@@ -1,0 +1,40 @@
+# =============================================================================
+# LIGA UNIVERSITARIA SANJUANINA DE FÚTBOL — .gitignore
+# =============================================================================
+
+# Dependencias y entornos
+node_modules/
+package-lock.json
+
+# Despliegues y compilación
+.vercel
+dist/
+build/
+
+# Datos crudos masivos, respaldos y zips
+raw_data/
+*.zip
+*.rar
+*.7z
+public/escudos/raw/
+
+# Python cache y scripts temporales
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+
+# Sistema operativo y editores
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs y depuración
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Liga Universitaria Sanjuanina de Fútbol — Categoría A 2026</title>
+  <meta name="description"
+    content="Sitio oficial de la Liga Universitaria Sanjuanina de Fútbol, Categoría A 2026. Tablas de posiciones, fixture, resultados, goleadores, sanciones y estadísticas oficiales.">
+
+  <!-- Google Fonts: Big Shoulders Display & Archivo -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Big+Shoulders+Display:wght@600;700;800;900&display=swap"
+    rel="stylesheet">
+
+  <!-- Favicon Oficial -->
+  <link rel="icon" type="image/png" href="public/logo_liga.png">
+
+  <!-- Estilos Premium -->
+  <link rel="stylesheet" href="css/styles.css?v=20261026_07">
+</head>
+
+<body>
+
+  <!-- =========================================================================
+       CABECERA: ESTADIO Y MARCADOR
+       ========================================================================= -->
+  <header class="hero-stadium">
+    <!-- Líneas de Cal Vectoriales de la Cancha -->
+    <div class="pitch-overlay" aria-hidden="true">
+      <svg class="pitch-lines" viewBox="0 0 1200 320" preserveAspectRatio="none">
+        <!-- Borde exterior de campo -->
+        <rect x="20" y="20" width="1160" height="280" rx="8" />
+        <!-- Línea central -->
+        <line x1="600" y1="20" x2="600" y2="300" />
+        <!-- Círculo central y punto -->
+        <circle cx="600" cy="160" r="70" />
+        <circle cx="600" cy="160" r="3.5" style="fill: var(--chalk); stroke: none;" />
+        <!-- Área Grande Izquierda -->
+        <rect x="20" y="70" width="140" height="180" />
+        <!-- Área Chica Izquierda -->
+        <rect x="20" y="115" width="55" height="90" />
+        <!-- Punto penal izquierdo -->
+        <circle cx="110" cy="160" r="3" style="fill: var(--chalk); stroke: none;" />
+        <!-- Área Grande Derecha -->
+        <rect x="1040" y="70" width="140" height="180" />
+        <!-- Área Chica Derecha -->
+        <rect x="1125" y="115" width="55" height="90" />
+        <!-- Punto penal derecho -->
+        <circle cx="1090" cy="160" r="3" style="fill: var(--chalk); stroke: none;" />
+      </svg>
+    </div>
+
+    <div class="container hero-content">
+      <!-- Identidad Oficial -->
+      <div class="hero-brand">
+        <div class="brand-main">
+          <div class="league-crest" aria-label="Categoría A">A</div>
+          <div class="brand-text">
+            <span class="eyebrow">Universidad Nacional de San Juan</span>
+            <div class="brand-title-row">
+              <img src="public/logo_liga.png" alt="La Liga Universitaria" class="league-official-logo">
+            </div>
+            <div class="subtitle">
+              <span>Categoría A · Fútbol Universitario</span>
+              <span>·</span>
+              <span style="color: var(--accent);">Temporada 2026</span>
+            </div>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+          <div class="badge-tag live-pulse">
+            <span class="live-dot"></span>
+            <span>Clausura en curso · F3</span>
+          </div>
+          <div class="badge-tag">
+            <span>Apertura Finalizado</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Marcador del Estadio (Hero Board) -->
+      <div class="hero-board" id="heroBoard">
+        <!-- Renderizado dinámico vía app.js -->
+      </div>
+    </div>
+  </header>
+
+  <!-- =========================================================================
+       NAVBAR STICKY DE PESTAÑAS CON INDICADOR DESLIZANTE
+       ========================================================================= -->
+  <nav class="navbar-sticky" aria-label="Navegación principal">
+    <div class="container">
+      <div class="tabs-nav" id="mainTabs" role="tablist">
+        <button class="tab-btn active" data-view="posiciones" role="tab" aria-selected="true">
+          <span></span> Posiciones
+        </button>
+        <button class="tab-btn" data-view="fixture" role="tab" aria-selected="false">
+          <span></span> Fixture
+        </button>
+        <button class="tab-btn" data-view="equipos" role="tab" aria-selected="false">
+          <span></span> Equipos
+        </button>
+        <button class="tab-btn" data-view="estadisticas" role="tab" aria-selected="false">
+          <span></span> Estadísticas
+        </button>
+        <button class="tab-btn" data-view="goleadores" role="tab" aria-selected="false">
+          <span></span> Goleadores
+        </button>
+        <button class="tab-btn" data-view="sanciones" role="tab" aria-selected="false">
+          <span></span> Sanciones
+        </button>
+        <button class="tab-btn" data-view="reglamento" role="tab" aria-selected="false">
+          <span></span> Reglamento
+        </button>
+        <div class="tab-indicator" id="tabIndicator"></div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- =========================================================================
+       ÁREA DE CONTENIDO (7 SECCIONES)
+       ========================================================================= -->
+  <main class="content-area">
+    <div class="container">
+      <!-- Sección A: Posiciones -->
+      <section id="view-posiciones" class="view-section active" role="tabpanel">
+        <!-- Dinámico -->
+      </section>
+
+      <!-- Sección B: Fixture -->
+      <section id="view-fixture" class="view-section" role="tabpanel">
+        <!-- Dinámico -->
+      </section>
+
+      <!-- Sección C: Equipos -->
+      <section id="view-equipos" class="view-section" role="tabpanel">
+        <!-- Dinámico -->
+      </section>
+
+      <!-- Sección D: Estadísticas -->
+      <section id="view-estadisticas" class="view-section" role="tabpanel">
+        <!-- Dinámico -->
+      </section>
+
+      <!-- Sección E: Goleadores -->
+      <section id="view-goleadores" class="view-section" role="tabpanel">
+        <!-- Dinámico -->
+      </section>
+
+      <!-- Sección F: Sanciones -->
+      <section id="view-sanciones" class="view-section" role="tabpanel">
+        <!-- Dinámico -->
+      </section>
+
+      <!-- Sección G: Reglamento -->
+      <section id="view-reglamento" class="view-section" role="tabpanel">
+        <!-- Dinámico -->
+      </section>
+    </div>
+  </main>
+
+  <!-- =========================================================================
+       MODAL DE FICHA DE EQUIPO
+       ========================================================================= -->
+  <div id="teamModal" class="modal-backdrop" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="modal-container" id="teamModalContent">
+      <button class="modal-close-btn" id="modalClose" aria-label="Cerrar Ficha">&times;</button>
+      <div id="teamModalBody"></div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       PIE DE PÁGINA INSTITUCIONAL
+       ========================================================================= -->
+  <footer class="page-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <img src="public/logo_liga.png" alt="La Liga Universitaria" class="footer-league-logo">
+      </div>
+      <div class="footer-copy">
+        Secretaría de Bienestar Universitario · Dirección General de Deportes y Recreación<br>
+        Liga Superior Universitaria Sanjuanina de Fútbol · <b>Categoría A · Temporada 2026</b><br>
+        Resultados y tablas oficiales validadas según informes de la Comisión Organizadora.
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts: Datos Oficiales y Lógica Reactiva -->
+  <script src="js/data.js?v=20261026_07"></script>
+  <script src="js/app.js?v=20261026_07"></script>
+</body>
+
+</html>
