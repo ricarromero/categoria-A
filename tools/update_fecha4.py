@@ -138,8 +138,8 @@ for eq in [e['nombre'] for e in db['equipos']]:
         'pjCl': cl['pj'], 'ptsCl': cl['pts']
     })
 
-# Ordenar por Puntos DESC, luego DG DESC, luego GF DESC, luego Coeficiente DESC
-tabla_anual.sort(key=lambda x: (x['pts'], x['dg'], x['gf'], x['coeficiente']), reverse=True)
+# Ordenar por Coeficiente (Promedio) DESC, luego Puntos DESC, luego DG DESC, luego GF DESC
+tabla_anual.sort(key=lambda x: (x['coeficiente'], x['pts'], x['dg'], x['gf']), reverse=True)
 for i, row in enumerate(tabla_anual):
     row['pos'] = i + 1
 
