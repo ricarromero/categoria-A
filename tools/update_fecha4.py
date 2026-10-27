@@ -117,7 +117,7 @@ for eq in [e['nombre'] for e in db['equipos']]:
     pts_cancha = ap['pts'] + cl['pts']
     bonus = bonus_apertura.get(eq, 0)
     sancion_pts = sanciones_puntos.get(eq, 0)
-    pts_total = pts_cancha + bonus - sancion_pts
+    pts_total = pts_cancha + bonus
     coeficiente = round(pts_total / pj_total, 3) if pj_total > 0 else 0.0
     
     tabla_anual.append({
