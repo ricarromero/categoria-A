@@ -1090,8 +1090,9 @@ const LIGA_DATA = {
           "gf": 19,
           "gc": 16,
           "dg": 3,
-          "pts": 17,
-          "clasifico": "campeonato"
+          "pts": 15,
+          "sancion": -2,
+          "zona": "A"
         },
         {
           "pos": 2,
@@ -1104,7 +1105,8 @@ const LIGA_DATA = {
           "gc": 11,
           "dg": 12,
           "pts": 13,
-          "clasifico": "campeonato"
+          "sancion": 0,
+          "zona": "A"
         },
         {
           "pos": 3,
@@ -1117,7 +1119,8 @@ const LIGA_DATA = {
           "gc": 13,
           "dg": 2,
           "pts": 13,
-          "clasifico": "campeonato"
+          "sancion": 0,
+          "zona": "A"
         },
         {
           "pos": 4,
@@ -1130,7 +1133,8 @@ const LIGA_DATA = {
           "gc": 9,
           "dg": 5,
           "pts": 10,
-          "clasifico": "campeonato"
+          "sancion": -1,
+          "zona": "A"
         },
         {
           "pos": 5,
@@ -1143,7 +1147,8 @@ const LIGA_DATA = {
           "gc": 12,
           "dg": 1,
           "pts": 9,
-          "clasifico": "plata"
+          "sancion": -2,
+          "zona": "A"
         },
         {
           "pos": 6,
@@ -1156,7 +1161,8 @@ const LIGA_DATA = {
           "gc": 19,
           "dg": 0,
           "pts": 9,
-          "clasifico": "plata"
+          "sancion": 0,
+          "zona": "A"
         },
         {
           "pos": 7,
@@ -1169,7 +1175,8 @@ const LIGA_DATA = {
           "gc": 10,
           "dg": 0,
           "pts": 8,
-          "clasifico": "plata"
+          "sancion": -1,
+          "zona": "A"
         },
         {
           "pos": 8,
@@ -1182,7 +1189,8 @@ const LIGA_DATA = {
           "gc": 20,
           "dg": -7,
           "pts": 6,
-          "clasifico": "plata"
+          "sancion": 0,
+          "zona": "A"
         }
       ],
       "zonaB": [
@@ -1196,8 +1204,9 @@ const LIGA_DATA = {
           "gf": 13,
           "gc": 4,
           "dg": 9,
-          "pts": 18,
-          "clasifico": "campeonato"
+          "pts": 17,
+          "sancion": -1,
+          "zona": "B"
         },
         {
           "pos": 2,
@@ -1209,8 +1218,9 @@ const LIGA_DATA = {
           "gf": 14,
           "gc": 14,
           "dg": 0,
-          "pts": 13,
-          "clasifico": "campeonato"
+          "pts": 12,
+          "sancion": -1,
+          "zona": "B"
         },
         {
           "pos": 3,
@@ -1222,8 +1232,9 @@ const LIGA_DATA = {
           "gf": 14,
           "gc": 11,
           "dg": 3,
-          "pts": 14,
-          "clasifico": "campeonato"
+          "pts": 11,
+          "sancion": -3,
+          "zona": "B"
         },
         {
           "pos": 4,
@@ -1235,8 +1246,9 @@ const LIGA_DATA = {
           "gf": 10,
           "gc": 15,
           "dg": -5,
-          "pts": 12,
-          "clasifico": "campeonato"
+          "pts": 11,
+          "sancion": -1,
+          "zona": "B"
         },
         {
           "pos": 5,
@@ -1248,8 +1260,9 @@ const LIGA_DATA = {
           "gf": 17,
           "gc": 14,
           "dg": 3,
-          "pts": 12,
-          "clasifico": "plata"
+          "pts": 10,
+          "sancion": -2,
+          "zona": "B"
         },
         {
           "pos": 6,
@@ -1261,8 +1274,9 @@ const LIGA_DATA = {
           "gf": 15,
           "gc": 12,
           "dg": 3,
-          "pts": 10,
-          "clasifico": "plata"
+          "pts": 9,
+          "sancion": -1,
+          "zona": "B"
         },
         {
           "pos": 7,
@@ -1275,7 +1289,8 @@ const LIGA_DATA = {
           "gc": 13,
           "dg": -3,
           "pts": 7,
-          "clasifico": "plata"
+          "sancion": 0,
+          "zona": "B"
         },
         {
           "pos": 8,
@@ -1288,7 +1303,8 @@ const LIGA_DATA = {
           "gc": 26,
           "dg": -26,
           "pts": 0,
-          "clasifico": "descenso"
+          "sancion": 0,
+          "zona": "B"
         }
       ]
     },
@@ -2681,13 +2697,13 @@ const LIGA_DATA = {
       "gf": 29,
       "gc": 24,
       "dg": 5,
-      "ptsCancha": 26,
+      "ptsCancha": 24,
       "bonus": 3,
       "sancionPts": 2,
-      "pts": 29,
-      "coeficiente": 2.417,
+      "pts": 27,
+      "coeficiente": 2.25,
       "pjAp": 8,
-      "ptsAp": 17,
+      "ptsAp": 15,
       "pjCl": 4,
       "ptsCl": 9,
       "pos": 1
@@ -2701,13 +2717,13 @@ const LIGA_DATA = {
       "gf": 17,
       "gc": 10,
       "dg": 7,
-      "ptsCancha": 23,
+      "ptsCancha": 22,
       "bonus": 0,
       "sancionPts": 1,
-      "pts": 23,
-      "coeficiente": 1.917,
+      "pts": 22,
+      "coeficiente": 1.833,
       "pjAp": 8,
-      "ptsAp": 18,
+      "ptsAp": 17,
       "pjCl": 4,
       "ptsCl": 5,
       "pos": 2
@@ -2733,26 +2749,6 @@ const LIGA_DATA = {
       "pos": 3
     },
     {
-      "equipo": "De Primera",
-      "pj": 11,
-      "pg": 5,
-      "pe": 3,
-      "pp": 3,
-      "gf": 22,
-      "gc": 16,
-      "dg": 6,
-      "ptsCancha": 18,
-      "bonus": 0,
-      "sancionPts": 3,
-      "pts": 18,
-      "coeficiente": 1.636,
-      "pjAp": 8,
-      "ptsAp": 14,
-      "pjCl": 3,
-      "ptsCl": 4,
-      "pos": 4
-    },
-    {
       "equipo": "Otro Equipo",
       "pj": 10,
       "pg": 5,
@@ -2770,7 +2766,7 @@ const LIGA_DATA = {
       "ptsAp": 10,
       "pjCl": 3,
       "ptsCl": 6,
-      "pos": 5
+      "pos": 4
     },
     {
       "equipo": "Maverick",
@@ -2790,27 +2786,7 @@ const LIGA_DATA = {
       "ptsAp": 13,
       "pjCl": 4,
       "ptsCl": 4,
-      "pos": 6
-    },
-    {
-      "equipo": "Calise",
-      "pj": 11,
-      "pg": 5,
-      "pe": 2,
-      "pp": 4,
-      "gf": 17,
-      "gc": 17,
-      "dg": 0,
-      "ptsCancha": 17,
-      "bonus": 0,
-      "sancionPts": 2,
-      "pts": 17,
-      "coeficiente": 1.545,
-      "pjAp": 8,
-      "ptsAp": 13,
-      "pjCl": 3,
-      "ptsCl": 4,
-      "pos": 7
+      "pos": 5
     },
     {
       "equipo": "Aston",
@@ -2830,7 +2806,27 @@ const LIGA_DATA = {
       "ptsAp": 13,
       "pjCl": 4,
       "ptsCl": 4,
-      "pos": 8
+      "pos": 6
+    },
+    {
+      "equipo": "Calise",
+      "pj": 11,
+      "pg": 5,
+      "pe": 2,
+      "pp": 4,
+      "gf": 17,
+      "gc": 17,
+      "dg": 0,
+      "ptsCancha": 16,
+      "bonus": 0,
+      "sancionPts": 1,
+      "pts": 16,
+      "coeficiente": 1.455,
+      "pjAp": 8,
+      "ptsAp": 12,
+      "pjCl": 3,
+      "ptsCl": 4,
+      "pos": 7
     },
     {
       "equipo": "Minaster City",
@@ -2850,6 +2846,26 @@ const LIGA_DATA = {
       "ptsAp": 9,
       "pjCl": 4,
       "ptsCl": 7,
+      "pos": 8
+    },
+    {
+      "equipo": "De Primera",
+      "pj": 11,
+      "pg": 5,
+      "pe": 3,
+      "pp": 3,
+      "gf": 22,
+      "gc": 16,
+      "dg": 6,
+      "ptsCancha": 15,
+      "bonus": 0,
+      "sancionPts": 3,
+      "pts": 15,
+      "coeficiente": 1.364,
+      "pjAp": 8,
+      "ptsAp": 11,
+      "pjCl": 3,
+      "ptsCl": 4,
       "pos": 9
     },
     {
@@ -2881,13 +2897,13 @@ const LIGA_DATA = {
       "gf": 19,
       "gc": 19,
       "dg": 0,
-      "ptsCancha": 16,
+      "ptsCancha": 15,
       "bonus": 0,
       "sancionPts": 1,
-      "pts": 16,
-      "coeficiente": 1.333,
+      "pts": 15,
+      "coeficiente": 1.25,
       "pjAp": 8,
-      "ptsAp": 10,
+      "ptsAp": 9,
       "pjCl": 4,
       "ptsCl": 6,
       "pos": 11
@@ -2901,36 +2917,16 @@ const LIGA_DATA = {
       "gf": 22,
       "gc": 21,
       "dg": 1,
-      "ptsCancha": 15,
+      "ptsCancha": 13,
       "bonus": 0,
       "sancionPts": 2,
-      "pts": 15,
-      "coeficiente": 1.25,
+      "pts": 13,
+      "coeficiente": 1.083,
       "pjAp": 8,
-      "ptsAp": 12,
+      "ptsAp": 10,
       "pjCl": 4,
       "ptsCl": 3,
       "pos": 12
-    },
-    {
-      "equipo": "Celtic",
-      "pj": 11,
-      "pg": 4,
-      "pe": 0,
-      "pp": 7,
-      "gf": 10,
-      "gc": 25,
-      "dg": -15,
-      "ptsCancha": 12,
-      "bonus": 0,
-      "sancionPts": 1,
-      "pts": 12,
-      "coeficiente": 1.091,
-      "pjAp": 8,
-      "ptsAp": 12,
-      "pjCl": 3,
-      "ptsCl": 0,
-      "pos": 13
     },
     {
       "equipo": "C-Lesión",
@@ -2950,6 +2946,26 @@ const LIGA_DATA = {
       "ptsAp": 7,
       "pjCl": 4,
       "ptsCl": 4,
+      "pos": 13
+    },
+    {
+      "equipo": "Celtic",
+      "pj": 11,
+      "pg": 4,
+      "pe": 0,
+      "pp": 7,
+      "gf": 10,
+      "gc": 25,
+      "dg": -15,
+      "ptsCancha": 11,
+      "bonus": 0,
+      "sancionPts": 1,
+      "pts": 11,
+      "coeficiente": 1.0,
+      "pjAp": 8,
+      "ptsAp": 11,
+      "pjCl": 3,
+      "ptsCl": 0,
       "pos": 14
     },
     {
