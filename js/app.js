@@ -1072,7 +1072,7 @@
       <!-- BLOQUE: LO MEJOR DEL TORNEO -->
       <div class="advanced-section-wrapper">
         <div class="section-title-sub">
-          <h3 style="font-family:var(--f-display); font-size:1.6rem; text-transform:uppercase; color:#ffffff;">Lo Mejor del Torneo</h3>
+          <h3 class="stats-subheading">Lo Mejor del Torneo</h3>
           <span style="font-size:0.85rem; color:var(--muted);">${torneoTitle}</span>
         </div>
         <div class="best-tournament-grid">
@@ -1218,7 +1218,7 @@
               return `
                 <div class="butterfly-row">
                   <div class="bf-against-col">
-                    <span style="font-weight:700; color:#ffffff; font-size:0.85rem;">${t.gc}</span>
+                    <span class="bf-val bf-val-against">${t.gc}</span>
                     <div class="bf-bar-against" style="width:${Math.max(widthGC, 4)}%;"></div>
                   </div>
                   <div class="bf-team-col" data-team="${t.id}" style="cursor:pointer;">
@@ -1227,7 +1227,7 @@
                   </div>
                   <div class="bf-favor-col">
                     <div class="bf-bar-favor" style="width:${Math.max(widthGF, 4)}%;"></div>
-                    <span style="font-weight:700; color:#ffffff; font-size:0.85rem;">${t.gf}</span>
+                    <span class="bf-val bf-val-favor">${t.gf}</span>
                   </div>
                 </div>
               `;
@@ -1239,7 +1239,7 @@
       <!-- BLOQUE: EQUIPO POR EQUIPO (TABLA AVANZADA SORTEABLE) -->
       <div class="advanced-table-section">
         <div class="section-title-sub">
-          <h3 style="font-family:var(--f-display); font-size:1.6rem; text-transform:uppercase; color:#ffffff;">Equipo por Equipo</h3>
+          <h3 class="stats-subheading">Equipo por Equipo</h3>
           <span style="font-size:0.85rem; color:var(--muted);">Tocá una columna para ordenar</span>
         </div>
         <div class="table-responsive">
@@ -1315,7 +1315,7 @@
       <!-- BLOQUE: APERTURA VS CLAUSURA (DUMBBELL CHART) -->
       <div class="advanced-section-wrapper" style="margin-bottom:40px;">
         <div class="section-title-sub">
-          <h3 style="font-family:var(--f-display); font-size:1.6rem; text-transform:uppercase; color:#ffffff;">Apertura vs Clausura</h3>
+          <h3 class="stats-subheading">Apertura vs Clausura</h3>
           <span style="font-size:0.85rem; color:var(--muted);">Efectividad de cada equipo en los dos torneos · ordenado por cuánto mejoró</span>
         </div>
         <div class="dumbbell-legend">
@@ -2249,6 +2249,10 @@
       case 'reglamento': renderReglamento(); break;
     }
 
+    if (window.history && window.history.replaceState) {
+      window.history.replaceState(null, '', '#' + viewName);
+    }
+
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
@@ -2280,7 +2284,11 @@
 
     window.addEventListener('resize', updateTabIndicator);
 
-    switchTab('posiciones');
+    const urlParams = new URLSearchParams(window.location.search);
+    const hash = window.location.hash ? window.location.hash.substring(1) : '';
+    const initialView = urlParams.get('tab') || urlParams.get('view') || hash || 'posiciones';
+    const validViews = ['posiciones', 'fixture', 'equipos', 'estadisticas', 'goleadores', 'sanciones', 'reglamento'];
+    switchTab(validViews.includes(initialView) ? initialView : 'posiciones');
   }
 
   window.APP = {
