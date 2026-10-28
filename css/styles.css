@@ -1137,6 +1137,120 @@ img.match-crest {
   font-weight: 500 !important;
 }
 
+/* =========================================================================
+   ACCIONES DE FICHA DE CLUB: INSTAGRAM & DESCARGA DE ESCUDO
+   ========================================================================= */
+.team-modal-actions-row {
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  flex-wrap: wrap !important;
+  margin-top: 10px !important;
+}
+
+.team-social-btn,
+.team-download-crest-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 7px !important;
+  padding: 6px 14px !important;
+  border-radius: 9999px !important;
+  font-size: 0.82rem !important;
+  font-weight: 700 !important;
+  text-decoration: none !important;
+  cursor: pointer !important;
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  line-height: 1 !important;
+}
+
+/* Botón Instagram Oficial del Club */
+.team-ig-btn {
+  background: #FFFFFF !important;
+  color: #1A2229 !important;
+  border: 1px solid #E2E8F0 !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04) !important;
+}
+
+.team-ig-btn .ig-svg-icon {
+  stroke: #E1306C !important;
+  transition: transform 0.2s ease !important;
+}
+
+.team-ig-btn:hover {
+  background: linear-gradient(135deg, rgba(225, 48, 108, 0.08), rgba(253, 29, 29, 0.04)) !important;
+  border-color: #E1306C !important;
+  color: #C13584 !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 4px 10px rgba(225, 48, 108, 0.15) !important;
+}
+
+.team-ig-btn:hover .ig-svg-icon {
+  transform: scale(1.18) !important;
+}
+
+/* Botón Descargar Escudo Oficial */
+.team-download-crest-btn {
+  background: #F1F6FB !important;
+  color: var(--navy-primary, #14283F) !important;
+  border: 1px solid #CBD5E1 !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04) !important;
+}
+
+.team-download-crest-btn .dl-svg-icon {
+  stroke: var(--navy-secondary, #24496B) !important;
+  transition: transform 0.2s ease !important;
+}
+
+.team-download-crest-btn:hover {
+  background: var(--navy-secondary, #24496B) !important;
+  border-color: var(--navy-secondary, #24496B) !important;
+  color: #FFFFFF !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 4px 12px rgba(36, 73, 107, 0.2) !important;
+}
+
+.team-download-crest-btn:hover .dl-svg-icon {
+  stroke: #FFFFFF !important;
+  transform: translateY(2px) !important;
+}
+
+.team-download-crest-btn.downloading {
+  opacity: 0.75 !important;
+  cursor: wait !important;
+}
+
+.team-download-crest-btn.download-success {
+  background: #1B7A42 !important;
+  border-color: #1B7A42 !important;
+  color: #FFFFFF !important;
+}
+
+.team-download-crest-btn.download-success .dl-svg-icon {
+  stroke: #FFFFFF !important;
+}
+
+/* Enlace directo Instagram en tarjeta preview de club */
+.preview-ig-link {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 28px !important;
+  height: 28px !important;
+  border-radius: 50% !important;
+  background: #F8FAFC !important;
+  border: 1px solid #E2E8F0 !important;
+  color: #64748B !important;
+  transition: all 0.2s ease !important;
+  text-decoration: none !important;
+}
+
+.preview-ig-link:hover {
+  background: linear-gradient(135deg, rgba(225, 48, 108, 0.12), rgba(253, 29, 29, 0.06)) !important;
+  border-color: #E1306C !important;
+  color: #E1306C !important;
+  transform: scale(1.12) !important;
+}
+
 .team-dropdown-select {
   padding: 8px 14px !important;
   border: 1px solid var(--border-color, #DCE2E8) !important;

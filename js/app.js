@@ -776,8 +776,19 @@
           <img src="${eq.escudo}" alt="${eq.nombre}" class="preview-crest" loading="lazy" onerror="this.src='';">
           <div class="preview-name">${eq.nombre}</div>
           <div class="preview-zones">Clausura: Zona ${eq.zonaClausura} · Apertura: Zona ${eq.zonaApertura}</div>
-          <div style="display:flex; gap:4px; margin-top:6px;" title="Racha en los últimos partidos">
-            ${rachaBadges}
+          <div style="display:flex; align-items:center; justify-content:space-between; width:100%; margin-top:8px;">
+            <div style="display:flex; gap:4px;" title="Racha en los últimos partidos">
+              ${rachaBadges}
+            </div>
+            ${eq.instagram ? `
+              <a href="${eq.instagram}" target="_blank" rel="noopener noreferrer" class="preview-ig-link" title="Instagram: ${eq.instagramHandle || ''}" onclick="event.stopPropagation();">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                </svg>
+              </a>
+            ` : ''}
           </div>
         </div>
       `;
@@ -1973,6 +1984,62 @@
     };
   }
 
+  function downloadTeamCrest(url, filename, btnElement) {
+    if (btnElement) {
+      btnElement.classList.add('downloading');
+      const span = btnElement.querySelector('span');
+      if (span) span.textContent = 'Descargando...';
+    }
+
+    fetch(url)
+      .then(res => {
+        if (!res.ok) throw new Error('Error al descargar el escudo');
+        return res.blob();
+      })
+      .then(blob => {
+        const blobUrl = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.style.display = 'none';
+        a.href = blobUrl;
+        a.download = filename || 'escudo.png';
+        document.body.appendChild(a);
+        a.click();
+        setTimeout(() => {
+          document.body.removeChild(a);
+          window.URL.revokeObjectURL(blobUrl);
+        }, 300);
+
+        if (btnElement) {
+          btnElement.classList.remove('downloading');
+          btnElement.classList.add('download-success');
+          const span = btnElement.querySelector('span');
+          if (span) span.textContent = '¡Descargado!';
+          setTimeout(() => {
+            btnElement.classList.remove('download-success');
+            if (span) span.textContent = 'Descargar Escudo';
+          }, 2200);
+        }
+      })
+      .catch(err => {
+        console.warn('Fallback a descarga por enlace directo:', err);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = filename || 'escudo.png';
+        a.target = '_blank';
+        document.body.appendChild(a);
+        a.click();
+        setTimeout(() => {
+          document.body.removeChild(a);
+        }, 300);
+
+        if (btnElement) {
+          btnElement.classList.remove('downloading');
+          const span = btnElement.querySelector('span');
+          if (span) span.textContent = 'Descargar Escudo';
+        }
+      });
+  }
+
   function openTeamModal(teamId) {
     const team = teamsById[teamId] || teamsByName[teamId.toLowerCase()];
     if (!team) return;
@@ -2128,6 +2195,28 @@
                 ${sancionModalBadge}
               </div>
               <div class="modal-team-subtitle">${posStr} · ${team.zonaApertura ? `Apertura Zona ${team.zonaApertura}` : ''}</div>
+              
+              <!-- ACCIONES DEL EQUIPO: INSTAGRAM & DESCARGA DE ESCUDO -->
+              <div class="team-modal-actions-row">
+                ${team.instagram ? `
+                  <a href="${team.instagram}" target="_blank" rel="noopener noreferrer" class="team-social-btn team-ig-btn" title="Perfil oficial de Instagram de ${team.nombre}">
+                    <svg class="ig-svg-icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                      <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                    </svg>
+                    <span>${team.instagramHandle || 'Instagram'}</span>
+                  </a>
+                ` : ''}
+                <button type="button" class="team-download-crest-btn" id="btnDownloadCrest" data-escudo="${team.escudo}" data-filename="escudo-${team.slug || team.id}.png" title="Descargar escudo oficial de ${team.nombre} en alta calidad">
+                  <svg class="dl-svg-icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                    <polyline points="7 10 12 15 17 10"></polyline>
+                    <line x1="12" y1="15" x2="12" y2="3"></line>
+                  </svg>
+                  <span>Descargar Escudo</span>
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -2290,6 +2379,16 @@
         if (targetId) openTeamModal(targetId);
       });
     });
+
+    const btnDl = $('#btnDownloadCrest', modalBody);
+    if (btnDl) {
+      btnDl.addEventListener('click', (e) => {
+        e.preventDefault();
+        const escudoUrl = btnDl.dataset.escudo;
+        const filename = btnDl.dataset.filename || 'escudo.png';
+        downloadTeamCrest(escudoUrl, filename, btnDl);
+      });
+    }
 
     modal.classList.add('active');
     modal.classList.add('open');

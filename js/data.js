@@ -24,7 +24,9 @@ const LIGA_DATA = {
       "escudo": "public/escudos/antorcha.png",
       "zonaApertura": "B",
       "zonaClausura": "A",
-      "color": "#e63946"
+      "color": "#e63946",
+      "instagram": "https://www.instagram.com/antorchafc_/",
+      "instagramHandle": "@antorchafc_"
     },
     {
       "id": "aston",
@@ -33,7 +35,9 @@ const LIGA_DATA = {
       "escudo": "public/escudos/aston.png",
       "zonaApertura": "A",
       "zonaClausura": "A",
-      "color": "#7b2cbf"
+      "color": "#7b2cbf",
+      "instagram": "https://www.instagram.com/astonfc23/",
+      "instagramHandle": "@astonfc23"
     },
     {
       "id": "c_lesion",
@@ -42,7 +46,9 @@ const LIGA_DATA = {
       "escudo": "public/escudos/c_lesion.png",
       "zonaApertura": "B",
       "zonaClausura": "A",
-      "color": "#2a9d8f"
+      "color": "#2a9d8f",
+      "instagram": "https://www.instagram.com/clesion.1997/",
+      "instagramHandle": "@clesion.1997"
     },
     {
       "id": "calise",
@@ -51,7 +57,9 @@ const LIGA_DATA = {
       "escudo": "public/escudos/calise.png",
       "zonaApertura": "B",
       "zonaClausura": "B",
-      "color": "#e76f51"
+      "color": "#e76f51",
+      "instagram": "https://www.instagram.com/calise.universitario/",
+      "instagramHandle": "@calise.universitario"
     },
     {
       "id": "celtic",
@@ -60,7 +68,9 @@ const LIGA_DATA = {
       "escudo": "public/escudos/celtic.png",
       "zonaApertura": "B",
       "zonaClausura": "B",
-      "color": "#2d6a4f"
+      "color": "#2d6a4f",
+      "instagram": "https://www.instagram.com/clticfcu_sj/",
+      "instagramHandle": "@clticfcu_sj"
     },
     {
       "id": "constructores",
@@ -69,7 +79,9 @@ const LIGA_DATA = {
       "escudo": "public/escudos/constructores.png",
       "zonaApertura": "A",
       "zonaClausura": "A",
-      "color": "#f4a261"
+      "color": "#f4a261",
+      "instagram": "https://www.instagram.com/constructores.fc/",
+      "instagramHandle": "@constructores.fc"
     },
     {
       "id": "de_primera",
@@ -78,7 +90,9 @@ const LIGA_DATA = {
       "escudo": "public/escudos/de_primera.png",
       "zonaApertura": "B",
       "zonaClausura": "B",
-      "color": "#1d3557"
+      "color": "#1d3557",
+      "instagram": "https://www.instagram.com/deprimerafcok/",
+      "instagramHandle": "@deprimerafcok"
     },
     {
       "id": "eclipse",
@@ -87,7 +101,9 @@ const LIGA_DATA = {
       "escudo": "public/escudos/eclipse.png",
       "zonaApertura": "B",
       "zonaClausura": "B",
-      "color": "#457b9d"
+      "color": "#457b9d",
+      "instagram": "https://www.instagram.com/eclipseoficial11/",
+      "instagramHandle": "@eclipseoficial11"
     },
     {
       "id": "jagermeister",
@@ -96,7 +112,9 @@ const LIGA_DATA = {
       "escudo": "public/escudos/jagermeister.png",
       "zonaApertura": "A",
       "zonaClausura": "A",
-      "color": "#d4a373"
+      "color": "#d4a373",
+      "instagram": "https://www.instagram.com/jagerfc_sj/",
+      "instagramHandle": "@jagerfc_sj"
     },
     {
       "id": "la_maquina",
@@ -105,7 +123,9 @@ const LIGA_DATA = {
       "escudo": "public/escudos/la_maquina.png",
       "zonaApertura": "B",
       "zonaClausura": "A",
-      "color": "#b5179e"
+      "color": "#b5179e",
+      "instagram": "https://www.instagram.com/la_maquinafcoficial/",
+      "instagramHandle": "@la_maquinafcoficial"
     },
     {
       "id": "maverick",
@@ -114,7 +134,9 @@ const LIGA_DATA = {
       "escudo": "public/escudos/maverick.png",
       "zonaApertura": "A",
       "zonaClausura": "B",
-      "color": "#3f37c9"
+      "color": "#3f37c9",
+      "instagram": "https://www.instagram.com/mavericks_ufc/",
+      "instagramHandle": "@mavericks_ufc"
     },
     {
       "id": "minaster_city",
@@ -123,7 +145,9 @@ const LIGA_DATA = {
       "escudo": "public/escudos/minaster_city.png",
       "zonaApertura": "A",
       "zonaClausura": "A",
-      "color": "#48cae4"
+      "color": "#48cae4",
+      "instagram": "https://www.instagram.com/minasterfc/",
+      "instagramHandle": "@minasterfc"
     },
     {
       "id": "nottingham",
@@ -132,7 +156,9 @@ const LIGA_DATA = {
       "escudo": "public/escudos/nottingham.png",
       "zonaApertura": "A",
       "zonaClausura": "A",
-      "color": "#d90429"
+      "color": "#d90429",
+      "instagram": "https://www.instagram.com/nottinghammiedo.sj/",
+      "instagramHandle": "@nottinghammiedo.sj"
     },
     {
       "id": "otro_equipo",
@@ -141,7 +167,9 @@ const LIGA_DATA = {
       "escudo": "public/escudos/otro_equipo.png",
       "zonaApertura": "A",
       "zonaClausura": "B",
-      "color": "#6c757d"
+      "color": "#6c757d",
+      "instagram": "https://www.instagram.com/otroequipo/",
+      "instagramHandle": "@otroequipo"
     },
     {
       "id": "red_bull",
@@ -150,7 +178,9 @@ const LIGA_DATA = {
       "escudo": "public/escudos/red_bull.png",
       "zonaApertura": "A",
       "zonaClausura": "B",
-      "color": "#0077b6"
+      "color": "#0077b6",
+      "instagram": "https://www.instagram.com/red.sanjuan/",
+      "instagramHandle": "@red.sanjuan"
     }
   ],
   "apertura": {
