@@ -1028,124 +1028,563 @@ img.match-crest {
   }
 }
 
-/* Modal de Equipo */
+/* ==========================================================================
+   MODAL DE EQUIPO INSTITUCIONAL (FICHA COMPLETA)
+   ========================================================================== */
 .modal-backdrop {
-  position: fixed;
-  inset: 0;
-  background: rgba(20, 40, 63, 0.65);
-  backdrop-filter: blur(3px);
-  z-index: 1000;
-  display: none;
-  align-items: center;
-  justify-content: center;
-  padding: 16px;
+  position: fixed !important;
+  inset: 0 !important;
+  background: rgba(15, 30, 48, 0.72) !important;
+  backdrop-filter: blur(4px) !important;
+  z-index: 9999 !important;
+  display: none !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 16px !important;
 }
 
-.modal-backdrop.active {
-  display: flex;
+.modal-backdrop.active,
+.modal-backdrop.open {
+  display: flex !important;
 }
 
 .modal-container {
-  background: var(--surface);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-lg);
-  width: 100%;
-  max-width: 680px;
-  max-height: 88vh;
-  overflow-y: auto;
-  position: relative;
-  padding: 22px;
-  border: 1px solid var(--border-color);
+  background: #FFFFFF !important;
+  border-radius: 12px !important;
+  box-shadow: 0 12px 40px rgba(15, 30, 48, 0.28) !important;
+  width: 100% !important;
+  max-width: 840px !important;
+  max-height: 90vh !important;
+  overflow-y: auto !important;
+  position: relative !important;
+  padding: 24px 28px !important;
+  border: 1px solid var(--border-color, #DCE2E8) !important;
+  box-sizing: border-box !important;
 }
 
 .modal-close-btn {
-  position: absolute;
-  top: 14px;
-  right: 14px;
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  background: #F1F4F8;
-  color: var(--text-secondary);
-  font-size: 1.25rem;
-  display: grid;
-  place-items: center;
-  line-height: 1;
+  position: absolute !important;
+  top: 18px !important;
+  right: 18px !important;
+  width: 34px !important;
+  height: 34px !important;
+  border-radius: 50% !important;
+  background: #F1F4F8 !important;
+  border: 1px solid var(--border-color, #DCE2E8) !important;
+  color: var(--text-secondary, #667382) !important;
+  font-size: 1.15rem !important;
+  display: grid !important;
+  place-items: center !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+  z-index: 10 !important;
 }
 
 .modal-close-btn:hover {
-  background: #E2E8F0;
-  color: var(--navy-primary);
+  background: #E2E8F0 !important;
+  color: var(--navy-primary, #14283F) !important;
+  transform: scale(1.05) !important;
 }
 
+/* Header del modal */
 .team-modal-header-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  margin-bottom: 18px;
-  border-bottom: 1px solid var(--border-color);
-  padding-bottom: 14px;
-  flex-wrap: wrap;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 16px !important;
+  margin-bottom: 20px !important;
+  border-bottom: 1px solid var(--border-color, #DCE2E8) !important;
+  padding-bottom: 18px !important;
+  padding-right: 48px !important;
+  flex-wrap: wrap !important;
 }
 
 .team-modal-brand {
-  display: flex;
-  align-items: center;
-  gap: 14px;
+  display: flex !important;
+  align-items: center !important;
+  gap: 16px !important;
 }
 
 .team-modal-brand .modal-crest-lg {
-  width: 58px;
-  height: 58px;
-  object-fit: contain;
+  width: 60px !important;
+  height: 60px !important;
+  object-fit: contain !important;
+  flex-shrink: 0 !important;
+}
+
+.modal-team-title {
+  font-family: var(--f-display) !important;
+  font-size: 2.2rem !important;
+  text-transform: uppercase !important;
+  line-height: 1.05 !important;
+  color: var(--navy-primary, #14283F) !important;
+  margin: 0 !important;
+  letter-spacing: 0.02em !important;
+}
+
+.modal-team-subtitle {
+  font-size: 0.88rem !important;
+  color: var(--text-secondary, #667382) !important;
+  margin-top: 4px !important;
+  font-weight: 500 !important;
 }
 
 .team-dropdown-select {
-  padding: 6px 12px;
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-sm);
-  background: #FFFFFF;
-  color: var(--text-primary);
-  font-size: 0.88rem;
-  font-weight: 600;
+  padding: 8px 14px !important;
+  border: 1px solid var(--border-color, #DCE2E8) !important;
+  border-radius: 6px !important;
+  background: #F8FAFC !important;
+  color: var(--navy-primary, #14283F) !important;
+  font-size: 0.88rem !important;
+  font-weight: 700 !important;
+  cursor: pointer !important;
+  outline: none !important;
+  transition: all 0.2s ease !important;
 }
 
+.team-dropdown-select:focus {
+  border-color: var(--navy-secondary, #24496B) !important;
+  box-shadow: 0 0 0 3px rgba(36, 73, 107, 0.15) !important;
+}
+
+/* Tabs de Torneo en el Modal */
+.modal-torneo-tabs {
+  display: inline-flex !important;
+  background: #F1F5F9 !important;
+  padding: 3px !important;
+  border-radius: 6px !important;
+  border: 1px solid var(--border-color, #DCE2E8) !important;
+}
+
+.modal-torneo-btn {
+  padding: 6px 14px !important;
+  font-size: 0.82rem !important;
+  font-weight: 700 !important;
+  border: none !important;
+  background: transparent !important;
+  color: var(--text-secondary, #667382) !important;
+  border-radius: 4px !important;
+  cursor: pointer !important;
+  transition: all 0.15s ease !important;
+}
+
+.modal-torneo-btn.active {
+  background: #FFFFFF !important;
+  color: var(--navy-primary, #14283F) !important;
+  box-shadow: 0 1px 3px rgba(20, 40, 63, 0.12) !important;
+}
+
+/* Panel Superior KPI del Modal */
 .team-modal-kpi-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 8px;
-  margin-bottom: 18px;
+  display: grid !important;
+  grid-template-columns: 140px 1fr 1.3fr !important;
+  gap: 16px !important;
+  align-items: stretch !important;
+  margin-bottom: 24px !important;
+}
+
+@media (max-width: 768px) {
+  .team-modal-kpi-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* Tarjeta del Anillo de Efectividad */
+.efect-ring-card {
+  background: #F8FAFC !important;
+  border: 1px solid var(--border-color, #DCE2E8) !important;
+  border-radius: 8px !important;
+  padding: 16px 12px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  position: relative !important;
+  min-height: 120px !important;
+}
+
+.ring-svg {
+  width: 90px !important;
+  height: 90px !important;
+  transform: rotate(-90deg) !important;
+}
+
+.ring-bg {
+  fill: none !important;
+  stroke: #E2E8F0 !important;
+  stroke-width: 8 !important;
+}
+
+.ring-progress {
+  fill: none !important;
+  stroke: #397653 !important;
+  stroke-width: 8 !important;
+  stroke-linecap: round !important;
+  transition: stroke-dashoffset 0.6s ease !important;
+}
+
+.ring-label {
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  text-align: center !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.ring-pct {
+  font-family: var(--f-display) !important;
+  font-size: 1.7rem !important;
+  font-weight: 800 !important;
+  color: var(--navy-primary, #14283F) !important;
+  line-height: 1 !important;
+}
+
+.ring-txt {
+  font-size: 0.65rem !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.06em !important;
+  color: var(--text-secondary, #667382) !important;
+  margin-top: 2px !important;
+}
+
+/* 4 Tiles de métricas */
+.metric-tiles-2x2 {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 10px !important;
 }
 
 .metric-tile {
-  background: #F4F7FA;
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-sm);
-  padding: 10px;
-  text-align: center;
+  background: #F8FAFC !important;
+  border: 1px solid var(--border-color, #DCE2E8) !important;
+  border-radius: 8px !important;
+  padding: 12px 14px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
 }
 
-.metric-tile .kpi-num {
-  font-family: var(--f-display);
-  font-size: 1.6rem;
-  font-weight: 800;
-  color: var(--navy-primary);
-  line-height: 1;
+.metric-tile .tile-val {
+  font-family: var(--f-display) !important;
+  font-size: 1.8rem !important;
+  font-weight: 800 !important;
+  color: var(--navy-secondary, #24496B) !important;
+  line-height: 1 !important;
+  margin-bottom: 4px !important;
 }
 
-.metric-tile .kpi-label {
-  font-size: 0.72rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  color: var(--text-secondary);
-  margin-top: 4px;
+.metric-tile .tile-lbl {
+  font-size: 0.74rem !important;
+  font-weight: 600 !important;
+  color: var(--text-secondary, #667382) !important;
+  line-height: 1.25 !important;
 }
 
-@media (max-width: 600px) {
-  .team-modal-kpi-grid {
-    grid-template-columns: repeat(2, 1fr);
+/* Tabla de Condición Local/Visita */
+.condicion-table-card {
+  background: #F8FAFC !important;
+  border: 1px solid var(--border-color, #DCE2E8) !important;
+  border-radius: 8px !important;
+  padding: 12px 16px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+}
+
+.condicion-table {
+  width: 100% !important;
+  border-collapse: collapse !important;
+  font-size: 0.82rem !important;
+  text-align: center !important;
+}
+
+.condicion-table th {
+  padding: 6px 4px !important;
+  font-size: 0.7rem !important;
+  font-weight: 800 !important;
+  text-transform: uppercase !important;
+  color: var(--text-secondary, #667382) !important;
+  border-bottom: 1px solid var(--border-color, #DCE2E8) !important;
+}
+
+.condicion-table td {
+  padding: 8px 4px !important;
+  border-bottom: 1px solid rgba(220, 226, 232, 0.6) !important;
+  color: var(--text-primary, #202B36) !important;
+}
+
+.condicion-table tr:last-child td {
+  border-bottom: none !important;
+}
+
+.condicion-table .cond-label {
+  text-align: left !important;
+  font-weight: 800 !important;
+  color: var(--navy-primary, #14283F) !important;
+}
+
+.condicion-table .cond-efect {
+  font-weight: 800 !important;
+  color: #397653 !important;
+}
+
+/* ==========================================================================
+   SECCIÓN DE RESULTADOS: PARTIDO A PARTIDO (APERTURA Y CLAUSURA)
+   ========================================================================== */
+.modal-matches-section {
+  margin-top: 24px !important;
+  border-top: 1px solid var(--border-color, #DCE2E8) !important;
+  padding-top: 20px !important;
+}
+
+.modal-section-header {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  flex-wrap: wrap !important;
+  gap: 12px !important;
+  margin-bottom: 16px !important;
+}
+
+.modal-section-title {
+  font-family: var(--f-display) !important;
+  font-size: 1.45rem !important;
+  text-transform: uppercase !important;
+  color: var(--navy-primary, #14283F) !important;
+  letter-spacing: 0.02em !important;
+  margin: 0 !important;
+}
+
+.match-filter-pills {
+  display: inline-flex !important;
+  gap: 6px !important;
+}
+
+.match-filter-pill {
+  padding: 4px 10px !important;
+  background: #F1F5F9 !important;
+  border: 1px solid var(--border-color, #DCE2E8) !important;
+  border-radius: 4px !important;
+  font-size: 0.78rem !important;
+  font-weight: 700 !important;
+  color: var(--text-secondary, #667382) !important;
+  cursor: pointer !important;
+  transition: all 0.15s ease !important;
+}
+
+.match-filter-pill.active {
+  background: var(--navy-secondary, #24496B) !important;
+  color: #FFFFFF !important;
+  border-color: var(--navy-secondary, #24496B) !important;
+}
+
+/* Grilla de Partidos */
+.team-matches-grid {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)) !important;
+  gap: 10px !important;
+  margin-bottom: 20px !important;
+}
+
+.team-match-card {
+  background: #FFFFFF !important;
+  border: 1px solid var(--border-color, #DCE2E8) !important;
+  border-radius: 8px !important;
+  padding: 10px 12px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 6px !important;
+  transition: all 0.15s ease !important;
+  box-shadow: 0 1px 3px rgba(20, 40, 63, 0.04) !important;
+}
+
+.team-match-card:hover {
+  border-color: #B8C7D6 !important;
+  box-shadow: 0 2px 6px rgba(20, 40, 63, 0.08) !important;
+}
+
+.tmc-top {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  font-size: 0.72rem !important;
+  font-weight: 700 !important;
+  color: var(--text-secondary, #667382) !important;
+}
+
+.tmc-torneo-badge {
+  padding: 2px 6px !important;
+  border-radius: 3px !important;
+  font-size: 0.68rem !important;
+  font-weight: 800 !important;
+  text-transform: uppercase !important;
+}
+
+.badge-clausura {
+  background: #EBF3FA !important;
+  color: #1E40AF !important;
+}
+
+.badge-apertura {
+  background: #EAF4EE !important;
+  color: #166534 !important;
+}
+
+.badge-playoffs {
+  background: #FEF3C7 !important;
+  color: #92400E !important;
+}
+
+.tmc-cond {
+  font-size: 0.68rem !important;
+  font-weight: 700 !important;
+  color: var(--text-secondary, #667382) !important;
+  text-transform: uppercase !important;
+}
+
+.tmc-main {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 8px !important;
+}
+
+.tmc-rival-box {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  min-width: 0 !important;
+  flex: 1 !important;
+}
+
+.tmc-rival-crest {
+  width: 24px !important;
+  height: 24px !important;
+  object-fit: contain !important;
+  flex-shrink: 0 !important;
+}
+
+.tmc-rival-name {
+  font-weight: 700 !important;
+  color: var(--navy-primary, #14283F) !important;
+  font-size: 0.88rem !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+.tmc-score-badge {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 5px !important;
+  padding: 3px 8px !important;
+  border-radius: 4px !important;
+  font-family: var(--f-display) !important;
+  font-size: 1.05rem !important;
+  font-weight: 800 !important;
+  line-height: 1 !important;
+  flex-shrink: 0 !important;
+}
+
+.tmc-letter {
+  font-size: 0.72rem !important;
+  font-weight: 900 !important;
+  padding: 1px 4px !important;
+  border-radius: 3px !important;
+}
+
+.score-win {
+  background: #EAF4EE !important;
+  color: #166534 !important;
+  border: 1px solid rgba(22, 101, 52, 0.2) !important;
+}
+.score-win .tmc-letter {
+  background: #166534 !important;
+  color: #FFFFFF !important;
+}
+
+.score-draw {
+  background: #FEF3C7 !important;
+  color: #92400E !important;
+  border: 1px solid rgba(146, 64, 14, 0.2) !important;
+}
+.score-draw .tmc-letter {
+  background: #92400E !important;
+  color: #FFFFFF !important;
+}
+
+.score-loss {
+  background: #FEE2E2 !important;
+  color: #991B1B !important;
+  border: 1px solid rgba(153, 27, 27, 0.2) !important;
+}
+.score-loss .tmc-letter {
+  background: #991B1B !important;
+  color: #FFFFFF !important;
+}
+
+.tmc-penales {
+  font-size: 0.72rem !important;
+  font-weight: 600 !important;
+  color: var(--text-secondary, #667382) !important;
+}
+
+.tmc-nota {
+  font-size: 0.7rem !important;
+  color: var(--text-secondary, #667382) !important;
+  font-style: italic !important;
+}
+
+/* Tarjetas Inferiores del Modal */
+.team-footer-cards-grid {
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: 12px !important;
+  margin-top: 20px !important;
+  border-top: 1px solid var(--border-color, #DCE2E8) !important;
+  padding-top: 18px !important;
+}
+
+@media (max-width: 650px) {
+  .team-footer-cards-grid {
+    grid-template-columns: 1fr !important;
   }
+}
+
+.footer-card {
+  background: #F8FAFC !important;
+  border: 1px solid var(--border-color, #DCE2E8) !important;
+  border-radius: 8px !important;
+  padding: 12px 14px !important;
+}
+
+.fc-label {
+  font-size: 0.72rem !important;
+  font-weight: 800 !important;
+  text-transform: uppercase !important;
+  color: var(--text-secondary, #667382) !important;
+  letter-spacing: 0.04em !important;
+  margin-bottom: 4px !important;
+}
+
+.fc-val {
+  font-family: var(--f-display) !important;
+  font-size: 1.15rem !important;
+  font-weight: 800 !important;
+  color: var(--navy-primary, #14283F) !important;
+  line-height: 1.2 !important;
+}
+
+.fc-sub {
+  font-size: 0.72rem !important;
+  color: var(--text-secondary, #667382) !important;
+  margin-top: 3px !important;
 }
 
 /* ==========================================================================

@@ -1912,43 +1912,29 @@
   }
 
   // =========================================================================
-  // MODAL / FICHA DEL EQUIPO (PLANTILLA AVANZADA CON EQUIPOS ORIGINALES)
+  // MODAL / FICHA DEL EQUIPO (PLANTILLA AVANZADA CON APERTURA Y CLAUSURA)
   // =========================================================================
-  function openTeamModal(teamId) {
-    const team = teamsById[teamId] || teamsByName[teamId.toLowerCase()];
-    if (!team) return;
-
-    state.activeTeamId = team.id;
-    const modal = $('#teamModal') || $('#teamModalBackdrop');
-    if (!modal) return;
-
-    // Calcular estadísticas del Clausura para el equipo
-    const allMatches = getTeamChronologicalMatches(team.nombre);
-    const clMatches = allMatches.filter(m => m.torneo === 'Clausura');
-
-    let clPJ = clMatches.length;
-    let clG = 0, clE = 0, clP = 0, clGF = 0, clGC = 0, clVI = 0, clPts = 0;
+  function calcTeamTournamentStats(matches) {
+    let pj = matches.length;
+    let g = 0, e = 0, p = 0, gf = 0, gc = 0, vi = 0, pts = 0;
     let locPJ = 0, locG = 0, locE = 0, locP = 0, locGF = 0, locGC = 0;
     let visPJ = 0, visG = 0, visE = 0, visP = 0, visGF = 0, visGC = 0;
+    let mayorVictoria = null, mayorDifVic = -1;
+    let peorDerrota = null, mayorDifDer = -1;
 
-    let mayorVictoria = null;
-    let mayorDifVic = -1;
-    let peorDerrota = null;
-    let mayorDifDer = -1;
-
-    clMatches.forEach(m => {
-      clGF += m.gf;
-      clGC += m.gc;
-      if (m.gc === 0) clVI++;
+    matches.forEach(m => {
+      gf += m.gf;
+      gc += m.gc;
+      if (m.gc === 0) vi++;
 
       if (m.gf > m.gc) {
-        clG++; clPts += 3;
+        g++; pts += 3;
         const dif = m.gf - m.gc;
         if (dif > mayorDifVic) { mayorDifVic = dif; mayorVictoria = m; }
       } else if (m.gf === m.gc) {
-        clE++; clPts += 1;
+        e++; pts += 1;
       } else {
-        clP++;
+        p++;
         const dif = m.gc - m.gf;
         if (dif > mayorDifDer) { mayorDifDer = dif; peorDerrota = m; }
       }
@@ -1966,24 +1952,52 @@
       }
     });
 
-    const efectClausura = clPJ > 0 ? Math.round((clPts / (clPJ * 3)) * 100) : 0;
-    const efectLocal = locPJ > 0 ? Math.round(((locG * 3 + locE) / (locPJ * 3)) * 100) : 0;
-    const efectVisita = visPJ > 0 ? Math.round(((visG * 3 + visE) / (visPJ * 3)) * 100) : 0;
+    const efect = pj > 0 ? Math.round((pts / (pj * 3)) * 100) : 0;
+    const efectLoc = locPJ > 0 ? Math.round(((locG * 3 + locE) / (locPJ * 3)) * 100) : 0;
+    const efectVis = visPJ > 0 ? Math.round(((visG * 3 + visE) / (visPJ * 3)) * 100) : 0;
+    const gfPJ = pj > 0 ? (gf / pj).toFixed(1).replace('.', ',') : "0,0";
+    const gcPJ = pj > 0 ? (gc / pj).toFixed(1).replace('.', ',') : "0,0";
 
-    const gfPorPJ = clPJ > 0 ? (clGF / clPJ).toFixed(1).replace('.', ',') : "0,0";
-    const gcPorPJ = clPJ > 0 ? (clGC / clPJ).toFixed(1).replace('.', ',') : "0,0";
+    return {
+      pj, g, e, p, gf, gc, vi, pts,
+      locPJ, locG, locE, locP, locGF, locGC,
+      visPJ, visG, visE, visP, visGF, visGC,
+      efect, efectLoc, efectVis, gfPJ, gcPJ,
+      mayorVictoria, peorDerrota
+    };
+  }
 
-    const tablaZona = team.zonaClausura === 'A' ? DATA.clausura.tablas.zonaA : DATA.clausura.tablas.zonaB;
-    const posRow = tablaZona.find(r => r.equipo.toLowerCase() === team.nombre.toLowerCase());
-    const posStr = posRow ? `${posRow.pos}° de la Zona ${team.zonaClausura} del Clausura` : `Zona ${team.zonaClausura}`;
+  function openTeamModal(teamId) {
+    const team = teamsById[teamId] || teamsByName[teamId.toLowerCase()];
+    if (!team) return;
 
+    state.activeTeamId = team.id;
+    if (!state.modalTorneo) state.modalTorneo = 'clausura';
+    if (!state.modalMatchFilter) state.modalMatchFilter = 'todos';
+
+    const modal = $('#teamModal') || $('#teamModalBackdrop');
+    if (!modal) return;
+
+    // Obtener todos los partidos de Apertura y Clausura
+    const allMatches = getTeamChronologicalMatches(team.nombre);
+    const clMatches = allMatches.filter(m => m.torneo === 'Clausura');
+    const apMatches = allMatches.filter(m => m.torneo.startsWith('Apertura'));
+
+    const statsClausura = calcTeamTournamentStats(clMatches);
+    const statsApertura = calcTeamTournamentStats(apMatches);
+    const statsAnual = calcTeamTournamentStats(allMatches);
+
+    const curTorneo = state.modalTorneo;
+    const curStats = curTorneo === 'clausura' ? statsClausura : curTorneo === 'apertura' ? statsApertura : statsAnual;
+
+    // Calcular racha actual e invicto más largo
     let rachaActualStr = "—";
     let invictoLargo = 0;
-    if (clMatches.length > 0) {
-      const first = clMatches[0];
+    if (allMatches.length > 0) {
+      const first = allMatches[0];
       const tipo = first.gf > first.gc ? 'victoria' : first.gf === first.gc ? 'empate' : 'derrota';
       let c = 0;
-      for (const m of clMatches) {
+      for (const m of allMatches) {
         const t = m.gf > m.gc ? 'victoria' : m.gf === m.gc ? 'empate' : 'derrota';
         if (t === tipo) c++;
         else break;
@@ -1991,7 +2005,7 @@
       rachaActualStr = `${c} ${tipo}${c > 1 ? 's' : ''}`;
 
       let invCount = 0;
-      clMatches.forEach(m => {
+      [...allMatches].reverse().forEach(m => {
         if (m.gf >= m.gc) {
           invCount++;
           if (invCount > invictoLargo) invictoLargo = invCount;
@@ -2001,47 +2015,19 @@
       });
     }
 
+    // Posición en tabla
+    const tablaZona = team.zonaClausura === 'A' ? DATA.clausura.tablas.zonaA : DATA.clausura.tablas.zonaB;
+    const posRow = tablaZona.find(r => r.equipo.toLowerCase() === team.nombre.toLowerCase());
+    const posStr = posRow ? `${posRow.pos}° de la Zona ${team.zonaClausura} del Clausura` : `Zona ${team.zonaClausura}`;
+
     const teamOptionsHtml = DATA.equipos.map(eq => {
       const sel = eq.id === team.id ? 'selected' : '';
       return `<option value="${eq.id}" ${sel}>${eq.nombre}</option>`;
     }).join('');
 
-    const timelineMatches = [...clMatches].reverse();
-    const maxBarVal = Math.max(...timelineMatches.map(m => Math.max(m.gf, m.gc)), 3);
-
-    const matchPillsHtml = timelineMatches.map(m => {
-      const rivalTeam = getTeam(m.rival);
-      return `
-        <div class="team-match-col">
-          <div class="match-pill-card">
-            <div class="pill-fase">${m.faseLabel}</div>
-            ${renderCrestImg(rivalTeam, "pill-crest")}
-            <div class="pill-score">${m.golesL}-${m.golesV}</div>
-            <div class="pill-cond">${m.esLocal ? 'LOCAL' : 'VISITA'}</div>
-          </div>
-        </div>
-      `;
-    }).join('');
-
-    const matchBarsHtml = timelineMatches.map(m => {
-      const hGF = Math.round((m.gf / maxBarVal) * 55);
-      const hGC = Math.round((m.gc / maxBarVal) * 55);
-      return `
-        <div class="bar-pair-col">
-          <div class="bar-top-wrapper">
-            ${m.gf > 0 ? `<div class="bar-bar bar-gf" style="height:${Math.max(hGF, 8)}px;"><span class="bar-num">${m.gf}</span></div>` : ''}
-          </div>
-          <div class="bar-center-line"></div>
-          <div class="bar-bottom-wrapper">
-            ${m.gc > 0 ? `<div class="bar-bar bar-gc" style="height:${Math.max(hGC, 8)}px;"><span class="bar-num">${m.gc}</span></div>` : ''}
-          </div>
-          <div class="bar-fecha-lbl">${m.faseLabel}</div>
-        </div>
-      `;
-    }).join('');
-
+    // Anillo SVG de efectividad
     const circumference = 2 * Math.PI * 40;
-    const strokeDashoffset = circumference - (efectClausura / 100) * circumference;
+    const strokeDashoffset = circumference - (curStats.efect / 100) * circumference;
 
     const modalBody = $('#teamModalBody');
     if (!modalBody) return;
@@ -2050,60 +2036,144 @@
     const bonusModalBadge = anualRow && anualRow.bonus > 0 ? `<span class="badge-bonus-pts">+${anualRow.bonus} bonus</span>` : '';
     const sancionModalBadge = anualRow && anualRow.sancionPts > 0 ? `<span class="badge-sancion-pts">-${anualRow.sancionPts} sanción</span>` : '';
 
+    // Renderizar tarjeta individual de partido
+    function renderMatchItem(m) {
+      const rivalTeam = getTeam(m.rival);
+      const isWin = m.gf > m.gc;
+      const isDraw = m.gf === m.gc;
+      const resClass = isWin ? 'score-win' : isDraw ? 'score-draw' : 'score-loss';
+      const resLetter = isWin ? 'G' : isDraw ? 'E' : 'P';
+      const torneoClass = m.torneo === 'Clausura' ? 'badge-clausura' : m.torneo.includes('Playoffs') ? 'badge-playoffs' : 'badge-apertura';
+      const penalesHtml = m.penalesL !== undefined ? `<span class="tmc-penales">(${m.penalesL}-${m.penalesV} pen.)</span>` : '';
+
+      return `
+        <div class="team-match-card">
+          <div class="tmc-top">
+            <span class="tmc-torneo-badge ${torneoClass}">${m.torneo} · ${m.faseLabel}</span>
+            <span class="tmc-cond">${m.esLocal ? 'LOCAL' : 'VISITANTE'}</span>
+          </div>
+          <div class="tmc-main">
+            <div class="tmc-rival-box" data-team="${rivalTeam?.id || ''}" style="${rivalTeam ? 'cursor:pointer;' : ''}">
+              ${renderCrestImg(rivalTeam, "tmc-rival-crest")}
+              <span class="tmc-rival-name" title="${m.rival}">${m.rival}</span>
+            </div>
+            <div class="tmc-score-badge ${resClass}">
+              <span class="tmc-letter">${resLetter}</span>
+              <span>${m.golesL}-${m.golesV}</span>
+              ${penalesHtml}
+            </div>
+          </div>
+          ${m.nota ? `<div class="tmc-nota">${escapeHtml(m.nota)}</div>` : ''}
+        </div>
+      `;
+    }
+
+    const matchFilter = state.modalMatchFilter;
+    let matchesContentHtml = '';
+
+    if (matchFilter === 'clausura') {
+      matchesContentHtml = `
+        <div class="team-matches-grid">
+          ${clMatches.length > 0 ? clMatches.map(renderMatchItem).join('') : '<div style="color:var(--muted); font-size:0.9rem;">Sin partidos disputados en Clausura.</div>'}
+        </div>
+      `;
+    } else if (matchFilter === 'apertura') {
+      matchesContentHtml = `
+        <div class="team-matches-grid">
+          ${apMatches.length > 0 ? apMatches.map(renderMatchItem).join('') : '<div style="color:var(--muted); font-size:0.9rem;">Sin partidos disputados en Apertura.</div>'}
+        </div>
+      `;
+    } else {
+      // TODOS: Mostrar Clausura y Apertura agrupados con títulos
+      matchesContentHtml = `
+        <div style="margin-bottom:18px;">
+          <div style="display:flex; align-items:center; gap:8px; margin-bottom:10px;">
+            <span class="tmc-torneo-badge badge-clausura" style="font-size:0.75rem;">Torneo Clausura 2026 (En curso)</span>
+            <span style="font-size:0.8rem; color:var(--text-secondary,#667382); font-weight:600;">${clMatches.length} partidos</span>
+          </div>
+          <div class="team-matches-grid">
+            ${clMatches.length > 0 ? clMatches.map(renderMatchItem).join('') : '<div style="color:var(--muted); font-size:0.9rem;">Sin partidos disputados.</div>'}
+          </div>
+        </div>
+
+        <div>
+          <div style="display:flex; align-items:center; gap:8px; margin-bottom:10px;">
+            <span class="tmc-torneo-badge badge-apertura" style="font-size:0.75rem;">Torneo Apertura 2026 (Finalizado)</span>
+            <span style="font-size:0.8rem; color:var(--text-secondary,#667382); font-weight:600;">${apMatches.length} partidos</span>
+          </div>
+          <div class="team-matches-grid">
+            ${apMatches.length > 0 ? apMatches.map(renderMatchItem).join('') : '<div style="color:var(--muted); font-size:0.9rem;">Sin partidos disputados.</div>'}
+          </div>
+        </div>
+      `;
+    }
+
     modalBody.innerHTML = `
-      <!-- HEADER CON SELECTOR DROPDOWN -->
+      <!-- HEADER CON MARCA DEL EQUIPO Y DROPDOWN -->
       <div class="team-modal-header-row">
         <div>
-          <div style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.12em; font-weight:800; color:var(--muted);">Ficha del Equipo</div>
+          <div style="font-size:0.72rem; text-transform:uppercase; letter-spacing:0.12em; font-weight:800; color:var(--text-secondary,#667382); margin-bottom:4px;">Ficha Oficial del Club</div>
           <div class="team-modal-brand">
             <img src="${team.escudo}" alt="${team.nombre}" class="modal-crest-lg">
             <div>
               <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
-                <h2 style="font-family:var(--f-display); font-size:2.4rem; text-transform:uppercase; line-height:1; color:#ffffff; margin:0;">${team.nombre}</h2>
+                <h2 class="modal-team-title">${team.nombre}</h2>
                 ${bonusModalBadge}
                 ${sancionModalBadge}
               </div>
-              <div style="font-size:0.85rem; color:var(--muted); margin-top:4px;">${posStr} · ${clG} ganados, ${clE} empatados, ${clP} perdidos</div>
+              <div class="modal-team-subtitle">${posStr} · ${team.zonaApertura ? `Apertura Zona ${team.zonaApertura}` : ''}</div>
             </div>
           </div>
         </div>
-        <div style="display:flex; flex-direction:column; align-items:flex-end; gap:8px;">
-          <span style="font-size:0.85rem; color:var(--muted); font-weight:700;">Clausura 2026</span>
+        <div style="display:flex; flex-direction:column; align-items:flex-end; gap:6px;">
+          <span style="font-size:0.78rem; color:var(--text-secondary,#667382); font-weight:700; text-transform:uppercase;">Cambiar de Club</span>
           <select id="modalTeamSelect" class="team-dropdown-select">
             ${teamOptionsHtml}
           </select>
         </div>
       </div>
 
+      <!-- TABS DE TORNEO PARA LAS ESTADÍSTICAS -->
+      <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px; margin-bottom:14px;">
+        <div class="modal-torneo-tabs" role="tablist">
+          <button class="modal-torneo-btn ${curTorneo === 'clausura' ? 'active' : ''}" data-torneo="clausura">Clausura 2026 (${clMatches.length} PJ)</button>
+          <button class="modal-torneo-btn ${curTorneo === 'apertura' ? 'active' : ''}" data-torneo="apertura">Apertura 2026 (${apMatches.length} PJ)</button>
+          <button class="modal-torneo-btn ${curTorneo === 'anual' ? 'active' : ''}" data-torneo="anual">Temporada Anual (${allMatches.length} PJ)</button>
+        </div>
+        <span style="font-size:0.82rem; color:var(--text-secondary,#667382); font-weight:600;">
+          ${curStats.g} G · ${curStats.e} E · ${curStats.p} P
+        </span>
+      </div>
+
       <!-- PANEL SUPERIOR: ANILLO + 4 TARJETAS + TABLA CONDICIÓN -->
       <div class="team-modal-kpi-grid">
         <div class="efect-ring-card">
           <svg class="ring-svg" viewBox="0 0 100 100">
-            <circle class="ring-bg" cx="50" cy="50" r="40"></circle>
-            <circle class="ring-progress" cx="50" cy="50" r="40" style="stroke-dasharray:${circumference}; stroke-dashoffset:${strokeDashoffset};"></circle>
+            <circle class="ring-bg" cx="50" cy="50" r="40" fill="none"></circle>
+            <circle class="ring-progress" cx="50" cy="50" r="40" fill="none" style="stroke-dasharray:${circumference}; stroke-dashoffset:${strokeDashoffset};"></circle>
           </svg>
           <div class="ring-label">
-            <span class="ring-pct">${efectClausura}%</span>
+            <span class="ring-pct">${curStats.efect}%</span>
             <span class="ring-txt">Efectividad</span>
           </div>
         </div>
 
         <div class="metric-tiles-2x2">
           <div class="metric-tile">
-            <span class="tile-val">${clGF}</span>
-            <span class="tile-lbl">Goles a favor · ${gfPorPJ} por PJ</span>
+            <span class="tile-val">${curStats.gf}</span>
+            <span class="tile-lbl">Goles a favor · ${curStats.gfPJ} por PJ</span>
           </div>
           <div class="metric-tile">
-            <span class="tile-val">${clGC}</span>
-            <span class="tile-lbl">En contra · ${gcPorPJ} por PJ</span>
+            <span class="tile-val">${curStats.gc}</span>
+            <span class="tile-lbl">En contra · ${curStats.gcPJ} por PJ</span>
           </div>
           <div class="metric-tile">
-            <span class="tile-val">${clVI}</span>
+            <span class="tile-val">${curStats.vi}</span>
             <span class="tile-lbl">Vallas invictas</span>
           </div>
           <div class="metric-tile">
-            <span class="tile-val">${clPts}</span>
-            <span class="tile-lbl">Puntos en ${clPJ} PJ</span>
+            <span class="tile-val">${curStats.pts}</span>
+            <span class="tile-lbl">Puntos ganados (${curStats.pj} PJ)</span>
           </div>
         </div>
 
@@ -2123,75 +2193,97 @@
             </thead>
             <tbody>
               <tr>
-                <td style="text-align:left; font-weight:700; color:#ffffff;">Local</td>
-                <td>${locPJ}</td>
-                <td>${locG}</td>
-                <td>${locE}</td>
-                <td>${locP}</td>
-                <td>${locGF}</td>
-                <td>${locGC}</td>
-                <td style="font-weight:700; color:var(--accent);">${efectLocal}%</td>
+                <td class="cond-label">Local</td>
+                <td>${curStats.locPJ}</td>
+                <td>${curStats.locG}</td>
+                <td>${curStats.locE}</td>
+                <td>${curStats.locP}</td>
+                <td>${curStats.locGF}</td>
+                <td>${curStats.locGC}</td>
+                <td class="cond-efect">${curStats.efectLoc}%</td>
               </tr>
               <tr>
-                <td style="text-align:left; font-weight:700; color:#ffffff;">Visitante</td>
-                <td>${visPJ}</td>
-                <td>${visG}</td>
-                <td>${visE}</td>
-                <td>${visP}</td>
-                <td>${visGF}</td>
-                <td>${visGC}</td>
-                <td style="font-weight:700; color:var(--accent);">${efectVisita}%</td>
+                <td class="cond-label">Visitante</td>
+                <td>${curStats.visPJ}</td>
+                <td>${curStats.visG}</td>
+                <td>${curStats.visE}</td>
+                <td>${curStats.visP}</td>
+                <td>${curStats.visGF}</td>
+                <td>${curStats.visGC}</td>
+                <td class="cond-efect">${curStats.efectVis}%</td>
               </tr>
             </tbody>
           </table>
         </div>
       </div>
 
-      <!-- SECCIÓN PARTIDO A PARTIDO -->
-      <div class="partido-partido-section">
-        <h3 style="font-family:var(--f-display); font-size:1.3rem; text-transform:uppercase; color:#ffffff; margin-bottom:12px;">Partido a Partido</h3>
-        
-        <div class="timeline-pills-row">
-          ${matchPillsHtml.length > 0 ? matchPillsHtml : `<div style="color:var(--muted); font-size:0.9rem;">Sin partidos disputados en esta fase.</div>`}
+      <!-- SECCIÓN PARTIDO A PARTIDO (APERTURA Y CLAUSURA) -->
+      <div class="modal-matches-section">
+        <div class="modal-section-header">
+          <div>
+            <h3 class="modal-section-title">Resultados de la Temporada</h3>
+            <span style="font-size:0.8rem; color:var(--text-secondary,#667382);">Historial oficial de partidos disputados</span>
+          </div>
+          <div class="match-filter-pills">
+            <button class="match-filter-pill ${matchFilter === 'todos' ? 'active' : ''}" data-filter="todos">Todos (${allMatches.length})</button>
+            <button class="match-filter-pill ${matchFilter === 'clausura' ? 'active' : ''}" data-filter="clausura">Clausura (${clMatches.length})</button>
+            <button class="match-filter-pill ${matchFilter === 'apertura' ? 'active' : ''}" data-filter="apertura">Apertura (${apMatches.length})</button>
+          </div>
         </div>
 
-        ${timelineMatches.length > 0 ? `
-          <div class="bidirectional-bars-wrapper">
-            <div class="bars-inner-grid">
-              ${matchBarsHtml}
-            </div>
-          </div>
-        ` : ''}
+        ${matchesContentHtml}
       </div>
 
-      <!-- 3 TARJETAS INFERIORES: MAYOR VICTORIA, DERROTA MÁS DURA, RACHA ACTUAL -->
+      <!-- 3 TARJETAS INFERIORES: MAYOR VICTORIA, DERROTA MÁS DURA, RACHA -->
       <div class="team-footer-cards-grid">
         <div class="footer-card">
           <div class="fc-label">Mayor Victoria</div>
-          <div class="fc-val">${mayorVictoria ? `${mayorVictoria.gf}-${mayorVictoria.gc} vs ${mayorVictoria.rival}` : '—'}</div>
-          <div class="fc-sub">${mayorVictoria ? `Clausura · ${mayorVictoria.faseLabel} · de ${mayorVictoria.esLocal ? 'local' : 'visitante'}` : 'Sin registros'}</div>
+          <div class="fc-val">${curStats.mayorVictoria ? `${curStats.mayorVictoria.gf}-${curStats.mayorVictoria.gc} vs ${curStats.mayorVictoria.rival}` : '—'}</div>
+          <div class="fc-sub">${curStats.mayorVictoria ? `${curStats.mayorVictoria.torneo} · ${curStats.mayorVictoria.faseLabel} (${curStats.mayorVictoria.esLocal ? 'Local' : 'Visitante'})` : 'Sin registros'}</div>
         </div>
 
         <div class="footer-card">
           <div class="fc-label">Derrota Más Dura</div>
-          <div class="fc-val">${peorDerrota ? `${peorDerrota.gf}-${peorDerrota.gc} vs ${peorDerrota.rival}` : '—'}</div>
-          <div class="fc-sub">${peorDerrota ? `Clausura · ${peorDerrota.faseLabel} · de ${peorDerrota.esLocal ? 'local' : 'visitante'}` : 'Sin derrotas registradas'}</div>
+          <div class="fc-val">${curStats.peorDerrota ? `${curStats.peorDerrota.gf}-${curStats.peorDerrota.gc} vs ${curStats.peorDerrota.rival}` : '—'}</div>
+          <div class="fc-sub">${curStats.peorDerrota ? `${curStats.peorDerrota.torneo} · ${curStats.peorDerrota.faseLabel} (${curStats.peorDerrota.esLocal ? 'Local' : 'Visitante'})` : 'Sin derrotas registradas'}</div>
         </div>
 
         <div class="footer-card">
-          <div class="fc-label">Racha Actual</div>
+          <div class="fc-label">Racha / Invicto</div>
           <div class="fc-val">${rachaActualStr}</div>
           <div class="fc-sub">Invicto más largo: ${invictoLargo} partido${invictoLargo > 1 ? 's' : ''}</div>
         </div>
       </div>
     `;
 
+    // Eventos dentro del Modal
     const select = $('#modalTeamSelect', modalBody);
     if (select) {
       select.addEventListener('change', (e) => {
         openTeamModal(e.target.value);
       });
     }
+
+    $$('.modal-torneo-btn', modalBody).forEach(btn => {
+      btn.addEventListener('click', () => {
+        state.modalTorneo = btn.dataset.torneo;
+        openTeamModal(team.id);
+      });
+    });
+
+    $$('.match-filter-pill', modalBody).forEach(btn => {
+      btn.addEventListener('click', () => {
+        state.modalMatchFilter = btn.dataset.filter;
+        openTeamModal(team.id);
+      });
+    });
+
+    $$('.tmc-rival-box', modalBody).forEach(box => {
+      box.addEventListener('click', () => {
+        const targetId = box.dataset.team;
+        if (targetId) openTeamModal(targetId);
+      });
+    });
 
     modal.classList.add('active');
     modal.classList.add('open');
