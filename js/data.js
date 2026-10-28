@@ -10,7 +10,7 @@ const LIGA_DATA = {
     "categoria": "Categoría A",
     "subtitulo": "Categoría A · Fútbol Universitario",
     "temporada": "Temporada 2026",
-    "organizador": "Secretaría de Bienestar Universitario · Dirección General de Deportes y Recreación",
+    "organizador": "Comisión de la Liga Universitaria",
     "universidad": "Universidad Nacional de San Juan",
     "torneoActual": "Torneo Clausura 2026",
     "ultimaFechaDisputada": 4,

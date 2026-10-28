@@ -1860,7 +1860,7 @@
 
         <div class="reg-status-strip">
           <span id="reg-counter-display">Cargando normativas...</span>
-          <span>Secretaría de Bienestar Universitario · DGDR</span>
+          <span>Comisión de la Liga · Normativa Vigente</span>
         </div>
       </div>
 
