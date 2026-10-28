@@ -14,7 +14,9 @@ const LIGA_DATA = {
     "universidad": "Universidad Nacional de San Juan",
     "torneoActual": "Torneo Clausura 2026",
     "ultimaFechaDisputada": 4,
-    "estado": "Clausura en disputa · Fecha 4 completada"
+    "estado": "Clausura en disputa · Fecha 4 completada",
+    "instagram": "https://www.instagram.com/ligauniversitaria.sj/",
+    "instagramHandle": "@ligauniversitaria.sj"
   },
   "equipos": [
     {

@@ -242,6 +242,66 @@ a {
   box-shadow: 0 0 6px #397653;
 }
 
+/* Badge de Instagram Oficial de la Liga en Cabecera */
+.badge-tag.badge-ig-league {
+  background: rgba(255, 255, 255, 0.14) !important;
+  color: #FFFFFF !important;
+  border: 1px solid rgba(255, 255, 255, 0.28) !important;
+  text-decoration: none !important;
+  cursor: pointer !important;
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.badge-tag.badge-ig-league:hover {
+  background: linear-gradient(135deg, rgba(225, 48, 108, 0.35), rgba(253, 29, 29, 0.25)) !important;
+  border-color: #E1306C !important;
+  color: #FFFFFF !important;
+  transform: translateY(-2px) scale(1.03) !important;
+  box-shadow: 0 4px 12px rgba(225, 48, 108, 0.35) !important;
+}
+
+.badge-tag.badge-ig-league .ig-svg-icon {
+  stroke: #FFFFFF !important;
+  transition: transform 0.2s ease !important;
+}
+
+.badge-tag.badge-ig-league:hover .ig-svg-icon {
+  transform: scale(1.15) !important;
+}
+
+/* Enlace de Instagram en el Footer */
+.footer-ig-link {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  padding: 8px 16px !important;
+  border-radius: 9999px !important;
+  background: rgba(255, 255, 255, 0.08) !important;
+  color: #FFFFFF !important;
+  border: 1px solid rgba(255, 255, 255, 0.16) !important;
+  text-decoration: none !important;
+  font-weight: 700 !important;
+  font-size: 0.82rem !important;
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.footer-ig-link .ig-svg-icon {
+  stroke: #E1306C !important;
+  transition: transform 0.2s ease !important;
+}
+
+.footer-ig-link:hover {
+  background: linear-gradient(135deg, rgba(225, 48, 108, 0.25), rgba(253, 29, 29, 0.15)) !important;
+  border-color: #E1306C !important;
+  color: #FFFFFF !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 4px 12px rgba(225, 48, 108, 0.25) !important;
+}
+
+.footer-ig-link:hover .ig-svg-icon {
+  transform: scale(1.15) !important;
+}
+
 /* Marcador Hero Board */
 .hero-board {
   display: grid;
