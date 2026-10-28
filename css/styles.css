@@ -930,18 +930,26 @@ img.match-crest {
   box-shadow: 0 0 0 3px rgba(36, 73, 107, 0.15) !important;
 }
 
+.search-input-box .search-icon-svg,
 .search-input-box .search-icon {
   position: absolute !important;
   left: 14px !important;
   top: 50% !important;
   transform: translateY(-50%) !important;
-  font-size: 1rem !important;
+  width: 17px !important;
+  height: 17px !important;
   color: var(--text-secondary, #667382) !important;
   pointer-events: none !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
-  line-height: 1 !important;
+  transition: all 0.2s ease !important;
+}
+
+.search-input-box:focus-within .search-icon-svg,
+.search-input-box:focus-within .search-icon {
+  color: var(--navy-secondary, #24496B) !important;
+  transform: translateY(-50%) scale(1.1) !important;
 }
 
 .search-input-box input {
@@ -3232,3 +3240,517 @@ img.match-crest {
   color: var(--navy-secondary, #24496B);
   font-weight: bold;
 }
+
+/* ==========================================================================
+   SISTEMA DE ANIMACIONES MODERNAS Y FLUIDAS (MICRO-INTERACCIONES)
+   ========================================================================== */
+@keyframes viewFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes modalPopIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.95) translateY(14px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes backdropFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes badgePulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+/* Transición fluida al cambiar de pestaña */
+.view-section {
+  display: none;
+  opacity: 0;
+}
+
+.view-section.active {
+  display: block !important;
+  animation: viewFadeIn 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards !important;
+}
+
+/* Indicador de pestaña activo deslizante */
+#tabIndicator {
+  position: absolute !important;
+  bottom: 0 !important;
+  height: 3px !important;
+  background: var(--navy-primary, #14283F) !important;
+  border-radius: 3px 3px 0 0 !important;
+  transition: left 0.28s cubic-bezier(0.4, 0, 0.2, 1), width 0.28s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  pointer-events: none !important;
+}
+
+/* Botones de navegación */
+.tab-btn {
+  transition: color 0.18s ease, background 0.18s ease, transform 0.12s ease !important;
+}
+
+.tab-btn:hover {
+  color: var(--navy-primary, #14283F) !important;
+}
+
+.tab-btn:active {
+  transform: scale(0.96) !important;
+}
+
+/* Tarjetas del Hero Board (Cabecera) */
+.board-tile {
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease, border-color 0.25s ease !important;
+}
+
+.board-tile:hover {
+  transform: translateY(-3px) !important;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.32) !important;
+  border-color: rgba(255, 255, 255, 0.28) !important;
+}
+
+.board-tile:hover .tile-crest {
+  transform: scale(1.08) !important;
+}
+
+.tile-crest {
+  transition: transform 0.25s ease !important;
+}
+
+/* Tarjetas de Clubes en Sección Equipos */
+.team-card-preview {
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease, border-color 0.25s ease !important;
+  cursor: pointer !important;
+}
+
+.team-card-preview:hover {
+  transform: translateY(-4px) !important;
+  box-shadow: 0 10px 24px rgba(20, 40, 63, 0.1) !important;
+  border-color: var(--navy-secondary, #24496B) !important;
+}
+
+.team-card-preview:hover .preview-crest {
+  transform: scale(1.08) !important;
+}
+
+.preview-crest {
+  transition: transform 0.25s ease !important;
+}
+
+/* Filas de Partidos en Fixture */
+.match-row-card {
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease, border-color 0.2s ease !important;
+}
+
+.match-row-card:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 18px rgba(20, 40, 63, 0.08) !important;
+  border-color: #B8C7D6 !important;
+}
+
+/* Tarjetas de "Lo Mejor del Torneo" */
+.best-card {
+  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.22s ease, border-color 0.22s ease !important;
+}
+
+.best-card:hover {
+  transform: translateY(-3px) !important;
+  box-shadow: 0 8px 20px rgba(20, 40, 63, 0.09) !important;
+  border-color: #B8C7D6 !important;
+}
+
+/* Efecto suave en botones y píldoras interactivas */
+.pill-btn,
+.match-filter-pill,
+.modal-torneo-btn,
+.reg-pill,
+.reg-toggle-all-btn {
+  transition: all 0.18s ease !important;
+}
+
+.pill-btn:hover,
+.match-filter-pill:hover,
+.modal-torneo-btn:hover,
+.reg-pill:hover,
+.reg-toggle-all-btn:hover {
+  transform: translateY(-1px) !important;
+}
+
+.pill-btn:active,
+.match-filter-pill:active,
+.modal-torneo-btn:active,
+.reg-pill:active,
+.reg-toggle-all-btn:active {
+  transform: scale(0.96) !important;
+}
+
+/* Filas de tablas oficiales */
+.league-table tbody tr {
+  transition: background-color 0.15s ease !important;
+}
+
+.league-table tbody tr:hover {
+  background-color: #F1F6FB !important;
+}
+
+/* Modal con apertura pop fluida */
+.modal-backdrop.active,
+.modal-backdrop.open {
+  display: flex !important;
+  animation: backdropFadeIn 0.22s ease forwards !important;
+}
+
+.modal-container {
+  animation: modalPopIn 0.26s cubic-bezier(0.16, 1, 0.3, 1) forwards !important;
+}
+
+.modal-close-btn {
+  transition: all 0.22s ease !important;
+}
+
+.modal-close-btn:hover {
+  transform: rotate(90deg) scale(1.1) !important;
+}
+
+/* ==========================================================================
+   OPTIMIZACIONES RESPONSIVE EXCLUSIVAS PARA DISPOSITIVOS MÓVILES
+   ========================================================================== */
+@media (max-width: 768px) {
+  /* Contenedores y espaciados */
+  .container {
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+  }
+
+  .site-header {
+    padding: 14px 0 10px 0 !important;
+  }
+
+  /* Hero Board en móvil: 2x2 ordenado */
+  .hero-board {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 8px !important;
+    margin-top: 14px !important;
+  }
+
+  .board-tile {
+    padding: 10px 12px !important;
+  }
+
+  .tile-crest {
+    width: 30px !important;
+    height: 30px !important;
+  }
+
+  .tile-name {
+    font-size: 0.92rem !important;
+  }
+
+  .tile-desc {
+    font-size: 0.72rem !important;
+  }
+
+  /* Pestañas de navegación con scroll horizontal fluido y sin barra fea */
+  .tabs-container {
+    padding: 0 8px !important;
+    overflow-x: auto !important;
+    scrollbar-width: none !important;
+    -webkit-overflow-scrolling: touch !important;
+    display: flex !important;
+  }
+
+  .tabs-container::-webkit-scrollbar {
+    display: none !important;
+  }
+
+  .tab-btn {
+    padding: 12px 14px !important;
+    font-size: 0.88rem !important;
+    white-space: nowrap !important;
+    flex-shrink: 0 !important;
+  }
+
+  /* Encabezados de secciones con buscador */
+  .section-header,
+  .stats-header-banner {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 12px !important;
+  }
+
+  .search-input-box {
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+
+  /* Tablas responsivas con scroll horizontal suave */
+  .table-responsive {
+    border-radius: 8px !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+
+  .league-table th,
+  .league-table td {
+    padding: 8px 6px !important;
+    font-size: 0.84rem !important;
+  }
+
+  .league-table .team-name {
+    max-width: 130px !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+  }
+
+  /* Equipos en móvil: 2 columnas limpias */
+  .teams-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 10px !important;
+  }
+
+  .team-card-preview {
+    padding: 14px 8px !important;
+  }
+
+  .preview-crest {
+    width: 44px !important;
+    height: 44px !important;
+  }
+
+  .preview-name {
+    font-size: 0.92rem !important;
+  }
+
+  .preview-zone {
+    font-size: 0.72rem !important;
+  }
+
+  .preview-form {
+    gap: 3px !important;
+  }
+
+  .preview-form .badge-form {
+    width: 16px !important;
+    height: 16px !important;
+    font-size: 0.65rem !important;
+  }
+
+  /* Estadísticas en móvil */
+  .stats-kpi-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 8px !important;
+  }
+
+  .stats-kpi-card {
+    padding: 12px !important;
+  }
+
+  .stats-kpi-card .kpi-num {
+    font-size: 1.8rem !important;
+  }
+
+  .best-tournament-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 8px !important;
+  }
+
+  .charts-two-col-grid {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+
+  .chart-box {
+    padding: 16px 12px !important;
+  }
+
+  .scatter-container {
+    height: 310px !important;
+  }
+
+  .butterfly-header-row,
+  .butterfly-row {
+    grid-template-columns: 1fr 105px 1fr !important;
+    gap: 4px !important;
+  }
+
+  .bf-team-col span {
+    font-size: 0.75rem !important;
+  }
+
+  .bf-team-col img {
+    width: 18px !important;
+    height: 18px !important;
+  }
+
+  .dumbbell-row {
+    grid-template-columns: 105px 1fr 38px !important;
+    gap: 6px !important;
+  }
+
+  .db-team-col {
+    font-size: 0.76rem !important;
+  }
+
+  .db-team-col img {
+    width: 18px !important;
+    height: 18px !important;
+  }
+
+  .dumbbell-axis {
+    left: 110px !important;
+    right: 44px !important;
+  }
+
+  /* Ficha de Equipo (Modal) en móvil */
+  .modal-container {
+    max-width: 95vw !important;
+    max-height: 94vh !important;
+    padding: 18px 14px !important;
+    border-radius: 10px !important;
+  }
+
+  .team-modal-header-row {
+    padding-right: 38px !important;
+    gap: 10px !important;
+  }
+
+  .modal-team-title {
+    font-size: 1.65rem !important;
+  }
+
+  .modal-crest-lg {
+    width: 48px !important;
+    height: 48px !important;
+  }
+
+  .team-modal-kpi-grid {
+    grid-template-columns: 1fr !important;
+    gap: 10px !important;
+  }
+
+  .modal-torneo-tabs {
+    width: 100% !important;
+    display: flex !important;
+  }
+
+  .modal-torneo-btn {
+    flex: 1 !important;
+    text-align: center !important;
+    padding: 6px 4px !important;
+    font-size: 0.72rem !important;
+  }
+
+  .team-matches-grid {
+    grid-template-columns: 1fr !important;
+    gap: 8px !important;
+  }
+
+  .team-footer-cards-grid {
+    grid-template-columns: 1fr !important;
+    gap: 8px !important;
+  }
+
+  /* Reglamento en móvil */
+  .reg-search-row {
+    flex-direction: column !important;
+    align-items: stretch !important;
+  }
+
+  .reg-toggle-all-btn {
+    width: 100% !important;
+    justify-content: center !important;
+  }
+
+  .reg-card-header {
+    padding: 10px 12px !important;
+  }
+
+  .reg-card-body {
+    padding: 12px 14px !important;
+    font-size: 0.86rem !important;
+  }
+}
+
+/* Optimización extra para celulares pequeños (< 480px) */
+@media (max-width: 480px) {
+  .hero-board {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 6px !important;
+  }
+
+  .board-tile {
+    padding: 8px 10px !important;
+    border-radius: 6px !important;
+  }
+
+  .tile-label {
+    font-size: 0.64rem !important;
+  }
+
+  .tile-val-pill {
+    font-size: 0.66rem !important;
+    padding: 1px 5px !important;
+  }
+
+  .tile-crest {
+    width: 26px !important;
+    height: 26px !important;
+  }
+
+  .tile-name {
+    font-size: 0.86rem !important;
+  }
+
+  .tile-desc {
+    font-size: 0.66rem !important;
+  }
+
+  .tab-btn {
+    padding: 10px 12px !important;
+    font-size: 0.82rem !important;
+  }
+
+  .teams-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 8px !important;
+  }
+
+  .team-card-preview {
+    padding: 10px 6px !important;
+  }
+
+  .preview-crest {
+    width: 40px !important;
+    height: 40px !important;
+  }
+
+  .preview-name {
+    font-size: 0.86rem !important;
+  }
+
+  .best-tournament-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
