@@ -1758,17 +1758,8 @@ const LIGA_DATA = {
         "partidos": [
           {
             "zona": "Zona A",
-            "local": "Constructores",
-            "visitante": "Antorcha",
-            "golesL": null,
-            "golesV": null,
-            "estado": "pendiente",
-            "nota": "Próximamente"
-          },
-          {
-            "zona": "Zona A",
-            "local": "Jägermeister",
-            "visitante": "Minaster City",
+            "local": "Antorcha",
+            "visitante": "Jägermeister",
             "golesL": null,
             "golesV": null,
             "estado": "pendiente",
@@ -1777,7 +1768,7 @@ const LIGA_DATA = {
           {
             "zona": "Zona A",
             "local": "Aston",
-            "visitante": "C-Lesión",
+            "visitante": "Constructores",
             "golesL": null,
             "golesV": null,
             "estado": "pendiente",
@@ -1793,9 +1784,18 @@ const LIGA_DATA = {
             "nota": "Próximamente"
           },
           {
+            "zona": "Zona A",
+            "local": "Minaster City",
+            "visitante": "C-Lesión",
+            "golesL": null,
+            "golesV": null,
+            "estado": "pendiente",
+            "nota": "Próximamente"
+          },
+          {
             "zona": "Zona B",
-            "local": "Celtic",
-            "visitante": "De Primera",
+            "local": "De Primera",
+            "visitante": "Celtic",
             "golesL": null,
             "golesV": null,
             "estado": "pendiente",
@@ -1838,7 +1838,7 @@ const LIGA_DATA = {
           {
             "zona": "Zona A",
             "local": "Antorcha",
-            "visitante": "Jägermeister",
+            "visitante": "Constructores",
             "golesL": null,
             "golesV": null,
             "estado": "pendiente",
@@ -1846,8 +1846,8 @@ const LIGA_DATA = {
           },
           {
             "zona": "Zona A",
-            "local": "Constructores",
-            "visitante": "Aston",
+            "local": "Jägermeister",
+            "visitante": "Nottingham",
             "golesL": null,
             "golesV": null,
             "estado": "pendiente",
@@ -1855,7 +1855,7 @@ const LIGA_DATA = {
           },
           {
             "zona": "Zona A",
-            "local": "Minaster City",
+            "local": "Aston",
             "visitante": "C-Lesión",
             "golesL": null,
             "golesV": null,
@@ -1864,8 +1864,8 @@ const LIGA_DATA = {
           },
           {
             "zona": "Zona A",
-            "local": "Nottingham",
-            "visitante": "La Máquina",
+            "local": "La Máquina",
+            "visitante": "Minaster City",
             "golesL": null,
             "golesV": null,
             "estado": "pendiente",
@@ -1873,8 +1873,8 @@ const LIGA_DATA = {
           },
           {
             "zona": "Zona B",
-            "local": "Red Bull",
-            "visitante": "De Primera",
+            "local": "De Primera",
+            "visitante": "Red Bull",
             "golesL": null,
             "golesV": null,
             "estado": "pendiente",
@@ -1892,20 +1892,20 @@ const LIGA_DATA = {
           {
             "zona": "Zona B",
             "local": "Eclipse",
+            "visitante": "Libre",
+            "golesL": null,
+            "golesV": null,
+            "estado": "libre",
+            "nota": "Fecha Libre Eclipse"
+          },
+          {
+            "zona": "Zona B",
+            "local": "Otro Equipo",
             "visitante": "Maverick",
             "golesL": null,
             "golesV": null,
             "estado": "pendiente",
             "nota": "Próximamente"
-          },
-          {
-            "zona": "Zona B",
-            "local": "Otro Equipo",
-            "visitante": "Libre",
-            "golesL": null,
-            "golesV": null,
-            "estado": "libre",
-            "nota": "Fecha Libre Otro Equipo"
           }
         ]
       },
@@ -1916,8 +1916,8 @@ const LIGA_DATA = {
         "partidos": [
           {
             "zona": "Zona A",
-            "local": "Nottingham",
-            "visitante": "Antorcha",
+            "local": "Antorcha",
+            "visitante": "Nottingham",
             "golesL": null,
             "golesV": null,
             "estado": "pendiente",
@@ -1925,17 +1925,8 @@ const LIGA_DATA = {
           },
           {
             "zona": "Zona A",
-            "local": "C-Lesión",
-            "visitante": "Constructores",
-            "golesL": null,
-            "golesV": null,
-            "estado": "pendiente",
-            "nota": "Próximamente"
-          },
-          {
-            "zona": "Zona A",
-            "local": "Aston",
-            "visitante": "La Máquina",
+            "local": "Constructores",
+            "visitante": "C-Lesión",
             "golesL": null,
             "golesV": null,
             "estado": "pendiente",
@@ -1951,9 +1942,18 @@ const LIGA_DATA = {
             "nota": "Próximamente"
           },
           {
+            "zona": "Zona A",
+            "local": "Aston",
+            "visitante": "La Máquina",
+            "golesL": null,
+            "golesV": null,
+            "estado": "pendiente",
+            "nota": "Próximamente"
+          },
+          {
             "zona": "Zona B",
-            "local": "Calise",
-            "visitante": "De Primera",
+            "local": "De Primera",
+            "visitante": "Calise",
             "golesL": null,
             "golesV": null,
             "estado": "pendiente",
@@ -1970,8 +1970,8 @@ const LIGA_DATA = {
           },
           {
             "zona": "Zona B",
-            "local": "Otro Equipo",
-            "visitante": "Eclipse",
+            "local": "Celtic",
+            "visitante": "Maverick",
             "golesL": null,
             "golesV": null,
             "estado": "pendiente",
@@ -1979,8 +1979,8 @@ const LIGA_DATA = {
           },
           {
             "zona": "Zona B",
-            "local": "Maverick",
-            "visitante": "Celtic",
+            "local": "Eclipse",
+            "visitante": "Otro Equipo",
             "golesL": null,
             "golesV": null,
             "estado": "pendiente",
