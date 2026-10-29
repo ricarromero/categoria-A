@@ -543,8 +543,9 @@
     const seed = opts.seed ? `<span class="bk-seed">${opts.seed}</span>` : '';
     const score = opts.score !== undefined ? `<span class="bk-score">${opts.score}</span>` : '';
     const pen = opts.pen !== undefined ? `<span class="bk-pen">(${opts.pen})</span>` : '';
-    const cat = opts.cat ? `<span class="cat-chip cat-${opts.cat}" title="Categoría ${opts.cat}">${opts.cat}</span>` : '';
-    return `<div class="bk-team ${opts.win ? 'win' : ''} ${opts.lose ? 'lose' : ''}" data-team="${teamsByName[name.toLowerCase()] ? team.id : ''}">
+    const cat = opts.cat && !opts.catBar ? `<span class="cat-chip cat-${opts.cat}" title="Categoría ${opts.cat}">${opts.cat}</span>` : '';
+    const bar = opts.cat && opts.catBar ? `catbar catbar-${opts.cat}` : '';
+    return `<div class="bk-team ${bar} ${opts.win ? 'win' : ''} ${opts.lose ? 'lose' : ''}" ${bar ? `title="Categoría ${opts.cat}"` : ''} data-team="${teamsByName[name.toLowerCase()] ? team.id : ''}">
       ${seed}${renderCrestImg(team)}<span class="bk-name">${name}</span>${cat}${pen}${score}</div>`;
   }
 
@@ -760,12 +761,12 @@
     return corta ? `${dias[dt.getDay()].slice(0, 3)} ${da}/${mo}` : `${dias[dt.getDay()]} ${da} de ${meses[mo - 1]}`;
   }
 
-  function ccMatchHtml(m, extraClass = '') {
+  function ccMatchHtml(m, extraClass = '', compact = false) {
     const jugado = !!m.ganador;
     const hasPen = m.res && m.res.a === m.res.b && m.res.pa != null;
     const lado = (p, i) => {
       if (!p.nombre) return bkTeamHtml(null, { placeholder: `Ganador P${p.de.no}` });
-      const opts = { cat: p.cat };
+      const opts = { cat: p.cat, catBar: compact };
       if (m.res && m.res.a != null) {
         opts.score = i === 0 ? m.res.a : m.res.b;
         if (hasPen) opts.pen = i === 0 ? m.res.pa : m.res.pb;
@@ -775,13 +776,21 @@
       return bkTeamHtml(p.nombre, opts);
     };
     const vencido = !jugado && m.date && m.date < ccHoy();
-    const info = jugado ? (hasPen ? 'Penales' : 'Final')
-      : vencido ? `${ccFecha(m.date, true)} · Resultado a cargar`
-      : (m.date ? `${ccFecha(m.date, true)}${m.t ? ' · ' + m.t + ' hs' : ''}` : 'A confirmar');
+    let info;
+    if (compact) {
+      const cancha = m.c ? (m.c === 'R' ? 'Rugby' : 'Fútbol') : '';
+      info = jugado ? (hasPen ? 'Penales' : 'Final')
+        : vencido ? 'A cargar'
+        : [m.t ? m.t + ' hs' : (m.date ? '' : 'A confirmar'), cancha].filter(Boolean).join(' · ');
+    } else {
+      info = jugado ? (hasPen ? 'Penales' : 'Final')
+        : vencido ? `${ccFecha(m.date, true)} · Resultado a cargar`
+        : (m.date ? `${ccFecha(m.date, true)}${m.t ? ' · ' + m.t + ' hs' : ''}` : 'A confirmar');
+    }
     return `<div class="bk-match ${extraClass} ${jugado ? '' : 'pending'}">
       <div class="bk-code"><span>P${m.no}</span><span>${info}</span></div>
       ${lado(m.a, 0)}${lado(m.b, 1)}
-      ${!jugado && m.c ? `<div class="bk-foot">${CC_CANCHA[m.c]}</div>` : ''}
+      ${!compact && !jugado && m.c ? `<div class="bk-foot">${CC_CANCHA[m.c]}</div>` : ''}
     </div>`;
   }
 
@@ -791,10 +800,10 @@
     const model = getChallengerModel();
     if (!model) { container.innerHTML = ''; return; }
     const { all, final, CC } = model;
-    const side = state.ccLlave || 'L';
+    const vista = state.ccVista || 'cuadro';
 
     let bodyHtml = '';
-    if (side === 'partidos') {
+    if (vista === 'partidos') {
       const porRonda = {};
       all.filter(m => m !== final).forEach(m => { (porRonda[m.r] = porRonda[m.r] || []).push(m); });
       const bloques = Object.keys(porRonda).sort((a, b) => b - a).map(r => {
@@ -804,34 +813,48 @@
       }).join('');
       bodyHtml = `<div class="bracket-block">${bloques}</div>`;
     } else {
-      // Cuadro en grilla: cada partido de 16avos ocupa una fila; las rondas siguientes abarcan las filas de sus llaves
+      // Cuadro espejado: Llave 19 a la izquierda, Llave 18 a la derecha y la final en el centro.
+      // Columnas: 1-4 = 16avos..semi (izq), 5 = final, 6-9 = semi..16avos (der). La ronda previa va dentro de la celda de 16avos.
+      const colDe = (side, r) => side === 'L' ? r : 10 - r;
       const celdas = [];
-      let fila = 0;
-      (function ubicar(n) {
+      const filas = { L: 0, R: 0 };
+      function ubicar(n, side) {
         if (n.leaf) return null;
         if (n.r === 1) {
-          const row = ++fila;
-          n.kids.forEach(k => { if (!k.leaf && k.r === 0) celdas.push({ m: k, col: 1, row, span: 1 }); });
-          celdas.push({ m: n, col: 2, row, span: 1 });
+          const row = ++filas[side];
+          const previas = n.kids.map((k, i) => (!k.leaf && k.r === 0) ? { m: k, i } : null).filter(Boolean);
+          const prevHtml = i => previas.filter(p => p.i === i).map(p => `<div class="cc-previa"><span class="cc-previa-tag">Previa · ${ccFecha(p.m.date, true)}</span>${ccMatchHtml(p.m, '', true)}</div>`).join('');
+          celdas.push({ html: prevHtml(0) + ccMatchHtml(n, '', true) + prevHtml(1), col: colDe(side, 1), row, span: 1 });
           return { row, span: 1 };
         }
-        const pos = n.kids.map(ubicar).filter(Boolean);
+        const pos = n.kids.map(k => ubicar(k, side)).filter(Boolean);
         const row = Math.min(...pos.map(p => p.row));
         const span = pos.reduce((t, p) => t + p.span, 0);
-        celdas.push({ m: n, col: n.r + 1, row, span });
+        celdas.push({ html: ccMatchHtml(n, n.r === 4 ? 'cc-semi' : '', true), col: colDe(side, n.r), row, span });
         return { row, span };
-      })(model.roots[side]);
-      const heads = [0, 1, 2, 3, 4].map(r => `<div class="cc-head" style="grid-column:${r + 1};grid-row:1">${CC_RONDAS_CORTO[r]}<small>${ccFecha(CC.llaves[side].fechas[r], true)}</small></div>`).join('');
-      const colsHtml = heads + celdas.map(c => `<div class="cc-cell" style="grid-column:${c.col};grid-row:${c.row + 1} / span ${c.span}">${ccMatchHtml(c.m, c.m.r === 4 ? 'final' : '')}</div>`).join('');
+      }
+      ubicar(model.roots.L, 'L');
+      ubicar(model.roots.R, 'R');
+      const nFilas = Math.max(filas.L, filas.R);
+      const HEAD = 2; // filas de encabezado
+      const heads = ['L', 'R'].map(side => {
+        const ll = CC.llaves[side];
+        const desde = side === 'L' ? 1 : 6;
+        const llaveHead = `<div class="cc-llave-head cc-llave-${side}" style="grid-column:${desde} / span 4;grid-row:1">${ll.nombre}</div>`;
+        return llaveHead + [1, 2, 3, 4].map(r => `<div class="cc-head" style="grid-column:${colDe(side, r)};grid-row:2">${CC_RONDAS_CORTO[r]}<small>${ccFecha(ll.fechas[r], true)}</small></div>`).join('');
+      }).join('') + `<div class="cc-head cc-head-final" style="grid-column:5;grid-row:2">Final<small>A confirmar</small></div>`;
+      const finalHtml = `<div class="cc-final-box">
+          <svg class="cc-trophy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0V4z"/><path d="M17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/></svg>
+          <div class="cc-final-title">Gran final</div>
+          ${ccMatchHtml(final, 'final', true)}
+          ${final.ganador ? `<div class="bk-champion">★ ${CC.equipos[final.ganador]} campeón</div>` : '<div class="cc-final-note">Ganador Llave 19 vs Ganador Llave 18</div>'}
+        </div>`;
+      const cuerpo = celdas.map(c => `<div class="cc-cell" style="grid-column:${c.col};grid-row:${c.row + HEAD} / span ${c.span}">${c.html}</div>`).join('')
+        + `<div class="cc-cell cc-cell-final" style="grid-column:5;grid-row:${1 + HEAD} / span ${nFilas}">${finalHtml}</div>`;
       bodyHtml = `
-        <div class="bracket-block">
-          <div class="bracket-title"><h3>${CC.llaves[side].nombre}</h3><span class="bracket-tag oro">El ganador juega la final</span></div>
-          <div class="bracket-scroll"><div class="cc-grid">${colsHtml}</div></div>
-        </div>
-        <div class="bracket-block cc-final">
-          <div class="bracket-title"><h3>Gran final</h3><span class="bracket-tag plata">Fecha a confirmar</span></div>
-          <div style="max-width:420px">${ccMatchHtml(final, 'final')}</div>
-          ${final.ganador ? `<div class="bk-champion">★ ${CC.equipos[final.ganador]} campeón</div>` : ''}
+        <div class="bracket-block cc-wide">
+          <div class="cc-scroll-hint">Deslizá para ver todo el cuadro →</div>
+          <div class="bracket-scroll"><div class="cc-mirror">${heads}${cuerpo}</div></div>
         </div>`;
     }
 
@@ -844,10 +867,9 @@
           <h2>Copa Challenger</h2>
           <span class="section-badge">2026 · Categorías A, B y C</span>
         </div>
-        <div class="pill-group" role="tablist" aria-label="Ver cuadro">
-          <button class="pill-btn ${side === 'L' ? 'active' : ''}" data-cc="L">${CC.llaves.L.nombre}</button>
-          <button class="pill-btn ${side === 'R' ? 'active' : ''}" data-cc="R">${CC.llaves.R.nombre}</button>
-          <button class="pill-btn ${side === 'partidos' ? 'active' : ''}" data-cc="partidos">Partidos</button>
+        <div class="pill-group" role="tablist" aria-label="Ver Copa Challenger">
+          <button class="pill-btn ${vista === 'cuadro' ? 'active' : ''}" data-cc="cuadro">Cuadro</button>
+          <button class="pill-btn ${vista === 'partidos' ? 'active' : ''}" data-cc="partidos">Partidos</button>
         </div>
       </div>
       <div class="banner-alert">
@@ -865,7 +887,7 @@
     `;
 
     $$('button[data-cc]', container).forEach(btn => btn.addEventListener('click', () => {
-      state.ccLlave = btn.dataset.cc;
+      state.ccVista = btn.dataset.cc;
       renderChallenger();
     }));
     $$('.bk-team[data-team]', container).forEach(el => el.addEventListener('click', () => {
