@@ -615,29 +615,66 @@
     };
   }
 
-  function renderProyeccionPlayoffs(compact = false) {
+  function renderProyeccionPlayoffs() {
     const pr = getProyeccionPlayoffs();
-    const crossHtml = c => `<div class="bk-match">
+    const fmt = n => n.toFixed(2).replace('.', ',');
+    const cruce = c => `<div class="bk-match">
         <div class="bk-code"><span>${c.codigo}</span><span>${c.sl} vs ${c.sv}</span></div>
         ${bkTeamHtml(c.local, { seed: c.sl })}
         ${bkTeamHtml(c.visitante, { seed: c.sv })}
       </div>`;
-    const fmt = n => n.toFixed(2).replace('.', ',');
+    const pendiente = (codigo, a, b, extra = '') => `<div class="bk-match ${extra}">
+        <div class="bk-code"><span>${codigo}</span><span>A jugar</span></div>
+        ${a}${b}
+      </div>`;
+    const tbd = txt => bkTeamHtml(null, { placeholder: txt });
+    const [c1, c2, c3, c4] = pr.campeonato;
+    const [p1, p2, p3] = pr.plata;
+
     return `
       <div class="bracket-wrap">
-        <div class="bracket-block">
-          <div class="bracket-title"><h3>Cruces si el Clausura terminara hoy</h3><span class="bracket-tag proy">Proyección · tablas tras la Fecha ${pr.fecha}</span></div>
-          <div class="bracket-note" style="margin:-4px 0 14px;">No son cruces confirmados: cambian con cada fecha. Se arman con las posiciones actuales de cada zona según la Forma de Disputa 2026.</div>
-          <div class="bracket-col-title" style="text-align:left;">Fase Campeonato · Cuartos de final</div>
-          <div class="matches-grid" style="margin-bottom:18px;">${pr.campeonato.map(crossHtml).join('')}</div>
-          <div class="bracket-col-title" style="text-align:left;">Copa de Plata · Cuartos de final</div>
-          <div class="matches-grid">${pr.plata.map(crossHtml).join('')}
-            ${pr.mejor5 ? `<div class="bracket-bye" style="display:flex;flex-direction:column;justify-content:center;gap:6px;">
-              <div style="display:flex;align-items:center;justify-content:center;gap:8px;">${renderCrestImg(getTeam(pr.mejor5.equipo))}<b>${pr.mejor5.equipo}</b> (5°${pr.mejor5.zona})</div>
-              <div>Mejor 5°: pasa directo a semifinales</div></div>` : ''}
-          </div>
-          <div class="bracket-note">Semifinales y finales según el cuadro preestablecido por la organización. Mejor 5° calculado por promedio de puntos por partido (${pr.mejor5 ? fmt(pr.mejor5.ppj) : '—'}), luego diferencia de gol, porque la Zona B tiene un equipo libre por fecha.</div>
+        <div class="bracket-note" style="margin:0 0 14px; padding:10px 14px; background:#F0FDF4; border:1px solid #BBF7D0; border-radius:8px; color:#166534;">
+          <b>Proyección con las tablas tras la Fecha ${pr.fecha}.</b> No son cruces confirmados: cambian con cada fecha.
         </div>
+
+        <div class="bracket-block">
+          <div class="bracket-title"><h3>Fase Campeonato</h3><span class="bracket-tag proy">Clausura 2026 · Si terminara hoy</span></div>
+          <div class="bracket-scroll"><div class="bracket">
+            <div class="bracket-col"><div class="bracket-col-title">Cuartos de final</div><div class="bk-stack">
+              ${cruce(c1)}${cruce(c2)}${cruce(c3)}${cruce(c4)}
+            </div></div>
+            <div class="bracket-col"><div class="bracket-col-title">Semifinales</div><div class="bk-stack">
+              ${pendiente('SF1', tbd('Ganador CF1'), tbd('Ganador CF2'))}
+              ${pendiente('SF2', tbd('Ganador CF3'), tbd('Ganador CF4'))}
+            </div></div>
+            <div class="bracket-col"><div class="bracket-col-title">Final</div><div class="bk-stack">
+              ${pendiente('Gran final', tbd('Ganador SF1'), tbd('Ganador SF2'), 'final')}
+              <div class="bk-champion">★ Campeón Clausura 2026</div>
+              <div class="bracket-col-title" style="margin-top:14px;">3° puesto</div>
+              ${pendiente('3° puesto', tbd('Perdedor SF1'), tbd('Perdedor SF2'))}
+            </div></div>
+          </div></div>
+        </div>
+
+        <div class="bracket-block">
+          <div class="bracket-title"><h3>Copa de Plata</h3><span class="bracket-tag proy">Clausura 2026 · Si terminara hoy</span></div>
+          <div class="bracket-scroll"><div class="bracket">
+            <div class="bracket-col"><div class="bracket-col-title">Cuartos de final</div><div class="bk-stack">
+              ${cruce(p1)}${cruce(p2)}${cruce(p3)}
+              ${pr.mejor5 ? `<div class="bracket-bye"><b>${pr.mejor5.equipo}</b> (5°${pr.mejor5.zona}) pasa directo a semifinales como mejor 5°</div>` : ''}
+            </div></div>
+            <div class="bracket-col"><div class="bracket-col-title">Semifinales</div><div class="bk-stack">
+              ${pendiente('SF1', pr.mejor5 ? bkTeamHtml(pr.mejor5.equipo, { seed: `5°${pr.mejor5.zona}` }) : tbd('Mejor 5°'), tbd('Ganador CP1'))}
+              ${pendiente('SF2', tbd('Ganador CP2'), tbd('Ganador CP3'))}
+            </div></div>
+            <div class="bracket-col"><div class="bracket-col-title">Final</div><div class="bk-stack">
+              ${pendiente('Final', tbd('Ganador SF1'), tbd('Ganador SF2'), 'final plata')}
+              <div class="bk-champion plata">★ Campeón Copa de Plata</div>
+            </div></div>
+          </div></div>
+        </div>
+
+        <div class="bracket-note">Cuartos según la Forma de Disputa 2026 (1°A vs 4°B, 2°A vs 3°B, 1°B vs 4°A, 2°B vs 3°A). Las semifinales siguen el mismo esquema que se usó en el Apertura; la organización puede definir otro cuadro. Mejor 5° calculado por promedio de puntos por partido (${pr.mejor5 ? fmt(pr.mejor5.ppj) : '—'}), porque la Zona B tiene un equipo libre por fecha.</div>
       </div>`;
   }
 
