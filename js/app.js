@@ -543,8 +543,9 @@
     const seed = opts.seed ? `<span class="bk-seed">${opts.seed}</span>` : '';
     const score = opts.score !== undefined ? `<span class="bk-score">${opts.score}</span>` : '';
     const pen = opts.pen !== undefined ? `<span class="bk-pen">(${opts.pen})</span>` : '';
-    return `<div class="bk-team ${opts.win ? 'win' : ''}" data-team="${team?.id || ''}">
-      ${seed}${renderCrestImg(team)}<span class="bk-name">${name}</span>${pen}${score}</div>`;
+    const cat = opts.cat ? `<span class="cat-chip cat-${opts.cat}" title="Categoría ${opts.cat}">${opts.cat}</span>` : '';
+    return `<div class="bk-team ${opts.win ? 'win' : ''} ${opts.lose ? 'lose' : ''}" data-team="${teamsByName[name.toLowerCase()] ? team.id : ''}">
+      ${seed}${renderCrestImg(team)}<span class="bk-name">${name}</span>${cat}${pen}${score}</div>`;
   }
 
   function bkPlayedHtml(p, label, extraClass = '') {
@@ -691,6 +692,185 @@
 
         <div class="bracket-note">Cuartos según la Forma de Disputa 2026 (1°A vs 4°B, 2°A vs 3°B, 1°B vs 4°A, 2°B vs 3°A). Las semifinales siguen el mismo esquema que se usó en el Apertura; la organización puede definir otro cuadro. Mejor 5° calculado por promedio de puntos por partido (${pr.mejor5 ? fmt(pr.mejor5.ppj) : '—'}), porque la Zona B tiene un equipo libre por fecha.</div>
       </div>`;
+  }
+
+  // =========================================================================
+  // COPA CHALLENGER (cuadro de dos llaves + final)
+  // =========================================================================
+  const CC_RONDAS = ['Ronda previa', '16avos de final', 'Octavos de final', 'Cuartos de final', 'Semifinal', 'Final'];
+  const CC_RONDAS_CORTO = ['Previa', '16avos', 'Octavos', 'Cuartos', 'Semifinal', 'Final'];
+  const CC_CANCHA = { R: 'Cancha de Rugby', F: 'Cancha de Fútbol' };
+
+  // Arma el modelo: numera los partidos igual que la planilla de la Liga (por ronda, fecha, hora, llave y cancha)
+  function getChallengerModel() {
+    const CC = DATA.copaChallenger;
+    if (!CC) return null;
+    const all = [];
+    const toMins = t => { const [h, m] = String(t).split(':').map(Number); return h * 60 + m; };
+    function walk(n, side) {
+      if (typeof n === 'number') return { leaf: side + n };
+      const [r, t, c, kids] = n;
+      const node = { r, t, c, side, date: CC.llaves[side].fechas[r], kids: kids.map(k => walk(k, side)) };
+      all.push(node);
+      return node;
+    }
+    const roots = { L: walk(CC.cuadro.L, 'L'), R: walk(CC.cuadro.R, 'R') };
+    all.sort((a, b) => a.r - b.r || (a.date || '').localeCompare(b.date || '') ||
+      (a.t ? toMins(a.t) : 0) - (b.t ? toMins(b.t) : 0) || a.side.localeCompare(b.side) || (a.c === 'R' ? -1 : 1));
+    const final = { r: 5, side: null, date: null, t: null, c: null, kids: [roots.L, roots.R] };
+    all.push(final);
+    all.forEach((m, i) => { m.no = i + 1; });
+
+    const zonaDe = slot => CC.llaves[slot[0]].zonas[Number(slot.slice(1)) - 1];
+    const nombreDe = slot => CC.equipos[slot] || null;
+    function participante(k) {
+      if (k.leaf) return { slot: k.leaf, nombre: nombreDe(k.leaf), cat: zonaDe(k.leaf) };
+      const w = ganador(k);
+      return w ? { slot: w, nombre: nombreDe(w), cat: zonaDe(w), de: k } : { nombre: null, de: k };
+    }
+    function ganador(m) {
+      const res = CC.resultados['P' + m.no];
+      if (!res || res.a == null || res.b == null) return null;
+      const [pa, pb] = m.kids.map(participante);
+      if (!pa.slot || !pb.slot) return null;
+      if (res.a !== res.b) return res.a > res.b ? pa.slot : pb.slot;
+      if (res.pa == null || res.pb == null || res.pa === res.pb) return null;
+      return res.pa > res.pb ? pa.slot : pb.slot;
+    }
+    all.forEach(m => {
+      m.res = CC.resultados['P' + m.no] || null;
+      m.a = participante(m.kids[0]);
+      m.b = participante(m.kids[1]);
+      m.ganador = ganador(m);
+    });
+    return { all, roots, final, CC };
+  }
+
+  function ccHoy() {
+    const d = new Date();
+    return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+  }
+
+  function ccFecha(d, corta = false) {
+    if (!d) return 'Fecha a confirmar';
+    const [y, mo, da] = d.split('-').map(Number);
+    const dt = new Date(y, mo - 1, da);
+    const dias = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
+    const meses = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
+    return corta ? `${dias[dt.getDay()].slice(0, 3)} ${da}/${mo}` : `${dias[dt.getDay()]} ${da} de ${meses[mo - 1]}`;
+  }
+
+  function ccMatchHtml(m, extraClass = '') {
+    const jugado = !!m.ganador;
+    const hasPen = m.res && m.res.a === m.res.b && m.res.pa != null;
+    const lado = (p, i) => {
+      if (!p.nombre) return bkTeamHtml(null, { placeholder: `Ganador P${p.de.no}` });
+      const opts = { cat: p.cat };
+      if (m.res && m.res.a != null) {
+        opts.score = i === 0 ? m.res.a : m.res.b;
+        if (hasPen) opts.pen = i === 0 ? m.res.pa : m.res.pb;
+        opts.win = jugado && m.ganador === p.slot;
+        opts.lose = jugado && m.ganador !== p.slot;
+      }
+      return bkTeamHtml(p.nombre, opts);
+    };
+    const vencido = !jugado && m.date && m.date < ccHoy();
+    const info = jugado ? (hasPen ? 'Penales' : 'Final')
+      : vencido ? `${ccFecha(m.date, true)} · Resultado a cargar`
+      : (m.date ? `${ccFecha(m.date, true)}${m.t ? ' · ' + m.t + ' hs' : ''}` : 'A confirmar');
+    return `<div class="bk-match ${extraClass} ${jugado ? '' : 'pending'}">
+      <div class="bk-code"><span>P${m.no}</span><span>${info}</span></div>
+      ${lado(m.a, 0)}${lado(m.b, 1)}
+      ${!jugado && m.c ? `<div class="bk-foot">${CC_CANCHA[m.c]}</div>` : ''}
+    </div>`;
+  }
+
+  function renderChallenger() {
+    const container = $('#view-challenger');
+    if (!container) return;
+    const model = getChallengerModel();
+    if (!model) { container.innerHTML = ''; return; }
+    const { all, final, CC } = model;
+    const side = state.ccLlave || 'L';
+
+    let bodyHtml = '';
+    if (side === 'partidos') {
+      const porRonda = {};
+      all.filter(m => m !== final).forEach(m => { (porRonda[m.r] = porRonda[m.r] || []).push(m); });
+      const bloques = Object.keys(porRonda).sort((a, b) => b - a).map(r => {
+        const ms = porRonda[r].slice().sort((a, b) => (a.date || '').localeCompare(b.date || '') || a.no - b.no);
+        return `<div class="bracket-col-title" style="text-align:left;margin:18px 0 8px;">${CC_RONDAS[r]}</div>
+          <div class="matches-grid">${ms.map(m => ccMatchHtml(m)).join('')}</div>`;
+      }).join('');
+      bodyHtml = `<div class="bracket-block">${bloques}</div>`;
+    } else {
+      // Cuadro en grilla: cada partido de 16avos ocupa una fila; las rondas siguientes abarcan las filas de sus llaves
+      const celdas = [];
+      let fila = 0;
+      (function ubicar(n) {
+        if (n.leaf) return null;
+        if (n.r === 1) {
+          const row = ++fila;
+          n.kids.forEach(k => { if (!k.leaf && k.r === 0) celdas.push({ m: k, col: 1, row, span: 1 }); });
+          celdas.push({ m: n, col: 2, row, span: 1 });
+          return { row, span: 1 };
+        }
+        const pos = n.kids.map(ubicar).filter(Boolean);
+        const row = Math.min(...pos.map(p => p.row));
+        const span = pos.reduce((t, p) => t + p.span, 0);
+        celdas.push({ m: n, col: n.r + 1, row, span });
+        return { row, span };
+      })(model.roots[side]);
+      const heads = [0, 1, 2, 3, 4].map(r => `<div class="cc-head" style="grid-column:${r + 1};grid-row:1">${CC_RONDAS_CORTO[r]}<small>${ccFecha(CC.llaves[side].fechas[r], true)}</small></div>`).join('');
+      const colsHtml = heads + celdas.map(c => `<div class="cc-cell" style="grid-column:${c.col};grid-row:${c.row + 1} / span ${c.span}">${ccMatchHtml(c.m, c.m.r === 4 ? 'final' : '')}</div>`).join('');
+      bodyHtml = `
+        <div class="bracket-block">
+          <div class="bracket-title"><h3>${CC.llaves[side].nombre}</h3><span class="bracket-tag oro">El ganador juega la final</span></div>
+          <div class="bracket-scroll"><div class="cc-grid">${colsHtml}</div></div>
+        </div>
+        <div class="bracket-block cc-final">
+          <div class="bracket-title"><h3>Gran final</h3><span class="bracket-tag plata">Fecha a confirmar</span></div>
+          <div style="max-width:420px">${ccMatchHtml(final, 'final')}</div>
+          ${final.ganador ? `<div class="bk-champion">★ ${CC.equipos[final.ganador]} campeón</div>` : ''}
+        </div>`;
+    }
+
+    const proximos = all.filter(m => !m.ganador && m.date && m.date >= ccHoy()).sort((a, b) => a.date.localeCompare(b.date) || a.no - b.no);
+    const prox = proximos.length ? proximos[0].date : null;
+
+    container.innerHTML = `
+      <div class="section-header">
+        <div class="section-title">
+          <h2>Copa Challenger</h2>
+          <span class="section-badge">2026 · Categorías A, B y C</span>
+        </div>
+        <div class="pill-group" role="tablist" aria-label="Ver cuadro">
+          <button class="pill-btn ${side === 'L' ? 'active' : ''}" data-cc="L">${CC.llaves.L.nombre}</button>
+          <button class="pill-btn ${side === 'R' ? 'active' : ''}" data-cc="R">${CC.llaves.R.nombre}</button>
+          <button class="pill-btn ${side === 'partidos' ? 'active' : ''}" data-cc="partidos">Partidos</button>
+        </div>
+      </div>
+      <div class="banner-alert">
+        <div>
+          <b>Eliminación directa entre equipos de las categorías A, B y C</b>
+          Si hay empate se define por penales.${prox ? ` Próxima fecha: ${ccFecha(prox)}.` : ''} ${CC.fuente}.
+        </div>
+      </div>
+      <div class="cc-legend">
+        <span><span class="cat-chip cat-A">A</span> Categoría A</span>
+        <span><span class="cat-chip cat-B">B</span> Categoría B</span>
+        <span><span class="cat-chip cat-C">C</span> Categoría C</span>
+      </div>
+      ${bodyHtml}
+    `;
+
+    $$('button[data-cc]', container).forEach(btn => btn.addEventListener('click', () => {
+      state.ccLlave = btn.dataset.cc;
+      renderChallenger();
+    }));
+    $$('.bk-team[data-team]', container).forEach(el => el.addEventListener('click', () => {
+      if (el.dataset.team) openTeamModal(el.dataset.team);
+    }));
   }
 
   // =========================================================================
@@ -2552,6 +2732,7 @@
       case 'goleadores': renderGoleadores(); break;
       case 'sanciones': renderSanciones(); break;
       case 'reglamento': renderReglamento(); break;
+      case 'challenger': renderChallenger(); break;
     }
 
     if (window.history && window.history.replaceState) {
@@ -2592,7 +2773,7 @@
     const urlParams = new URLSearchParams(window.location.search);
     const hash = window.location.hash ? window.location.hash.substring(1) : '';
     const initialView = urlParams.get('tab') || urlParams.get('view') || hash || 'posiciones';
-    const validViews = ['posiciones', 'fixture', 'equipos', 'estadisticas', 'goleadores', 'sanciones', 'reglamento'];
+    const validViews = ['posiciones', 'fixture', 'challenger', 'equipos', 'estadisticas', 'goleadores', 'sanciones', 'reglamento'];
     switchTab(validViews.includes(initialView) ? initialView : 'posiciones');
   }
 
