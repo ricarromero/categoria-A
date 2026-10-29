@@ -4048,11 +4048,9 @@ img.match-crest {
   position: relative; overflow: hidden;
   height: 36px !important; padding: 0 16px !important; margin: 0 8px 0 2px;
   border-radius: 8px; color: #FFFFFF !important; font-weight: 800;
-  border: 2px solid transparent !important;
-  background:
-    linear-gradient(180deg, #2C5A85 0%, #1D3F61 100%) padding-box,
-    linear-gradient(120deg, #6E93B8 0%, #D9E8F6 22%, #3E6890 42%, #B9D1E9 60%, #2D547B 80%, #E6F0FA 100%) border-box !important;
-  box-shadow: 0 2px 10px rgba(36, 73, 107, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.18);
+  border: none !important;
+  background: linear-gradient(180deg, #2C5A85 0%, #1D3F61 100%) !important;
+  box-shadow: 0 2px 10px rgba(36, 73, 107, 0.35);
 }
 .tab-btn.tab-challenger::after {
   content: ""; position: absolute; top: 0; bottom: 0; left: -60%; width: 40%;
@@ -4063,10 +4061,8 @@ img.match-crest {
 .tab-btn.tab-challenger:hover { color: #FFFFFF !important; filter: brightness(1.08); }
 .tab-btn.tab-challenger.active {
   color: #FFFFFF !important;
-  background:
-    linear-gradient(180deg, #24496B 0%, #14283F 100%) padding-box,
-    linear-gradient(120deg, #8FB3D6 0%, #F1F7FD 25%, #4A76A0 45%, #CFE1F2 65%, #35608A 85%, #F1F7FD 100%) border-box !important;
-  box-shadow: 0 0 0 3px rgba(111, 152, 194, 0.28), 0 3px 12px rgba(20, 40, 63, 0.4);
+  background: linear-gradient(180deg, #24496B 0%, #14283F 100%) !important;
+  box-shadow: 0 3px 12px rgba(20, 40, 63, 0.4);
 }
 @media (prefers-reduced-motion: reduce) { .tab-btn.tab-challenger::after { animation: none; display: none; } }
 
@@ -4076,7 +4072,7 @@ img.match-crest {
 .cc-mirror { display: grid; grid-template-columns: repeat(4, minmax(132px, 1fr)) minmax(160px, 1.1fr) repeat(4, minmax(132px, 1fr)); column-gap: 10px; row-gap: 10px; align-items: center; }
 .cc-llave-head { text-align: center; font-family: var(--f-display); font-weight: 900; font-size: 1.25rem; text-transform: uppercase; letter-spacing: 0.02em; color: #FFFFFF; background: linear-gradient(90deg, #24496B, #2F6CA8); border-radius: 6px; padding: 4px 0; }
 .cc-llave-head.cc-llave-R { background: linear-gradient(270deg, #24496B, #2F6CA8); }
-.cc-head-final { color: #92400E; }
+.cc-head-final { color: #C8164B; }
 .cc-mirror .bk-team { padding: 5px 7px; gap: 6px; font-size: 0.78rem; }
 .cc-mirror .bk-team img.table-crest, .cc-mirror .bk-team .crest-fallback { width: 18px; height: 18px; }
 .cc-mirror .bk-team .bk-score { font-size: 1rem; min-width: 12px; }
@@ -4093,9 +4089,13 @@ img.match-crest {
 .cc-previa-tag { font-size: 0.6rem; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-muted); padding-left: 2px; }
 .bk-match.cc-semi { border: 1.5px solid #6E93B8; box-shadow: 0 0 0 3px #E6EEF7; }
 .cc-cell-final { justify-content: center; }
-.cc-final-box { display: flex; flex-direction: column; align-items: stretch; gap: 8px; padding: 14px 10px; border-radius: 12px; background: linear-gradient(180deg, #FFFBEB, #FFFFFF); border: 2px solid #D4A017; box-shadow: 0 6px 18px rgba(212, 160, 23, 0.18); }
+.cc-final-box { display: flex; flex-direction: column; align-items: stretch; gap: 8px; padding: 14px 10px; border-radius: 12px; background: linear-gradient(180deg, #FFF0F4, #FFFFFF); border: 2px solid #C8164B; box-shadow: 0 6px 18px rgba(200, 22, 75, 0.18); }
+.cc-logo-wrap { margin: -14px -10px 4px; padding: 14px 10px 10px; border-radius: 10px 10px 0 0; background: radial-gradient(circle at 50% 35%, #E0245E 0%, #B5123F 55%, #8E0E33 100%); display: flex; justify-content: center; }
+.cc-logo { width: 100%; max-width: 200px; height: auto; }
+.cc-final-box .bk-match.final { border-color: #C8164B; box-shadow: 0 0 0 3px #FCE4EC; }
+.cc-final-box .bk-champion { color: #C8164B; }
 .cc-trophy { width: 44px; height: 44px; color: #B7791F; align-self: center; }
-.cc-final-title { text-align: center; font-family: var(--f-display); font-weight: 900; font-size: 1.45rem; text-transform: uppercase; color: #92400E; line-height: 1; }
+.cc-final-title { text-align: center; font-family: var(--f-display); font-weight: 900; font-size: 1.45rem; text-transform: uppercase; color: #C8164B; line-height: 1; }
 .cc-final-note { text-align: center; font-size: 0.7rem; color: var(--text-secondary); }
 .cc-scroll-hint { display: none; font-size: 0.78rem; font-weight: 700; color: var(--navy-secondary); margin-bottom: 8px; }
 @media (max-width: 1340px) { .cc-scroll-hint { display: block; } }

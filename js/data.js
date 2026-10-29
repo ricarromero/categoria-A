@@ -2628,7 +2628,7 @@ const LIGA_DATA = {
     "fuente": "Cuadro y resultados enviados por la Liga al 29/10/2026",
     "llaves": {
       "L": {
-        "nombre": "Llave 19",
+        "nombre": "Llave 1",
         "zonas": "ABCABCACBABACBABCAB",
         "fechas": [
           "2026-10-07",
@@ -2639,7 +2639,7 @@ const LIGA_DATA = {
         ]
       },
       "R": {
-        "nombre": "Llave 18",
+        "nombre": "Llave 2",
         "zonas": "ABCACACBAACBAABCAB",
         "fechas": [
           "2026-10-07",

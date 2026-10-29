@@ -813,7 +813,7 @@
       }).join('');
       bodyHtml = `<div class="bracket-block">${bloques}</div>`;
     } else {
-      // Cuadro espejado: Llave 19 a la izquierda, Llave 18 a la derecha y la final en el centro.
+      // Cuadro espejado: Llave 1 a la izquierda, Llave 2 a la derecha y la final en el centro.
       // Columnas: 1-4 = 16avos..semi (izq), 5 = final, 6-9 = semi..16avos (der). La ronda previa va dentro de la celda de 16avos.
       const colDe = (side, r) => side === 'L' ? r : 10 - r;
       const celdas = [];
@@ -844,10 +844,10 @@
         return llaveHead + [1, 2, 3, 4].map(r => `<div class="cc-head" style="grid-column:${colDe(side, r)};grid-row:2">${CC_RONDAS_CORTO[r]}<small>${ccFecha(ll.fechas[r], true)}</small></div>`).join('');
       }).join('') + `<div class="cc-head cc-head-final" style="grid-column:5;grid-row:2">Final<small>A confirmar</small></div>`;
       const finalHtml = `<div class="cc-final-box">
-          <svg class="cc-trophy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0V4z"/><path d="M17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/></svg>
+          <div class="cc-logo-wrap"><img class="cc-logo" src="public/copa_challenger_blanco.png" alt="Copa Challenger"></div>
           <div class="cc-final-title">Gran final</div>
           ${ccMatchHtml(final, 'final', true)}
-          ${final.ganador ? `<div class="bk-champion">★ ${CC.equipos[final.ganador]} campeón</div>` : '<div class="cc-final-note">Ganador Llave 19 vs Ganador Llave 18</div>'}
+          ${final.ganador ? `<div class="bk-champion">★ ${CC.equipos[final.ganador]} campeón</div>` : `<div class="cc-final-note">Ganador ${CC.llaves.L.nombre} vs Ganador ${CC.llaves.R.nombre}</div>`}
         </div>`;
       const cuerpo = celdas.map(c => `<div class="cc-cell" style="grid-column:${c.col};grid-row:${c.row + HEAD} / span ${c.span}">${c.html}</div>`).join('')
         + `<div class="cc-cell cc-cell-final" style="grid-column:5;grid-row:${1 + HEAD} / span ${nFilas}">${finalHtml}</div>`;
