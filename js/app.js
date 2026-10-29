@@ -194,22 +194,20 @@
     let noticeHtml = "";
 
     if (state.posTorneo === 'anual') {
-      // TABLA ANUAL ACUMULADA 2026
+      // TABLA ANUAL 2026 — formato de la tabla enviada por la Liga
+      const fmt2 = n => Number(n).toFixed(2).replace('.', ',');
       noticeHtml = `
         <div class="banner-alert">
           <div>
-            <b>Tabla Anual 2026 — Clasificación General Acumulada</b>
-            Puntos de Fase Clasificatoria (Apertura + Clausura) más bonificaciones oficiales del Apertura (Campeón Jägermeister +3, Subcampeón Maverick +2, 3° Aston +1, Plata Minaster City +1) y quitas de puntos dictaminadas por el Tribunal de Penas.
+            <b>Tabla Anual 2026 — Categoría A</b>
+            Total = Coeficiente Apertura + Coeficiente Clausura. El total del Apertura incluye los bonus por mérito (Campeón +3, Subcampeón +2, 3° puesto +1, Campeón Copa de Plata +1). ${DATA.tablaAnualFuente ? DATA.tablaAnualFuente + '.' : ''}
           </div>
         </div>
       `;
 
       tableRowsHtml = DATA.tablaAnual.map(row => {
         const team = getTeam(row.equipo);
-        const dgClass = row.dg > 0 ? "positive" : row.dg < 0 ? "negative" : "";
-        const dgSign = row.dg > 0 ? `+${row.dg}` : `${row.dg}`;
         const bonusTag = row.bonus > 0 ? `<span class="badge-bonus-pts">+${row.bonus} bonus</span>` : "";
-        const sancionTag = row.sancionPts > 0 ? `<span class="badge-sancion-pts">-${row.sancionPts} sanción</span>` : "";
 
         return `
           <tr>
@@ -219,28 +217,24 @@
                 ${renderCrestImg(team)}
                 <span class="team-name">${row.equipo}</span>
                 ${bonusTag}
-                ${sancionTag}
               </div>
             </td>
-            <td>${row.pj}</td>
-            <td>${row.pg}</td>
-            <td>${row.pe}</td>
-            <td>${row.pp}</td>
-            <td>${row.gf}</td>
-            <td>${row.gc}</td>
-            <td class="col-dg ${dgClass}">${dgSign}</td>
-            <td style="font-size:0.88rem; color:var(--muted);">${row.ptsCancha}</td>
-            <td class="col-highlight">${row.pts}</td>
-            <td style="font-family:var(--f-display); font-weight:800; color:var(--muted);">${row.coeficiente.toFixed(3)}</td>
+            <td>${row.ptsAp}</td>
+            <td>${row.bonus}</td>
+            <td style="font-weight:700;">${row.totalAp}</td>
+            <td>${fmt2(row.coefAp)}</td>
+            <td>${row.ptsCl}</td>
+            <td>${fmt2(row.coefCl)}</td>
+            <td class="col-highlight">${fmt2(row.total)}</td>
           </tr>
         `;
       }).join('');
 
       legendHtml = `
         <div class="table-legend">
-          <div class="legend-item"><span class="legend-marker" style="background:var(--accent);"></span> 1° clasifica a la Superfinal Anual de la Temporada 2026</div>
-          <div class="legend-item"><span class="badge-bonus-pts" style="display:inline-block;">+X bonus</span> Puntos otorgados por mérito Apertura</div>
-          <div class="legend-item"><span class="badge-sancion-pts" style="display:inline-block;">-X sanción</span> Quita oficial de puntos aplicada por Tribunal</div>
+          <div class="legend-item"><b>Pts AP</b>: puntos de fase clasificatoria del Apertura · <b>Total AP</b>: Pts AP + bonus</div>
+          <div class="legend-item"><b>Coef.</b>: coeficiente de rendimiento de cada torneo · <b>Pts CL</b>: puntos del Clausura</div>
+          <div class="legend-item"><span class="badge-bonus-pts" style="display:inline-block;">+X bonus</span> Puntos otorgados por mérito en el Apertura</div>
         </div>
       `;
     } else {
@@ -343,6 +337,14 @@
             <tr>
               <th>#</th>
               <th style="text-align: left;">Equipo</th>
+              ${state.posTorneo === 'anual' ? `
+              <th title="Puntos fase clasificatoria Apertura">Pts AP</th>
+              <th title="Bonus Apertura">Bonus</th>
+              <th title="Total Apertura">Total AP</th>
+              <th title="Coeficiente Apertura">Coef. AP</th>
+              <th title="Puntos fase clasificatoria Clausura">Pts CL</th>
+              <th title="Coeficiente Clausura">Coef. CL</th>
+              <th class="col-highlight">Total</th>` : `
               <th>PJ</th>
               <th>G</th>
               <th>E</th>
@@ -350,7 +352,7 @@
               <th>GF</th>
               <th>GC</th>
               <th>DG</th>
-              ${state.posTorneo === 'anual' ? `<th>Pts Cancha</th><th class="col-highlight">Pts Final</th><th>Coef.</th>` : `<th class="col-highlight">Pts</th>`}
+              <th class="col-highlight">Pts</th>`}
             </tr>
           </thead>
           <tbody>
