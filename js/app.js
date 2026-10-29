@@ -9,8 +9,18 @@
 (function () {
   'use strict';
 
+  // Categoría activa (A, B o C): se elige con ?cat= o se recuerda la última elegida
+  const CATS = ['A', 'B', 'C'];
+  let CAT = (new URLSearchParams(location.search).get('cat') || '').toUpperCase();
+  if (!CATS.includes(CAT)) {
+    try { CAT = (localStorage.getItem('liga_cat') || 'A').toUpperCase(); } catch (e) { CAT = 'A'; }
+  }
+  if (!CATS.includes(CAT) || (CAT !== 'A' && !window['LIGA_DATA_' + CAT])) CAT = 'A';
+  try { localStorage.setItem('liga_cat', CAT); } catch (e) { /* sin almacenamiento */ }
+  document.documentElement.dataset.cat = CAT;
+
   // Verificar disponibilidad de los datos
-  const DATA = window.LIGA_DATA;
+  const DATA = CAT === 'A' ? window.LIGA_DATA : window['LIGA_DATA_' + CAT];
   if (!DATA) {
     console.error("No se encontraron los datos oficiales en window.LIGA_DATA");
     document.body.innerHTML = `
@@ -1013,7 +1023,7 @@
         <div class="section-header">
           <div class="section-title">
             <h2>Equipos</h2>
-            <span class="section-badge">15 Clubes Oficiales</span>
+            <span class="section-badge">${DATA.equipos.length} ${ESQ ? "Equipos" : "Clubes Oficiales"}</span>
           </div>
           <div class="search-input-box">
             <svg class="search-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -1071,9 +1081,9 @@
 
       return `
         <div class="team-card-preview" data-team-id="${eq.id}">
-          <img src="${eq.escudo}" alt="${eq.nombre}" class="preview-crest" loading="lazy" onerror="this.src='';">
+          <img src="${eq.escudo || genericCrestUri(eq.nombre)}" alt="${eq.nombre}" class="preview-crest" loading="lazy" onerror="this.onerror=null; this.src='${genericCrestUri(eq.nombre).replace(/'/g, '%27')}';">
           <div class="preview-name">${eq.nombre}</div>
-          <div class="preview-zones">Clausura: Zona ${eq.zonaClausura} · Apertura: Zona ${eq.zonaApertura}</div>
+          <div class="preview-zones">${eq.zonaClausura ? `Clausura: Zona ${eq.zonaClausura} · Apertura: Zona ${eq.zonaApertura}` : 'Zonas a confirmar'}</div>
           <div style="display:flex; align-items:center; justify-content:space-between; width:100%; margin-top:8px;">
             <div style="display:flex; gap:4px;" title="Racha en los últimos partidos">
               ${rachaBadges}
@@ -2399,9 +2409,9 @@
     }
 
     // Posición en tabla
-    const tablaZona = team.zonaClausura === 'A' ? DATA.clausura.tablas.zonaA : DATA.clausura.tablas.zonaB;
+    const tablaZona = (team.zonaClausura === 'A' ? DATA.clausura.tablas.zonaA : DATA.clausura.tablas.zonaB) || [];
     const posRow = tablaZona.find(r => r.equipo.toLowerCase() === team.nombre.toLowerCase());
-    const posStr = posRow ? `${posRow.pos}° de la Zona ${team.zonaClausura} del Clausura` : `Zona ${team.zonaClausura}`;
+    const posStr = posRow ? `${posRow.pos}° de la Zona ${team.zonaClausura} del Clausura` : (team.zonaClausura ? `Zona ${team.zonaClausura}` : 'Zona a confirmar');
 
     const teamOptionsHtml = DATA.equipos.map(eq => {
       const sel = eq.id === team.id ? 'selected' : '';
@@ -2497,7 +2507,7 @@
         <div>
           <div style="font-size:0.72rem; text-transform:uppercase; letter-spacing:0.12em; font-weight:800; color:var(--text-secondary,#667382); margin-bottom:4px;">Ficha Oficial del Club</div>
           <div class="team-modal-brand">
-            <img src="${team.escudo}" alt="${team.nombre}" class="modal-crest-lg">
+            <img src="${team.escudo || genericCrestUri(team.nombre)}" alt="${team.nombre}" class="modal-crest-lg">
             <div>
               <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
                 <h2 class="modal-team-title">${team.nombre}</h2>
@@ -2518,14 +2528,14 @@
                     <span>${team.instagramHandle || 'Instagram'}</span>
                   </a>
                 ` : ''}
-                <button type="button" class="team-download-crest-btn" id="btnDownloadCrest" data-escudo="${team.escudo}" data-filename="escudo-${team.slug || team.id}.png" title="Descargar escudo oficial de ${team.nombre} en alta calidad">
+                ${team.escudo ? `<button type="button" class="team-download-crest-btn" id="btnDownloadCrest" data-escudo="${team.escudo}" data-filename="escudo-${team.slug || team.id}.png" title="Descargar escudo oficial de ${team.nombre} en alta calidad">
                   <svg class="dl-svg-icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
                     <polyline points="7 10 12 15 17 10"></polyline>
                     <line x1="12" y1="15" x2="12" y2="3"></line>
                   </svg>
                   <span>Descargar Escudo</span>
-                </button>
+                </button>` : ''}
               </div>
             </div>
           </div>
@@ -2717,6 +2727,153 @@
   // =========================================================================
   // NAVEGACIÓN Y CONTROLADOR DE PESTAÑAS
   // =========================================================================
+
+  // =========================================================================
+  // CATEGORÍAS B y C: ESQUELETO (sin informes todavía)
+  // =========================================================================
+  const ESQ = !!DATA.esqueleto;
+  const ESQ_TXT = `Todavía no tenemos los informes de la Liga para la Categoría ${CAT}. Estamos armando la sección: cuando lleguen las fechas se cargan acá las tablas, el fixture, los goleadores y las sanciones.`;
+
+  function esqBanner(extra = '') {
+    return `<div class="banner-alert esq-banner"><div><b>Categoría ${CAT} · Sección en construcción</b>${ESQ_TXT}${extra}</div></div>`;
+  }
+  const esqBar = (w = 70) => `<span class="esq-bar" style="width:${w}%"></span>`;
+
+  function renderHeroBoardEsqueleto() {
+    const board = $('#heroBoard');
+    if (!board) return;
+    const n = DATA.equipos.length;
+    const tile = (label, tag, body, desc, action = '') => `
+      <div class="board-tile" ${action ? `data-action="${action}"` : ''}>
+        <span class="tile-label">${label} <span>${tag}</span></span>
+        <div class="tile-body">${body}</div>
+        <span class="tile-desc">${desc}</span>
+      </div>`;
+    const vacio = `<span class="tile-name">—</span>`;
+    board.innerHTML =
+      tile('Líder Clausura · Zona A', '— PTS', vacio, 'Esperando informes') +
+      tile('Líder Clausura · Zona B', '— PTS', vacio, 'Esperando informes') +
+      tile(`Equipos Categoría ${CAT}`, `${n} EQUIPOS`, `<span class="tile-name">${n} equipos</span>`, 'Ver la lista de equipos', 'go-equipos') +
+      tile('Copa Challenger', 'EN JUEGO', `<span class="tile-name">Ver cuadro</span>`, `Equipos de la ${CAT} en la Copa`, 'go-challenger');
+    $$('.board-tile[data-action]', board).forEach(t => t.addEventListener('click', () => {
+      switchTab(t.dataset.action === 'go-equipos' ? 'equipos' : 'challenger');
+    }));
+  }
+
+  function esqHeader(titulo, badge, pills = '') {
+    return `<div class="section-header">
+        <div class="section-title"><h2>${titulo}</h2><span class="section-badge">${badge}</span></div>
+        ${pills}
+      </div>`;
+  }
+  const esqTorneoPills = (key) => `<div class="pill-group" role="tablist">
+      ${['clausura', 'apertura'].map(t => `<button class="pill-btn ${state[key] === t ? 'active' : ''}" data-esq-torneo="${t}">${t[0].toUpperCase() + t.slice(1)}</button>`).join('')}
+    </div>`;
+  function esqBindTorneo(container, key, rerender) {
+    $$('button[data-esq-torneo]', container).forEach(b => b.addEventListener('click', () => { state[key] = b.dataset.esqTorneo; rerender(); }));
+    $$('button[data-goto-view]', container).forEach(b => b.addEventListener('click', () => switchTab(b.dataset.gotoView)));
+  }
+  const esqCta = `<div class="esq-cta"><span>Mientras tanto, seguí a los equipos de la ${CAT} en la Copa Challenger.</span><button class="legend-cta" data-goto-view="challenger">Ver Copa Challenger</button></div>`;
+
+  function renderPosicionesEsqueleto() {
+    const container = $('#view-posiciones');
+    if (!container) return;
+    if (state.posTorneo === 'anual') state.posTorneo = 'clausura';
+    const filas = DATA.equipos.map(eq => `
+      <tr>
+        <td class="col-pos">–</td>
+        <td class="col-team"><div class="team-cell">${renderCrestImg(getTeam(eq.nombre))}<span class="team-name">${escapeHtml(eq.nombre)}</span></div></td>
+        <td>–</td><td>–</td><td>–</td><td>–</td><td>–</td><td>–</td><td>–</td><td class="col-highlight">–</td>
+      </tr>`).join('');
+    container.innerHTML = `
+      ${esqHeader('Posiciones', `${state.posTorneo.toUpperCase()} 2026`, esqTorneoPills('posTorneo'))}
+      <div style="margin-bottom:16px;display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+        <div class="pill-group"><button class="pill-btn active" disabled>Zonas a confirmar</button></div>
+      </div>
+      ${esqBanner()}
+      <div class="table-responsive">
+        <table class="league-table">
+          <thead><tr><th>#</th><th style="text-align:left;">Equipo</th><th>PJ</th><th>G</th><th>E</th><th>P</th><th>GF</th><th>GC</th><th>DG</th><th class="col-highlight">Pts</th></tr></thead>
+          <tbody>${filas}</tbody>
+        </table>
+      </div>
+      <div class="esq-note">Equipos de la Categoría ${CAT} según el cuadro de la Copa Challenger, en orden alfabético. El orden y las zonas se actualizan con el primer informe.</div>
+      ${esqCta}`;
+    esqBindTorneo(container, 'posTorneo', renderPosicionesEsqueleto);
+  }
+
+  function renderFixtureEsqueleto() {
+    const container = $('#view-fixture');
+    if (!container) return;
+    const card = () => `
+      <div class="match-card esq-match">
+        <div class="esq-match-row">${esqBar(55)}<span class="esq-score">–</span></div>
+        <div class="esq-match-row">${esqBar(45)}<span class="esq-score">–</span></div>
+        <div class="esq-match-foot">${esqBar(35)}</div>
+      </div>`;
+    container.innerHTML = `
+      ${esqHeader('Fixture', `${state.fixtureTorneo.toUpperCase()} 2026`, esqTorneoPills('fixtureTorneo'))}
+      <div class="fecha-pills-scroll" style="margin-bottom:16px"><div class="pill-group"><button class="pill-btn active" disabled>Fechas a confirmar</button></div></div>
+      ${esqBanner()}
+      <div class="matches-grid">${Array.from({ length: 6 }, card).join('')}</div>
+      ${esqCta}`;
+    esqBindTorneo(container, 'fixtureTorneo', renderFixtureEsqueleto);
+  }
+
+  function renderTablaVaciaEsqueleto(viewId, titulo, cols, key) {
+    const container = $('#' + viewId);
+    if (!container) return;
+    const filas = Array.from({ length: 5 }, () => `<tr>${cols.map((c, i) => `<td${i === 1 ? ' style="text-align:left"' : ''}>${i === 1 ? esqBar(60) : '–'}</td>`).join('')}</tr>`).join('');
+    container.innerHTML = `
+      ${esqHeader(titulo, `CATEGORÍA ${CAT} · 2026`, key ? esqTorneoPills(key) : '')}
+      ${esqBanner()}
+      <div class="table-responsive">
+        <table class="league-table">
+          <thead><tr>${cols.map((c, i) => `<th${i === 1 ? ' style="text-align:left"' : ''}>${c}</th>`).join('')}</tr></thead>
+          <tbody>${filas}</tbody>
+        </table>
+      </div>
+      ${esqCta}`;
+    if (key) esqBindTorneo(container, key, () => renderTablaVaciaEsqueleto(viewId, titulo, cols, key));
+    else esqBindTorneo(container, '', () => {});
+  }
+
+  function aplicarCategoriaUI() {
+    const nombre = `Categoría ${CAT}`;
+    document.title = `Liga Universitaria Sanjuanina de Fútbol — ${nombre} 2026`;
+    const btn = $('#catBtn');
+    const menu = $('#catMenu');
+    if (btn) $('.cat-letter', btn).textContent = CAT;
+    const sub = $('#heroCatLabel');
+    if (sub) sub.textContent = `${nombre} · Fútbol Universitario`;
+    const foot = $('#footerCat');
+    if (foot) foot.textContent = `${nombre} · Temporada 2026`;
+    if (ESQ) {
+      const badges = $('#heroBadges');
+      if (badges) {
+        $$('.badge-tag:not(.badge-ig-league)', badges).forEach(b => b.remove());
+        badges.insertAdjacentHTML('afterbegin', `<div class="badge-tag"><span>Esperando informes</span></div><div class="badge-tag"><span>Versión de prueba</span></div>`);
+      }
+    }
+    if (btn && menu) {
+      $$('[data-cat]', menu).forEach(o => o.classList.toggle('active', o.dataset.cat === CAT));
+      const cerrar = () => { menu.hidden = true; btn.setAttribute('aria-expanded', 'false'); };
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        menu.hidden = !menu.hidden;
+        btn.setAttribute('aria-expanded', menu.hidden ? 'false' : 'true');
+      });
+      document.addEventListener('click', (e) => { if (!menu.contains(e.target)) cerrar(); });
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape') cerrar(); });
+      $$('[data-cat]', menu).forEach(o => o.addEventListener('click', () => {
+        const c = o.dataset.cat;
+        if (c === CAT) { cerrar(); return; }
+        try { localStorage.setItem('liga_cat', c); } catch (err) { /* sin almacenamiento */ }
+        location.href = `${location.pathname}?cat=${c.toLowerCase()}#${state.currentTab}`;
+      }));
+    }
+  }
+
   function updateTabIndicator() {
     const activeBtn = $(`#mainTabs .tab-btn[data-view="${state.currentTab}"]`);
     const indicator = $('#tabIndicator');
@@ -2746,7 +2903,13 @@
 
     updateTabIndicator();
 
-    switch (viewName) {
+    if (ESQ && viewName !== 'challenger' && viewName !== 'reglamento' && viewName !== 'equipos') {
+      if (viewName === 'posiciones') renderPosicionesEsqueleto();
+      else if (viewName === 'fixture') renderFixtureEsqueleto();
+      else if (viewName === 'estadisticas') renderTablaVaciaEsqueleto('view-estadisticas', 'Estadísticas', ['#', 'Equipo', 'PJ', 'GF', 'GC', 'DG', 'Prom.'], 'statsTorneo');
+      else if (viewName === 'goleadores') renderTablaVaciaEsqueleto('view-goleadores', 'Goleadores', ['#', 'Jugador', 'Equipo', 'Goles'], 'goleadoresTorneo');
+      else if (viewName === 'sanciones') renderTablaVaciaEsqueleto('view-sanciones', 'Sanciones', ['#', 'Jugador', 'Equipo', 'Sanción', 'Estado'], '');
+    } else switch (viewName) {
       case 'posiciones': renderPosiciones(); break;
       case 'fixture': renderFixture(); break;
       case 'equipos': renderEquipos(); break;
@@ -2768,7 +2931,8 @@
   // INICIALIZACIÓN DE LA APLICACIÓN
   // =========================================================================
   function initApp() {
-    renderHeroBoard();
+    aplicarCategoriaUI();
+    if (ESQ) renderHeroBoardEsqueleto(); else renderHeroBoard();
 
     $$('#mainTabs .tab-btn').forEach(btn => {
       btn.addEventListener('click', () => {

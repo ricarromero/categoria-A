@@ -19,7 +19,7 @@
   <link rel="icon" type="image/png" href="public/logo_liga.png">
 
   <!-- Estilos Premium -->
-  <link rel="stylesheet" href="css/styles.css?v=20261029_challenger5">
+  <link rel="stylesheet" href="css/styles.css?v=20261029_bc1">
 </head>
 
 <body>
@@ -57,21 +57,31 @@
       <!-- Identidad Oficial -->
       <div class="hero-brand">
         <div class="brand-main">
-          <div class="league-crest" aria-label="Categoría A">A</div>
+          <div class="cat-switch">
+            <button class="league-crest" id="catBtn" type="button" aria-haspopup="true" aria-expanded="false" title="Cambiar de categoría">
+              <span class="cat-letter">A</span><span class="cat-caret" aria-hidden="true"></span>
+            </button>
+            <div class="cat-menu" id="catMenu" hidden>
+              <span class="cat-menu-title">Elegí la categoría</span>
+              <button type="button" data-cat="A"><span class="cat-dot">A</span>Categoría A</button>
+              <button type="button" data-cat="B"><span class="cat-dot">B</span>Categoría B</button>
+              <button type="button" data-cat="C"><span class="cat-dot">C</span>Categoría C</button>
+            </div>
+          </div>
           <div class="brand-text">
             <span class="eyebrow">Universidad Nacional de San Juan</span>
             <div class="brand-title-row">
               <img src="public/logo_liga.png" alt="La Liga Universitaria" class="league-official-logo">
             </div>
             <div class="subtitle">
-              <span>Categoría A · Fútbol Universitario</span>
+              <span id="heroCatLabel">Categoría A · Fútbol Universitario</span>
               <span>·</span>
               <span style="color: var(--accent);">Temporada 2026</span>
             </div>
           </div>
         </div>
 
-        <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+        <div id="heroBadges" style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
           <div class="badge-tag live-pulse">
             <span class="live-dot"></span>
             <span>Clausura en curso</span>
@@ -198,7 +208,7 @@
         <img src="public/logo_liga.png" alt="La Liga Universitaria" class="footer-league-logo">
       </div>
       <div class="footer-copy">
-        Liga Universitaria Sanjuanina de Fútbol · <b>Categoría A · Temporada 2026</b><br>
+        Liga Universitaria Sanjuanina de Fútbol · <b id="footerCat">Categoría A · Temporada 2026</b><br>
         Portal de seguimiento deportivo, fixture, resultados, goleadores y estadísticas de los equipos.
       </div>
       <div class="footer-social">
@@ -215,8 +225,9 @@
   </footer>
 
   <!-- Scripts: Datos Oficiales y Lógica Reactiva -->
-  <script src="js/data.js?v=20261029_challenger5"></script>
-  <script src="js/app.js?v=20261029_challenger5"></script>
+  <script src="js/data.js?v=20261029_bc1"></script>
+  <script src="js/data_bc.js?v=20261029_bc1"></script>
+  <script src="js/app.js?v=20261029_bc1"></script>
 </body>
 
 </html>
