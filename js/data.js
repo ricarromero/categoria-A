@@ -2341,14 +2341,6 @@ const LIGA_DATA = {
       "estado": "Definitiva"
     },
     {
-      "jugador": "Cayo, Damián",
-      "equipo": "C-Lesión",
-      "sancion": "1 Partido",
-      "articulo": "Art 27 inc 'E'",
-      "motivo": "Doble amonestación",
-      "estado": "Cumplido (1/1)"
-    },
-    {
       "jugador": "Díaz Cuenca, Alejo",
       "equipo": "Antorcha",
       "sancion": "Hasta 31/12/2029",
@@ -2363,14 +2355,6 @@ const LIGA_DATA = {
       "articulo": "Art 23 inc 'B' y 24 inc 'B'",
       "motivo": "Agresión e insultos reiterados",
       "estado": "Vigente"
-    },
-    {
-      "jugador": "Martínez, Matías",
-      "equipo": "Antorcha",
-      "sancion": "1 Partido",
-      "articulo": "Art 26 inc 'C'",
-      "motivo": "Juego brusco",
-      "estado": "Cumplido"
     },
     {
       "jugador": "Guillén, Facundo",
@@ -2397,28 +2381,12 @@ const LIGA_DATA = {
       "estado": "Vigente"
     },
     {
-      "jugador": "Chía, Juan Cruz",
-      "equipo": "Celtic",
-      "sancion": "1 Partido",
-      "articulo": "Art 26 inc 'C'",
-      "motivo": "Juego brusco",
-      "estado": "Cumplido"
-    },
-    {
       "jugador": "Ramos, Osvaldo",
       "equipo": "Calise",
       "sancion": "Hasta 30/06/2028",
       "articulo": "Art 22 inc 'B'",
       "motivo": "Agresión y conducta antideportiva",
       "estado": "Vigente"
-    },
-    {
-      "jugador": "Toro, Federico",
-      "equipo": "Calise",
-      "sancion": "4 Partidos",
-      "articulo": "Art 26 inc 'C' y 23 inc 'A'",
-      "motivo": "Expulsión directa agravada",
-      "estado": "Cumplió 3 (Resta 1)"
     },
     {
       "jugador": "Torres, Francisco",
@@ -2435,14 +2403,6 @@ const LIGA_DATA = {
       "articulo": "Art 23º inc 'B'",
       "motivo": "Conducta antideportiva grave",
       "estado": "Vigente"
-    },
-    {
-      "jugador": "Vargas, Juan Manuel",
-      "equipo": "Constructores",
-      "sancion": "2 Partidos",
-      "articulo": "Art 22 inc 'B'",
-      "motivo": "Conducta antideportiva",
-      "estado": "Cumplido (2/2)"
     },
     {
       "jugador": "Boninato, Franco",
@@ -2477,44 +2437,12 @@ const LIGA_DATA = {
       "estado": "Vigente"
     },
     {
-      "jugador": "Equipo De Primera (General)",
-      "equipo": "De Primera",
-      "sancion": "Amonestación colectiva",
-      "articulo": "Art 12.2 inc 'A'",
-      "motivo": "Amonestación a todo el plantel por disturbios en Fecha 2",
-      "estado": "Amonestación Oficial"
-    },
-    {
       "jugador": "García, Nahuel",
       "equipo": "Eclipse",
       "sancion": "Hasta 31/12/2026",
       "articulo": "Art 24 inc 'A'",
       "motivo": "Infracción reglamentaria grave",
       "estado": "Vigente"
-    },
-    {
-      "jugador": "Albarracín, Matías",
-      "equipo": "Eclipse",
-      "sancion": "1 Partido",
-      "articulo": "Art 26 inc 'C'",
-      "motivo": "Juego brusco",
-      "estado": "Vigente"
-    },
-    {
-      "jugador": "Argañaraz, Matías",
-      "equipo": "Jägermeister",
-      "sancion": "3 Partidos",
-      "articulo": "Art 24 inc 'A' y 23 inc 'A'",
-      "motivo": "Expulsión agravada",
-      "estado": "Cumplió 2 (Resta 1)"
-    },
-    {
-      "jugador": "DT: Carvajal David",
-      "equipo": "Jägermeister",
-      "sancion": "2 Partidos",
-      "articulo": "Art 23 inc 'A'",
-      "motivo": "Exceso verbal reiterado",
-      "estado": "Cumplido (2/2)"
     },
     {
       "jugador": "Núñez, Nahuel",
@@ -2541,30 +2469,6 @@ const LIGA_DATA = {
       "estado": "Vigente"
     },
     {
-      "jugador": "Ordines, Agustín",
-      "equipo": "Maverick",
-      "sancion": "2 Partidos",
-      "articulo": "Art 23 inc 'A'",
-      "motivo": "Conducta violenta",
-      "estado": "Cumplido (2/2)"
-    },
-    {
-      "jugador": "Velázquez, Francisco",
-      "equipo": "Maverick",
-      "sancion": "2 Partidos",
-      "articulo": "Art 23 inc 'A'",
-      "motivo": "Expulsión",
-      "estado": "Cumplido (2/2)"
-    },
-    {
-      "jugador": "Escobares, Nelson",
-      "equipo": "Minaster City",
-      "sancion": "3 Partidos",
-      "articulo": "Art 23 inc 'A' y 25 inc 'C'",
-      "motivo": "Juego brusco y protesta desmedida",
-      "estado": "Cumplido (3/3)"
-    },
-    {
       "jugador": "Tello, Lautaro",
       "equipo": "Nottingham",
       "sancion": "Hasta 31/07/2027",
@@ -2576,17 +2480,9 @@ const LIGA_DATA = {
       "jugador": "Guerra, Agustín",
       "equipo": "Nottingham",
       "sancion": "1 Partido",
-      "articulo": "Art 23 inc 'A'",
-      "motivo": "Doble amarilla",
-      "estado": "Cumplido"
-    },
-    {
-      "jugador": "Murciano, Eric",
-      "equipo": "Red Bull",
-      "sancion": "2 Partidos",
-      "articulo": "Art 26 inc 'B'",
-      "motivo": "Infracción reglamentaria en Fecha 3",
-      "estado": "Cumplió 1 (Resta 1)"
+      "articulo": "Art. 26 inc \"C\"",
+      "motivo": "",
+      "estado": "Vigente (0/1)"
     },
     {
       "jugador": "Giménez, Ezequiel",
