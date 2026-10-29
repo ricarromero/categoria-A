@@ -479,6 +479,7 @@
               <span class="match-team-name">${libreVisit ? 'Libre' : m.visitante}</span>
             </div>
           </div>
+          ${m.hora && !esFinalizado ? `<div class="match-schedule"><span>${m.dia || ''}</span><b>${m.hora} hs</b><span>${m.cancha || ''}</span></div>` : ''}
           ${m.nota && !esLibre ? `<div class="match-footer-note">${m.nota}</div>` : ''}
         </div>
       `;
@@ -506,6 +507,7 @@
         ${fechaPillsHtml}
       </div>
 
+      ${!verPlayoffs && currentFechaObj?.dia ? `<div class="fecha-dia-banner"><b>${currentFechaObj.nombre}</b> · ${currentFechaObj.dia} · El Palomar</div>` : ''}
       ${contentHtml}
     `;
 

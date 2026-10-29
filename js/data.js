@@ -1756,6 +1756,7 @@ const LIGA_DATA = {
       {
         "numero": 5,
         "nombre": "Fecha 5",
+        "dia": "Sábado 31 de octubre",
         "disputada": false,
         "partidos": [
           {
@@ -1765,7 +1766,8 @@ const LIGA_DATA = {
             "golesL": null,
             "golesV": null,
             "estado": "pendiente",
-            "nota": "Próximamente"
+            "nota": "",
+          "dia": "Sábado 31/10", "hora": "14:10", "cancha": "Cancha de Rugby"
           },
           {
             "zona": "Zona A",
@@ -1774,7 +1776,8 @@ const LIGA_DATA = {
             "golesL": null,
             "golesV": null,
             "estado": "pendiente",
-            "nota": "Próximamente"
+            "nota": "",
+          "dia": "Sábado 31/10", "hora": "11:20", "cancha": "Cancha de Fútbol"
           },
           {
             "zona": "Zona A",
@@ -1783,7 +1786,8 @@ const LIGA_DATA = {
             "golesL": null,
             "golesV": null,
             "estado": "pendiente",
-            "nota": "Próximamente"
+            "nota": "",
+          "dia": "Sábado 31/10", "hora": "14:20", "cancha": "Cancha de Fútbol"
           },
           {
             "zona": "Zona A",
@@ -1792,7 +1796,8 @@ const LIGA_DATA = {
             "golesL": null,
             "golesV": null,
             "estado": "pendiente",
-            "nota": "Próximamente"
+            "nota": "",
+          "dia": "Sábado 31/10", "hora": "12:40", "cancha": "Cancha de Rugby"
           },
           {
             "zona": "Zona B",
@@ -1801,7 +1806,8 @@ const LIGA_DATA = {
             "golesL": null,
             "golesV": null,
             "estado": "pendiente",
-            "nota": "Próximamente"
+            "nota": "",
+          "dia": "Sábado 31/10", "hora": "15:40", "cancha": "Cancha de Rugby"
           },
           {
             "zona": "Zona B",
@@ -1810,7 +1816,8 @@ const LIGA_DATA = {
             "golesL": null,
             "golesV": null,
             "estado": "pendiente",
-            "nota": "Próximamente"
+            "nota": "",
+          "dia": "Sábado 31/10", "hora": "15:50", "cancha": "Cancha de Fútbol"
           },
           {
             "zona": "Zona B",
@@ -1819,7 +1826,8 @@ const LIGA_DATA = {
             "golesL": null,
             "golesV": null,
             "estado": "pendiente",
-            "nota": "Próximamente"
+            "nota": "",
+          "dia": "Sábado 31/10", "hora": "12:50", "cancha": "Cancha de Fútbol"
           },
           {
             "zona": "Zona B",
