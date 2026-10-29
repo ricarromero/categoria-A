@@ -82,6 +82,21 @@
     });
   }
 
+  // Escudo genérico (para equipos sin escudo cargado): escudo liso con iniciales
+  const GENERIC_CREST_COLORS = ['#24496B', '#397653', '#7C3AED', '#B45309', '#0E7490', '#9F1239', '#4D7C0F', '#475569'];
+  const genericCrestCache = {};
+  function genericCrestUri(name) {
+    const n = String(name || 'Equipo').trim();
+    if (genericCrestCache[n]) return genericCrestCache[n];
+    let h = 0;
+    for (const ch of n) h = (h * 31 + ch.charCodeAt(0)) >>> 0;
+    const color = GENERIC_CREST_COLORS[h % GENERIC_CREST_COLORS.length];
+    const words = n.replace(/[^A-Za-zÁÉÍÓÚÑÜáéíóúñü0-9 ]/g, ' ').split(/\s+/).filter(Boolean);
+    const initials = (words.length > 1 ? words[0][0] + words[1][0] : n.slice(0, 2)).toUpperCase();
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 72"><path d="M32 2 L60 10 V34 C60 52 47 64 32 70 C17 64 4 52 4 34 V10 Z" fill="${color}" stroke="#FFFFFF" stroke-width="3"/><path d="M32 8 L54 14 V34 C54 48 44 58 32 63 C20 58 10 48 10 34 V14 Z" fill="none" stroke="rgba(255,255,255,0.45)" stroke-width="1.5"/><text x="32" y="44" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-weight="700" font-size="22" fill="#FFFFFF">${initials}</text></svg>`;
+    return (genericCrestCache[n] = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg));
+  }
+
   function getTeam(nameOrId) {
     if (!nameOrId) return null;
     const key = String(nameOrId).trim().toLowerCase();
@@ -89,19 +104,17 @@
       id: key.replace(/[^a-z0-9]/g, '_'),
       nombre: nameOrId,
       shortName: nameOrId.slice(0, 3).toUpperCase(),
-      escudo: "public/escudos/" + key.replace(/[^a-z0-9]/g, '_') + ".png",
+      escudo: genericCrestUri(nameOrId),
+      generic: true,
       color: "#4895ef"
     };
   }
 
   function renderCrestImg(team, className = "table-crest") {
     if (!team) return "";
-    const crestPath = team.escudo || (teamsByName[team.nombre?.toLowerCase()]?.escudo) || "";
-    if (crestPath) {
-      return `<img src="${crestPath}" alt="${team.nombre}" class="${className}" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-flex';">
-              <span class="${className} crest-fallback" style="display:none;">${(team.nombre || "E").slice(0, 2).toUpperCase()}</span>`;
-    }
-    return `<span class="${className} crest-fallback" style="display:inline-flex;">${(team.nombre || "E").slice(0, 2).toUpperCase()}</span>`;
+    const crestPath = team.escudo || (teamsByName[team.nombre?.toLowerCase()]?.escudo) || genericCrestUri(team.nombre);
+    const fallback = genericCrestUri(team.nombre).replace(/'/g, '%27');
+    return `<img src="${crestPath}" alt="${escapeHtml ? escapeHtml(team.nombre || '') : team.nombre}" class="${className}" loading="lazy" onerror="this.onerror=null; this.src='${fallback}';">`;
   }
 
   // =========================================================================
