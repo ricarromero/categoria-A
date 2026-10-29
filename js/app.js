@@ -844,7 +844,7 @@
         return llaveHead + [1, 2, 3, 4].map(r => `<div class="cc-head" style="grid-column:${colDe(side, r)};grid-row:2">${CC_RONDAS_CORTO[r]}<small>${ccFecha(ll.fechas[r], true)}</small></div>`).join('');
       }).join('') + `<div class="cc-head cc-head-final" style="grid-column:5;grid-row:2">Final<small>A confirmar</small></div>`;
       const finalHtml = `<div class="cc-final-box">
-          <div class="cc-logo-wrap"><img class="cc-logo" src="public/copa_challenger_blanco.png" alt="Copa Challenger"></div>
+          <div class="cc-logo-wrap"><img class="cc-logo" src="public/copa_challenger_blanco.png?v=2" alt="Copa Challenger"></div>
           <div class="cc-final-title">Gran final</div>
           ${ccMatchHtml(final, 'final', true)}
           ${final.ganador ? `<div class="bk-champion">★ ${CC.equipos[final.ganador]} campeón</div>` : `<div class="cc-final-note">Ganador ${CC.llaves.L.nombre} vs Ganador ${CC.llaves.R.nombre}</div>`}
