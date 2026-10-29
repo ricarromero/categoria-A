@@ -266,7 +266,7 @@
         const team = getTeam(row.equipo);
         const dgClass = row.dg > 0 ? "positive" : row.dg < 0 ? "negative" : "";
         const dgSign = row.dg > 0 ? `+${row.dg}` : `${row.dg}`;
-        const qualifyClass = row.pos <= 4 ? "row-qualify-campeonato" : "row-qualify-plata";
+        const qualifyClass = (row.pos <= 4 ? "row-qualify-campeonato" : "row-qualify-plata") + (row.pos === 4 ? " row-qualify-cut" : "");
 
         let sancionBadge = "";
         if (state.posTorneo === 'apertura' && Array.isArray(DATA.deducciones)) {
@@ -303,6 +303,7 @@
           <div class="legend-item"><span class="legend-marker legend-campeonato"></span> Puestos 1° a 4°: Clasificación a Cuartos de Final (Fase Campeonato)</div>
           <div class="legend-item"><span class="legend-marker legend-plata"></span> Puestos 5° a 8°: Clasificación a Copa de Plata</div>
           ${state.posTorneo === 'apertura' ? '<div class="legend-item"><span class="badge-sancion-pts" style="display:inline-block;">-X sanción</span> Quita oficial de puntos aplicada por Tribunal de Penas</div>' : ''}
+          ${state.posTorneo === 'clausura' ? '<button class="pill-btn legend-cta" data-goto="cruces" style="margin-left:auto;">Ver cruces si el Clausura terminara hoy →</button>' : ''}
         </div>
       `;
     }
@@ -372,6 +373,14 @@
       });
     });
 
+    $$('button[data-goto="cruces"]', container).forEach(btn => {
+      btn.addEventListener('click', () => {
+        state.fixtureTorneo = 'clausura';
+        state.fixtureFecha = 'playoffs';
+        switchTab('fixture');
+      });
+    });
+
     $$('button[data-zona]', container).forEach(btn => {
       btn.addEventListener('click', () => {
         state.posZona = btn.dataset.zona;
@@ -398,160 +407,75 @@
     const esClausura = state.fixtureTorneo === 'clausura';
     const fechasList = esClausura ? DATA.clausura.fechas : DATA.apertura.fechas;
 
-    let currentFechaObj = fechasList.find(f => f.numero === Number(state.fixtureFecha));
-    if (!currentFechaObj) {
+    const verPlayoffs = state.fixtureFecha === 'playoffs';
+    let currentFechaObj = verPlayoffs ? null : fechasList.find(f => f.numero === Number(state.fixtureFecha));
+    if (!currentFechaObj && !verPlayoffs) {
       currentFechaObj = fechasList[0];
       state.fixtureFecha = currentFechaObj?.numero || 1;
     }
 
-    const fechaPillsHtml = fechasList.map(f => {
+    const playoffsPill = `<button class="fecha-pill fecha-pill-playoffs ${verPlayoffs ? 'active' : ''}" data-fecha="playoffs">${esClausura ? 'Cruces si terminara hoy' : 'Playoffs'}</button>`;
+    const fechaPillsHtml = playoffsPill + fechasList.map(f => {
       const activeClass = f.numero === Number(state.fixtureFecha) ? 'active' : '';
       const subTag = esClausura && f.numero > (DATA.clausura.ultimaFechaDisputada || 3) ? "· Próx" : "";
       return `<button class="fecha-pill ${activeClass}" data-fecha="${f.numero}">Fecha ${f.numero} ${subTag}</button>`;
     }).join('');
 
     const matchesHtml = (currentFechaObj?.partidos || []).map(m => {
-      const homeTeam = getTeam(m.local);
-      const awayTeam = getTeam(m.visitante);
       const esLibre = m.estado === 'libre';
       const esFinalizado = m.estado === 'finalizado';
+      const libreLocal = /^libre$/i.test(m.local);
+      const libreVisit = /^libre$/i.test(m.visitante);
+      const homeTeam = libreLocal ? null : getTeam(m.local);
+      const awayTeam = libreVisit ? null : getTeam(m.visitante);
+      const libreCrest = `<span class="crest-libre" aria-hidden="true">—</span>`;
 
       let scoreHtml = "";
       let statusBadge = "";
+      let cardState = "is-pendiente";
 
       if (esLibre) {
         scoreHtml = `<div class="match-score-box score-vs">LIBRE</div>`;
-        statusBadge = `<span class="match-status-badge status-libre">Fecha Libre</span>`;
+        statusBadge = `<span class="match-status-badge status-libre">Fecha libre</span>`;
+        cardState = "is-libre";
       } else if (esFinalizado) {
-        scoreHtml = `<div class="match-score-box">${m.golesL} - ${m.golesV}</div>`;
+        const wl = m.golesL > m.golesV ? 'score-winner' : '';
+        const wv = m.golesV > m.golesL ? 'score-winner' : '';
+        scoreHtml = `<div class="match-score-box"><span class="${wl}">${m.golesL}</span> - <span class="${wv}">${m.golesV}</span></div>`;
         statusBadge = `<span class="match-status-badge status-finalizado">Finalizado</span>`;
+        cardState = "is-finalizado";
       } else {
         scoreHtml = `<div class="match-score-box score-vs">vs</div>`;
-        statusBadge = `<span class="match-status-badge status-pendiente">A Disputar</span>`;
+        statusBadge = `<span class="match-status-badge status-pendiente">A disputar</span>`;
       }
 
       return `
-        <div class="match-card">
+        <div class="match-card ${cardState}">
           <div class="match-header">
             <span class="match-zone-badge">${m.zona || "Categoría A"}</span>
             ${statusBadge}
           </div>
           <div class="match-teams-row">
             <div class="match-team home" data-team="${homeTeam?.id || ''}">
-              ${renderCrestImg(homeTeam, "match-crest")}
-              <span class="match-team-name">${m.local}</span>
+              ${libreLocal ? libreCrest : renderCrestImg(homeTeam, "match-crest")}
+              <span class="match-team-name">${libreLocal ? 'Libre' : m.local}</span>
             </div>
             ${scoreHtml}
             <div class="match-team away" data-team="${awayTeam?.id || ''}">
-              ${renderCrestImg(awayTeam, "match-crest")}
-              <span class="match-team-name">${m.visitante}</span>
+              ${libreVisit ? libreCrest : renderCrestImg(awayTeam, "match-crest")}
+              <span class="match-team-name">${libreVisit ? 'Libre' : m.visitante}</span>
             </div>
           </div>
-          ${m.nota ? `<div class="match-footer-note">${m.nota}</div>` : ''}
+          ${m.nota && !esLibre ? `<div class="match-footer-note">${m.nota}</div>` : ''}
         </div>
       `;
     }).join('');
 
-    // Playoffs del Apertura
-    let playoffsHtml = "";
-    if (!esClausura && DATA.apertura.playoffs) {
-      const camp = DATA.apertura.playoffs.faseCampeonato;
-      const plata = DATA.apertura.playoffs.copaPlata;
-
-      playoffsHtml = `
-        <div class="card-box" style="margin-top: 32px;">
-          <div class="section-title" style="margin-bottom: 16px;">
-            <h2>Playoffs Apertura 2026</h2>
-            <span class="section-badge">Fases de Eliminación Directa</span>
-          </div>
-
-          <h3 style="font-family:var(--f-display); font-size:1.4rem; color:var(--accent); text-transform:uppercase; margin-block:12px 8px;">Fase Campeonato</h3>
-          <div class="matches-grid">
-            ${(camp?.cuartos || []).map(p => `
-              <div class="match-card">
-                <div class="match-header"><span>${p.codigo} · Cuartos</span><span class="match-status-badge status-finalizado">Finalizado</span></div>
-                <div class="match-teams-row">
-                  <div class="match-team home">${renderCrestImg(getTeam(p.local), "match-crest")}<span class="match-team-name">${p.local}</span></div>
-                  <div class="match-score-box">${p.golesL} - ${p.golesV}</div>
-                  <div class="match-team away">${renderCrestImg(getTeam(p.visitante), "match-crest")}<span class="match-team-name">${p.visitante}</span></div>
-                </div>
-                ${p.nota ? `<div class="match-footer-note">${p.nota}</div>` : ''}
-              </div>
-            `).join('')}
-            ${(camp?.semifinales || []).map(p => `
-              <div class="match-card">
-                <div class="match-header"><span>${p.codigo} · Semifinal</span><span class="match-status-badge status-finalizado">Finalizado</span></div>
-                <div class="match-teams-row">
-                  <div class="match-team home">${renderCrestImg(getTeam(p.local), "match-crest")}<span class="match-team-name">${p.local}</span></div>
-                  <div class="match-score-box">${p.golesL} - ${p.golesV}</div>
-                  <div class="match-team away">${renderCrestImg(getTeam(p.visitante), "match-crest")}<span class="match-team-name">${p.visitante}</span></div>
-                </div>
-                ${p.nota ? `<div class="match-footer-note">${p.nota}</div>` : ''}
-              </div>
-            `).join('')}
-            ${camp?.tercerPuesto ? `
-              <div class="match-card" style="border-color: rgba(255, 182, 39, 0.4);">
-                <div class="match-header"><span>3° PUESTO</span><span class="match-status-badge status-finalizado">Finalizado</span></div>
-                <div class="match-teams-row">
-                  <div class="match-team home">${renderCrestImg(getTeam(camp.tercerPuesto.local), "match-crest")}<span class="match-team-name">${camp.tercerPuesto.local}</span></div>
-                  <div class="match-score-box">${camp.tercerPuesto.golesL} - ${camp.tercerPuesto.golesV}</div>
-                  <div class="match-team away">${renderCrestImg(getTeam(camp.tercerPuesto.visitante), "match-crest")}<span class="match-team-name">${camp.tercerPuesto.visitante}</span></div>
-                </div>
-                ${camp.tercerPuesto.nota ? `<div class="match-footer-note">${camp.tercerPuesto.nota}</div>` : ''}
-              </div>
-            ` : ''}
-            ${camp?.final ? `
-              <div class="match-card" style="border: 2px solid var(--accent); background: rgba(255, 182, 39, 0.05);">
-                <div class="match-header"><span style="color:var(--accent); font-weight:800;">★ GRAN FINAL CAMPEONATO ★</span><span class="match-status-badge status-finalizado">Finalizado</span></div>
-                <div class="match-teams-row">
-                  <div class="match-team home">${renderCrestImg(getTeam(camp.final.local), "match-crest")}<span class="match-team-name">${camp.final.local}</span></div>
-                  <div class="match-score-box" style="color:var(--accent);">${camp.final.golesL} - ${camp.final.golesV}</div>
-                  <div class="match-team away">${renderCrestImg(getTeam(camp.final.visitante), "match-crest")}<span class="match-team-name">${camp.final.visitante}</span></div>
-                </div>
-                <div class="match-footer-note" style="color:var(--accent); font-weight:700;">¡Jägermeister Campeón Apertura 2026!</div>
-              </div>
-            ` : ''}
-          </div>
-
-          <h3 style="font-family:var(--f-display); font-size:1.4rem; color:#90caf9; text-transform:uppercase; margin-block:24px 8px;">Copa de Plata</h3>
-          <div class="matches-grid">
-            ${(plata?.cuartos || []).map(p => `
-              <div class="match-card">
-                <div class="match-header"><span>${p.codigo} · Cuartos</span><span class="match-status-badge status-finalizado">Finalizado</span></div>
-                <div class="match-teams-row">
-                  <div class="match-team home">${renderCrestImg(getTeam(p.local), "match-crest")}<span class="match-team-name">${p.local}</span></div>
-                  <div class="match-score-box">${p.golesL} - ${p.golesV}</div>
-                  <div class="match-team away">${renderCrestImg(getTeam(p.visitante), "match-crest")}<span class="match-team-name">${p.visitante}</span></div>
-                </div>
-                ${p.nota ? `<div class="match-footer-note">${p.nota}</div>` : ''}
-              </div>
-            `).join('')}
-            ${(plata?.semifinales || []).map(p => `
-              <div class="match-card">
-                <div class="match-header"><span>${p.codigo} · Semifinal</span><span class="match-status-badge status-finalizado">Finalizado</span></div>
-                <div class="match-teams-row">
-                  <div class="match-team home">${renderCrestImg(getTeam(p.local), "match-crest")}<span class="match-team-name">${p.local}</span></div>
-                  <div class="match-score-box">${p.golesL} - ${p.golesV}</div>
-                  <div class="match-team away">${renderCrestImg(getTeam(p.visitante), "match-crest")}<span class="match-team-name">${p.visitante}</span></div>
-                </div>
-                ${p.nota ? `<div class="match-footer-note">${p.nota}</div>` : ''}
-              </div>
-            `).join('')}
-            ${plata?.final ? `
-              <div class="match-card" style="border: 2px solid #90caf9; background: rgba(144, 202, 249, 0.05);">
-                <div class="match-header"><span style="color:#90caf9; font-weight:800;">★ FINAL COPA DE PLATA ★</span><span class="match-status-badge status-finalizado">Finalizado</span></div>
-                <div class="match-teams-row">
-                  <div class="match-team home">${renderCrestImg(getTeam(plata.final.local), "match-crest")}<span class="match-team-name">${plata.final.local}</span></div>
-                  <div class="match-score-box" style="color:#90caf9;">${plata.final.golesL} - ${plata.final.golesV}</div>
-                  <div class="match-team away">${renderCrestImg(getTeam(plata.final.visitante), "match-crest")}<span class="match-team-name">${plata.final.visitante}</span></div>
-                </div>
-                <div class="match-footer-note" style="color:#90caf9; font-weight:700;">¡Minaster City Campeón Copa de Plata!</div>
-              </div>
-            ` : ''}
-          </div>
-        </div>
-      `;
-    }
+    const contentHtml = verPlayoffs
+      ? (esClausura ? renderProyeccionPlayoffs() : renderBracketApertura())
+      : `<div class="matches-grid">
+          ${matchesHtml.length > 0 ? matchesHtml : `<div style="grid-column:1/-1; text-align:center; padding:40px; color:var(--text-secondary);">No hay partidos registrados para esta fecha.</div>`}
+        </div>`;
 
     container.innerHTML = `
       <div class="section-header">
@@ -569,11 +493,7 @@
         ${fechaPillsHtml}
       </div>
 
-      <div class="matches-grid">
-        ${matchesHtml.length > 0 ? matchesHtml : `<div style="grid-column:1/-1; text-align:center; padding:40px; color:var(--muted);">No hay partidos registrados para esta fecha.</div>`}
-      </div>
-
-      ${playoffsHtml}
+      ${contentHtml}
     `;
 
     $$('button[data-fixture-torneo]', container).forEach(btn => {
@@ -586,17 +506,139 @@
 
     $$('button[data-fecha]', container).forEach(btn => {
       btn.addEventListener('click', () => {
-        state.fixtureFecha = Number(btn.dataset.fecha);
+        state.fixtureFecha = btn.dataset.fecha === 'playoffs' ? 'playoffs' : Number(btn.dataset.fecha);
         renderFixture();
       });
     });
 
-    $$('.match-team', container).forEach(el => {
+    $$('.match-team, .bk-team[data-team]', container).forEach(el => {
       el.addEventListener('click', () => {
         const teamId = el.dataset.team;
         if (teamId && teamId !== 'libre') openTeamModal(teamId);
       });
     });
+  }
+
+  // =========================================================================
+  // CUADROS DE PLAYOFF (APERTURA JUGADO · CLAUSURA PROYECTADO)
+  // =========================================================================
+  function bkTeamHtml(name, opts = {}) {
+    if (!name) return `<div class="bk-team tbd"><span class="bk-name">${opts.placeholder || 'A definir'}</span></div>`;
+    const team = getTeam(name);
+    const seed = opts.seed ? `<span class="bk-seed">${opts.seed}</span>` : '';
+    const score = opts.score !== undefined ? `<span class="bk-score">${opts.score}</span>` : '';
+    const pen = opts.pen !== undefined ? `<span class="bk-pen">(${opts.pen})</span>` : '';
+    return `<div class="bk-team ${opts.win ? 'win' : ''}" data-team="${team?.id || ''}">
+      ${seed}${renderCrestImg(team)}<span class="bk-name">${name}</span>${pen}${score}</div>`;
+  }
+
+  function bkPlayedHtml(p, label, extraClass = '') {
+    if (!p) return '';
+    const hasPen = p.penalesL !== undefined;
+    return `<div class="bk-match ${extraClass}">
+      <div class="bk-code"><span>${label}</span><span>${hasPen ? 'Penales' : 'Final'}</span></div>
+      ${bkTeamHtml(p.local, { score: p.golesL, pen: hasPen ? p.penalesL : undefined, win: p.ganador === p.local })}
+      ${bkTeamHtml(p.visitante, { score: p.golesV, pen: hasPen ? p.penalesV : undefined, win: p.ganador === p.visitante })}
+    </div>`;
+  }
+
+  function renderBracketApertura() {
+    const po = DATA.apertura.playoffs;
+    if (!po) return '';
+    const camp = po.faseCampeonato || {};
+    const plata = po.copaPlata || {};
+    // equipo que entró directo a semifinales de Plata (no jugó cuartos)
+    const enCuartosPlata = new Set((plata.cuartos || []).flatMap(p => [p.local, p.visitante]));
+    const byePlata = (plata.semifinales || []).flatMap(p => [p.local, p.visitante]).find(t => !enCuartosPlata.has(t));
+
+    return `
+      <div class="bracket-wrap">
+        <div class="bracket-block">
+          <div class="bracket-title"><h3>Fase Campeonato</h3><span class="bracket-tag oro">Apertura 2026 · Jugado</span></div>
+          <div class="bracket-scroll"><div class="bracket">
+            <div class="bracket-col"><div class="bracket-col-title">Cuartos de final</div><div class="bk-stack">
+              ${(camp.cuartos || []).map(p => bkPlayedHtml(p, p.codigo)).join('')}</div></div>
+            <div class="bracket-col"><div class="bracket-col-title">Semifinales</div><div class="bk-stack">
+              ${(camp.semifinales || []).map(p => bkPlayedHtml(p, p.codigo)).join('')}</div></div>
+            <div class="bracket-col"><div class="bracket-col-title">Final</div><div class="bk-stack">
+              ${bkPlayedHtml(camp.final, 'Gran final', 'final')}
+              ${camp.final ? `<div class="bk-champion">★ ${camp.final.ganador} campeón</div>` : ''}
+              ${camp.tercerPuesto ? `<div class="bracket-col-title" style="margin-top:14px;">3° puesto</div>${bkPlayedHtml(camp.tercerPuesto, '3° puesto')}` : ''}
+            </div></div>
+          </div></div>
+        </div>
+
+        <div class="bracket-block">
+          <div class="bracket-title"><h3>Copa de Plata</h3><span class="bracket-tag plata">Apertura 2026 · Jugado</span></div>
+          <div class="bracket-scroll"><div class="bracket">
+            <div class="bracket-col"><div class="bracket-col-title">Cuartos de final</div><div class="bk-stack">
+              ${(plata.cuartos || []).map(p => bkPlayedHtml(p, p.codigo)).join('')}
+              ${byePlata ? `<div class="bracket-bye"><b>${byePlata}</b> pasó directo a semifinales (mejor 5°)</div>` : ''}</div></div>
+            <div class="bracket-col"><div class="bracket-col-title">Semifinales</div><div class="bk-stack">
+              ${(plata.semifinales || []).map(p => bkPlayedHtml(p, p.codigo)).join('')}</div></div>
+            <div class="bracket-col"><div class="bracket-col-title">Final</div><div class="bk-stack">
+              ${bkPlayedHtml(plata.final, 'Final', 'final plata')}
+              ${plata.final ? `<div class="bk-champion plata">★ ${plata.final.ganador} campeón de Plata</div>` : ''}
+            </div></div>
+          </div></div>
+        </div>
+      </div>`;
+  }
+
+  function getProyeccionPlayoffs() {
+    const A = (DATA.clausura.tablas?.zonaA || []).slice().sort((x, y) => x.pos - y.pos);
+    const B = (DATA.clausura.tablas?.zonaB || []).slice().sort((x, y) => x.pos - y.pos);
+    const at = (z, n) => z[n - 1]?.equipo;
+    const ppj = r => (r && r.pj ? r.pts / r.pj : 0);
+    // Mejor 5°: mayor promedio de puntos por partido, luego diferencia de gol y goles a favor
+    const a5 = A[4], b5 = B[4];
+    let mejor5 = a5, otro5 = b5;
+    if (a5 && b5) {
+      const cmp = (ppj(b5) - ppj(a5)) || (b5.dg - a5.dg) || (b5.gf - a5.gf);
+      if (cmp > 0) { mejor5 = b5; otro5 = a5; }
+    }
+    const zonaDe = r => (A.includes(r) ? 'A' : 'B');
+    return {
+      campeonato: [
+        { codigo: 'CF1', local: at(A, 1), sl: '1°A', visitante: at(B, 4), sv: '4°B' },
+        { codigo: 'CF2', local: at(A, 2), sl: '2°A', visitante: at(B, 3), sv: '3°B' },
+        { codigo: 'CF3', local: at(B, 1), sl: '1°B', visitante: at(A, 4), sv: '4°A' },
+        { codigo: 'CF4', local: at(B, 2), sl: '2°B', visitante: at(A, 3), sv: '3°A' },
+      ],
+      plata: [
+        { codigo: 'CP1', local: otro5?.equipo, sl: otro5 ? `5°${zonaDe(otro5)}` : '5°', visitante: at(A, 8), sv: '8°A' },
+        { codigo: 'CP2', local: at(B, 6), sl: '6°B', visitante: at(A, 7), sv: '7°A' },
+        { codigo: 'CP3', local: at(A, 6), sl: '6°A', visitante: at(B, 7), sv: '7°B' },
+      ],
+      mejor5: mejor5 ? { equipo: mejor5.equipo, zona: zonaDe(mejor5), ppj: ppj(mejor5) } : null,
+      fecha: DATA.clausura.ultimaFechaDisputada,
+    };
+  }
+
+  function renderProyeccionPlayoffs(compact = false) {
+    const pr = getProyeccionPlayoffs();
+    const crossHtml = c => `<div class="bk-match">
+        <div class="bk-code"><span>${c.codigo}</span><span>${c.sl} vs ${c.sv}</span></div>
+        ${bkTeamHtml(c.local, { seed: c.sl })}
+        ${bkTeamHtml(c.visitante, { seed: c.sv })}
+      </div>`;
+    const fmt = n => n.toFixed(2).replace('.', ',');
+    return `
+      <div class="bracket-wrap">
+        <div class="bracket-block">
+          <div class="bracket-title"><h3>Cruces si el Clausura terminara hoy</h3><span class="bracket-tag proy">Proyección · tablas tras la Fecha ${pr.fecha}</span></div>
+          <div class="bracket-note" style="margin:-4px 0 14px;">No son cruces confirmados: cambian con cada fecha. Se arman con las posiciones actuales de cada zona según la Forma de Disputa 2026.</div>
+          <div class="bracket-col-title" style="text-align:left;">Fase Campeonato · Cuartos de final</div>
+          <div class="matches-grid" style="margin-bottom:18px;">${pr.campeonato.map(crossHtml).join('')}</div>
+          <div class="bracket-col-title" style="text-align:left;">Copa de Plata · Cuartos de final</div>
+          <div class="matches-grid">${pr.plata.map(crossHtml).join('')}
+            ${pr.mejor5 ? `<div class="bracket-bye" style="display:flex;flex-direction:column;justify-content:center;gap:6px;">
+              <div style="display:flex;align-items:center;justify-content:center;gap:8px;">${renderCrestImg(getTeam(pr.mejor5.equipo))}<b>${pr.mejor5.equipo}</b> (5°${pr.mejor5.zona})</div>
+              <div>Mejor 5°: pasa directo a semifinales</div></div>` : ''}
+          </div>
+          <div class="bracket-note">Semifinales y finales según el cuadro preestablecido por la organización. Mejor 5° calculado por promedio de puntos por partido (${pr.mejor5 ? fmt(pr.mejor5.ppj) : '—'}), luego diferencia de gol, porque la Zona B tiene un equipo libre por fecha.</div>
+        </div>
+      </div>`;
   }
 
   // =========================================================================
@@ -1535,6 +1577,14 @@
             <tbody id="sancionesTbody"></tbody>
           </table>
         </div>
+        <div class="sanciones-legend">
+          <span class="badge-sancion-estado sancion-vigente">Vigente</span>
+          <span class="badge-sancion-estado sancion-encurso">En curso</span>
+          <span class="badge-sancion-estado sancion-provisoria">Provisoria</span>
+          <span class="badge-sancion-estado sancion-cumplida">Cumplida</span>
+          <span class="badge-sancion-estado sancion-definitiva">Definitiva</span>
+          <span class="badge-sancion-estado sancion-aviso">Amonestación</span>
+        </div>
       `;
 
       tbody = $('#sancionesTbody', container);
@@ -1573,7 +1623,7 @@
                          (s.articulo && s.articulo.toLowerCase().includes(query));
       if (!matchQuery) return false;
 
-      if (filtro === 'vigentes') return s.estado.toLowerCase().includes('vigente');
+      if (filtro === 'vigentes') return /vigente|resta|provisori/.test(s.estado.toLowerCase());
       if (filtro === 'cumplidas') return s.estado.toLowerCase().includes('cumplid');
       if (filtro === 'definitivas') return s.estado.toLowerCase().includes('definitiv');
       return true;
@@ -1581,12 +1631,16 @@
 
     const rowsHtml = filtered.map(s => {
       const team = getTeam(s.equipo);
+      const est = s.estado.toLowerCase();
       let badgeClass = "sancion-vigente";
-      if (s.estado.toLowerCase().includes('cumplid')) badgeClass = "sancion-cumplida";
-      else if (s.estado.toLowerCase().includes('definitiv')) badgeClass = "sancion-definitiva";
+      if (est.includes('definitiv')) badgeClass = "sancion-definitiva";
+      else if (est.includes('resta')) badgeClass = "sancion-encurso";
+      else if (est.includes('cumplid')) badgeClass = "sancion-cumplida";
+      else if (est.includes('provisori')) badgeClass = "sancion-provisoria";
+      else if (est.includes('amonest') || est.includes('amarilla')) badgeClass = "sancion-aviso";
 
       return `
-        <tr>
+        <tr class="row-${badgeClass}">
           <td style="text-align:left; font-weight:700;">${s.jugador}</td>
           <td class="col-team">
             <div class="team-cell" data-team="${team?.id || ''}">
@@ -1594,7 +1648,7 @@
               <span>${s.equipo}</span>
             </div>
           </td>
-          <td class="col-sancion" style="font-weight:700; color:#ffb627;">${s.sancion}</td>
+          <td class="col-sancion">${s.sancion}</td>
           <td style="color:var(--muted); font-size:0.85rem;">${s.articulo || "—"}</td>
           <td style="color:var(--dim); font-size:0.85rem; max-width:280px; white-space:normal;">${s.motivo || "—"}</td>
           <td><span class="badge-sancion-estado ${badgeClass}">${s.estado}</span></td>
