@@ -2626,6 +2626,23 @@ const LIGA_DATA = {
   "copaChallenger": {
     "nombre": "Copa Challenger 2026",
     "fuente": "Cuadro y resultados enviados por la Liga al 29/10/2026",
+    "escudos": {
+      "Defensa e Injusticia": "public/escudos/defensa_e_injusticia.png",
+      "Imputables FC": "public/escudos/imputables_fc.png",
+      "Timba": "public/escudos/timba.png",
+      "Tercer Tiempo": "public/escudos/tercer_tiempo.png",
+      "Central": "public/escudos/central.png",
+      "Gol en Contra": "public/escudos/gol_en_contra.png",
+      "F90": "public/escudos/f90.png",
+      "Newcauce": "public/escudos/newcauce.png",
+      "Geología": "public/escudos/geologia.png",
+      "Al Costado": "public/escudos/al_costado.png",
+      "De Zurda": "public/escudos/de_zurda.png",
+      "Necaxa": "public/escudos/necaxa.png",
+      "Dep. La Verna": "public/escudos/dep_la_verna.png",
+      "Inter": "public/escudos/inter.png",
+      "Malvinas": "public/escudos/malvinas.png"
+    },
     "llaves": {
       "L": {
         "nombre": "Llave 1",
@@ -2644,7 +2661,7 @@ const LIGA_DATA = {
         "fechas": [
           "2026-10-07",
           "2026-10-17",
-          "2026-10-28",
+          "2026-10-29",
           "2026-11-04",
           null
         ]

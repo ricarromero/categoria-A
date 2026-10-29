@@ -104,7 +104,7 @@
       id: key.replace(/[^a-z0-9]/g, '_'),
       nombre: nameOrId,
       shortName: nameOrId.slice(0, 3).toUpperCase(),
-      escudo: genericCrestUri(nameOrId),
+      escudo: ((DATA.copaChallenger && DATA.copaChallenger.escudos) || {})[String(nameOrId).trim()] || genericCrestUri(nameOrId),
       generic: true,
       color: "#4895ef"
     };
