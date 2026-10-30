@@ -4183,3 +4183,14 @@ html[data-cat="C"] {
 .cat-pick[data-cat="C"]:not(.active) { animation-delay: 1.2s; }
 .cat-pick:hover { animation-play-state: paused; }
 @media (prefers-reduced-motion: reduce) { .cat-pick:not(.active) { animation: none; } }
+
+/* Brillo como el del botón Copa Challenger */
+.cat-pick { position: relative; overflow: hidden; }
+.cat-pick::after {
+  content: ""; position: absolute; top: 0; bottom: 0; left: -60%; width: 45%;
+  background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.45), transparent);
+  transform: skewX(-20deg); animation: ccShine 4.5s ease-in-out infinite; pointer-events: none;
+}
+.cat-pick[data-cat="B"]::after { animation-delay: .25s; }
+.cat-pick[data-cat="C"]::after { animation-delay: .5s; }
+@media (prefers-reduced-motion: reduce) { .cat-pick::after { animation: none; display: none; } }
