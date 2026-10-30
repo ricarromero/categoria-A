@@ -2842,7 +2842,7 @@
     const nombre = `Categoría ${CAT}`;
     document.title = `Liga Universitaria Sanjuanina de Fútbol — ${nombre} 2026`;
     const sub = $('#heroCatLabel');
-    if (sub) sub.textContent = `${nombre} · Fútbol Universitario`;
+    if (sub) sub.textContent = nombre;
     const foot = $('#footerCat');
     if (foot) foot.textContent = `${nombre} · Temporada 2026`;
     $$('#catSwitch .cat-pick').forEach(o => {

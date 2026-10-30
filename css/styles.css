@@ -4216,3 +4216,19 @@ html[data-cat="C"] {
   .tile-name { font-size: 1.02rem !important; }
   .tile-desc { font-size: .66rem !important; }
 }
+
+/* Marca del header: logo | Categoría + bajada */
+.brand-v2 { display: flex; align-items: center; gap: 16px; min-width: 0; }
+.brand-v2 .league-official-logo { height: 54px; }
+.brand-div { width: 2px; align-self: stretch; min-height: 44px; background: rgba(255,255,255,.28); border-radius: 2px; }
+.brand-info { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.brand-cat { font-family: var(--f-display); font-weight: 900; font-size: 2rem; line-height: .95; text-transform: uppercase; letter-spacing: .01em; color: #FFFFFF; }
+.brand-sub { font-size: .74rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--tile-label); white-space: nowrap; }
+@media (max-width: 600px) {
+  .brand-v2 { gap: 12px; }
+  .brand-v2 .league-official-logo { height: 42px; }
+  .brand-div { min-height: 36px; }
+  .brand-cat { font-size: 1.6rem; }
+  .brand-sub { font-size: .62rem; letter-spacing: .07em; white-space: normal; }
+}
+@media (max-width: 600px) { .brand-sub-long { display: none; } .brand-sub { font-size: .7rem; } }
