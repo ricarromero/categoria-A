@@ -4168,3 +4168,18 @@ html[data-cat="C"] {
   .cat-pick { width: auto; flex: 1; height: 34px; font-size: 1.15rem; }
   .cat-pick.active { width: auto; }
 }
+
+/* Rebote de vez en cuando en los botones de categoría para invitar a tocarlos */
+@keyframes catBounce {
+  0%, 78%, 100% { transform: translateY(0) scale(1); }
+  82% { transform: translateY(-7px) scale(1.06); }
+  86% { transform: translateY(0) scale(.97); }
+  90% { transform: translateY(-3px) scale(1.02); }
+  94% { transform: translateY(0) scale(1); }
+}
+.cat-pick:not(.active) { animation: catBounce 5s ease-in-out infinite; }
+.cat-pick[data-cat="A"]:not(.active) { animation-delay: .8s; }
+.cat-pick[data-cat="B"]:not(.active) { animation-delay: 1s; }
+.cat-pick[data-cat="C"]:not(.active) { animation-delay: 1.2s; }
+.cat-pick:hover { animation-play-state: paused; }
+@media (prefers-reduced-motion: reduce) { .cat-pick:not(.active) { animation: none; } }
