@@ -2845,13 +2845,6 @@
     if (sub) sub.textContent = `${nombre} · Fútbol Universitario`;
     const foot = $('#footerCat');
     if (foot) foot.textContent = `${nombre} · Temporada 2026`;
-    if (ESQ) {
-      const badges = $('#heroBadges');
-      if (badges) {
-        $$('.badge-tag:not(.badge-ig-league)', badges).forEach(b => b.remove());
-        badges.insertAdjacentHTML('afterbegin', `<div class="badge-tag"><span>Esperando informes</span></div><div class="badge-tag"><span>Versión de prueba</span></div>`);
-      }
-    }
     $$('#catSwitch .cat-pick').forEach(o => {
       const activa = o.dataset.cat === CAT;
       o.classList.toggle('active', activa);
