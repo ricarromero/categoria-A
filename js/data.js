@@ -3121,6 +3121,11 @@ const LIGA_DATA = {
       }
     }
   },
+  "fotos": {
+    "_ayuda": "Fotógrafos y álbumes. fotografos: {id, nombre, instagram}. albumes: {torneo: 'clausura'|'apertura', fecha: N, local, visitante (opcional: sin partido = álbum de toda la fecha), fotografo: id, url, nota (opcional)}",
+    "fotografos": [],
+    "albumes": []
+  },
   "tablaAnualFuente": "Tabla Anual enviada por la Liga al 29/10/2026",
   "tablaAnual": [
     {
