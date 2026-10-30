@@ -19,7 +19,7 @@
   <link rel="icon" type="image/png" href="public/logo_liga.png">
 
   <!-- Estilos Premium -->
-  <link rel="stylesheet" href="css/styles.css?v=20261030_bc4">
+  <link rel="stylesheet" href="css/styles.css?v=20261030_bc5">
 </head>
 
 <body>
@@ -57,16 +57,10 @@
       <!-- Identidad Oficial -->
       <div class="hero-brand">
         <div class="brand-main">
-          <div class="cat-switch">
-            <button class="league-crest" id="catBtn" type="button" aria-haspopup="true" aria-expanded="false" title="Cambiar de categoría">
-              <span class="cat-letter">A</span><span class="cat-caret" aria-hidden="true"></span>
-            </button>
-            <div class="cat-menu" id="catMenu" hidden>
-              <span class="cat-menu-title">Elegí la categoría</span>
-              <button type="button" data-cat="A"><span class="cat-dot">A</span>Categoría A</button>
-              <button type="button" data-cat="B"><span class="cat-dot">B</span>Categoría B</button>
-              <button type="button" data-cat="C"><span class="cat-dot">C</span>Categoría C</button>
-            </div>
+          <div class="cat-switch" id="catSwitch" role="group" aria-label="Elegir categoría">
+            <button type="button" class="cat-pick" data-cat="A" title="Categoría A">A</button>
+            <button type="button" class="cat-pick" data-cat="B" title="Categoría B">B</button>
+            <button type="button" class="cat-pick" data-cat="C" title="Categoría C">C</button>
           </div>
           <div class="brand-text">
             <span class="eyebrow">Universidad Nacional de San Juan</span>
@@ -225,9 +219,9 @@
   </footer>
 
   <!-- Scripts: Datos Oficiales y Lógica Reactiva -->
-  <script src="js/data.js?v=20261030_bc4"></script>
-  <script src="js/data_bc.js?v=20261030_bc4"></script>
-  <script src="js/app.js?v=20261030_bc4"></script>
+  <script src="js/data.js?v=20261030_bc5"></script>
+  <script src="js/data_bc.js?v=20261030_bc5"></script>
+  <script src="js/app.js?v=20261030_bc5"></script>
 </body>
 
 </html>

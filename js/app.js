@@ -2841,9 +2841,6 @@
   function aplicarCategoriaUI() {
     const nombre = `Categoría ${CAT}`;
     document.title = `Liga Universitaria Sanjuanina de Fútbol — ${nombre} 2026`;
-    const btn = $('#catBtn');
-    const menu = $('#catMenu');
-    if (btn) $('.cat-letter', btn).textContent = CAT;
     const sub = $('#heroCatLabel');
     if (sub) sub.textContent = `${nombre} · Fútbol Universitario`;
     const foot = $('#footerCat');
@@ -2855,23 +2852,17 @@
         badges.insertAdjacentHTML('afterbegin', `<div class="badge-tag"><span>Esperando informes</span></div><div class="badge-tag"><span>Versión de prueba</span></div>`);
       }
     }
-    if (btn && menu) {
-      $$('[data-cat]', menu).forEach(o => o.classList.toggle('active', o.dataset.cat === CAT));
-      const cerrar = () => { menu.hidden = true; btn.setAttribute('aria-expanded', 'false'); };
-      btn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        menu.hidden = !menu.hidden;
-        btn.setAttribute('aria-expanded', menu.hidden ? 'false' : 'true');
-      });
-      document.addEventListener('click', (e) => { if (!menu.contains(e.target)) cerrar(); });
-      document.addEventListener('keydown', (e) => { if (e.key === 'Escape') cerrar(); });
-      $$('[data-cat]', menu).forEach(o => o.addEventListener('click', () => {
+    $$('#catSwitch .cat-pick').forEach(o => {
+      const activa = o.dataset.cat === CAT;
+      o.classList.toggle('active', activa);
+      o.setAttribute('aria-pressed', activa ? 'true' : 'false');
+      o.addEventListener('click', () => {
         const c = o.dataset.cat;
-        if (c === CAT) { cerrar(); return; }
+        if (c === CAT) return;
         try { localStorage.setItem('liga_cat', c); } catch (err) { /* sin almacenamiento */ }
         location.href = `${location.pathname}?cat=${c.toLowerCase()}#${state.currentTab}`;
-      }));
-    }
+      });
+    });
   }
 
   function updateTabIndicator() {
