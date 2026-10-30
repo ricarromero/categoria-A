@@ -53,7 +53,6 @@
       reglamentos: A.reglamentos,
       reglamentosCompletos: A.reglamentosCompletos,
       copaChallenger: A.copaChallenger,
-      fotos: { fotografos: [], albumes: [] },
       tablaAnualFuente: '',
       tablaAnual: []
     };

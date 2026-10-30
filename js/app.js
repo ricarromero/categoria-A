@@ -2874,99 +2874,6 @@
     }
   }
 
-
-  // =========================================================================
-  // FOTOS: álbumes de los fotógrafos por fecha y partido
-  // =========================================================================
-  const IG_SVG = '<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>';
-  const CAM_SVG = '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>';
-
-  function renderFotos() {
-    const container = $('#view-fotos');
-    if (!container) return;
-    const F = DATA.fotos || { fotografos: [], albumes: [] };
-    const fotografos = {};
-    (F.fotografos || []).forEach(f => { fotografos[f.id] = f; });
-    const torneo = state.fotosTorneo || 'clausura';
-    const equipo = state.fotosEquipo || '';
-    const norm = x => String(x || '').trim().toLowerCase();
-    const albumes = (F.albumes || []).filter(a => (a.torneo || 'clausura') === torneo);
-    const delPartido = (n, m) => albumes.filter(a => Number(a.fecha) === n && a.local && norm(a.local) === norm(m.local) && norm(a.visitante) === norm(m.visitante));
-    const deLaFecha = n => albumes.filter(a => Number(a.fecha) === n && !a.local);
-
-    const btnAlbum = a => {
-      const f = fotografos[a.fotografo] || { nombre: a.fotografo || 'Fotógrafo' };
-      return `<a class="foto-btn" href="${escapeHtml(a.url)}" target="_blank" rel="noopener noreferrer">
-          ${CAM_SVG}<span class="foto-btn-txt"><b>${escapeHtml(f.nombre)}</b><small>${escapeHtml(a.nota || 'Ver y comprar fotos')}</small></span><span class="foto-btn-go">→</span>
-        </a>`;
-    };
-
-    const fechas = ((DATA[torneo] && DATA[torneo].fechas) || [])
-      .filter(f => f.disputada || albumes.some(a => Number(a.fecha) === f.numero))
-      .slice().sort((a, b) => b.numero - a.numero);
-
-    const bloques = fechas.map(f => {
-      const partidos = (f.partidos || []).filter(m => m.estado !== 'libre' && norm(m.visitante) !== 'libre' && norm(m.local) !== 'libre')
-        .filter(m => !equipo || norm(m.local) === norm(equipo) || norm(m.visitante) === norm(equipo));
-      if (!partidos.length) return '';
-      const generales = deLaFecha(f.numero);
-      const cards = partidos.map(m => {
-        const tl = getTeam(m.local), tv = getTeam(m.visitante);
-        const res = typeof m.golesL === 'number' ? `${m.golesL} - ${m.golesV}` : 'vs';
-        const als = delPartido(f.numero, m);
-        return `<div class="foto-card ${als.length ? 'has' : ''}">
-            <div class="foto-match">
-              <span class="foto-team">${renderCrestImg(tl)}<span>${escapeHtml(m.local)}</span></span>
-              <span class="foto-res">${res}</span>
-              <span class="foto-team r"><span>${escapeHtml(m.visitante)}</span>${renderCrestImg(tv)}</span>
-            </div>
-            <div class="foto-albums">${als.length ? als.map(btnAlbum).join('') : '<span class="foto-empty">Todavía no hay fotos de este partido</span>'}</div>
-          </div>`;
-      }).join('');
-      return `<div class="foto-fecha">
-          <div class="foto-fecha-head"><h3>${escapeHtml(f.nombre || 'Fecha ' + f.numero)}</h3>${f.dia ? `<span>${escapeHtml(f.dia)}</span>` : ''}</div>
-          ${generales.length ? `<div class="foto-generales"><span>Álbumes de toda la fecha</span>${generales.map(btnAlbum).join('')}</div>` : ''}
-          <div class="foto-grid">${cards}</div>
-        </div>`;
-    }).join('');
-
-    const listaFot = (F.fotografos || []).length ? `
-      <div class="foto-fotografos">
-        <div class="bracket-col-title" style="text-align:left;margin-bottom:8px">Fotógrafos</div>
-        <div class="foto-fot-list">${F.fotografos.map(f => `
-          <div class="foto-fot">${CAM_SVG}<b>${escapeHtml(f.nombre)}</b>
-            ${f.instagram ? `<a href="${escapeHtml(f.instagram)}" target="_blank" rel="noopener noreferrer" class="preview-ig-link" title="Instagram">${IG_SVG}</a>` : ''}
-          </div>`).join('')}</div>
-      </div>` : '';
-
-    const equipos = DATA.equipos.map(e => e.nombre).sort((a, b) => a.localeCompare(b, 'es'));
-    container.innerHTML = `
-      <div class="section-header">
-        <div class="section-title"><h2>Fotos</h2><span class="section-badge">Fotógrafos de la Liga</span></div>
-        <div class="pill-group" role="tablist" aria-label="Seleccionar torneo">
-          <button class="pill-btn ${torneo === 'clausura' ? 'active' : ''}" data-fotos-torneo="clausura">Clausura</button>
-          <button class="pill-btn ${torneo === 'apertura' ? 'active' : ''}" data-fotos-torneo="apertura">Apertura</button>
-        </div>
-      </div>
-      <div class="banner-alert foto-banner">
-        <div>
-          <b>Encontrá las fotos de tu partido</b>
-          Cada álbum te lleva directo a la página del fotógrafo, donde podés ver y comprar las fotos.
-          <span class="foto-banner-cta">¿Sos fotógrafo? Mandanos el link de tu álbum por Instagram a <a href="https://www.instagram.com/ligauniversitaria.sj/" target="_blank" rel="noopener noreferrer">@ligauniversitaria.sj</a> y lo sumamos.</span>
-        </div>
-      </div>
-      <div class="foto-filtro">
-        <label for="fotosEquipo">Equipo</label>
-        <select id="fotosEquipo"><option value="">Todos los equipos</option>${equipos.map(n => `<option value="${escapeHtml(n)}" ${norm(n) === norm(equipo) ? 'selected' : ''}>${escapeHtml(n)}</option>`).join('')}</select>
-      </div>
-      ${bloques || `<div class="foto-vacio">${CAM_SVG}<b>Todavía no hay fechas con fotos</b><span>${ESQ ? `Cuando arranquen los informes de la Categoría ${CAT}, acá van a aparecer los partidos con sus álbumes.` : 'Las fotos aparecen acá a medida que los fotógrafos suben sus álbumes.'}</span></div>`}
-      ${listaFot}
-    `;
-    $$('button[data-fotos-torneo]', container).forEach(b => b.addEventListener('click', () => { state.fotosTorneo = b.dataset.fotosTorneo; renderFotos(); }));
-    const sel = $('#fotosEquipo', container);
-    if (sel) sel.addEventListener('change', () => { state.fotosEquipo = sel.value; renderFotos(); });
-  }
-
   function updateTabIndicator() {
     const activeBtn = $(`#mainTabs .tab-btn[data-view="${state.currentTab}"]`);
     const indicator = $('#tabIndicator');
@@ -2996,7 +2903,7 @@
 
     updateTabIndicator();
 
-    if (ESQ && !['challenger', 'reglamento', 'equipos', 'fotos'].includes(viewName)) {
+    if (ESQ && viewName !== 'challenger' && viewName !== 'reglamento' && viewName !== 'equipos') {
       if (viewName === 'posiciones') renderPosicionesEsqueleto();
       else if (viewName === 'fixture') renderFixtureEsqueleto();
       else if (viewName === 'estadisticas') renderTablaVaciaEsqueleto('view-estadisticas', 'Estadísticas', ['#', 'Equipo', 'PJ', 'GF', 'GC', 'DG', 'Prom.'], 'statsTorneo');
@@ -3011,7 +2918,6 @@
       case 'sanciones': renderSanciones(); break;
       case 'reglamento': renderReglamento(); break;
       case 'challenger': renderChallenger(); break;
-      case 'fotos': renderFotos(); break;
     }
 
     if (window.history && window.history.replaceState) {
@@ -3053,7 +2959,7 @@
     const urlParams = new URLSearchParams(window.location.search);
     const hash = window.location.hash ? window.location.hash.substring(1) : '';
     const initialView = urlParams.get('tab') || urlParams.get('view') || hash || 'posiciones';
-    const validViews = ['posiciones', 'fixture', 'fotos', 'challenger', 'equipos', 'estadisticas', 'goleadores', 'sanciones', 'reglamento'];
+    const validViews = ['posiciones', 'fixture', 'challenger', 'equipos', 'estadisticas', 'goleadores', 'sanciones', 'reglamento'];
     switchTab(validViews.includes(initialView) ? initialView : 'posiciones');
   }
 
