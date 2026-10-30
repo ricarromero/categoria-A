@@ -2557,12 +2557,20 @@ const LIGA_DATA = {
       "estado": "Provisorio"
     },
     {
-      "jugador": "Gaitán, Axel",
-      "equipo": "C-Lesión",
-      "sancion": "5 Partidos",
-      "articulo": "Art. 22 inc \"B\"",
-      "motivo": "Sanción grave Fecha 4",
-      "estado": "Vigente (0/5)"
+      "jugador": "Cabello, Valentín",
+      "equipo": "Calise",
+      "sancion": "2 Partidos",
+      "articulo": "Art. 23 inc \"A\"",
+      "motivo": "",
+      "estado": "Vigente (0/2)"
+    },
+    {
+      "jugador": "Mogrovejo, Joaquín",
+      "equipo": "Celtic",
+      "sancion": "2 Partidos",
+      "articulo": "Art. 23 inc \"B\"",
+      "motivo": "",
+      "estado": "Vigente (0/2)"
     },
     {
       "jugador": "Arbo, Mauricio",
