@@ -12,7 +12,7 @@
   // Categoría activa (A, B o C): se elige con ?cat= o se recuerda la última elegida
   const CATS = ['A', 'B', 'C'];
   // Categorías abiertas al público. Las demás muestran "Próximamente" salvo en modo prueba (?prueba=1).
-  const CATS_ABIERTAS = ['A'];
+  const CATS_ABIERTAS = ['A', 'B', 'C'];
   const qs = new URLSearchParams(location.search);
   let PRUEBA = false;
   try {
