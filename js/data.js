@@ -2933,7 +2933,7 @@ const LIGA_DATA = {
       "L13": "Newcauce",
       "L17": "Don Bosco",
       "R3": "Defensa e Injusticia",
-      "R5": "C Atedra FC",
+      "R5": "Cátedra FC",
       "R7": "Nacional",
       "R11": "Imputables FC",
       "R16": "Bonus Track"
