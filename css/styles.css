@@ -4350,3 +4350,7 @@ html[data-cat="C"] {
 .dist-seg.seg-local, .dot-local { background: var(--navy-secondary) !important; }
 .dist-seg.seg-empate, .dot-empate { background: #A0AEC0 !important; }
 .dist-seg.seg-visita, .dot-visita { background: #F2B630 !important; }
+
+/* Tarjeta de equipo: racha y botón de Instagram centrados juntos */
+.team-card-preview > div:last-child { justify-content: center !important; gap: 12px; }
+.team-card-preview > div:last-child .badge-form { width: 22px !important; height: 22px !important; }
