@@ -58,6 +58,6 @@
     };
   }
 
-  window.LIGA_DATA_B = esqueleto('B');
+  window.LIGA_DATA_B = window.LIGA_DATA_B || esqueleto('B');
   window.LIGA_DATA_C = esqueleto('C');
 })();

@@ -232,7 +232,7 @@
       noticeHtml = `
         <div class="banner-alert">
           <div>
-            <b>Tabla Anual 2026 — Categoría A</b>
+            <b>Tabla Anual 2026 — Categoría ${CAT}</b>
             Total = Coeficiente Apertura + Coeficiente Clausura. El total del Apertura incluye los bonus por mérito (Campeón +3, Subcampeón +2, 3° puesto +1, Campeón Copa de Plata +1). ${DATA.tablaAnualFuente ? DATA.tablaAnualFuente + '.' : ''}
           </div>
         </div>
@@ -572,10 +572,11 @@
   function bkPlayedHtml(p, label, extraClass = '') {
     if (!p) return '';
     const hasPen = p.penalesL !== undefined;
+    const sinRes = p.golesL == null || p.golesV == null;
     return `<div class="bk-match ${extraClass}">
-      <div class="bk-code"><span>${label}</span><span>${hasPen ? 'Penales' : 'Final'}</span></div>
-      ${bkTeamHtml(p.local, { score: p.golesL, pen: hasPen ? p.penalesL : undefined, win: p.ganador === p.local })}
-      ${bkTeamHtml(p.visitante, { score: p.golesV, pen: hasPen ? p.penalesV : undefined, win: p.ganador === p.visitante })}
+      <div class="bk-code"><span>${label}</span><span>${sinRes ? 'Resultado no informado' : (hasPen ? 'Penales' : 'Final')}</span></div>
+      ${bkTeamHtml(p.local, { score: sinRes ? undefined : p.golesL, pen: hasPen ? p.penalesL : undefined, win: p.ganador === p.local })}
+      ${bkTeamHtml(p.visitante, { score: sinRes ? undefined : p.golesV, pen: hasPen ? p.penalesV : undefined, win: p.ganador === p.visitante })}
     </div>`;
   }
 
