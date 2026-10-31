@@ -489,19 +489,18 @@
           "codigo": "3P",
           "local": "Cátedra FC",
           "visitante": "Defensa e Injusticia",
-          "golesL": null,
-          "golesV": null,
-          "ganador": "Cátedra FC",
-          "nota": "Resultado no informado (Cátedra 3° según la Tabla Anual)"
+          "golesL": 5,
+          "golesV": 2,
+          "ganador": "Cátedra FC"
         },
         "final": {
           "codigo": "FINAL",
           "local": "Vial",
           "visitante": "Imputables FC",
-          "golesL": null,
-          "golesV": null,
+          "golesL": 1,
+          "golesV": 2,
           "ganador": "Imputables FC",
-          "nota": "¡Imputables FC Campeón Apertura 2026! (resultado no informado)"
+          "nota": "¡Imputables FC Campeón Apertura 2026!"
         }
       },
       "copaPlata": {
@@ -524,10 +523,10 @@
           "codigo": "FINAL",
           "local": "Bonus Track",
           "visitante": "Talleres",
-          "golesL": null,
-          "golesV": null,
+          "golesL": 2,
+          "golesV": 1,
           "ganador": "Bonus Track",
-          "nota": "¡Bonus Track Campeón de Plata! (resultado no informado)"
+          "nota": "¡Bonus Track Campeón de Plata!"
         }
       }
     },
