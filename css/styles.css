@@ -4345,3 +4345,8 @@ html[data-cat="C"] {
   .hero-board.rotate .board-tile.out { visibility: visible; transform: translateX(-105%) !important; transition: transform .55s cubic-bezier(.65,0,.35,1), visibility 0s linear .55s; }
 }
 @media (max-width: 600px) and (prefers-reduced-motion: reduce) { .hero-board.rotate .board-tile, .hero-board.rotate .board-tile.on, .hero-board.rotate .board-tile.out { transition: none; } }
+
+/* Distribución de resultados: tres colores bien distintos en cualquier categoría */
+.dist-seg.seg-local, .dot-local { background: var(--navy-secondary) !important; }
+.dist-seg.seg-empate, .dot-empate { background: #A0AEC0 !important; }
+.dist-seg.seg-visita, .dot-visita { background: #F2B630 !important; }
