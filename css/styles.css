@@ -4250,3 +4250,9 @@ html[data-cat="C"] {
 .prox-actions { display: flex; gap: 10px; justify-content: flex-end; align-items: center; padding: 18px 20px 20px; flex-wrap: wrap; }
 .prox-ig { font-weight: 700; font-size: .88rem; color: var(--navy-secondary); text-decoration: none; margin-right: auto; }
 .prox-ok { background: var(--navy-primary); color: #FFFFFF; font-weight: 800; padding: 10px 18px; border-radius: 8px; cursor: pointer; }
+/* Celular: logo y categoría arriba, botones A/B/C debajo */
+@media (max-width: 600px) {
+  .brand-main .brand-v2 { order: 1; padding-right: 46px; }
+  .brand-main .cat-switch { order: 2; width: 100%; }
+  .hero-ig { top: 6px; }
+}
