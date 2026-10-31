@@ -2872,6 +2872,39 @@
     $('.prox-ok', ov).focus();
   }
 
+  // Celular: una sola tarjeta del header a la vez, rotando sola cada pocos segundos
+  let heroRotTimer = null;
+  function iniciarRotacionHero() {
+    const board = $('#heroBoard');
+    if (!board) return;
+    clearInterval(heroRotTimer);
+    $$('.hero-dots', board.parentNode).forEach(d => d.remove());
+    const tiles = $$('.board-tile', board);
+    const mq = window.matchMedia('(max-width: 600px)');
+    if (!mq.matches || tiles.length < 2) {
+      board.classList.remove('rotate');
+      tiles.forEach(t => t.classList.remove('on'));
+      return;
+    }
+    board.classList.add('rotate');
+    board.insertAdjacentHTML('afterend', `<div class="hero-dots">${tiles.map((_, i) => `<button type="button" aria-label="Ver dato ${i + 1}" data-i="${i}"></button>`).join('')}</div>`);
+    const dots = $$('.hero-dots button', board.parentNode);
+    let i = 0;
+    const mostrar = n => {
+      i = (n + tiles.length) % tiles.length;
+      tiles.forEach((t, k) => t.classList.toggle('on', k === i));
+      dots.forEach((d, k) => d.classList.toggle('on', k === i));
+    };
+    const arrancar = () => {
+      clearInterval(heroRotTimer);
+      const reducir = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (!reducir) heroRotTimer = setInterval(() => { if (!document.hidden) mostrar(i + 1); }, 4000);
+    };
+    dots.forEach(d => d.addEventListener('click', () => { mostrar(Number(d.dataset.i)); arrancar(); }));
+    mostrar(0);
+    arrancar();
+  }
+
   function aplicarCategoriaUI() {
     const nombre = `Categoría ${CAT}`;
     document.title = `Liga Universitaria Sanjuanina de Fútbol — ${nombre} 2026`;
@@ -3007,6 +3040,9 @@
   function initApp() {
     aplicarCategoriaUI();
     if (ESQ) renderHeroBoardEsqueleto(); else renderHeroBoard();
+    iniciarRotacionHero();
+    let rotResize;
+    window.addEventListener('resize', () => { clearTimeout(rotResize); rotResize = setTimeout(iniciarRotacionHero, 250); });
 
     $$('#mainTabs .tab-btn').forEach(btn => {
       btn.addEventListener('click', () => {

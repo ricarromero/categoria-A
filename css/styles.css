@@ -4317,3 +4317,23 @@ html[data-cat="C"] {
   .board-tile { grid-template-columns: 84px minmax(0, 1fr) auto; padding: 7px 12px !important; }
   .board-tile .tile-label { line-height: 1.2 !important; }
 }
+
+/* Celular: una sola tarjeta a la vez que va cambiando */
+@media (max-width: 600px) {
+  .hero-board.rotate { display: grid !important; grid-template-columns: 1fr; background: none; border: 0; border-radius: 0; }
+  .hero-board.rotate .board-tile { grid-area: 1 / 1; display: flex !important; flex-direction: column; gap: 6px !important; padding: 12px 14px !important; background: var(--tile-bg) !important; border: 1px solid rgba(255,255,255,.16) !important; border-radius: 10px !important; opacity: 0; visibility: hidden; transform: translateY(6px) !important; transition: opacity .45s ease, transform .45s ease, visibility 0s linear .45s; }
+  .hero-board.rotate .board-tile.on { opacity: 1; visibility: visible; transform: none !important; transition: opacity .45s ease, transform .45s ease; }
+  .hero-board.rotate .board-tile + .board-tile { border-top: 1px solid rgba(255,255,255,.16) !important; }
+  .hero-board.rotate .board-tile .tile-label { display: flex !important; justify-content: space-between; align-items: center !important; font-size: .64rem !important; }
+  .hero-board.rotate .tl-long { display: block; } .hero-board.rotate .tl-short { display: none; }
+  .hero-board.rotate .board-tile .tile-label span { font-size: .85rem !important; }
+  .hero-board.rotate .board-tile .tile-crest { width: 26px !important; height: 26px !important; }
+  .hero-board.rotate .board-tile .tile-name { font-size: 1.15rem !important; }
+  .hero-dots { display: flex; justify-content: center; gap: 6px; margin-top: -4px; }
+  .hero-dots button { width: 7px; height: 7px; border-radius: 50%; background: rgba(255,255,255,.35); padding: 0; transition: width .25s ease, background .25s ease; }
+  .hero-dots button.on { width: 18px; border-radius: 4px; background: #FFFFFF; }
+}
+@media (min-width: 601px) { .hero-dots { display: none; } }
+@media (max-width: 600px) { .hero-board.rotate .board-tile { width: 100%; flex: none !important; max-width: none; } .hero-board.rotate .board-tile .tile-name { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; } }
+@media (max-width: 600px) { .hero-board.rotate { grid-template-columns: 1fr !important; } }
+@media (max-width: 600px) { .hero-board.rotate .tile-body { width: 100% !important; } .hero-board.rotate .board-tile .tile-name { max-width: none !important; flex: 1; min-width: 0; } }
