@@ -1763,9 +1763,9 @@ const LIGA_DATA = {
             "zona": "Zona A",
             "local": "Antorcha",
             "visitante": "Jägermeister",
-            "golesL": null,
-            "golesV": null,
-            "estado": "pendiente",
+            "golesL": 0,
+            "golesV": 2,
+            "estado": "finalizado",
             "nota": "",
           "dia": "Sábado 31/10", "hora": "14:10", "cancha": "Cancha de Rugby"
           },
