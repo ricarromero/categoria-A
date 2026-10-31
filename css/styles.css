@@ -4472,3 +4472,5 @@ body.modo-inicio .content-area {
 .ini-tbl tr.cut td { border-bottom: 0 !important; }
 .ini-tbl tr.cut + tr td { border-top: 2px solid var(--cc) !important; }
 .ini-daysep { padding: 6px 14px; font-size: .72rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--cc); background: color-mix(in srgb, var(--cc) 8%, #FFFFFF); border-top: 1px solid var(--border-subtle); }
+/* Inicio: sin los botones A/B/C del encabezado (ya están en "Elegí tu categoría") */
+html[data-cat="INICIO"] .brand-main .cat-switch { display: none !important; }
