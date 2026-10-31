@@ -1582,7 +1582,10 @@
             "golesL": null,
             "golesV": null,
             "estado": "pendiente",
-            "nota": ""
+            "nota": "",
+            "dia": "Domingo 01/11",
+            "hora": "10:20",
+            "cancha": "Cancha de Rugby"
           },
           {
             "zona": "Zona A",
@@ -1591,7 +1594,10 @@
             "golesL": null,
             "golesV": null,
             "estado": "pendiente",
-            "nota": ""
+            "nota": "",
+            "dia": "Domingo 01/11",
+            "hora": "11:40",
+            "cancha": "Cancha de Rugby"
           },
           {
             "zona": "Zona A",
@@ -1600,7 +1606,10 @@
             "golesL": null,
             "golesV": null,
             "estado": "pendiente",
-            "nota": ""
+            "nota": "",
+            "dia": "Domingo 01/11",
+            "hora": "13:00",
+            "cancha": "Cancha de Rugby"
           },
           {
             "zona": "Zona A",
@@ -1609,7 +1618,10 @@
             "golesL": null,
             "golesV": null,
             "estado": "pendiente",
-            "nota": ""
+            "nota": "",
+            "dia": "Domingo 01/11",
+            "hora": "13:00",
+            "cancha": "Cancha de Fútbol"
           },
           {
             "zona": "Zona B",
@@ -1618,7 +1630,10 @@
             "golesL": null,
             "golesV": null,
             "estado": "pendiente",
-            "nota": ""
+            "nota": "",
+            "dia": "Sábado 31/10",
+            "hora": "08:40",
+            "cancha": "Cancha de Fútbol"
           },
           {
             "zona": "Zona B",
@@ -1627,7 +1642,10 @@
             "golesL": null,
             "golesV": null,
             "estado": "pendiente",
-            "nota": ""
+            "nota": "",
+            "dia": "Domingo 01/11",
+            "hora": "10:20",
+            "cancha": "Cancha de Fútbol"
           },
           {
             "zona": "Zona B",
@@ -1645,9 +1663,13 @@
             "golesL": null,
             "golesV": null,
             "estado": "pendiente",
-            "nota": ""
+            "nota": "",
+            "dia": "Domingo 01/11",
+            "hora": "11:40",
+            "cancha": "Cancha de Fútbol"
           }
-        ]
+        ],
+        "dia": "Sábado 31 de octubre y domingo 1 de noviembre"
       },
       {
         "numero": 7,

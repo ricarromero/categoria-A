@@ -4471,3 +4471,4 @@ body.modo-inicio .content-area {
 .ini-e .ini-crest { width: 20px; height: 20px; }
 .ini-tbl tr.cut td { border-bottom: 0 !important; }
 .ini-tbl tr.cut + tr td { border-top: 2px solid var(--cc) !important; }
+.ini-daysep { padding: 6px 14px; font-size: .72rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--cc); background: color-mix(in srgb, var(--cc) 8%, #FFFFFF); border-top: 1px solid var(--border-subtle); }

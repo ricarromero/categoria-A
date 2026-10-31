@@ -3011,24 +3011,31 @@
       const d = CAT_DATOS[c];
       const f = proximaFecha(d);
       if (!f) return '';
-      const ps = f.partidos.filter(p => p.estado === 'pendiente').slice().sort((a, b) => minutos(a.hora) - minutos(b.hora));
+      const ordenDia = d => /s[áa]b/i.test(d || '') ? 0 : /dom/i.test(d || '') ? 1 : 2;
+      const ps = f.partidos.filter(p => p.estado === 'pendiente').slice().sort((a, b) => ordenDia(a.dia) - ordenDia(b.dia) || minutos(a.hora) - minutos(b.hora) || (a.cancha || '').localeCompare(b.cancha || ''));
+      const variosDias = new Set(ps.map(p => p.dia).filter(Boolean)).size > 1;
       const libres = f.partidos.filter(p => p.estado === 'libre').map(p => p.local === 'Libre' ? p.visitante : p.local);
       const dia = f.dia || '';
       const conHora = ps.some(p => p.hora);
       const crest = n => { const eq = (d.equipos || []).find(e => e.nombre === n); return `<img class="ini-crest" src="${(eq && eq.escudo) || escudoGlobal(n) || genericCrestUri(n)}" alt="">`; };
-      const filas = ps.map(p => `
+      let diaPrevio = null;
+      const filas = ps.map(p => {
+        const sep = variosDias && p.dia !== diaPrevio ? `<div class="ini-daysep">${escapeHtml(p.dia || '')}</div>` : '';
+        diaPrevio = p.dia;
+        return sep + `
         <a class="ini-match" href="${urlCat(c, 'fixture')}">
           ${conHora ? `<span class="ini-time">${p.hora || ''}</span>` : ''}
           <span class="ini-team">${escapeHtml(p.local)}${crest(p.local)}</span>
           <span class="ini-vs">vs</span>
           <span class="ini-team r">${crest(p.visitante)}${escapeHtml(p.visitante)}</span>
           ${p.cancha ? `<span class="ini-cancha">${escapeHtml(p.cancha.replace('Cancha de ', ''))}</span>` : ''}
-        </a>`).join('');
+        </a>`;
+      }).join('');
       return `<div class="ini-block ini-cat-${c} ${conHora ? '' : 'sin-hora'}">
           <div class="ini-block-head">
             <span class="ini-chip">${c}</span>
             <b>Categoría ${c} · ${escapeHtml(f.nombre)}</b>
-            <span class="ini-dia">${dia ? escapeHtml(dia) + ' · El Palomar' : 'Día y horario a confirmar'}</span>
+            <span class="ini-dia">${dia ? (variosDias ? 'El Palomar' : escapeHtml(dia) + ' · El Palomar') : 'Día y horario a confirmar'}</span>
           </div>
           ${filas}
           ${libres.length ? `<div class="ini-libre">Libre: ${libres.map(escapeHtml).join(', ')}</div>` : ''}

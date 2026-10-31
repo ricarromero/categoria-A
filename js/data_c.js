@@ -968,7 +968,10 @@
             "golesL": null,
             "golesV": null,
             "estado": "pendiente",
-            "nota": ""
+            "nota": "",
+            "dia": "Sábado 31/10",
+            "hora": "10:00",
+            "cancha": "Cancha de Rugby"
           },
           {
             "zona": "Zona única",
@@ -977,7 +980,10 @@
             "golesL": null,
             "golesV": null,
             "estado": "pendiente",
-            "nota": ""
+            "nota": "",
+            "dia": "Sábado 31/10",
+            "hora": "11:20",
+            "cancha": "Cancha de Rugby"
           },
           {
             "zona": "Zona única",
@@ -986,7 +992,10 @@
             "golesL": null,
             "golesV": null,
             "estado": "pendiente",
-            "nota": ""
+            "nota": "",
+            "dia": "Domingo 01/11",
+            "hora": "09:00",
+            "cancha": "Cancha de Rugby"
           },
           {
             "zona": "Zona única",
@@ -995,7 +1004,10 @@
             "golesL": null,
             "golesV": null,
             "estado": "pendiente",
-            "nota": ""
+            "nota": "",
+            "dia": "Sábado 31/10",
+            "hora": "10:00",
+            "cancha": "Cancha de Fútbol"
           },
           {
             "zona": "Zona única",
@@ -1004,9 +1016,13 @@
             "golesL": null,
             "golesV": null,
             "estado": "pendiente",
-            "nota": ""
+            "nota": "",
+            "dia": "Domingo 01/11",
+            "hora": "09:00",
+            "cancha": "Cancha de Fútbol"
           }
-        ]
+        ],
+        "dia": "Sábado 31 de octubre y domingo 1 de noviembre"
       },
       {
         "numero": 7,
