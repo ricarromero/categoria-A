@@ -11,11 +11,21 @@
 
   // Categoría activa (A, B o C): se elige con ?cat= o se recuerda la última elegida
   const CATS = ['A', 'B', 'C'];
-  let CAT = (new URLSearchParams(location.search).get('cat') || '').toUpperCase();
+  // Categorías abiertas al público. Las demás muestran "Próximamente" salvo en modo prueba (?prueba=1).
+  const CATS_ABIERTAS = ['A'];
+  const qs = new URLSearchParams(location.search);
+  let PRUEBA = false;
+  try {
+    if (qs.get('prueba') === '1') localStorage.setItem('liga_prueba', '1');
+    if (qs.get('prueba') === '0') localStorage.removeItem('liga_prueba');
+    PRUEBA = localStorage.getItem('liga_prueba') === '1';
+  } catch (e) { PRUEBA = qs.get('prueba') === '1'; }
+  const catDisponible = c => CATS_ABIERTAS.includes(c) || PRUEBA;
+  let CAT = (qs.get('cat') || '').toUpperCase();
   if (!CATS.includes(CAT)) {
     try { CAT = (localStorage.getItem('liga_cat') || 'A').toUpperCase(); } catch (e) { CAT = 'A'; }
   }
-  if (!CATS.includes(CAT) || (CAT !== 'A' && !window['LIGA_DATA_' + CAT])) CAT = 'A';
+  if (!CATS.includes(CAT) || !catDisponible(CAT) || (CAT !== 'A' && !window['LIGA_DATA_' + CAT])) CAT = 'A';
   try { localStorage.setItem('liga_cat', CAT); } catch (e) { /* sin almacenamiento */ }
   document.documentElement.dataset.cat = CAT;
 
@@ -2838,6 +2848,30 @@
     else esqBindTorneo(container, '', () => {});
   }
 
+  function mostrarProximamente(c) {
+    let ov = $('#proxOverlay');
+    if (ov) ov.remove();
+    document.body.insertAdjacentHTML('beforeend', `
+      <div class="prox-overlay" id="proxOverlay" role="dialog" aria-modal="true" aria-labelledby="proxTitulo">
+        <div class="prox-card prox-${c}">
+          <div class="prox-head"><span class="prox-letra">${c}</span><div><small>Categoría ${c}</small><h3 id="proxTitulo">Próximamente</h3></div></div>
+          <p>Estamos preparando la sección de la <b>Categoría ${c}</b> con tablas, fixture, resultados y goleadores.</p>
+          <p>Seguinos en Instagram para enterarte cuando esté lista.</p>
+          <div class="prox-actions">
+            <a class="prox-ig" href="https://www.instagram.com/ligauniversitaria.sj/" target="_blank" rel="noopener noreferrer">@ligauniversitaria.sj</a>
+            <button type="button" class="prox-ok">Entendido</button>
+          </div>
+        </div>
+      </div>`);
+    ov = $('#proxOverlay');
+    const cerrar = () => { ov.remove(); document.removeEventListener('keydown', esc); };
+    const esc = e => { if (e.key === 'Escape') cerrar(); };
+    ov.addEventListener('click', e => { if (e.target === ov) cerrar(); });
+    $('.prox-ok', ov).addEventListener('click', cerrar);
+    document.addEventListener('keydown', esc);
+    $('.prox-ok', ov).focus();
+  }
+
   function aplicarCategoriaUI() {
     const nombre = `Categoría ${CAT}`;
     document.title = `Liga Universitaria Sanjuanina de Fútbol — ${nombre} 2026`;
@@ -2852,6 +2886,7 @@
       o.addEventListener('click', () => {
         const c = o.dataset.cat;
         if (c === CAT) return;
+        if (!catDisponible(c)) { mostrarProximamente(c); return; }
         try { localStorage.setItem('liga_cat', c); } catch (err) { /* sin almacenamiento */ }
         location.href = `${location.pathname}?cat=${c.toLowerCase()}#${state.currentTab}`;
       });

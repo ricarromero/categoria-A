@@ -4232,3 +4232,21 @@ html[data-cat="C"] {
   .brand-sub { font-size: .62rem; letter-spacing: .07em; white-space: normal; }
 }
 @media (max-width: 600px) { .brand-sub-long { display: none; } .brand-sub { font-size: .7rem; } }
+
+/* Aviso "Próximamente" para categorías que todavía no están abiertas */
+.cat-pick.locked { opacity: .55; }
+.prox-overlay { position: fixed; inset: 0; z-index: 200; background: rgba(8, 16, 28, .55); display: grid; place-items: center; padding: 16px; animation: proxIn .18s ease; }
+@keyframes proxIn { from { opacity: 0; } to { opacity: 1; } }
+.prox-card { width: min(380px, 100%); background: #FFFFFF; border-radius: 16px; overflow: hidden; box-shadow: 0 24px 60px rgba(0,0,0,.35); animation: proxPop .22s cubic-bezier(.2,1.2,.4,1); }
+@keyframes proxPop { from { transform: scale(.92); } to { transform: scale(1); } }
+.prox-head { display: flex; align-items: center; gap: 14px; padding: 18px 20px; color: #FFFFFF; }
+.prox-B .prox-head { background: linear-gradient(135deg, #134A2E, #22814D); }
+.prox-C .prox-head { background: linear-gradient(135deg, #8A3B06, #D9770B); }
+.prox-letra { width: 52px; height: 52px; border-radius: 10px; display: grid; place-items: center; font-family: var(--f-display); font-weight: 900; font-size: 2rem; background: rgba(255,255,255,.18); border: 2px solid #FFFFFF; }
+.prox-head small { display: block; font-size: .72rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; opacity: .85; }
+.prox-head h3 { margin: 0; font-family: var(--f-display); font-weight: 900; font-size: 2rem; line-height: 1; text-transform: uppercase; }
+.prox-card p { margin: 14px 20px 0; font-size: .92rem; color: var(--text-secondary); line-height: 1.45; }
+.prox-card p b { color: var(--text-primary); }
+.prox-actions { display: flex; gap: 10px; justify-content: flex-end; align-items: center; padding: 18px 20px 20px; flex-wrap: wrap; }
+.prox-ig { font-weight: 700; font-size: .88rem; color: var(--navy-secondary); text-decoration: none; margin-right: auto; }
+.prox-ok { background: var(--navy-primary); color: #FFFFFF; font-weight: 800; padding: 10px 18px; border-radius: 8px; cursor: pointer; }
