@@ -814,10 +814,10 @@
           "codigo": "FINAL",
           "local": "Necaxa",
           "visitante": "Al Costado",
-          "golesL": null,
-          "golesV": null,
+          "golesL": 4,
+          "golesV": 1,
           "ganador": "Necaxa",
-          "nota": "¡Necaxa Campeón Apertura 2026! (resultado no informado)"
+          "nota": "¡Necaxa Campeón Apertura 2026!"
         }
       },
       "copaPlata": {
@@ -881,12 +881,12 @@
         ],
         "final": {
           "codigo": "FINAL",
-          "local": "De Zurda",
-          "visitante": "Gol en Contra",
-          "golesL": null,
-          "golesV": null,
+          "local": "Gol en Contra",
+          "visitante": "De Zurda",
+          "golesL": 3,
+          "golesV": 0,
           "ganador": "Gol en Contra",
-          "nota": "¡Gol en Contra Campeón de Plata! (resultado no informado)"
+          "nota": "¡Gol en Contra Campeón de Plata!"
         }
       }
     },
@@ -1123,38 +1123,38 @@
       },
       {
         "pos": 3,
+        "jugador": "Videla Lobos Julio Cesar",
+        "equipo": "Necaxa",
+        "goles": 6
+      },
+      {
+        "pos": 4,
         "jugador": "Martinez Girons, Agustin Ariel",
         "equipo": "Adove",
         "goles": 5
       },
       {
-        "pos": 3,
+        "pos": 4,
         "jugador": "Noe, Geronimo",
         "equipo": "Gol en Contra",
         "goles": 5
       },
       {
-        "pos": 3,
+        "pos": 4,
         "jugador": "Tello Abregu Santiago Jesus",
         "equipo": "Necaxa",
         "goles": 5
       },
       {
-        "pos": 6,
+        "pos": 7,
         "jugador": "Liñan, Ignacio",
         "equipo": "Al Costado",
         "goles": 4
       },
       {
-        "pos": 6,
+        "pos": 7,
         "jugador": "Golfieri Juan Ignacio",
         "equipo": "F90",
-        "goles": 4
-      },
-      {
-        "pos": 6,
-        "jugador": "Videla Lobos Julio Cesar",
-        "equipo": "Necaxa",
         "goles": 4
       },
       {
@@ -1567,6 +1567,164 @@
             "golesV": null,
             "estado": "libre",
             "nota": "Fecha libre Inter"
+          }
+        ]
+      },
+      {
+        "numero": 6,
+        "nombre": "Fecha 6",
+        "disputada": false,
+        "partidos": [
+          {
+            "zona": "Zona A",
+            "local": "De Zurda",
+            "visitante": "Timba",
+            "golesL": null,
+            "golesV": null,
+            "estado": "pendiente",
+            "nota": ""
+          },
+          {
+            "zona": "Zona A",
+            "local": "Gol en Contra",
+            "visitante": "Malvinas",
+            "golesL": null,
+            "golesV": null,
+            "estado": "pendiente",
+            "nota": ""
+          },
+          {
+            "zona": "Zona A",
+            "local": "Tercer Tiempo",
+            "visitante": "F90",
+            "golesL": null,
+            "golesV": null,
+            "estado": "pendiente",
+            "nota": ""
+          },
+          {
+            "zona": "Zona A",
+            "local": "Agrimensura",
+            "visitante": "Geología",
+            "golesL": null,
+            "golesV": null,
+            "estado": "pendiente",
+            "nota": ""
+          },
+          {
+            "zona": "Zona B",
+            "local": "Necaxa",
+            "visitante": "Descarte",
+            "golesL": null,
+            "golesV": null,
+            "estado": "pendiente",
+            "nota": ""
+          },
+          {
+            "zona": "Zona B",
+            "local": "Central",
+            "visitante": "Adove",
+            "golesL": null,
+            "golesV": null,
+            "estado": "pendiente",
+            "nota": ""
+          },
+          {
+            "zona": "Zona B",
+            "local": "Al Costado",
+            "visitante": "Libre",
+            "golesL": null,
+            "golesV": null,
+            "estado": "libre",
+            "nota": "Fecha libre Al Costado"
+          },
+          {
+            "zona": "Zona B",
+            "local": "Dep. La Verna",
+            "visitante": "Inter",
+            "golesL": null,
+            "golesV": null,
+            "estado": "pendiente",
+            "nota": ""
+          }
+        ]
+      },
+      {
+        "numero": 7,
+        "nombre": "Fecha 7",
+        "disputada": false,
+        "partidos": [
+          {
+            "zona": "Zona A",
+            "local": "De Zurda",
+            "visitante": "Malvinas",
+            "golesL": null,
+            "golesV": null,
+            "estado": "pendiente",
+            "nota": ""
+          },
+          {
+            "zona": "Zona A",
+            "local": "Timba",
+            "visitante": "F90",
+            "golesL": null,
+            "golesV": null,
+            "estado": "pendiente",
+            "nota": ""
+          },
+          {
+            "zona": "Zona A",
+            "local": "Gol en Contra",
+            "visitante": "Geología",
+            "golesL": null,
+            "golesV": null,
+            "estado": "pendiente",
+            "nota": ""
+          },
+          {
+            "zona": "Zona A",
+            "local": "Tercer Tiempo",
+            "visitante": "Agrimensura",
+            "golesL": null,
+            "golesV": null,
+            "estado": "pendiente",
+            "nota": ""
+          },
+          {
+            "zona": "Zona B",
+            "local": "Necaxa",
+            "visitante": "Adove",
+            "golesL": null,
+            "golesV": null,
+            "estado": "pendiente",
+            "nota": ""
+          },
+          {
+            "zona": "Zona B",
+            "local": "Descarte",
+            "visitante": "Libre",
+            "golesL": null,
+            "golesV": null,
+            "estado": "libre",
+            "nota": "Fecha libre Descarte"
+          },
+          {
+            "zona": "Zona B",
+            "local": "Central",
+            "visitante": "Inter",
+            "golesL": null,
+            "golesV": null,
+            "estado": "pendiente",
+            "nota": ""
+          },
+          {
+            "zona": "Zona B",
+            "local": "Al Costado",
+            "visitante": "Dep. La Verna",
+            "golesL": null,
+            "golesV": null,
+            "estado": "pendiente",
+            "nota": ""
           }
         ]
       }
@@ -2171,7 +2329,7 @@
     torneoActual: 'Torneo Clausura 2026', ultimaFechaDisputada: 5, estado: 'Clausura en disputa · Fecha 5 completada'
   });
   B.reglamentos = A.reglamentos;
-  B.reglamentosCompletos = A.reglamentosCompletos;
+  B.reglamentosCompletos = Object.assign({}, A.reglamentosCompletos, { formaDisputa: [{"id": "disp-b-estructura", "numero": 1, "articulo": "Estructura", "titulo": "Composición de la Temporada 2026", "categoria": "formaDisputa", "seccion": "Forma de Disputa · Categoría B", "texto": "La temporada 2026 de la Liga Universitaria de Fútbol – Categoría B está compuesta por dos torneos oficiales, el Torneo Apertura y el Torneo Clausura, además de una Tabla Anual y una Superfinal Anual para determinar el campeón absoluto de la temporada. Participan quince (15) equipos."}, {"id": "disp-b-clasificatoria", "numero": 2, "articulo": "Clausura", "titulo": "Fase Clasificatoria", "categoria": "formaDisputa", "seccion": "Forma de Disputa · Categoría B", "texto": "Los quince equipos se distribuyen por sorteo en dos zonas que juegan todos contra todos:\n• Zona A: 8 equipos.\n• Zona B: 7 equipos (un equipo libre por fecha).\nAl finalizar se arma una tabla de posiciones por zona."}, {"id": "disp-b-campeonato", "numero": 3, "articulo": "Clausura", "titulo": "Fase Campeonato", "categoria": "formaDisputa", "seccion": "Forma de Disputa · Categoría B", "texto": "Clasifican del 1° al 4° de cada zona, por eliminación directa.\nCuartos de final:\n• 1° Zona A vs 4° Zona B\n• 2° Zona A vs 3° Zona B\n• 1° Zona B vs 4° Zona A\n• 2° Zona B vs 3° Zona A\nLos ganadores juegan Semifinales según el cuadro que establece la organización, y los vencedores la Final del torneo."}, {"id": "disp-b-plata", "numero": 4, "articulo": "Clausura", "titulo": "Copa de Plata", "categoria": "formaDisputa", "seccion": "Forma de Disputa · Categoría B", "texto": "Participan del 5° al 8° de la Zona A y del 5° al 7° de la Zona B. El mejor 5° de ambas zonas pasa directo a Semifinales.\nCuartos de final:\n• 5° Zona A o B vs 8° Zona A\n• 6° Zona B vs 7° Zona A\n• 6° Zona A vs 7° Zona B\nLuego se juegan Semifinales y Final para definir el Campeón de la Copa de Plata."}, {"id": "disp-b-anual", "numero": 5, "articulo": "Tabla Anual", "titulo": "Tabla Anual 2026", "categoria": "formaDisputa", "seccion": "Forma de Disputa · Categoría B", "texto": "Suma solo los puntos de la fase clasificatoria del Apertura y del Clausura, usando un coeficiente de rendimiento: puntos obtenidos dividido la cantidad de partidos programados/jugados. No cuentan los partidos de Fase Campeonato ni de Copa de Plata.\nBonus al terminar cada torneo:\n• Campeón Fase Campeonato: +3\n• Subcampeón: +2\n• Tercer puesto: +1\n• Campeón Copa de Plata: +1"}, {"id": "disp-b-superfinal", "numero": 6, "articulo": "Superfinal", "titulo": "Superfinal Anual", "categoria": "formaDisputa", "seccion": "Forma de Disputa · Categoría B", "texto": "El Campeón Anual surge de una Superfinal entre el Campeón del Apertura y el Campeón del Clausura. Si ninguno de los dos es el primero de la Tabla Anual, juegan entre ellos una prefinal y el ganador juega la Final con el primero de la Tabla Anual. Si el mismo equipo gana Apertura y Clausura y además es primero en la Tabla Anual, es campeón anual directamente."}] });
   B.copaChallenger = A.copaChallenger;
   window.LIGA_DATA_B = B;
 })();
