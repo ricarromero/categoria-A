@@ -2582,7 +2582,7 @@ const LIGA_DATA = {
       "Central": "public/escudos/central.png?v=2",
       "Gol en Contra": "public/escudos/gol_en_contra.png?v=2",
       "F90": "public/escudos/f90.png",
-      "Newcauce": "public/escudos/newcauce.png",
+      "Newcauce": "public/escudos/newcauce.png?v=2",
       "Geología": "public/escudos/geologia.png",
       "Al Costado": "public/escudos/al_costado.png?v=3",
       "De Zurda": "public/escudos/de_zurda.png",

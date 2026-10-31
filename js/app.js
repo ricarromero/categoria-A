@@ -119,6 +119,9 @@
     return (genericCrestCache[n] = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg));
   }
 
+  const FMT = DATA.formato || null;
+  const ZONA_UNICA = !!(FMT && FMT.zonaUnica);
+
   // Escudos de todas las categorías (para ver equipos de otras categorías, p. ej. en la Copa Challenger)
   const ESCUDOS_GLOBAL = {};
   [window.LIGA_DATA, window.LIGA_DATA_B, window.LIGA_DATA_C].forEach(d => {
@@ -127,6 +130,16 @@
   function escudoGlobal(nombre) {
     const n = String(nombre || '').trim();
     return ESCUDOS_GLOBAL[n.toLowerCase()] || ((DATA.copaChallenger && DATA.copaChallenger.escudos) || {})[n] || '';
+  }
+
+  function posAperturaDe(nombre) {
+    const r = ((DATA.apertura.tablas && DATA.apertura.tablas.zonaA) || []).find(x => x.equipo.toLowerCase() === String(nombre).toLowerCase());
+    return r ? r.pos : null;
+  }
+  function posicionesTxt(eq) {
+    const c = ((DATA.clausura.tablas && DATA.clausura.tablas.zonaA) || []).find(x => x.equipo.toLowerCase() === eq.nombre.toLowerCase());
+    const a = posAperturaDe(eq.nombre);
+    return `Clausura: ${c ? c.pos + '°' : '—'} · Apertura: ${a ? a + '°' : 'no jugó'}`;
   }
 
   function getTeam(nameOrId) {
@@ -160,8 +173,8 @@
     const liderClausuraA = DATA.clausura.tablas.zonaA[0];
     const teamLiderA = getTeam(liderClausuraA?.equipo);
 
-    // 2. Líder Clausura Zona B
-    const liderClausuraB = DATA.clausura.tablas.zonaB[0];
+    // 2. Líder Clausura Zona B (en zona única: 2° del Clausura)
+    const liderClausuraB = ZONA_UNICA ? DATA.clausura.tablas.zonaA[1] : DATA.clausura.tablas.zonaB[0];
     const teamLiderB = getTeam(liderClausuraB?.equipo);
 
     // 3. Campeón Apertura
@@ -174,7 +187,7 @@
 
     board.innerHTML = `
       <div class="board-tile" data-action="go-pos" data-torneo="clausura" data-zona="A">
-        <span class="tile-label"><em class="tl-long">Líder Clausura · Zona A</em><em class="tl-short">Líder Zona A</em> <span>${liderClausuraA?.pts || 0} PTS</span></span>
+        <span class="tile-label"><em class="tl-long">${ZONA_UNICA ? 'Líder Clausura' : 'Líder Clausura · Zona A'}</em><em class="tl-short">${ZONA_UNICA ? 'Líder' : 'Líder Zona A'}</em> <span>${liderClausuraA?.pts || 0} PTS</span></span>
         <div class="tile-body">
           ${renderCrestImg(teamLiderA, "tile-crest")}
           <span class="tile-name">${teamLiderA?.nombre || "—"}</span>
@@ -182,8 +195,8 @@
         <span class="tile-desc">${liderClausuraA?.pj || 0} PJ | DG: +${liderClausuraA?.dg || 0}</span>
       </div>
 
-      <div class="board-tile" data-action="go-pos" data-torneo="clausura" data-zona="B">
-        <span class="tile-label"><em class="tl-long">Líder Clausura · Zona B</em><em class="tl-short">Líder Zona B</em> <span>${liderClausuraB?.pts || 0} PTS</span></span>
+      <div class="board-tile" data-action="go-pos" data-torneo="clausura" data-zona="${ZONA_UNICA ? 'A' : 'B'}">
+        <span class="tile-label"><em class="tl-long">${ZONA_UNICA ? 'Escolta Clausura · 2°' : 'Líder Clausura · Zona B'}</em><em class="tl-short">${ZONA_UNICA ? '2° Clausura' : 'Líder Zona B'}</em> <span>${liderClausuraB?.pts || 0} PTS</span></span>
         <div class="tile-body">
           ${renderCrestImg(teamLiderB, "tile-crest")}
           <span class="tile-name">${teamLiderB?.nombre || "—"}</span>
@@ -285,14 +298,17 @@
     } else {
       // APERTURA O CLAUSURA (POR ZONA)
       const fuente = state.posTorneo === 'clausura' ? DATA.clausura.tablas : DATA.apertura.tablas;
-      const tablaZona = state.posZona === 'A' ? fuente.zonaA : fuente.zonaB;
+      if (ZONA_UNICA) state.posZona = 'A';
+      const tablaZona = (state.posZona === 'A' ? fuente.zonaA : fuente.zonaB) || [];
+      const nCamp = (FMT && FMT[state.posTorneo] && FMT[state.posTorneo].campeonato) || 4;
+      const zonaTxt = ZONA_UNICA ? 'Zona única' : `Zona ${state.posZona}`;
 
       if (state.posTorneo === 'clausura') {
         noticeHtml = `
           <div class="banner-alert">
             <div>
-              <b>Torneo Clausura 2026 — Zona ${state.posZona} en disputa</b>
-              Tabla oficial consolidada hasta la Fecha ${DATA.clausura.ultimaFechaDisputada || 3}. Clasifican del 1° al 4° a la Fase Campeonato y del 5° al 8° a la Copa de Plata.
+              <b>Torneo Clausura 2026 — ${zonaTxt} en disputa</b>
+              Tabla oficial consolidada hasta la Fecha ${DATA.clausura.ultimaFechaDisputada || 3}. ${(FMT && FMT.clausura && FMT.clausura.texto) || 'Clasifican del 1° al 4° a la Fase Campeonato y del 5° al 8° a la Copa de Plata.'}
             </div>
           </div>
         `;
@@ -300,8 +316,8 @@
         noticeHtml = `
           <div class="banner-alert">
             <div>
-              <b>Torneo Apertura 2026 — Historial Oficial Fase Clasificatoria (Zona ${state.posZona})</b>
-              Fase regular culminada. El Torneo fue coronado por <b>Jägermeister</b> (Campeón Campeonato) y <b>Minaster City</b> (Campeón Copa de Plata).
+              <b>Torneo Apertura 2026 — Historial Oficial Fase Clasificatoria (${zonaTxt})</b>
+              Fase regular culminada. ${FMT && FMT.apertura && FMT.apertura.texto ? FMT.apertura.texto + ' ' : ''}El Torneo fue coronado por <b>${DATA.apertura.campeon || '—'}</b> (Campeón Campeonato) y <b>${DATA.apertura.campeonPlata || '—'}</b> (Campeón Copa de Plata).
             </div>
           </div>
         `;
@@ -311,10 +327,12 @@
         const team = getTeam(row.equipo);
         const dgClass = row.dg > 0 ? "positive" : row.dg < 0 ? "negative" : "";
         const dgSign = row.dg > 0 ? `+${row.dg}` : `${row.dg}`;
-        const qualifyClass = (row.pos <= 4 ? "row-qualify-campeonato" : "row-qualify-plata") + (row.pos === 4 ? " row-qualify-cut" : "");
+        const qualifyClass = (row.pos <= nCamp ? "row-qualify-campeonato" : "row-qualify-plata") + (row.pos === nCamp ? " row-qualify-cut" : "");
 
         let sancionBadge = "";
-        if (state.posTorneo === 'apertura' && Array.isArray(DATA.deducciones)) {
+        if (row.sancion && row.sancion < 0) {
+          sancionBadge = `<span class="badge-sancion-pts">${row.sancion} sanción</span>`;
+        } else if (state.posTorneo === 'apertura' && Array.isArray(DATA.deducciones)) {
           const ded = DATA.deducciones.find(d => d[0].toLowerCase() === row.equipo.toLowerCase() || (team && d[0].toLowerCase() === team.nombre.toLowerCase()));
           if (ded && ded[1] > 0) {
             sancionBadge = `<span class="badge-sancion-pts">-${ded[1]} sanción</span>`;
@@ -345,8 +363,8 @@
 
       legendHtml = `
         <div class="table-legend">
-          <div class="legend-item"><span class="legend-marker legend-campeonato"></span> Puestos 1° a 4°: Clasificación a Cuartos de Final (Fase Campeonato)</div>
-          <div class="legend-item"><span class="legend-marker legend-plata"></span> Puestos 5° a 8°: Clasificación a Copa de Plata</div>
+          <div class="legend-item"><span class="legend-marker legend-campeonato"></span> Puestos 1° a ${nCamp}°: Clasificación a la Fase Campeonato${ZONA_UNICA && state.posTorneo === 'clausura' ? ' (1° y 2° directo a semifinales)' : ''}</div>
+          <div class="legend-item"><span class="legend-marker legend-plata"></span> Puestos ${nCamp + 1}° en adelante: Clasificación a Copa de Plata</div>
           ${state.posTorneo === 'apertura' ? '<div class="legend-item"><span class="badge-sancion-pts" style="display:inline-block;">-X sanción</span> Quita oficial de puntos aplicada por Tribunal de Penas</div>' : ''}
           ${state.posTorneo === 'clausura' ? '<button class="pill-btn legend-cta" data-goto="cruces" style="margin-left:auto;">Ver cruces si el Clausura terminara hoy →</button>' : ''}
         </div>
@@ -366,7 +384,7 @@
         </div>
       </div>
 
-      ${state.posTorneo !== 'anual' ? `
+      ${state.posTorneo !== 'anual' && !ZONA_UNICA ? `
         <div style="margin-bottom: 16px; display: flex; gap: 8px;">
           <div class="pill-group" role="tablist" aria-label="Seleccionar Zona">
             <button class="pill-btn ${state.posZona === 'A' ? 'active' : ''}" data-zona="A">Zona A</button>
@@ -599,15 +617,15 @@
     const plata = po.copaPlata || {};
     // equipo que entró directo a semifinales de Plata (no jugó cuartos)
     const enCuartosPlata = new Set((plata.cuartos || []).flatMap(p => [p.local, p.visitante]));
-    const byePlata = (plata.semifinales || []).flatMap(p => [p.local, p.visitante]).find(t => !enCuartosPlata.has(t));
+    const byePlata = (plata.cuartos || []).length ? (plata.semifinales || []).flatMap(p => [p.local, p.visitante]).find(t => !enCuartosPlata.has(t)) : null;
 
     return `
       <div class="bracket-wrap">
         <div class="bracket-block">
           <div class="bracket-title"><h3>Fase Campeonato</h3><span class="bracket-tag oro">Apertura 2026 · Jugado</span></div>
           <div class="bracket-scroll"><div class="bracket">
-            <div class="bracket-col"><div class="bracket-col-title">Cuartos de final</div><div class="bk-stack">
-              ${(camp.cuartos || []).map(p => bkPlayedHtml(p, p.codigo)).join('')}</div></div>
+            ${(camp.cuartos || []).length ? `<div class="bracket-col"><div class="bracket-col-title">Cuartos de final</div><div class="bk-stack">
+              ${camp.cuartos.map(p => bkPlayedHtml(p, p.codigo)).join('')}</div></div>` : ''}
             <div class="bracket-col"><div class="bracket-col-title">Semifinales</div><div class="bk-stack">
               ${(camp.semifinales || []).map(p => bkPlayedHtml(p, p.codigo)).join('')}</div></div>
             <div class="bracket-col"><div class="bracket-col-title">Final</div><div class="bk-stack">
@@ -621,11 +639,12 @@
         <div class="bracket-block">
           <div class="bracket-title"><h3>Copa de Plata</h3><span class="bracket-tag plata">Apertura 2026 · Jugado</span></div>
           <div class="bracket-scroll"><div class="bracket">
-            <div class="bracket-col"><div class="bracket-col-title">Cuartos de final</div><div class="bk-stack">
-              ${(plata.cuartos || []).map(p => bkPlayedHtml(p, p.codigo)).join('')}
-              ${byePlata ? `<div class="bracket-bye"><b>${byePlata}</b> pasó directo a semifinales (mejor 5°)</div>` : ''}</div></div>
-            <div class="bracket-col"><div class="bracket-col-title">Semifinales</div><div class="bk-stack">
-              ${(plata.semifinales || []).map(p => bkPlayedHtml(p, p.codigo)).join('')}</div></div>
+            ${(plata.cuartos || []).length ? `<div class="bracket-col"><div class="bracket-col-title">Cuartos de final</div><div class="bk-stack">
+              ${plata.cuartos.map(p => bkPlayedHtml(p, p.codigo)).join('')}
+              ${byePlata ? `<div class="bracket-bye"><b>${byePlata}</b> pasó directo a semifinales (mejor 5°)</div>` : ''}</div></div>` : ''}
+            <div class="bracket-col"><div class="bracket-col-title">${(plata.semifinales || []).length > 1 ? 'Semifinales' : 'Semifinal'}</div><div class="bk-stack">
+              ${(plata.semifinales || []).map(p => bkPlayedHtml(p, p.codigo)).join('')}
+              ${plata.bye ? `<div class="bracket-bye"><b>${plata.bye}</b> pasó directo a la final (5° de la tabla)</div>` : ''}</div></div>
             <div class="bracket-col"><div class="bracket-col-title">Final</div><div class="bk-stack">
               ${bkPlayedHtml(plata.final, 'Final', 'final plata')}
               ${plata.final ? `<div class="bk-champion plata">★ ${plata.final.ganador} campeón de Plata</div>` : ''}
@@ -665,7 +684,55 @@
     };
   }
 
+  function renderProyeccionUnica() {
+    const T = (DATA.clausura.tablas?.zonaA || []).slice().sort((x, y) => x.pos - y.pos);
+    const at = n => T[n - 1]?.equipo;
+    const cfg = FMT.clausura;
+    const tbd = txt => bkTeamHtml(null, { placeholder: txt });
+    const cruce = (codigo, a, b) => `<div class="bk-match">
+        <div class="bk-code"><span>${codigo}</span><span>${a}° vs ${b}°</span></div>
+        ${bkTeamHtml(at(a), { seed: a + '°' })}${bkTeamHtml(at(b), { seed: b + '°' })}</div>`;
+    const pend = (codigo, x, y, extra = '') => `<div class="bk-match ${extra}"><div class="bk-code"><span>${codigo}</span><span>A jugar</span></div>${x}${y}</div>`;
+    const [q1, q2] = cfg.cuartos; const [s1, s2] = cfg.plata;
+    return `
+      <div class="bracket-wrap">
+        <div class="bracket-note" style="margin:0 0 14px; padding:10px 14px; background:#F0FDF4; border:1px solid #BBF7D0; border-radius:8px; color:#166534;">
+          <b>Proyección con la tabla tras la Fecha ${DATA.clausura.ultimaFechaDisputada}.</b> No son cruces confirmados: cambian con cada fecha.
+        </div>
+        <div class="bracket-block">
+          <div class="bracket-title"><h3>Fase Campeonato</h3><span class="bracket-tag proy">Clausura 2026 · Si terminara hoy</span></div>
+          <div class="bracket-scroll"><div class="bracket">
+            <div class="bracket-col"><div class="bracket-col-title">Cuartos de final</div><div class="bk-stack">
+              ${cruce('CF1', q1[0], q1[1])}${cruce('CF2', q2[0], q2[1])}
+            </div></div>
+            <div class="bracket-col"><div class="bracket-col-title">Semifinales</div><div class="bk-stack">
+              ${pend('SF1', bkTeamHtml(at(1), { seed: '1°' }), tbd('Ganador CF2'))}
+              ${pend('SF2', bkTeamHtml(at(2), { seed: '2°' }), tbd('Ganador CF1'))}
+            </div></div>
+            <div class="bracket-col"><div class="bracket-col-title">Final</div><div class="bk-stack">
+              ${pend('Gran final', tbd('Ganador SF1'), tbd('Ganador SF2'), 'final')}
+              <div class="bk-champion">★ Campeón Clausura 2026</div>
+            </div></div>
+          </div></div>
+        </div>
+        <div class="bracket-block">
+          <div class="bracket-title"><h3>Copa de Plata</h3><span class="bracket-tag proy">Clausura 2026 · Si terminara hoy</span></div>
+          <div class="bracket-scroll"><div class="bracket">
+            <div class="bracket-col"><div class="bracket-col-title">Semifinales</div><div class="bk-stack">
+              ${cruce('SP1', s1[0], s1[1])}${cruce('SP2', s2[0], s2[1])}
+            </div></div>
+            <div class="bracket-col"><div class="bracket-col-title">Final</div><div class="bk-stack">
+              ${pend('Final', tbd('Ganador SP1'), tbd('Ganador SP2'), 'final plata')}
+              <div class="bk-champion plata">★ Campeón Copa de Plata</div>
+            </div></div>
+          </div></div>
+        </div>
+        <div class="bracket-note">Cruces según la Forma de Disputa del Clausura de la Categoría C: 1° y 2° directo a semifinales, cuartos 3° vs 6° y 4° vs 5°; Copa de Plata 7° vs 10° y 8° vs 9°. El cruce de semifinales (1° con el ganador de 4° vs 5°) es una suposición: la organización define el cuadro.</div>
+      </div>`;
+  }
+
   function renderProyeccionPlayoffs() {
+    if (ZONA_UNICA && FMT.clausura && FMT.clausura.cuartos) return renderProyeccionUnica();
     const pr = getProyeccionPlayoffs();
     const fmt = n => n.toFixed(2).replace('.', ',');
     const cruce = c => `<div class="bk-match">
@@ -1106,7 +1173,7 @@
         <div class="team-card-preview" data-team-id="${eq.id}">
           <img src="${eq.escudo || genericCrestUri(eq.nombre)}" alt="${eq.nombre}" class="preview-crest" loading="lazy" onerror="this.onerror=null; this.src='${genericCrestUri(eq.nombre).replace(/'/g, '%27')}';">
           <div class="preview-name">${eq.nombre}</div>
-          <div class="preview-zones">${eq.zonaClausura ? `Clausura: Zona ${eq.zonaClausura} · Apertura: Zona ${eq.zonaApertura}` : 'Zonas a confirmar'}</div>
+          <div class="preview-zones">${ZONA_UNICA ? posicionesTxt(eq) : (eq.zonaClausura ? `Clausura: Zona ${eq.zonaClausura} · Apertura: Zona ${eq.zonaApertura}` : 'Zonas a confirmar')}</div>
           <div style="display:flex; align-items:center; justify-content:space-between; width:100%; margin-top:8px;">
             <div style="display:flex; gap:4px;" title="Racha en los últimos partidos">
               ${rachaBadges}
@@ -1362,11 +1429,11 @@
             <button class="pill-btn ${t === 'apertura' ? 'active' : ''}" data-st-torneo="apertura">Apertura 2026</button>
             <button class="pill-btn ${t === 'anual' ? 'active' : ''}" data-st-torneo="anual">Anual</button>
           </div>
-          <div class="pill-group" role="tablist" aria-label="Seleccionar Zona Stats">
+          ${ZONA_UNICA ? '' : `<div class="pill-group" role="tablist" aria-label="Seleccionar Zona Stats">
             <button class="pill-btn ${z === 'todas' ? 'active' : ''}" data-st-zona="todas">Todas las zonas</button>
             <button class="pill-btn ${z === 'A' ? 'active' : ''}" data-st-zona="A">Zona A</button>
             <button class="pill-btn ${z === 'B' ? 'active' : ''}" data-st-zona="B">Zona B</button>
-          </div>
+          </div>`}
         </div>
       </div>
 
@@ -2434,7 +2501,7 @@
     // Posición en tabla
     const tablaZona = (team.zonaClausura === 'A' ? DATA.clausura.tablas.zonaA : DATA.clausura.tablas.zonaB) || [];
     const posRow = tablaZona.find(r => r.equipo.toLowerCase() === team.nombre.toLowerCase());
-    const posStr = posRow ? `${posRow.pos}° de la Zona ${team.zonaClausura} del Clausura` : (team.zonaClausura ? `Zona ${team.zonaClausura}` : 'Zona a confirmar');
+    const posStr = ZONA_UNICA ? (posRow ? `${posRow.pos}° del Clausura` : 'Clausura') : (posRow ? `${posRow.pos}° de la Zona ${team.zonaClausura} del Clausura` : (team.zonaClausura ? `Zona ${team.zonaClausura}` : 'Zona a confirmar'));
 
     const teamOptionsHtml = DATA.equipos.map(eq => {
       const sel = eq.id === team.id ? 'selected' : '';
@@ -2537,7 +2604,7 @@
                 ${bonusModalBadge}
                 ${sancionModalBadge}
               </div>
-              <div class="modal-team-subtitle">${posStr} · ${team.zonaApertura ? `Apertura Zona ${team.zonaApertura}` : ''}</div>
+              <div class="modal-team-subtitle">${posStr}${ZONA_UNICA ? (posAperturaDe(team.nombre) ? ` · ${posAperturaDe(team.nombre)}° del Apertura` : ' · No jugó el Apertura') : ` · ${team.zonaApertura ? `Apertura Zona ${team.zonaApertura}` : ''}`}</div>
               
               <!-- ACCIONES DEL EQUIPO: INSTAGRAM & DESCARGA DE ESCUDO -->
               <div class="team-modal-actions-row">
