@@ -162,7 +162,7 @@
 
     board.innerHTML = `
       <div class="board-tile" data-action="go-pos" data-torneo="clausura" data-zona="A">
-        <span class="tile-label">Líder Clausura · Zona A <span>${liderClausuraA?.pts || 0} PTS</span></span>
+        <span class="tile-label"><em class="tl-long">Líder Clausura · Zona A</em><em class="tl-short">Líder Zona A</em> <span>${liderClausuraA?.pts || 0} PTS</span></span>
         <div class="tile-body">
           ${renderCrestImg(teamLiderA, "tile-crest")}
           <span class="tile-name">${teamLiderA?.nombre || "—"}</span>
@@ -171,7 +171,7 @@
       </div>
 
       <div class="board-tile" data-action="go-pos" data-torneo="clausura" data-zona="B">
-        <span class="tile-label">Líder Clausura · Zona B <span>${liderClausuraB?.pts || 0} PTS</span></span>
+        <span class="tile-label"><em class="tl-long">Líder Clausura · Zona B</em><em class="tl-short">Líder Zona B</em> <span>${liderClausuraB?.pts || 0} PTS</span></span>
         <div class="tile-body">
           ${renderCrestImg(teamLiderB, "tile-crest")}
           <span class="tile-name">${teamLiderB?.nombre || "—"}</span>
@@ -180,7 +180,7 @@
       </div>
 
       <div class="board-tile" data-action="go-apertura">
-        <span class="tile-label">Campeón Apertura 2026 <span>OFICIAL</span></span>
+        <span class="tile-label"><em class="tl-long">Campeón Apertura 2026</em><em class="tl-short">Campeón Apertura</em> <span>OFICIAL</span></span>
         <div class="tile-body">
           ${renderCrestImg(teamCampAp, "tile-crest")}
           <span class="tile-name">${teamCampAp?.nombre || "—"}</span>
@@ -189,7 +189,7 @@
       </div>
 
       <div class="board-tile" data-action="go-goleadores">
-        <span class="tile-label">Goleador Clausura <span>${topScorerClausura?.goles || 0} GOLES</span></span>
+        <span class="tile-label"><em class="tl-long">Goleador Clausura</em><em class="tl-short">Goleador</em> <span>${topScorerClausura?.goles || 0} GOLES</span></span>
         <div class="tile-body">
           ${renderCrestImg(teamScorer, "tile-crest")}
           <span class="tile-name">${(topScorerClausura?.jugador || "—").split(',')[0]}</span>
@@ -2753,18 +2753,18 @@
     const board = $('#heroBoard');
     if (!board) return;
     const n = DATA.equipos.length;
-    const tile = (label, tag, body, desc, action = '') => `
+    const tile = (label, tag, body, desc, action = '', short = '') => `
       <div class="board-tile" ${action ? `data-action="${action}"` : ''}>
-        <span class="tile-label">${label} <span>${tag}</span></span>
+        <span class="tile-label"><em class="tl-long">${label}</em><em class="tl-short">${short || label}</em> <span>${tag}</span></span>
         <div class="tile-body">${body}</div>
         <span class="tile-desc">${desc}</span>
       </div>`;
     const vacio = `<span class="tile-name">—</span>`;
     board.innerHTML =
-      tile('Líder Clausura · Zona A', '— PTS', vacio, 'Esperando informes') +
-      tile('Líder Clausura · Zona B', '— PTS', vacio, 'Esperando informes') +
-      tile(`Equipos Categoría ${CAT}`, `${n} EQUIPOS`, `<span class="tile-name">${n} equipos</span>`, 'Ver la lista de equipos', 'go-equipos') +
-      tile('Copa Challenger', 'EN JUEGO', `<span class="tile-name">Ver cuadro</span>`, `Equipos de la ${CAT} en la Copa`, 'go-challenger');
+      tile('Líder Clausura · Zona A', '— PTS', vacio, 'Esperando informes', '', 'Líder Zona A') +
+      tile('Líder Clausura · Zona B', '— PTS', vacio, 'Esperando informes', '', 'Líder Zona B') +
+      tile(`Equipos Categoría ${CAT}`, `${n} EQUIPOS`, `<span class="tile-name">Ver equipos</span>`, 'Ver la lista de equipos', 'go-equipos', 'Equipos') +
+      tile('Copa Challenger', 'EN JUEGO', `<span class="tile-name">Ver cuadro</span>`, `Equipos de la ${CAT} en la Copa`, 'go-challenger', 'Challenger');
     $$('.board-tile[data-action]', board).forEach(t => t.addEventListener('click', () => {
       switchTab(t.dataset.action === 'go-equipos' ? 'equipos' : 'challenger');
     }));
