@@ -20,6 +20,8 @@
     if (qs.get('prueba') === '0') localStorage.removeItem('liga_prueba');
     PRUEBA = localStorage.getItem('liga_prueba') === '1';
   } catch (e) { PRUEBA = qs.get('prueba') === '1'; }
+  // En las versiones de prueba de Vercel (dirección con "-git-") todas las categorías quedan abiertas
+  if (/-git-|localhost|127\.0\.0\.1/.test(location.hostname) && qs.get('prueba') !== '0') PRUEBA = true;
   const catDisponible = c => CATS_ABIERTAS.includes(c) || PRUEBA;
   let CAT = (qs.get('cat') || '').toUpperCase();
   if (!CATS.includes(CAT)) {
