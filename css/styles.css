@@ -4283,3 +4283,17 @@ html[data-cat="C"] {
   .mnav-item.active svg { color: #FFFFFF; }
 }
 @media (prefers-reduced-motion: reduce) { .mnav-cc::after { animation: none; display: none; } }
+
+/* Celular: tarjetas del header en una sola fila deslizable y compacta */
+@media (max-width: 600px) {
+  .hero-board { display: flex !important; gap: 8px !important; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: none; margin: 2px -16px 0; padding: 0 16px 4px; scroll-padding: 0 16px; }
+  .hero-board::-webkit-scrollbar { display: none; }
+  .board-tile { flex: 0 0 74%; scroll-snap-align: start; min-height: 0 !important; padding: 9px 12px !important; gap: 4px !important; }
+  .board-tile .tile-label { align-items: center !important; font-size: .6rem !important; }
+  .board-tile .tile-label span { font-size: .8rem !important; }
+  .board-tile .tile-body { gap: 8px !important; margin: 0 !important; }
+  .board-tile .tile-crest { width: 24px !important; height: 24px !important; }
+  .board-tile .tile-name { font-size: 1.05rem !important; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .board-tile .tile-desc { display: none !important; }
+}
+@media (max-width: 600px) { .hero-content { gap: 10px !important; } .hero-stadium { padding-block: 12px 10px !important; } }
