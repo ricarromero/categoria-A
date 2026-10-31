@@ -2644,7 +2644,7 @@ const LIGA_DATA = {
       "F90": "public/escudos/f90.png",
       "Newcauce": "public/escudos/newcauce.png",
       "Geología": "public/escudos/geologia.png",
-      "Al Costado": "public/escudos/al_costado.png",
+      "Al Costado": "public/escudos/al_costado.png?v=3",
       "De Zurda": "public/escudos/de_zurda.png",
       "Necaxa": "public/escudos/necaxa.png?v=2",
       "Dep. La Verna": "public/escudos/dep_la_verna.png?v=2",
