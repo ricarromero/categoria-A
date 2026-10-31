@@ -2,7 +2,7 @@
  * LIGA UNIVERSITARIA SANJUANINA DE FÚTBOL — CATEGORÍA A 2026
  * Controlador Principal de la Aplicación
  * Equipos Oficiales: Minaster City, Otro Equipo, Constructores, Jägermeister,
- * Antorcha, Maverick, Aston, Calise, Eclipse, La Máquina, De Primera, Red Bull,
+ * Antorcha, Mavericks, Aston, Calise, Eclipse, La Máquina, De Primera, Red Bull,
  * Celtic, Nottingham, C-Lesión.
  */
 
