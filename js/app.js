@@ -49,7 +49,11 @@
     posTorneo: 'clausura', // 'clausura' | 'apertura' | 'anual'
     posZona: 'A',          // 'A' | 'B'
     fixtureTorneo: 'clausura', // 'clausura' | 'apertura'
-    fixtureFecha: (DATA.clausura && DATA.clausura.ultimaFechaDisputada) ? DATA.clausura.ultimaFechaDisputada : 3,
+    fixtureFecha: (() => {
+      const fs = (DATA.clausura && DATA.clausura.fechas) || [];
+      const enJuego = fs.find(f => !f.disputada && (f.dia || (f.partidos || []).some(p => p.estado === 'finalizado')));
+      return enJuego ? enJuego.numero : ((DATA.clausura && DATA.clausura.ultimaFechaDisputada) || 3);
+    })(),
     goleadoresTorneo: 'clausura',
     statsTorneo: 'clausura', // 'clausura' | 'apertura' | 'anual'
     statsZona: 'todas',      // 'todas' | 'A' | 'B'
@@ -563,7 +567,7 @@
     $$('button[data-fixture-torneo]', container).forEach(btn => {
       btn.addEventListener('click', () => {
         state.fixtureTorneo = btn.dataset.fixtureTorneo;
-        state.fixtureFecha = state.fixtureTorneo === 'clausura' ? (DATA.clausura.ultimaFechaDisputada || 3) : 1;
+        state.fixtureFecha = state.fixtureTorneo === 'clausura' ? (((DATA.clausura.fechas || []).find(f => !f.disputada && (f.dia || (f.partidos || []).some(p => p.estado === 'finalizado'))) || {}).numero || DATA.clausura.ultimaFechaDisputada || 3) : 1;
         renderFixture();
       });
     });
@@ -3012,7 +3016,7 @@
       const f = proximaFecha(d);
       if (!f) return '';
       const ordenDia = d => /s[áa]b/i.test(d || '') ? 0 : /dom/i.test(d || '') ? 1 : 2;
-      const ps = f.partidos.filter(p => p.estado === 'pendiente').slice().sort((a, b) => ordenDia(a.dia) - ordenDia(b.dia) || minutos(a.hora) - minutos(b.hora) || (a.cancha || '').localeCompare(b.cancha || ''));
+      const ps = f.partidos.filter(p => p.estado === 'pendiente' || p.estado === 'finalizado').slice().sort((a, b) => ordenDia(a.dia) - ordenDia(b.dia) || minutos(a.hora) - minutos(b.hora) || (a.cancha || '').localeCompare(b.cancha || ''));
       const variosDias = new Set(ps.map(p => p.dia).filter(Boolean)).size > 1;
       const libres = f.partidos.filter(p => p.estado === 'libre').map(p => p.local === 'Libre' ? p.visitante : p.local);
       const dia = f.dia || '';
@@ -3023,12 +3027,12 @@
         const sep = variosDias && p.dia !== diaPrevio ? `<div class="ini-daysep">${escapeHtml(p.dia || '')}</div>` : '';
         diaPrevio = p.dia;
         return sep + `
-        <a class="ini-match" href="${urlCat(c, 'fixture')}">
+        <a class="ini-match ${p.estado === 'finalizado' ? 'jugado' : ''}" href="${urlCat(c, 'fixture')}">
           ${conHora ? `<span class="ini-time">${p.hora || ''}</span>` : ''}
           <span class="ini-team">${escapeHtml(p.local)}${crest(p.local)}</span>
-          <span class="ini-vs">vs</span>
+          ${p.estado === 'finalizado' ? `<span class="ini-score">${p.golesL}<i>-</i>${p.golesV}</span>` : '<span class="ini-vs">vs</span>'}
           <span class="ini-team r">${crest(p.visitante)}${escapeHtml(p.visitante)}</span>
-          ${p.cancha ? `<span class="ini-cancha">${escapeHtml(p.cancha.replace('Cancha de ', ''))}</span>` : ''}
+          ${p.estado === 'finalizado' ? '<span class="ini-cancha ini-final">Final</span>' : (p.cancha ? `<span class="ini-cancha">${escapeHtml(p.cancha.replace('Cancha de ', ''))}</span>` : '')}
         </a>`;
       }).join('');
       return `<div class="ini-block ini-cat-${c} ${conHora ? '' : 'sin-hora'}">

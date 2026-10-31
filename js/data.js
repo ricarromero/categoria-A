@@ -1773,9 +1773,9 @@ const LIGA_DATA = {
             "zona": "Zona A",
             "local": "Aston",
             "visitante": "Constructores",
-            "golesL": null,
-            "golesV": null,
-            "estado": "pendiente",
+            "golesL": 1,
+            "golesV": 5,
+            "estado": "finalizado",
             "nota": "",
           "dia": "Sábado 31/10", "hora": "11:20", "cancha": "Cancha de Fútbol"
           },

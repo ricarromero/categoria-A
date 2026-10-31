@@ -4484,3 +4484,10 @@ html[data-cat="INICIO"] .brand-main .cat-switch { display: none !important; }
 /* Botón Playoffs / Cruces con el color de cada categoría */
 .fecha-pill-playoffs { border-color: var(--navy-secondary) !important; color: var(--navy-secondary) !important; }
 .fecha-pill-playoffs.active { background: var(--navy-secondary) !important; color: #FFFFFF !important; border-color: var(--navy-secondary) !important; }
+/* Inicio: partidos ya jugados de la fecha en curso */
+.ini-score { display: inline-flex; align-items: center; justify-content: center; gap: 4px; min-width: 52px; padding: 2px 8px; border-radius: 6px; background: var(--cc); color: #FFFFFF; font-family: var(--f-display); font-weight: 900; font-size: 1.15rem; }
+.ini-score i { font-style: normal; opacity: .7; }
+.ini-match.jugado { grid-template-columns: 56px minmax(0,1fr) 60px minmax(0,1fr) auto; }
+.ini-block.sin-hora .ini-match.jugado { grid-template-columns: minmax(0,1fr) 60px minmax(0,1fr); }
+.ini-cancha.ini-final { background: var(--cc); color: #FFFFFF; border-color: var(--cc); }
+@media (max-width: 860px) { .ini-match.jugado { grid-template-columns: 46px minmax(0,1fr) 56px minmax(0,1fr); } }
