@@ -1783,9 +1783,9 @@ const LIGA_DATA = {
             "zona": "Zona A",
             "local": "La Máquina",
             "visitante": "Nottingham",
-            "golesL": null,
-            "golesV": null,
-            "estado": "pendiente",
+            "golesL": 0,
+            "golesV": 3,
+            "estado": "finalizado",
             "nota": "",
           "dia": "Sábado 31/10", "hora": "14:20", "cancha": "Cancha de Fútbol"
           },
