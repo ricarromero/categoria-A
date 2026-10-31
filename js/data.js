@@ -131,7 +131,7 @@ const LIGA_DATA = {
     },
     {
       "id": "maverick",
-      "nombre": "Maverick",
+      "nombre": "Mavericks",
       "slug": "maverick",
       "escudo": "public/escudos/maverick.png",
       "zonaApertura": "A",
@@ -187,7 +187,7 @@ const LIGA_DATA = {
   ],
   "apertura": {
     "campeon": "Jägermeister",
-    "subcampeon": "Maverick",
+    "subcampeon": "Mavericks",
     "tercero": "Aston",
     "cuarto": "Calise",
     "campeonPlata": "Minaster City",
@@ -209,11 +209,11 @@ const LIGA_DATA = {
           {
             "zona": "Zona A",
             "local": "Aston",
-            "visitante": "Maverick",
+            "visitante": "Mavericks",
             "golesL": 2,
             "golesV": 0,
             "estado": "finalizado",
-            "nota": "No presentación Maverick"
+            "nota": "No presentación Mavericks"
           },
           {
             "zona": "Zona A",
@@ -358,7 +358,7 @@ const LIGA_DATA = {
           },
           {
             "zona": "Interzonal",
-            "local": "Maverick",
+            "local": "Mavericks",
             "visitante": "La Granjah",
             "golesL": 12,
             "golesV": 0,
@@ -374,7 +374,7 @@ const LIGA_DATA = {
           {
             "zona": "Zona A",
             "local": "Otro Equipo",
-            "visitante": "Maverick",
+            "visitante": "Mavericks",
             "golesL": 1,
             "golesV": 1,
             "estado": "finalizado",
@@ -469,7 +469,7 @@ const LIGA_DATA = {
           },
           {
             "zona": "Zona A",
-            "local": "Maverick",
+            "local": "Mavericks",
             "visitante": "Constructores",
             "golesL": 1,
             "golesV": 1,
@@ -565,7 +565,7 @@ const LIGA_DATA = {
           },
           {
             "zona": "Zona A",
-            "local": "Maverick",
+            "local": "Mavericks",
             "visitante": "Red Bull",
             "golesL": 4,
             "golesV": 3,
@@ -661,7 +661,7 @@ const LIGA_DATA = {
           },
           {
             "zona": "Zona A",
-            "local": "Maverick",
+            "local": "Mavericks",
             "visitante": "Minaster City",
             "golesL": 2,
             "golesV": 2,
@@ -748,12 +748,12 @@ const LIGA_DATA = {
           },
           {
             "zona": "Zona A",
-            "local": "Maverick",
+            "local": "Mavericks",
             "visitante": "Libre",
             "golesL": null,
             "golesV": null,
             "estado": "libre",
-            "nota": "Fecha Libre Maverick"
+            "nota": "Fecha Libre Mavericks"
           },
           {
             "zona": "Zona B",
@@ -836,7 +836,7 @@ const LIGA_DATA = {
           {
             "zona": "Zona A",
             "local": "Jägermeister",
-            "visitante": "Maverick",
+            "visitante": "Mavericks",
             "golesL": 1,
             "golesV": 1,
             "estado": "finalizado",
@@ -914,7 +914,7 @@ const LIGA_DATA = {
           {
             "zona": "Zona A",
             "local": "Nottingham",
-            "visitante": "Maverick",
+            "visitante": "Mavericks",
             "golesL": 1,
             "golesV": 2,
             "estado": "finalizado",
@@ -999,12 +999,12 @@ const LIGA_DATA = {
           {
             "codigo": "CF3",
             "local": "Antorcha",
-            "visitante": "Maverick",
+            "visitante": "Mavericks",
             "golesL": 0,
             "golesV": 0,
             "penalesL": 2,
             "penalesV": 4,
-            "ganador": "Maverick",
+            "ganador": "Mavericks",
             "nota": "Penales: 2 - 4"
           },
           {
@@ -1027,11 +1027,11 @@ const LIGA_DATA = {
           },
           {
             "codigo": "SF2",
-            "local": "Maverick",
+            "local": "Mavericks",
             "visitante": "Calise",
             "golesL": 4,
             "golesV": 0,
-            "ganador": "Maverick"
+            "ganador": "Mavericks"
           }
         ],
         "tercerPuesto": {
@@ -1045,7 +1045,7 @@ const LIGA_DATA = {
         "final": {
           "codigo": "FINAL",
           "local": "Jägermeister",
-          "visitante": "Maverick",
+          "visitante": "Mavericks",
           "golesL": 1,
           "golesV": 0,
           "ganador": "Jägermeister",
@@ -1128,7 +1128,7 @@ const LIGA_DATA = {
         },
         {
           "pos": 2,
-          "equipo": "Maverick",
+          "equipo": "Mavericks",
           "pj": 8,
           "pg": 3,
           "pe": 4,
@@ -1374,13 +1374,13 @@ const LIGA_DATA = {
       {
         "pos": 6,
         "jugador": "Notario, Matías",
-        "equipo": "Maverick",
+        "equipo": "Mavericks",
         "goles": 6
       },
       {
         "pos": 7,
         "jugador": "Velázquez, Francisco",
-        "equipo": "Maverick",
+        "equipo": "Mavericks",
         "goles": 6
       },
       {
@@ -1416,7 +1416,7 @@ const LIGA_DATA = {
       {
         "pos": 13,
         "jugador": "Ríos, Maximiliano",
-        "equipo": "Maverick",
+        "equipo": "Mavericks",
         "goles": 4
       },
       {
@@ -1490,7 +1490,7 @@ const LIGA_DATA = {
           {
             "zona": "Zona B",
             "local": "Calise",
-            "visitante": "Maverick",
+            "visitante": "Mavericks",
             "golesL": 1,
             "golesV": 2,
             "estado": "finalizado",
@@ -1560,7 +1560,7 @@ const LIGA_DATA = {
           {
             "zona": "Zona B",
             "local": "De Primera",
-            "visitante": "Maverick",
+            "visitante": "Mavericks",
             "golesL": 1,
             "golesV": 1,
             "estado": "finalizado",
@@ -1647,7 +1647,7 @@ const LIGA_DATA = {
           },
           {
             "zona": "Zona B",
-            "local": "Maverick",
+            "local": "Mavericks",
             "visitante": "Eclipse",
             "golesL": 0,
             "golesV": 1,
@@ -1735,7 +1735,7 @@ const LIGA_DATA = {
           },
           {
             "zona": "Zona B",
-            "local": "Maverick",
+            "local": "Mavericks",
             "visitante": "Red Bull",
             "golesL": 1,
             "golesV": 3,
@@ -1831,12 +1831,12 @@ const LIGA_DATA = {
           },
           {
             "zona": "Zona B",
-            "local": "Maverick",
+            "local": "Mavericks",
             "visitante": "Libre",
             "golesL": null,
             "golesV": null,
             "estado": "libre",
-            "nota": "Fecha Libre Maverick"
+            "nota": "Fecha Libre Mavericks"
           }
         ]
       },
@@ -1911,7 +1911,7 @@ const LIGA_DATA = {
           {
             "zona": "Zona B",
             "local": "Otro Equipo",
-            "visitante": "Maverick",
+            "visitante": "Mavericks",
             "golesL": null,
             "golesV": null,
             "estado": "pendiente",
@@ -1981,7 +1981,7 @@ const LIGA_DATA = {
           {
             "zona": "Zona B",
             "local": "Celtic",
-            "visitante": "Maverick",
+            "visitante": "Mavericks",
             "golesL": null,
             "golesV": null,
             "estado": "pendiente",
@@ -2174,7 +2174,7 @@ const LIGA_DATA = {
         },
         {
           "pos": 6,
-          "equipo": "Maverick",
+          "equipo": "Mavericks",
           "pj": 4,
           "pg": 1,
           "pe": 1,
@@ -2402,7 +2402,7 @@ const LIGA_DATA = {
     },
     {
       "jugador": "Matus, Carlos Agustín",
-      "equipo": "Maverick",
+      "equipo": "Mavericks",
       "sancion": "Hasta 31/12/2026",
       "articulo": "Art 23 inc 'A'",
       "motivo": "Falta de respeto grave a la terna arbitral",
@@ -2410,7 +2410,7 @@ const LIGA_DATA = {
     },
     {
       "jugador": "Benega, Mauricio",
-      "equipo": "Maverick",
+      "equipo": "Mavericks",
       "sancion": "Hasta 30/06/2027",
       "articulo": "Art 23 inc 'A'",
       "motivo": "Conducta violenta",
@@ -2450,7 +2450,7 @@ const LIGA_DATA = {
     },
     {
       "jugador": "Sánchez, Lucas",
-      "equipo": "Maverick",
+      "equipo": "Mavericks",
       "sancion": "2 Partidos",
       "articulo": "Art. 23 inc \"A\"",
       "motivo": "Expulsión Fecha 4",
@@ -2458,7 +2458,7 @@ const LIGA_DATA = {
     },
     {
       "jugador": "Castro, Santiago",
-      "equipo": "Maverick",
+      "equipo": "Mavericks",
       "sancion": "2 Partidos",
       "articulo": "Art. 23 inc \"A\"",
       "motivo": "Expulsión Fecha 4",
@@ -2522,7 +2522,7 @@ const LIGA_DATA = {
     },
     {
       "jugador": "Notario, Matías",
-      "equipo": "Maverick",
+      "equipo": "Mavericks",
       "sancion": "3 Amarillas acumuladas",
       "articulo": "Art. 6° Régimen Amarillas",
       "motivo": "Acumulación de 3 tarjetas amarillas",
@@ -2906,7 +2906,7 @@ const LIGA_DATA = {
       "L10": "Minaster City",
       "L12": "Red Bull",
       "L15": "Otro Equipo",
-      "L18": "Maverick",
+      "L18": "Mavericks",
       "R1": "Antorcha",
       "R4": "Celtic",
       "R6": "De Primera",
@@ -3131,7 +3131,7 @@ const LIGA_DATA = {
     },
     {
       "pos": 7,
-      "equipo": "Maverick",
+      "equipo": "Mavericks",
       "ptsAp": 13,
       "bonus": 2,
       "totalAp": 15,
