@@ -18,8 +18,8 @@
       "zonaApertura": "A",
       "zonaClausura": "B",
       "color": "#22814D",
-      "instagram": "",
-      "instagramHandle": ""
+      "instagram": "https://www.instagram.com/adovefc/",
+      "instagramHandle": "@adovefc"
     },
     {
       "id": "agrimensura",
@@ -29,8 +29,8 @@
       "zonaApertura": "A",
       "zonaClausura": "A",
       "color": "#22814D",
-      "instagram": "",
-      "instagramHandle": ""
+      "instagram": "https://www.instagram.com/fcagrimensura/",
+      "instagramHandle": "@fcagrimensura"
     },
     {
       "id": "al_costado",
@@ -40,8 +40,8 @@
       "zonaApertura": "B",
       "zonaClausura": "B",
       "color": "#22814D",
-      "instagram": "",
-      "instagramHandle": ""
+      "instagram": "https://www.instagram.com/alcostadofc/",
+      "instagramHandle": "@alcostadofc"
     },
     {
       "id": "central",
@@ -51,8 +51,8 @@
       "zonaApertura": "A",
       "zonaClausura": "B",
       "color": "#22814D",
-      "instagram": "",
-      "instagramHandle": ""
+      "instagram": "https://www.instagram.com/centralfc25/",
+      "instagramHandle": "@centralfc25"
     },
     {
       "id": "de_zurda",
@@ -62,8 +62,8 @@
       "zonaApertura": "A",
       "zonaClausura": "A",
       "color": "#22814D",
-      "instagram": "",
-      "instagramHandle": ""
+      "instagram": "https://www.instagram.com/dezurda__/",
+      "instagramHandle": "@dezurda__"
     },
     {
       "id": "dep_la_verna",
@@ -73,8 +73,8 @@
       "zonaApertura": "B",
       "zonaClausura": "B",
       "color": "#22814D",
-      "instagram": "",
-      "instagramHandle": ""
+      "instagram": "https://www.instagram.com/dep.laverna/",
+      "instagramHandle": "@dep.laverna"
     },
     {
       "id": "descarte",
@@ -84,8 +84,8 @@
       "zonaApertura": "A",
       "zonaClausura": "B",
       "color": "#22814D",
-      "instagram": "",
-      "instagramHandle": ""
+      "instagram": "https://www.instagram.com/fcdescarte/",
+      "instagramHandle": "@fcdescarte"
     },
     {
       "id": "f90",
@@ -95,8 +95,8 @@
       "zonaApertura": "B",
       "zonaClausura": "A",
       "color": "#22814D",
-      "instagram": "",
-      "instagramHandle": ""
+      "instagram": "https://www.instagram.com/clubuniversitariof90/",
+      "instagramHandle": "@clubuniversitariof90"
     },
     {
       "id": "geologia",
@@ -106,8 +106,8 @@
       "zonaApertura": "A",
       "zonaClausura": "A",
       "color": "#22814D",
-      "instagram": "",
-      "instagramHandle": ""
+      "instagram": "https://www.instagram.com/geologia.fc/",
+      "instagramHandle": "@geologia.fc"
     },
     {
       "id": "gol_en_contra",
@@ -117,8 +117,8 @@
       "zonaApertura": "B",
       "zonaClausura": "A",
       "color": "#22814D",
-      "instagram": "",
-      "instagramHandle": ""
+      "instagram": "https://www.instagram.com/fc.gec/",
+      "instagramHandle": "@fc.gec"
     },
     {
       "id": "inter",
@@ -128,8 +128,8 @@
       "zonaApertura": "B",
       "zonaClausura": "B",
       "color": "#22814D",
-      "instagram": "",
-      "instagramHandle": ""
+      "instagram": "https://www.instagram.com/interfc.ok/",
+      "instagramHandle": "@interfc.ok"
     },
     {
       "id": "malvinas",
@@ -139,8 +139,8 @@
       "zonaApertura": "A",
       "zonaClausura": "A",
       "color": "#22814D",
-      "instagram": "",
-      "instagramHandle": ""
+      "instagram": "https://www.instagram.com/malvinasfc23/",
+      "instagramHandle": "@malvinasfc23"
     },
     {
       "id": "necaxa",
@@ -150,8 +150,8 @@
       "zonaApertura": "B",
       "zonaClausura": "B",
       "color": "#22814D",
-      "instagram": "",
-      "instagramHandle": ""
+      "instagram": "https://www.instagram.com/necaxa.fc/",
+      "instagramHandle": "@necaxa.fc"
     },
     {
       "id": "tercer_tiempo",
@@ -161,8 +161,8 @@
       "zonaApertura": "B",
       "zonaClausura": "A",
       "color": "#22814D",
-      "instagram": "",
-      "instagramHandle": ""
+      "instagram": "https://www.instagram.com/tercer_tiempo.sj/",
+      "instagramHandle": "@tercer_tiempo.sj"
     },
     {
       "id": "timba",
@@ -172,8 +172,8 @@
       "zonaApertura": "A",
       "zonaClausura": "A",
       "color": "#22814D",
-      "instagram": "",
-      "instagramHandle": ""
+      "instagram": "https://www.instagram.com/timbafc_sj/",
+      "instagramHandle": "@timbafc_sj"
     }
   ],
   "apertura": {
