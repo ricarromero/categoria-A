@@ -2891,8 +2891,13 @@
     const dots = $$('.hero-dots button', board.parentNode);
     let i = 0;
     const mostrar = n => {
+      const prev = i;
       i = (n + tiles.length) % tiles.length;
-      tiles.forEach((t, k) => t.classList.toggle('on', k === i));
+      tiles.forEach((t, k) => {
+        t.classList.remove('out');
+        if (k === prev && prev !== i) t.classList.add('out');
+        t.classList.toggle('on', k === i);
+      });
       dots.forEach((d, k) => d.classList.toggle('on', k === i));
     };
     const arrancar = () => {

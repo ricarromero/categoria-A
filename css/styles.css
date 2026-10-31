@@ -4337,3 +4337,11 @@ html[data-cat="C"] {
 @media (max-width: 600px) { .hero-board.rotate .board-tile { width: 100%; flex: none !important; max-width: none; } .hero-board.rotate .board-tile .tile-name { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; } }
 @media (max-width: 600px) { .hero-board.rotate { grid-template-columns: 1fr !important; } }
 @media (max-width: 600px) { .hero-board.rotate .tile-body { width: 100% !important; } .hero-board.rotate .board-tile .tile-name { max-width: none !important; flex: 1; min-width: 0; } }
+/* Celular: las tarjetas entran deslizándose desde la derecha y salen hacia la izquierda */
+@media (max-width: 600px) {
+  .hero-board.rotate { overflow: hidden; border-radius: 10px; }
+  .hero-board.rotate .board-tile { opacity: 1; transform: translateX(105%) !important; transition: transform .55s cubic-bezier(.65,0,.35,1), visibility 0s linear .55s; }
+  .hero-board.rotate .board-tile.on { visibility: visible; transform: translateX(0) !important; transition: transform .55s cubic-bezier(.65,0,.35,1); }
+  .hero-board.rotate .board-tile.out { visibility: visible; transform: translateX(-105%) !important; transition: transform .55s cubic-bezier(.65,0,.35,1), visibility 0s linear .55s; }
+}
+@media (max-width: 600px) and (prefers-reduced-motion: reduce) { .hero-board.rotate .board-tile, .hero-board.rotate .board-tile.on, .hero-board.rotate .board-tile.out { transition: none; } }
