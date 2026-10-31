@@ -23,13 +23,12 @@
   // En las versiones de prueba de Vercel (dirección con "-git-") todas las categorías quedan abiertas
   if (/-git-|localhost|127\.0\.0\.1/.test(location.hostname) && qs.get('prueba') !== '0') PRUEBA = true;
   const catDisponible = c => CATS_ABIERTAS.includes(c) || PRUEBA;
+  // Sin ?cat= se entra a la portada general (Inicio), fuera de cualquier categoría
   let CAT = (qs.get('cat') || '').toUpperCase();
-  if (!CATS.includes(CAT)) {
-    try { CAT = (localStorage.getItem('liga_cat') || 'A').toUpperCase(); } catch (e) { CAT = 'A'; }
-  }
-  if (!CATS.includes(CAT) || !catDisponible(CAT) || (CAT !== 'A' && !window['LIGA_DATA_' + CAT])) CAT = 'A';
-  try { localStorage.setItem('liga_cat', CAT); } catch (e) { /* sin almacenamiento */ }
-  document.documentElement.dataset.cat = CAT;
+  const INICIO = !CATS.includes(CAT);
+  if (INICIO) CAT = 'A';
+  else if (!catDisponible(CAT) || (CAT !== 'A' && !window['LIGA_DATA_' + CAT])) CAT = 'A';
+  document.documentElement.dataset.cat = INICIO ? 'INICIO' : CAT;
 
   // Verificar disponibilidad de los datos
   const DATA = CAT === 'A' ? window.LIGA_DATA : window['LIGA_DATA_' + CAT];
@@ -2990,20 +2989,121 @@
     arrancar();
   }
 
+  // =========================================================================
+  // INICIO: portada general (próximos partidos + tablas de las tres categorías)
+  // =========================================================================
+  const CAT_DATOS = { A: window.LIGA_DATA, B: window.LIGA_DATA_B, C: window.LIGA_DATA_C };
+  const catsVisibles = () => CATS.filter(c => catDisponible(c) && CAT_DATOS[c] && !CAT_DATOS[c].esqueleto);
+  const urlCat = (c, view) => `${location.pathname}?cat=${c.toLowerCase()}${view ? '#' + view : ''}`;
+
+  function proximaFecha(d) {
+    const f = ((d && d.clausura && d.clausura.fechas) || []).find(x => !x.disputada && (x.partidos || []).some(p => p.estado === 'pendiente'));
+    return f || null;
+  }
+
+  function renderInicio() {
+    const cont = $('#view-inicio');
+    if (!cont) return;
+    const cats = catsVisibles();
+    const minutos = h => { const m = /(\d+):(\d+)/.exec(h || ''); return m ? (+m[1]) * 60 + (+m[2]) : 9999; };
+
+    const bloques = cats.map(c => {
+      const d = CAT_DATOS[c];
+      const f = proximaFecha(d);
+      if (!f) return '';
+      const ps = f.partidos.filter(p => p.estado === 'pendiente').slice().sort((a, b) => minutos(a.hora) - minutos(b.hora));
+      const libres = f.partidos.filter(p => p.estado === 'libre').map(p => p.local === 'Libre' ? p.visitante : p.local);
+      const dia = f.dia || '';
+      const conHora = ps.some(p => p.hora);
+      const crest = n => { const eq = (d.equipos || []).find(e => e.nombre === n); return `<img class="ini-crest" src="${(eq && eq.escudo) || escudoGlobal(n) || genericCrestUri(n)}" alt="">`; };
+      const filas = ps.map(p => `
+        <a class="ini-match" href="${urlCat(c, 'fixture')}">
+          ${conHora ? `<span class="ini-time">${p.hora || ''}</span>` : ''}
+          <span class="ini-team">${escapeHtml(p.local)}${crest(p.local)}</span>
+          <span class="ini-vs">vs</span>
+          <span class="ini-team r">${crest(p.visitante)}${escapeHtml(p.visitante)}</span>
+          ${p.cancha ? `<span class="ini-cancha">${escapeHtml(p.cancha.replace('Cancha de ', ''))}</span>` : ''}
+        </a>`).join('');
+      return `<div class="ini-block ini-cat-${c} ${conHora ? '' : 'sin-hora'}">
+          <div class="ini-block-head">
+            <span class="ini-chip">${c}</span>
+            <b>Categoría ${c} · ${escapeHtml(f.nombre)}</b>
+            <span class="ini-dia">${dia ? escapeHtml(dia) + ' · El Palomar' : 'Día y horario a confirmar'}</span>
+          </div>
+          ${filas}
+          ${libres.length ? `<div class="ini-libre">Libre: ${libres.map(escapeHtml).join(', ')}</div>` : ''}
+        </div>`;
+    }).join('');
+
+    const tabla = c => {
+      const d = CAT_DATOS[c];
+      const t = d.clausura.tablas || {};
+      const zonas = (t.zonaB && t.zonaB.length) ? [['A', t.zonaA], ['B', t.zonaB]] : [['', t.zonaA]];
+      const nCamp = (d.formato && d.formato.clausura && d.formato.clausura.campeonato) || 4;
+      const filas = rows => (rows || []).map(r => {
+        const eq = (d.equipos || []).find(e => e.nombre === r.equipo);
+        return `<tr class="${r.pos <= nCamp ? 'q' : ''} ${r.pos === nCamp ? 'cut' : ''}"><td class="p">${r.pos}</td><td class="e"><img class="ini-crest" src="${(eq && eq.escudo) || escudoGlobal(r.equipo) || genericCrestUri(r.equipo)}" alt=""><span>${escapeHtml(r.equipo)}</span></td><td>${r.pj}</td><td class="pts">${r.pts}</td></tr>`;
+      }).join('');
+      return `<div class="ini-table ini-cat-${c}" data-ini-tab="${c}">
+          <div class="ini-table-head"><span class="ini-chip">${c}</span><b>Categoría ${c}</b><span>Clausura · Fecha ${d.clausura.ultimaFechaDisputada}</span></div>
+          ${zonas.length > 1 ? `<div class="ini-zonas">${zonas.map(([z], i) => `<button type="button" class="${i ? '' : 'active'}" data-ini-zona="${c}${z}">Zona ${z}</button>`).join('')}</div>` : ''}
+          ${zonas.map(([z, rows], i) => `<table class="ini-tbl" data-ini-zt="${c}${z}" ${i ? 'hidden' : ''}><thead><tr><th>#</th><th>Equipo</th><th>PJ</th><th>Pts</th></tr></thead><tbody>${filas(rows)}</tbody></table>`).join('')}
+          <a class="ini-ver" href="${urlCat(c)}">Ver Categoría ${c} →</a>
+        </div>`;
+    };
+
+    cont.innerHTML = `
+      <div class="ini-grid">
+        <section class="ini-col">
+          <div class="ini-title"><h2>Próximos partidos</h2><span class="section-badge">Clausura 2026</span></div>
+          ${bloques || '<div class="ini-empty">Todavía no hay próximos partidos cargados.</div>'}
+          <a class="ini-cc" href="${urlCat(CAT_DATOS.A ? 'A' : cats[0], 'challenger')}"><span>🏆</span><b>Copa Challenger</b><small>Ver el cuadro completo</small><em>→</em></a>
+        </section>
+        <aside class="ini-col">
+          <div class="ini-title"><h2>Posiciones</h2></div>
+          ${cats.length > 1 ? `<div class="ini-tabs">${cats.map((c, i) => `<button type="button" class="ini-cat-${c} ${i ? '' : 'active'}" data-ini-cat="${c}">${c}</button>`).join('')}</div>` : ''}
+          <div class="ini-tables">${cats.map(tabla).join('')}</div>
+        </aside>
+      </div>`;
+
+    $$('[data-ini-zona]', cont).forEach(b => b.addEventListener('click', () => {
+      const card = b.closest('.ini-table');
+      $$('[data-ini-zona]', card).forEach(x => x.classList.toggle('active', x === b));
+      $$('[data-ini-zt]', card).forEach(tb => { tb.hidden = tb.dataset.iniZt !== b.dataset.iniZona; });
+    }));
+    const marcarTab = c => {
+      $$('[data-ini-cat]', cont).forEach(x => x.classList.toggle('active', x.dataset.iniCat === c));
+      $$('.ini-table', cont).forEach(t => t.classList.toggle('on', t.dataset.iniTab === c));
+    };
+    $$('[data-ini-cat]', cont).forEach(b => b.addEventListener('click', () => marcarTab(b.dataset.iniCat)));
+    marcarTab(cats[0]);
+  }
+
+
   function aplicarCategoriaUI() {
     const nombre = `Categoría ${CAT}`;
     document.title = `Liga Universitaria Sanjuanina de Fútbol — ${nombre} 2026`;
     const sub = $('#heroCatLabel');
-    if (sub) sub.textContent = nombre;
+    if (sub) sub.textContent = INICIO ? 'Temporada 2026' : nombre;
+    if (INICIO) {
+      document.title = 'Liga Universitaria Sanjuanina de Fútbol — Temporada 2026';
+      const bs = $('.brand-sub'); if (bs) bs.textContent = 'Fútbol Universitario · UNSJ · Categorías A, B y C';
+      const fc = $('#footerCat'); if (fc) fc.textContent = 'Temporada 2026';
+    }
+    const logo = $('.brand-v2 .league-official-logo');
+    if (logo && !logo.closest('a')) {
+      logo.insertAdjacentHTML('beforebegin', '<a href="./" class="brand-home" title="Ir al inicio" aria-label="Ir al inicio"></a>');
+      logo.previousElementSibling.appendChild(logo);
+    }
     const foot = $('#footerCat');
-    if (foot) foot.textContent = `${nombre} · Temporada 2026`;
+    if (foot && !INICIO) foot.textContent = `${nombre} · Temporada 2026`;
     $$('#catSwitch .cat-pick').forEach(o => {
-      const activa = o.dataset.cat === CAT;
+      const activa = !INICIO && o.dataset.cat === CAT;
       o.classList.toggle('active', activa);
       o.setAttribute('aria-pressed', activa ? 'true' : 'false');
       o.addEventListener('click', () => {
         const c = o.dataset.cat;
-        if (c === CAT) return;
+        if (c === CAT && !INICIO) return;
         if (!catDisponible(c)) { mostrarProximamente(c); return; }
         try { localStorage.setItem('liga_cat', c); } catch (err) { /* sin almacenamiento */ }
         location.href = `${location.pathname}?cat=${c.toLowerCase()}#${state.currentTab}`;
@@ -3016,6 +3116,7 @@
   // MENÚ PARA CELULAR: botón Copa Challenger + desplegable con íconos
   // =========================================================================
   const NAV_ICONS = {
+    inicio: '<path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/>',
     posiciones: '<path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/>',
     fixture: '<rect x="3" y="4" width="18" height="17" rx="2"/><path d="M16 2v4M8 2v4M3 10h18M8 14h2M14 14h2M8 17h2"/>',
     challenger: '<path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0V4z"/><path d="M17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/>',
@@ -3075,6 +3176,7 @@
   }
 
   function switchTab(viewName) {
+    if (viewName === 'inicio') { location.href = location.pathname; return; }
     state.currentTab = viewName;
 
     $$('#mainTabs .tab-btn').forEach(btn => {
@@ -3124,6 +3226,11 @@
   // =========================================================================
   function initApp() {
     aplicarCategoriaUI();
+    if (INICIO) {
+      document.body.classList.add('modo-inicio');
+      renderInicio();
+      return;
+    }
     if (ESQ) renderHeroBoardEsqueleto(); else renderHeroBoard();
     iniciarRotacionHero();
     let rotResize;
