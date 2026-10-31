@@ -397,6 +397,7 @@
       ` : ''}
 
       ${noticeHtml}
+      ${state.posTorneo !== 'apertura' ? `<div class="aviso-tablas"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8h.01M11 12h1v5h1"/></svg><span>Las tablas se actualizan cuando la Liga envía el informe oficial de cada fecha. Los resultados de los partidos se cargan apenas terminan.</span></div>` : ''}
 
       <div class="table-responsive">
         <table class="league-table">
@@ -3090,6 +3091,7 @@
         </section>
         <aside class="ini-col">
           <div class="ini-title"><h2>Posiciones</h2></div>
+          <div class="aviso-tablas"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8h.01M11 12h1v5h1"/></svg><span>Las tablas se actualizan cuando la Liga envía el informe oficial de cada fecha. Los resultados de los partidos se cargan apenas terminan.</span></div>
           ${cats.length > 1 ? `<div class="ini-tabs">${cats.map((c, i) => `<button type="button" class="ini-cat-${c} ${i ? '' : 'active'}" data-ini-cat="${c}">${c}</button>`).join('')}</div>` : ''}
           <div class="ini-tables">${cats.map(tabla).join('')}</div>
         </aside>

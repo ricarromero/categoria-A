@@ -4491,3 +4491,6 @@ html[data-cat="INICIO"] .brand-main .cat-switch { display: none !important; }
 .ini-block.sin-hora .ini-match.jugado { grid-template-columns: minmax(0,1fr) 60px minmax(0,1fr); }
 .ini-cancha.ini-final { background: var(--cc); color: #FFFFFF; border-color: var(--cc); }
 @media (max-width: 860px) { .ini-match.jugado { grid-template-columns: 46px minmax(0,1fr) 56px minmax(0,1fr); } }
+/* Aviso: las tablas se actualizan con el informe oficial */
+.aviso-tablas { display: flex; align-items: flex-start; gap: 8px; margin: 0 0 12px; padding: 9px 12px; border-radius: 8px; background: #FFF8E6; border: 1px solid #F6D58A; color: #7A5200; font-size: .8rem; font-weight: 600; line-height: 1.4; }
+.aviso-tablas svg { flex: none; margin-top: 1px; }
