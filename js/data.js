@@ -1793,9 +1793,9 @@ const LIGA_DATA = {
             "zona": "Zona A",
             "local": "Minaster City",
             "visitante": "C-Lesión",
-            "golesL": null,
-            "golesV": null,
-            "estado": "pendiente",
+            "golesL": 3,
+            "golesV": 1,
+            "estado": "finalizado",
             "nota": "",
           "dia": "Sábado 31/10", "hora": "12:40", "cancha": "Cancha de Rugby"
           },
