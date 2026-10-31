@@ -4423,3 +4423,44 @@ body.modo-inicio #heroBoard, body.modo-inicio .hero-dots, body.modo-inicio .navb
 .ini-block.sin-hora .ini-match { grid-template-columns: minmax(0,1fr) 28px minmax(0,1fr); }
 @media (max-width: 860px) { .ini-block.sin-hora .ini-match { grid-template-columns: minmax(0,1fr) 22px minmax(0,1fr); } }
 @media (max-width: 600px) { html[data-cat="INICIO"] .brand-sub { font-size: .6rem; } }
+
+/* Inicio: "Elegí tu categoría" y fondo con más vida */
+body.modo-inicio .content-area {
+  background:
+    radial-gradient(900px 420px at 0% 0%, rgba(47,108,168,.13), transparent 60%),
+    radial-gradient(800px 420px at 100% 10%, rgba(34,129,77,.12), transparent 60%),
+    radial-gradient(900px 520px at 50% 100%, rgba(217,119,11,.10), transparent 60%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='160' viewBox='0 0 240 160'%3E%3Cg fill='none' stroke='%2314283F' stroke-opacity='.05' stroke-width='2'%3E%3Crect x='10' y='10' width='220' height='140' rx='4'/%3E%3Cline x1='120' y1='10' x2='120' y2='150'/%3E%3Ccircle cx='120' cy='80' r='26'/%3E%3Crect x='10' y='45' width='34' height='70'/%3E%3Crect x='196' y='45' width='34' height='70'/%3E%3C/g%3E%3C/svg%3E"),
+    var(--bg-page);
+}
+.ini-hero { margin-top: 22px; padding: 20px; border-radius: 16px; background: linear-gradient(135deg, #14283F 0%, #1E3D5E 100%); color: #FFFFFF; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2.2fr); gap: 18px; align-items: center; box-shadow: 0 10px 30px rgba(20,40,63,.18); position: relative; overflow: hidden; }
+.ini-hero::before { content: ""; position: absolute; inset: 0; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='200' viewBox='0 0 600 200'%3E%3Cg fill='none' stroke='%23FFFFFF' stroke-opacity='.07' stroke-width='2'%3E%3Crect x='6' y='6' width='588' height='188' rx='6'/%3E%3Cline x1='300' y1='6' x2='300' y2='194'/%3E%3Ccircle cx='300' cy='100' r='44'/%3E%3C/g%3E%3C/svg%3E") center / cover no-repeat; pointer-events: none; }
+.ini-hero-txt { position: relative; }
+.ini-hero h2 { margin: 0; font-family: var(--f-display); font-weight: 900; font-size: 2.1rem; line-height: 1; text-transform: uppercase; }
+.ini-hero p { margin: 6px 0 0; color: #C9D6E3; font-size: .9rem; }
+.ini-picks { position: relative; display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.ini-pick { display: flex; align-items: center; gap: 10px; text-align: left; padding: 12px; border-radius: 12px; color: #FFFFFF; background: var(--cc); box-shadow: 0 6px 16px rgba(0,0,0,.25), inset 0 1px 0 rgba(255,255,255,.2); cursor: pointer; transition: transform .15s ease, filter .15s ease; position: relative; overflow: hidden; }
+.ini-pick::after { content: ""; position: absolute; top: 0; bottom: 0; left: -60%; width: 40%; background: linear-gradient(100deg, transparent, rgba(255,255,255,.35), transparent); transform: skewX(-20deg); animation: ccShine 5s ease-in-out infinite; pointer-events: none; }
+.ini-pick.ini-cat-B::after { animation-delay: .3s; } .ini-pick.ini-cat-C::after { animation-delay: .6s; }
+.ini-pick:hover { transform: translateY(-2px); filter: brightness(1.07); }
+.ini-pick.locked { filter: saturate(.75); }
+.ini-pick-letra { width: 44px; height: 44px; flex: none; border-radius: 10px; display: grid; place-items: center; font-family: var(--f-display); font-weight: 900; font-size: 1.8rem; background: rgba(255,255,255,.18); border: 2px solid rgba(255,255,255,.75); }
+.ini-pick-txt { display: flex; flex-direction: column; min-width: 0; flex: 1; }
+.ini-pick-txt b { font-size: .98rem; } .ini-pick-txt small { font-size: .74rem; opacity: .9; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ini-pick-go { font-weight: 800; font-size: .8rem; white-space: nowrap; background: rgba(255,255,255,.2); padding: 4px 8px; border-radius: 999px; }
+.ini-pick-go em { font-style: normal; }
+@media (max-width: 960px) { .ini-hero { grid-template-columns: 1fr; } }
+@media (max-width: 600px) {
+  .ini-hero { margin-top: 14px; padding: 16px; }
+  .ini-hero h2 { font-size: 1.7rem; }
+  .ini-picks { grid-template-columns: 1fr; gap: 8px; }
+}
+@media (prefers-reduced-motion: reduce) { .ini-pick::after { display: none; } }
+.ini-hero { grid-template-columns: 1fr !important; gap: 14px; }
+.ini-hero-txt { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; }
+.ini-hero p { margin: 0; }
+@media (max-width: 600px) {
+  html[data-cat="INICIO"] .brand-main .cat-switch { display: none; }
+  html[data-cat="INICIO"] .brand-sub { white-space: nowrap; }
+  .ini-hero-txt { display: block; }
+}

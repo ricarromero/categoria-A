@@ -3052,12 +3052,30 @@
         </div>`;
     };
 
+    const elegir = CATS.map(c => {
+      const d = CAT_DATOS[c];
+      const abierta = cats.includes(c);
+      const t = (d && d.clausura && d.clausura.tablas) || {};
+      const lider = abierta ? ((t.zonaB && t.zonaB.length) ? null : (t.zonaA || [])[0]) : null;
+      const n = abierta ? (d.equipos || []).length : 0;
+      const det = abierta ? `${n} equipos${lider ? ` · Líder: ${escapeHtml(lider.equipo)}` : ' · Zonas A y B'}` : 'Próximamente';
+      return `<button type="button" class="ini-pick ini-cat-${c} ${abierta ? '' : 'locked'}" data-ini-go="${c}">
+          <span class="ini-pick-letra">${c}</span>
+          <span class="ini-pick-txt"><b>Categoría ${c}</b><small>${det}</small></span>
+          <span class="ini-pick-go">${abierta ? 'Entrar' : 'Pronto'} <em>→</em></span>
+        </button>`;
+    }).join('');
+
     cont.innerHTML = `
+      <div class="ini-hero">
+        <div class="ini-hero-txt"><h2>Elegí tu categoría</h2><p>Tablas, fixture, goleadores y sanciones de cada una.</p></div>
+        <div class="ini-picks">${elegir}</div>
+      </div>
       <div class="ini-grid">
         <section class="ini-col">
           <div class="ini-title"><h2>Próximos partidos</h2><span class="section-badge">Clausura 2026</span></div>
           ${bloques || '<div class="ini-empty">Todavía no hay próximos partidos cargados.</div>'}
-          <a class="ini-cc" href="${urlCat(CAT_DATOS.A ? 'A' : cats[0], 'challenger')}"><span>🏆</span><b>Copa Challenger</b><small>Ver el cuadro completo</small><em>→</em></a>
+          <a class="ini-cc" href="${urlCat(CAT_DATOS.A ? 'A' : cats[0], 'challenger')}"><b>Copa Challenger</b><small>Ver el cuadro completo</small><em>→</em></a>
         </section>
         <aside class="ini-col">
           <div class="ini-title"><h2>Posiciones</h2></div>
@@ -3066,6 +3084,11 @@
         </aside>
       </div>`;
 
+    $$('[data-ini-go]', cont).forEach(b => b.addEventListener('click', () => {
+      const c = b.dataset.iniGo;
+      if (!catDisponible(c)) { mostrarProximamente(c); return; }
+      location.href = urlCat(c);
+    }));
     $$('[data-ini-zona]', cont).forEach(b => b.addEventListener('click', () => {
       const card = b.closest('.ini-table');
       $$('[data-ini-zona]', card).forEach(x => x.classList.toggle('active', x === b));
@@ -3087,7 +3110,7 @@
     if (sub) sub.textContent = INICIO ? 'Temporada 2026' : nombre;
     if (INICIO) {
       document.title = 'Liga Universitaria Sanjuanina de Fútbol — Temporada 2026';
-      const bs = $('.brand-sub'); if (bs) bs.textContent = 'Fútbol Universitario · UNSJ · Categorías A, B y C';
+      const bs = $('.brand-sub'); if (bs) bs.textContent = 'Fútbol Universitario · UNSJ';
       const fc = $('#footerCat'); if (fc) fc.textContent = 'Temporada 2026';
     }
     const logo = $('.brand-v2 .league-official-logo');
