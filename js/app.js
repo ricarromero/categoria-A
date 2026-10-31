@@ -3002,7 +3002,8 @@
   const urlCat = (c, view) => `${location.pathname}?cat=${c.toLowerCase()}${view ? '#' + view : ''}`;
 
   function proximaFecha(d) {
-    const f = ((d && d.clausura && d.clausura.fechas) || []).find(x => !x.disputada && (x.partidos || []).some(p => p.estado === 'pendiente'));
+    // La fecha en curso se muestra (con sus resultados) hasta que llega el informe oficial y se marca como disputada
+    const f = ((d && d.clausura && d.clausura.fechas) || []).find(x => !x.disputada && (x.partidos || []).some(p => p.estado === 'pendiente' || p.estado === 'finalizado'));
     return f || null;
   }
 
