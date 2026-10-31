@@ -2260,66 +2260,6 @@ const LIGA_DATA = {
         "jugador": "Gaitán, Axel",
         "equipo": "C-Lesión",
         "goles": 2
-      },
-      {
-        "pos": 11,
-        "jugador": "Ortiz, Eduardo Mateo",
-        "equipo": "Constructores",
-        "goles": 2
-      },
-      {
-        "pos": 12,
-        "jugador": "González, Francisco",
-        "equipo": "Nottingham",
-        "goles": 2
-      },
-      {
-        "pos": 13,
-        "jugador": "Alós Olmos, Juan Bautista",
-        "equipo": "Antorcha",
-        "goles": 1
-      },
-      {
-        "pos": 14,
-        "jugador": "Contreras Cuevas, Lisandro Nicolás",
-        "equipo": "Antorcha",
-        "goles": 1
-      },
-      {
-        "pos": 15,
-        "jugador": "Mercado, Federico Ezequiel",
-        "equipo": "Antorcha",
-        "goles": 1
-      },
-      {
-        "pos": 16,
-        "jugador": "Riveras Fuentes, Juan Ignacio",
-        "equipo": "Antorcha",
-        "goles": 1
-      },
-      {
-        "pos": 17,
-        "jugador": "Grassano Gómez, Santino",
-        "equipo": "Aston",
-        "goles": 1
-      },
-      {
-        "pos": 18,
-        "jugador": "Contreras, Mariano",
-        "equipo": "C-Lesión",
-        "goles": 1
-      },
-      {
-        "pos": 19,
-        "jugador": "Quiroga González, Enzo",
-        "equipo": "Constructores",
-        "goles": 1
-      },
-      {
-        "pos": 20,
-        "jugador": "López, Braian Facundo",
-        "equipo": "Eclipse",
-        "goles": 1
       }
     ]
   },
