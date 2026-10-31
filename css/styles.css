@@ -4464,3 +4464,10 @@ body.modo-inicio .content-area {
   html[data-cat="INICIO"] .brand-sub { white-space: nowrap; }
   .ini-hero-txt { display: block; }
 }
+/* Línea de corte de las tablas del Inicio: continua y prolija */
+.ini-tbl td.e { display: table-cell !important; }
+.ini-e { display: flex; align-items: center; gap: 8px; font-weight: 700; color: var(--text-primary); min-width: 0; }
+.ini-e span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ini-e .ini-crest { width: 20px; height: 20px; }
+.ini-tbl tr.cut td { border-bottom: 0 !important; }
+.ini-tbl tr.cut + tr td { border-top: 2px solid var(--cc) !important; }

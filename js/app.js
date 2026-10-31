@@ -3042,7 +3042,7 @@
       const nCamp = (d.formato && d.formato.clausura && d.formato.clausura.campeonato) || 4;
       const filas = rows => (rows || []).map(r => {
         const eq = (d.equipos || []).find(e => e.nombre === r.equipo);
-        return `<tr class="${r.pos <= nCamp ? 'q' : ''} ${r.pos === nCamp ? 'cut' : ''}"><td class="p">${r.pos}</td><td class="e"><img class="ini-crest" src="${(eq && eq.escudo) || escudoGlobal(r.equipo) || genericCrestUri(r.equipo)}" alt=""><span>${escapeHtml(r.equipo)}</span></td><td>${r.pj}</td><td class="pts">${r.pts}</td></tr>`;
+        return `<tr class="${r.pos <= nCamp ? 'q' : ''} ${r.pos === nCamp ? 'cut' : ''}"><td class="p">${r.pos}</td><td class="e"><div class="ini-e"><img class="ini-crest" src="${(eq && eq.escudo) || escudoGlobal(r.equipo) || genericCrestUri(r.equipo)}" alt=""><span>${escapeHtml(r.equipo)}</span></div></td><td>${r.pj}</td><td class="pts">${r.pts}</td></tr>`;
       }).join('');
       return `<div class="ini-table ini-cat-${c}" data-ini-tab="${c}">
           <div class="ini-table-head"><span class="ini-chip">${c}</span><b>Categoría ${c}</b><span>Clausura · Fecha ${d.clausura.ultimaFechaDisputada}</span></div>
