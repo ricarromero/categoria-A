@@ -2594,7 +2594,7 @@ const LIGA_DATA = {
       "Flandria FC": "public/escudos/flandria.png",
       "Vial": "public/escudos/vial.png",
       "Don Bosco": "public/escudos/don_bosco.png",
-      "C Atedra FC": "public/escudos/catedra.png",
+      "Cátedra FC": "public/escudos/catedra.png",
       "Nacional": "public/escudos/nacional.png",
       "Bonus Track": "public/escudos/bonus_track.png"
     },
@@ -2940,7 +2940,7 @@ const LIGA_DATA = {
       "L13": "Newcauce",
       "L17": "Don Bosco",
       "R3": "Defensa e Injusticia",
-      "R5": "C Atedra FC",
+      "R5": "Cátedra FC",
       "R7": "Nacional",
       "R11": "Imputables FC",
       "R16": "Bonus Track"
