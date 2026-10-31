@@ -2589,7 +2589,14 @@ const LIGA_DATA = {
       "Necaxa": "public/escudos/necaxa.png?v=2",
       "Dep. La Verna": "public/escudos/dep_la_verna.png?v=2",
       "Inter": "public/escudos/inter.png",
-      "Malvinas": "public/escudos/malvinas.png"
+      "Malvinas": "public/escudos/malvinas.png",
+      "Talleres": "public/escudos/talleres.png",
+      "Flandria FC": "public/escudos/flandria.png",
+      "Vial": "public/escudos/vial.png",
+      "Don Bosco": "public/escudos/don_bosco.png",
+      "C Atedra FC": "public/escudos/catedra.png",
+      "Nacional": "public/escudos/nacional.png",
+      "Bonus Track": "public/escudos/bonus_track.png"
     },
     "llaves": {
       "L": {

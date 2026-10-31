@@ -10,6 +10,7 @@
   if (!A) return;
   const CC = A.copaChallenger || {};
   const escudos = CC.escudos || {};
+  const INSTAGRAM = {"C Atedra FC": "fc.catedra", "Nacional": "nacionalfc_sj", "Bonus Track": "bonustrack013", "Talleres": "talleres.univ", "Flandria FC": "flandria_fc", "Vial": "vialfc.sj", "Don Bosco": "fc_don.bosco"};
 
   const slug = n => n.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '')
     .replace(/[^a-z0-9]+/g, '_').replace(/^_|_$/g, '');
@@ -29,8 +30,8 @@
         zonaApertura: null,
         zonaClausura: null,
         color: '#64748B',
-        instagram: '',
-        instagramHandle: ''
+        instagram: INSTAGRAM[nombre] ? `https://www.instagram.com/${INSTAGRAM[nombre]}/` : '',
+        instagramHandle: INSTAGRAM[nombre] ? '@' + INSTAGRAM[nombre] : ''
       });
     });
     return lista.sort((a, b) => a.nombre.localeCompare(b.nombre, 'es'));
