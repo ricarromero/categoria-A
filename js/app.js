@@ -119,6 +119,16 @@
     return (genericCrestCache[n] = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg));
   }
 
+  // Escudos de todas las categorías (para ver equipos de otras categorías, p. ej. en la Copa Challenger)
+  const ESCUDOS_GLOBAL = {};
+  [window.LIGA_DATA, window.LIGA_DATA_B, window.LIGA_DATA_C].forEach(d => {
+    ((d && d.equipos) || []).forEach(eq => { if (eq.escudo) ESCUDOS_GLOBAL[eq.nombre.toLowerCase()] = eq.escudo; });
+  });
+  function escudoGlobal(nombre) {
+    const n = String(nombre || '').trim();
+    return ESCUDOS_GLOBAL[n.toLowerCase()] || ((DATA.copaChallenger && DATA.copaChallenger.escudos) || {})[n] || '';
+  }
+
   function getTeam(nameOrId) {
     if (!nameOrId) return null;
     const key = String(nameOrId).trim().toLowerCase();
@@ -126,7 +136,7 @@
       id: key.replace(/[^a-z0-9]/g, '_'),
       nombre: nameOrId,
       shortName: nameOrId.slice(0, 3).toUpperCase(),
-      escudo: ((DATA.copaChallenger && DATA.copaChallenger.escudos) || {})[String(nameOrId).trim()] || genericCrestUri(nameOrId),
+      escudo: escudoGlobal(nameOrId) || genericCrestUri(nameOrId),
       generic: true,
       color: "#4895ef"
     };
