@@ -1823,9 +1823,9 @@ const LIGA_DATA = {
             "zona": "Zona B",
             "local": "Otro Equipo",
             "visitante": "Calise",
-            "golesL": null,
-            "golesV": null,
-            "estado": "pendiente",
+            "golesL": 4,
+            "golesV": 1,
+            "estado": "finalizado",
             "nota": "",
           "dia": "Sábado 31/10", "hora": "12:50", "cancha": "Cancha de Fútbol"
           },
