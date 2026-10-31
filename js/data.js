@@ -1813,9 +1813,9 @@ const LIGA_DATA = {
             "zona": "Zona B",
             "local": "Eclipse",
             "visitante": "Red Bull",
-            "golesL": null,
-            "golesV": null,
-            "estado": "pendiente",
+            "golesL": 0,
+            "golesV": 0,
+            "estado": "finalizado",
             "nota": "",
           "dia": "Sábado 31/10", "hora": "15:50", "cancha": "Cancha de Fútbol"
           },
