@@ -154,17 +154,6 @@
       "instagramHandle": ""
     },
     {
-      "id": "newcauce",
-      "nombre": "Newcauce",
-      "slug": "newcauce",
-      "escudo": "public/escudos/newcauce.png",
-      "zonaApertura": "B",
-      "zonaClausura": null,
-      "color": "#22814D",
-      "instagram": "",
-      "instagramHandle": ""
-    },
-    {
       "id": "tercer_tiempo",
       "nombre": "Tercer Tiempo",
       "slug": "tercer_tiempo",
@@ -2174,17 +2163,6 @@
       "coefAp": 0.29,
       "coefCl": 0.0,
       "total": 0.29
-    },
-    {
-      "pos": 16,
-      "equipo": "Newcauce",
-      "ptsAp": 0,
-      "bonus": 0,
-      "ptsCl": 0,
-      "totalAp": 0,
-      "coefAp": 0.0,
-      "coefCl": 0.0,
-      "total": 0.0
     }
   ]
 };
