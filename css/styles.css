@@ -4474,3 +4474,10 @@ body.modo-inicio .content-area {
 .ini-daysep { padding: 6px 14px; font-size: .72rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--cc); background: color-mix(in srgb, var(--cc) 8%, #FFFFFF); border-top: 1px solid var(--border-subtle); }
 /* Inicio: sin los botones A/B/C del encabezado (ya están en "Elegí tu categoría") */
 html[data-cat="INICIO"] .brand-main .cat-switch { display: none !important; }
+/* Celular: botón de Inicio en la barra */
+.mnav-home { display: none; }
+@media (max-width: 760px) {
+  .mnav-home { display: grid; place-items: center; width: 46px; height: 46px; flex: none; border-radius: 10px; background: var(--navy-primary); color: #FFFFFF; box-shadow: 0 2px 8px rgba(20,40,63,.25); }
+  .mnav-home svg { width: 22px; height: 22px; }
+  .mnav-cc { padding: 0 12px; font-size: .85rem; }
+}

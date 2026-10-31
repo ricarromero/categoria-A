@@ -3164,13 +3164,14 @@
     const vistas = $$('#mainTabs .tab-btn').map(b => ({ v: b.dataset.view, t: b.textContent.trim() }));
     nav.insertAdjacentHTML('beforeend', `
       <div class="mnav" id="mnav">
+        <a class="mnav-home" href="./" title="Inicio" aria-label="Ir al inicio">${navIcon('inicio')}</a>
         <button type="button" class="mnav-cc" data-view="challenger">${navIcon('challenger')}<span>Copa Challenger</span></button>
         <button type="button" class="mnav-toggle" id="mnavToggle" aria-haspopup="true" aria-expanded="false">
           <span class="mnav-cur">${navIcon('posiciones')}<span>Posiciones</span></span>
           <svg class="mnav-chev" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
         </button>
         <div class="mnav-panel" id="mnavPanel" hidden>
-          ${vistas.filter(x => x.v !== 'challenger').map(x => `<button type="button" class="mnav-item" data-view="${x.v}">${navIcon(x.v)}<span>${escapeHtml(x.t)}</span></button>`).join('')}
+          ${vistas.filter(x => x.v !== 'challenger' && x.v !== 'inicio').map(x => `<button type="button" class="mnav-item" data-view="${x.v}">${navIcon(x.v)}<span>${escapeHtml(x.t)}</span></button>`).join('')}
         </div>
       </div>`);
     const panel = $('#mnavPanel'), toggle = $('#mnavToggle');
