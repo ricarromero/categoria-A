@@ -4481,3 +4481,6 @@ html[data-cat="INICIO"] .brand-main .cat-switch { display: none !important; }
   .mnav-home svg { width: 22px; height: 22px; }
   .mnav-cc { padding: 0 12px; font-size: .85rem; }
 }
+/* Botón Playoffs / Cruces con el color de cada categoría */
+.fecha-pill-playoffs { border-color: var(--navy-secondary) !important; color: var(--navy-secondary) !important; }
+.fecha-pill-playoffs.active { background: var(--navy-secondary) !important; color: #FFFFFF !important; border-color: var(--navy-secondary) !important; }
