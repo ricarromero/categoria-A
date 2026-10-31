@@ -4256,3 +4256,30 @@ html[data-cat="C"] {
   .brand-main .cat-switch { order: 2; width: 100%; }
   .hero-ig { top: 6px; }
 }
+
+/* =========================================================================
+   MENÚ PARA CELULAR (prueba): Copa Challenger + desplegable con íconos
+   ========================================================================= */
+.mnav { display: none; }
+@media (max-width: 760px) {
+  .navbar-sticky .tabs-nav { display: none !important; }
+  .navbar-sticky .container { position: relative; }
+  .mnav { display: flex; gap: 8px; align-items: center; padding: 8px 0; position: relative; }
+  .mnav-cc { display: inline-flex; align-items: center; gap: 6px; height: 46px; padding: 0 14px; border-radius: 10px; color: #FFFFFF; font-weight: 800; font-size: .9rem; white-space: nowrap; background: linear-gradient(180deg, #D81E57 0%, #A3123D 100%); box-shadow: 0 2px 10px rgba(200, 22, 75, .3); flex: none; position: relative; overflow: hidden; }
+  .mnav-cc::after { content: ""; position: absolute; top: 0; bottom: 0; left: -60%; width: 40%; background: linear-gradient(100deg, transparent, rgba(255,255,255,.35), transparent); transform: skewX(-20deg); animation: ccShine 4.5s ease-in-out infinite; }
+  .mnav-cc.active { box-shadow: 0 0 0 3px rgba(200, 22, 75, .25), 0 3px 12px rgba(142, 14, 51, .45); background: linear-gradient(180deg, #C8164B 0%, #8E0E33 100%); }
+  .mnav-toggle { flex: 1; min-width: 0; height: 46px; display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 0 12px 0 14px; border-radius: 10px; background: #FFFFFF; border: 2px solid var(--navy-secondary); color: var(--navy-primary); font-weight: 800; font-size: .95rem; }
+  .mnav-cur { display: flex; align-items: center; gap: 8px; min-width: 0; }
+  .mnav-cur span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .mnav-chev { flex: none; transition: transform .18s ease; color: var(--navy-secondary); }
+  .mnav-toggle.open .mnav-chev { transform: rotate(180deg); }
+  .mnav-panel { position: absolute; top: calc(100% + 2px); right: 0; left: 0; z-index: 120; background: #FFFFFF; border-radius: 12px; box-shadow: 0 18px 40px rgba(15, 30, 50, .22); border: 1px solid var(--border-color); padding: 6px; display: grid; grid-template-columns: 1fr 1fr; gap: 4px; animation: mnavIn .16s ease; }
+  .mnav-panel[hidden] { display: none; }
+  @keyframes mnavIn { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
+  .mnav-item { display: flex; align-items: center; gap: 10px; padding: 12px; border-radius: 8px; font-weight: 700; font-size: .92rem; color: var(--text-secondary); text-align: left; }
+  .mnav-item svg { color: var(--navy-secondary); flex: none; }
+  .mnav-item:active { background: var(--surface-hover); }
+  .mnav-item.active { background: var(--navy-secondary); color: #FFFFFF; }
+  .mnav-item.active svg { color: #FFFFFF; }
+}
+@media (prefers-reduced-motion: reduce) { .mnav-cc::after { animation: none; display: none; } }

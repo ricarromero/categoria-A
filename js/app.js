@@ -2893,6 +2893,60 @@
     });
   }
 
+
+  // =========================================================================
+  // MENÚ PARA CELULAR: botón Copa Challenger + desplegable con íconos
+  // =========================================================================
+  const NAV_ICONS = {
+    posiciones: '<path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/>',
+    fixture: '<rect x="3" y="4" width="18" height="17" rx="2"/><path d="M16 2v4M8 2v4M3 10h18M8 14h2M14 14h2M8 17h2"/>',
+    challenger: '<path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0V4z"/><path d="M17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/>',
+    equipos: '<path d="M12 2l8 3v6c0 5-3.5 9-8 11-4.5-2-8-6-8-11V5z"/>',
+    estadisticas: '<path d="M21 12A9 9 0 1 1 12 3v9z"/><path d="M15 3.5A9 9 0 0 1 20.5 9H15z"/>',
+    goleadores: '<circle cx="12" cy="12" r="9"/><path d="M12 7l4 3-1.5 4.5h-5L8 10z"/>',
+    sanciones: '<rect x="7" y="3" width="10" height="15" rx="1.5" transform="rotate(8 12 10)"/><path d="M5 21h14"/>',
+    reglamento: '<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V3H6.5A2.5 2.5 0 0 0 4 5.5v14z"/><path d="M8 7h8M8 11h6"/>'
+  };
+  const navIcon = v => `<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${NAV_ICONS[v] || ''}</svg>`;
+
+  function buildMobileNav() {
+    const nav = $('.navbar-sticky .container');
+    if (!nav || $('#mnav')) return;
+    const vistas = $$('#mainTabs .tab-btn').map(b => ({ v: b.dataset.view, t: b.textContent.trim() }));
+    nav.insertAdjacentHTML('beforeend', `
+      <div class="mnav" id="mnav">
+        <button type="button" class="mnav-cc" data-view="challenger">${navIcon('challenger')}<span>Copa Challenger</span></button>
+        <button type="button" class="mnav-toggle" id="mnavToggle" aria-haspopup="true" aria-expanded="false">
+          <span class="mnav-cur">${navIcon('posiciones')}<span>Posiciones</span></span>
+          <svg class="mnav-chev" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="mnav-panel" id="mnavPanel" hidden>
+          ${vistas.filter(x => x.v !== 'challenger').map(x => `<button type="button" class="mnav-item" data-view="${x.v}">${navIcon(x.v)}<span>${escapeHtml(x.t)}</span></button>`).join('')}
+        </div>
+      </div>`);
+    const panel = $('#mnavPanel'), toggle = $('#mnavToggle');
+    const cerrar = () => { panel.hidden = true; toggle.setAttribute('aria-expanded', 'false'); toggle.classList.remove('open'); };
+    toggle.addEventListener('click', e => {
+      e.stopPropagation();
+      panel.hidden = !panel.hidden;
+      toggle.setAttribute('aria-expanded', panel.hidden ? 'false' : 'true');
+      toggle.classList.toggle('open', !panel.hidden);
+    });
+    document.addEventListener('click', e => { if (!panel.hidden && !$('#mnav').contains(e.target)) cerrar(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') cerrar(); });
+    $$('#mnav [data-view]').forEach(b => b.addEventListener('click', () => { cerrar(); switchTab(b.dataset.view); }));
+  }
+
+  function updateMobileNav(view) {
+    if (!$('#mnav')) return;
+    const btn = $(`#mainTabs .tab-btn[data-view="${view}"]`);
+    const cur = $('#mnavToggle .mnav-cur');
+    const esCC = view === 'challenger';
+    $('#mnav .mnav-cc').classList.toggle('active', esCC);
+    cur.innerHTML = esCC ? `${navIcon('posiciones')}<span>Secciones</span>` : `${navIcon(view)}<span>${btn ? escapeHtml(btn.textContent.trim()) : ''}</span>`;
+    $$('#mnavPanel .mnav-item').forEach(i => i.classList.toggle('active', i.dataset.view === view));
+  }
+
   function updateTabIndicator() {
     const activeBtn = $(`#mainTabs .tab-btn[data-view="${state.currentTab}"]`);
     const indicator = $('#tabIndicator');
@@ -2921,6 +2975,7 @@
     }
 
     updateTabIndicator();
+    updateMobileNav(viewName);
 
     if (ESQ && viewName !== 'challenger' && viewName !== 'reglamento' && viewName !== 'equipos') {
       if (viewName === 'posiciones') renderPosicionesEsqueleto();
@@ -2958,6 +3013,7 @@
         switchTab(btn.dataset.view);
       });
     });
+    buildMobileNav();
 
     const closeBtn = $('#modalClose');
     if (closeBtn) closeBtn.addEventListener('click', closeTeamModal);
