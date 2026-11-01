@@ -91,12 +91,12 @@
       "id": "f90",
       "nombre": "F90",
       "slug": "f90",
-      "escudo": "public/escudos/f90.png?v=4",
+      "escudo": "public/escudos/f90.png?v=5",
       "zonaApertura": "B",
       "zonaClausura": "A",
       "color": "#22814D",
-      "instagram": "https://www.instagram.com/clubuniversitariof90/",
-      "instagramHandle": "@clubuniversitariof90"
+      "instagram": "https://www.instagram.com/vascodabfc/",
+      "instagramHandle": "@vascodabfc"
     },
     {
       "id": "geologia",
