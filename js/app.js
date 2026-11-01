@@ -3034,7 +3034,7 @@
           <span class="ini-team">${escapeHtml(p.local)}${crest(p.local)}</span>
           ${p.estado === 'finalizado' ? `<span class="ini-score">${p.golesL}<i>-</i>${p.golesV}</span>` : '<span class="ini-vs">vs</span>'}
           <span class="ini-team r">${crest(p.visitante)}${escapeHtml(p.visitante)}</span>
-          ${p.estado === 'finalizado' ? '<span class="ini-cancha ini-final">Final</span>' : (p.cancha ? `<span class="ini-cancha">${escapeHtml(p.cancha.replace('Cancha de ', ''))}</span>` : '')}
+          ${p.estado === 'finalizado' ? (/no se present/i.test(p.nota || '') ? `<span class="ini-cancha ini-final" title="${escapeHtml(p.nota)}">W.O.</span>` : '<span class="ini-cancha ini-final">Final</span>') : (p.cancha ? `<span class="ini-cancha">${escapeHtml(p.cancha.replace('Cancha de ', ''))}</span>` : '')}
         </a>`;
       }).join('');
       return `<div class="ini-block ini-cat-${c} ${conHora ? '' : 'sin-hora'}">
