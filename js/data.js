@@ -1,7 +1,7 @@
 /**
  * LIGA UNIVERSITARIA SANJUANINA DE FÚTBOL — CATEGORÍA A 2026
  * Fuente de Verdad Centralizada de Datos Oficiales
- * Actualizado automáticamente: Torneo Clausura 2026 · Fecha 4 completada
+ * Actualizado automáticamente: Torneo Clausura 2026 · Fecha 5 completada
  */
 
 const LIGA_DATA = {
@@ -13,8 +13,8 @@ const LIGA_DATA = {
     "organizador": "Comisión de la Liga Universitaria",
     "universidad": "Universidad Nacional de San Juan",
     "torneoActual": "Torneo Clausura 2026",
-    "ultimaFechaDisputada": 4,
-    "estado": "Clausura en disputa · Fecha 4 completada",
+    "ultimaFechaDisputada": 5,
+    "estado": "Clausura en disputa · Fecha 5 completada",
     "instagram": "https://www.instagram.com/ligauniversitaria.sj/",
     "instagramHandle": "@ligauniversitaria.sj"
   },
@@ -1435,7 +1435,7 @@ const LIGA_DATA = {
   },
   "clausura": {
     "enCurso": true,
-    "ultimaFechaDisputada": 4,
+    "ultimaFechaDisputada": 5,
     "fechas": [
       {
         "numero": 1,
@@ -1757,17 +1757,19 @@ const LIGA_DATA = {
         "numero": 5,
         "nombre": "Fecha 5",
         "dia": "Sábado 31 de octubre",
-        "disputada": false,
+        "disputada": true,
         "partidos": [
           {
             "zona": "Zona A",
             "local": "Antorcha",
             "visitante": "Jägermeister",
             "golesL": 0,
-            "golesV": 2,
+            "golesV": 3,
             "estado": "finalizado",
             "nota": "",
-          "dia": "Sábado 31/10", "hora": "14:10", "cancha": "Cancha de Rugby"
+            "dia": "Sábado 31/10",
+            "hora": "14:10",
+            "cancha": "Cancha de Rugby"
           },
           {
             "zona": "Zona A",
@@ -1777,7 +1779,9 @@ const LIGA_DATA = {
             "golesV": 5,
             "estado": "finalizado",
             "nota": "",
-          "dia": "Sábado 31/10", "hora": "11:20", "cancha": "Cancha de Fútbol"
+            "dia": "Sábado 31/10",
+            "hora": "11:20",
+            "cancha": "Cancha de Fútbol"
           },
           {
             "zona": "Zona A",
@@ -1787,7 +1791,9 @@ const LIGA_DATA = {
             "golesV": 3,
             "estado": "finalizado",
             "nota": "",
-          "dia": "Sábado 31/10", "hora": "14:20", "cancha": "Cancha de Fútbol"
+            "dia": "Sábado 31/10",
+            "hora": "14:20",
+            "cancha": "Cancha de Fútbol"
           },
           {
             "zona": "Zona A",
@@ -1797,7 +1803,9 @@ const LIGA_DATA = {
             "golesV": 1,
             "estado": "finalizado",
             "nota": "",
-          "dia": "Sábado 31/10", "hora": "12:40", "cancha": "Cancha de Rugby"
+            "dia": "Sábado 31/10",
+            "hora": "12:40",
+            "cancha": "Cancha de Rugby"
           },
           {
             "zona": "Zona B",
@@ -1807,7 +1815,9 @@ const LIGA_DATA = {
             "golesV": 0,
             "estado": "finalizado",
             "nota": "",
-          "dia": "Sábado 31/10", "hora": "15:40", "cancha": "Cancha de Rugby"
+            "dia": "Sábado 31/10",
+            "hora": "15:40",
+            "cancha": "Cancha de Rugby"
           },
           {
             "zona": "Zona B",
@@ -1817,7 +1827,9 @@ const LIGA_DATA = {
             "golesV": 0,
             "estado": "finalizado",
             "nota": "",
-          "dia": "Sábado 31/10", "hora": "15:50", "cancha": "Cancha de Fútbol"
+            "dia": "Sábado 31/10",
+            "hora": "15:50",
+            "cancha": "Cancha de Fútbol"
           },
           {
             "zona": "Zona B",
@@ -1827,7 +1839,9 @@ const LIGA_DATA = {
             "golesV": 1,
             "estado": "finalizado",
             "nota": "",
-          "dia": "Sábado 31/10", "hora": "12:50", "cancha": "Cancha de Fútbol"
+            "dia": "Sábado 31/10",
+            "hora": "12:50",
+            "cancha": "Cancha de Fútbol"
           },
           {
             "zona": "Zona B",
@@ -1846,13 +1860,16 @@ const LIGA_DATA = {
         "disputada": false,
         "partidos": [
           {
-            "zona": "Zona A",
-            "local": "Antorcha",
-            "visitante": "Constructores",
+            "zona": "Zona B",
+            "local": "De Primera",
+            "visitante": "Red Bull",
             "golesL": null,
             "golesV": null,
             "estado": "pendiente",
-            "nota": "Próximamente"
+            "nota": "",
+            "dia": "Domingo 08/11",
+            "hora": "11:20",
+            "cancha": "Cancha de Fútbol"
           },
           {
             "zona": "Zona A",
@@ -1861,34 +1878,10 @@ const LIGA_DATA = {
             "golesL": null,
             "golesV": null,
             "estado": "pendiente",
-            "nota": "Próximamente"
-          },
-          {
-            "zona": "Zona A",
-            "local": "Aston",
-            "visitante": "C-Lesión",
-            "golesL": null,
-            "golesV": null,
-            "estado": "pendiente",
-            "nota": "Próximamente"
-          },
-          {
-            "zona": "Zona A",
-            "local": "La Máquina",
-            "visitante": "Minaster City",
-            "golesL": null,
-            "golesV": null,
-            "estado": "pendiente",
-            "nota": "Próximamente"
-          },
-          {
-            "zona": "Zona B",
-            "local": "De Primera",
-            "visitante": "Red Bull",
-            "golesL": null,
-            "golesV": null,
-            "estado": "pendiente",
-            "nota": "Próximamente"
+            "nota": "",
+            "dia": "Domingo 08/11",
+            "hora": "12:40",
+            "cancha": "Cancha de Rugby"
           },
           {
             "zona": "Zona B",
@@ -1897,7 +1890,58 @@ const LIGA_DATA = {
             "golesL": null,
             "golesV": null,
             "estado": "pendiente",
-            "nota": "Próximamente"
+            "nota": "",
+            "dia": "Domingo 08/11",
+            "hora": "12:50",
+            "cancha": "Cancha de Fútbol"
+          },
+          {
+            "zona": "Zona A",
+            "local": "La Máquina",
+            "visitante": "Minaster City",
+            "golesL": null,
+            "golesV": null,
+            "estado": "pendiente",
+            "nota": "",
+            "dia": "Domingo 08/11",
+            "hora": "14:10",
+            "cancha": "Cancha de Rugby"
+          },
+          {
+            "zona": "Zona A",
+            "local": "Antorcha",
+            "visitante": "Constructores",
+            "golesL": null,
+            "golesV": null,
+            "estado": "pendiente",
+            "nota": "",
+            "dia": "Domingo 08/11",
+            "hora": "14:20",
+            "cancha": "Cancha de Fútbol"
+          },
+          {
+            "zona": "Zona B",
+            "local": "Otro Equipo",
+            "visitante": "Mavericks",
+            "golesL": null,
+            "golesV": null,
+            "estado": "pendiente",
+            "nota": "",
+            "dia": "Domingo 08/11",
+            "hora": "15:40",
+            "cancha": "Cancha de Rugby"
+          },
+          {
+            "zona": "Zona A",
+            "local": "Aston",
+            "visitante": "C-Lesión",
+            "golesL": null,
+            "golesV": null,
+            "estado": "pendiente",
+            "nota": "",
+            "dia": "Domingo 08/11",
+            "hora": "15:50",
+            "cancha": "Cancha de Fútbol"
           },
           {
             "zona": "Zona B",
@@ -1907,17 +1951,9 @@ const LIGA_DATA = {
             "golesV": null,
             "estado": "libre",
             "nota": "Fecha Libre Eclipse"
-          },
-          {
-            "zona": "Zona B",
-            "local": "Otro Equipo",
-            "visitante": "Mavericks",
-            "golesL": null,
-            "golesV": null,
-            "estado": "pendiente",
-            "nota": "Próximamente"
           }
-        ]
+        ],
+        "dia": "Domingo 8 de noviembre"
       },
       {
         "numero": 7,
@@ -2004,105 +2040,105 @@ const LIGA_DATA = {
         {
           "pos": 1,
           "equipo": "Constructores",
-          "pj": 4,
-          "pg": 4,
+          "pj": 5,
+          "pg": 5,
           "pe": 0,
           "pp": 0,
-          "gf": 14,
-          "gc": 2,
-          "dg": 12,
-          "pts": 12,
+          "gf": 19,
+          "gc": 3,
+          "dg": 16,
+          "pts": 15,
           "zona": "A"
         },
         {
           "pos": 2,
           "equipo": "Jägermeister",
-          "pj": 4,
-          "pg": 3,
+          "pj": 5,
+          "pg": 4,
           "pe": 0,
           "pp": 1,
-          "gf": 10,
+          "gf": 13,
           "gc": 8,
-          "dg": 2,
-          "pts": 9,
+          "dg": 5,
+          "pts": 12,
           "zona": "A"
         },
         {
           "pos": 3,
           "equipo": "Minaster City",
-          "pj": 4,
-          "pg": 2,
+          "pj": 5,
+          "pg": 3,
           "pe": 1,
           "pp": 1,
-          "gf": 6,
-          "gc": 4,
-          "dg": 2,
-          "pts": 7,
+          "gf": 9,
+          "gc": 5,
+          "dg": 4,
+          "pts": 10,
           "zona": "A"
         },
         {
           "pos": 4,
           "equipo": "Antorcha",
-          "pj": 4,
+          "pj": 5,
           "pg": 1,
           "pe": 2,
-          "pp": 1,
+          "pp": 2,
           "gf": 4,
-          "gc": 6,
-          "dg": -2,
+          "gc": 9,
+          "dg": -5,
           "pts": 5,
           "zona": "A"
         },
         {
           "pos": 5,
-          "equipo": "Aston",
-          "pj": 4,
+          "equipo": "Nottingham",
+          "pj": 5,
           "pg": 1,
           "pe": 1,
-          "pp": 2,
-          "gf": 5,
-          "gc": 5,
-          "dg": 0,
+          "pp": 3,
+          "gf": 9,
+          "gc": 13,
+          "dg": -4,
           "pts": 4,
           "zona": "A"
         },
         {
           "pos": 6,
-          "equipo": "C-Lesión",
-          "pj": 4,
+          "equipo": "Aston",
+          "pj": 5,
           "pg": 1,
           "pe": 1,
-          "pp": 2,
-          "gf": 8,
-          "gc": 13,
-          "dg": -5,
+          "pp": 3,
+          "gf": 6,
+          "gc": 10,
+          "dg": -4,
           "pts": 4,
           "zona": "A"
         },
         {
           "pos": 7,
-          "equipo": "La Máquina",
-          "pj": 4,
+          "equipo": "C-Lesión",
+          "pj": 5,
           "pg": 1,
-          "pe": 0,
+          "pe": 1,
           "pp": 3,
-          "gf": 5,
-          "gc": 7,
-          "dg": -2,
-          "pts": 3,
+          "gf": 9,
+          "gc": 16,
+          "dg": -7,
+          "pts": 4,
           "zona": "A"
         },
         {
           "pos": 8,
-          "equipo": "Nottingham",
-          "pj": 4,
-          "pg": 0,
-          "pe": 1,
-          "pp": 3,
-          "gf": 6,
-          "gc": 13,
-          "dg": -7,
-          "pts": 1,
+          "equipo": "La Máquina",
+          "pj": 5,
+          "pg": 1,
+          "pe": 0,
+          "pp": 4,
+          "gf": 5,
+          "gc": 10,
+          "dg": -5,
+          "pts": 3,
           "zona": "A"
         }
       ],
@@ -2110,70 +2146,57 @@ const LIGA_DATA = {
         {
           "pos": 1,
           "equipo": "Red Bull",
-          "pj": 4,
+          "pj": 5,
           "pg": 3,
-          "pe": 1,
+          "pe": 2,
           "pp": 0,
           "gf": 10,
           "gc": 2,
           "dg": 8,
-          "pts": 10,
+          "pts": 11,
           "zona": "B"
         },
         {
           "pos": 2,
           "equipo": "Otro Equipo",
-          "pj": 3,
-          "pg": 2,
+          "pj": 4,
+          "pg": 3,
           "pe": 0,
           "pp": 1,
-          "gf": 6,
-          "gc": 2,
-          "dg": 4,
-          "pts": 6,
+          "gf": 10,
+          "gc": 3,
+          "dg": 7,
+          "pts": 9,
           "zona": "B"
         },
         {
           "pos": 3,
           "equipo": "Eclipse",
-          "pj": 4,
+          "pj": 5,
           "pg": 2,
-          "pe": 0,
+          "pe": 1,
           "pp": 2,
           "gf": 4,
           "gc": 7,
           "dg": -3,
-          "pts": 6,
+          "pts": 7,
           "zona": "B"
         },
         {
           "pos": 4,
           "equipo": "De Primera",
-          "pj": 3,
+          "pj": 4,
           "pg": 1,
-          "pe": 1,
+          "pe": 2,
           "pp": 1,
           "gf": 8,
           "gc": 5,
           "dg": 3,
-          "pts": 4,
+          "pts": 5,
           "zona": "B"
         },
         {
           "pos": 5,
-          "equipo": "Calise",
-          "pj": 3,
-          "pg": 1,
-          "pe": 1,
-          "pp": 1,
-          "gf": 3,
-          "gc": 3,
-          "dg": 0,
-          "pts": 4,
-          "zona": "B"
-        },
-        {
-          "pos": 6,
           "equipo": "Mavericks",
           "pj": 4,
           "pg": 1,
@@ -2186,16 +2209,29 @@ const LIGA_DATA = {
           "zona": "B"
         },
         {
+          "pos": 6,
+          "equipo": "Calise",
+          "pj": 4,
+          "pg": 1,
+          "pe": 1,
+          "pp": 2,
+          "gf": 4,
+          "gc": 7,
+          "dg": -3,
+          "pts": 4,
+          "zona": "B"
+        },
+        {
           "pos": 7,
           "equipo": "Celtic",
-          "pj": 3,
+          "pj": 4,
           "pg": 0,
-          "pe": 0,
+          "pe": 1,
           "pp": 3,
           "gf": 0,
           "gc": 10,
           "dg": -10,
-          "pts": 0,
+          "pts": 1,
           "zona": "B"
         }
       ]
@@ -2209,56 +2245,56 @@ const LIGA_DATA = {
       },
       {
         "pos": 2,
+        "jugador": "Salinas, Guillermo",
+        "equipo": "Minaster City",
+        "goles": 5
+      },
+      {
+        "pos": 3,
+        "jugador": "Ortiz, Eduardo Mateo",
+        "equipo": "Constructores",
+        "goles": 4
+      },
+      {
+        "pos": 4,
         "jugador": "Beja, Augusto",
         "equipo": "Jägermeister",
         "goles": 4
       },
       {
-        "pos": 3,
-        "jugador": "Salinas, Guillermo",
-        "equipo": "Minaster City",
+        "pos": 5,
+        "jugador": "Quiroga, Maximiliano",
+        "equipo": "Nottingham",
         "goles": 4
       },
       {
-        "pos": 4,
+        "pos": 6,
+        "jugador": "Gaitán, Axel",
+        "equipo": "C-Lesión",
+        "goles": 3
+      },
+      {
+        "pos": 7,
         "jugador": "Aguilera, Tomás Ezequiel",
         "equipo": "Constructores",
         "goles": 3
       },
       {
-        "pos": 5,
+        "pos": 8,
+        "jugador": "Trozzi, Leonel Ángel",
+        "equipo": "Otro Equipo",
+        "goles": 3
+      },
+      {
+        "pos": 9,
         "jugador": "Martínez González, Mario Valentín",
         "equipo": "Red Bull",
         "goles": 3
       },
       {
-        "pos": 6,
-        "jugador": "Almazán, Joaquín",
-        "equipo": "Aston",
-        "goles": 2
-      },
-      {
-        "pos": 7,
+        "pos": 10,
         "jugador": "Flores, Dardo Ignacio",
         "equipo": "Aston",
-        "goles": 2
-      },
-      {
-        "pos": 8,
-        "jugador": "Carrario, Enzo",
-        "equipo": "Calise",
-        "goles": 2
-      },
-      {
-        "pos": 9,
-        "jugador": "Adaro, Diego Sebastián",
-        "equipo": "C-Lesión",
-        "goles": 2
-      },
-      {
-        "pos": 10,
-        "jugador": "Gaitán, Axel",
-        "equipo": "C-Lesión",
         "goles": 2
       }
     ]
@@ -2393,14 +2429,6 @@ const LIGA_DATA = {
       "estado": "Vigente"
     },
     {
-      "jugador": "Núñez, Nahuel",
-      "equipo": "La Máquina",
-      "sancion": "4 Partidos",
-      "articulo": "Art 23 inc 'A'",
-      "motivo": "Juego brusco con fuerza excesiva",
-      "estado": "Cumplió 3 (Resta 1)"
-    },
-    {
       "jugador": "Matus, Carlos Agustín",
       "equipo": "Mavericks",
       "sancion": "Hasta 31/12/2026",
@@ -2425,20 +2453,12 @@ const LIGA_DATA = {
       "estado": "Vigente"
     },
     {
-      "jugador": "Guerra, Agustín",
-      "equipo": "Nottingham",
-      "sancion": "1 Partido",
-      "articulo": "Art. 26 inc \"C\"",
-      "motivo": "",
-      "estado": "Vigente (0/1)"
-    },
-    {
       "jugador": "Giménez, Ezequiel",
       "equipo": "Minaster City",
       "sancion": "5 Partidos",
       "articulo": "Art. 28 inc \"B\"",
       "motivo": "Sanción disciplinaria Fecha 4",
-      "estado": "Cumplió 1 (Resta 4)"
+      "estado": "Cumplió 2 (Resta 3)"
     },
     {
       "jugador": "Irustia, Lautaro",
@@ -2446,7 +2466,7 @@ const LIGA_DATA = {
       "sancion": "5 Partidos",
       "articulo": "Art. 28 inc \"B\"",
       "motivo": "Sanción disciplinaria Fecha 4",
-      "estado": "Cumplió 1 (Resta 4)"
+      "estado": "Cumplió 2 (Resta 3)"
     },
     {
       "jugador": "Sánchez, Lucas",
@@ -2454,7 +2474,7 @@ const LIGA_DATA = {
       "sancion": "2 Partidos",
       "articulo": "Art. 23 inc \"A\"",
       "motivo": "Expulsión Fecha 4",
-      "estado": "Vigente (0/2)"
+      "estado": "Cumplió 1 (Resta 1)"
     },
     {
       "jugador": "Castro, Santiago",
@@ -2462,7 +2482,7 @@ const LIGA_DATA = {
       "sancion": "2 Partidos",
       "articulo": "Art. 23 inc \"A\"",
       "motivo": "Expulsión Fecha 4",
-      "estado": "Vigente (0/2)"
+      "estado": "Cumplió 1 (Resta 1)"
     },
     {
       "jugador": "Camargo, Francisco",
@@ -2470,31 +2490,31 @@ const LIGA_DATA = {
       "sancion": "3 Partidos",
       "articulo": "Art. 23 inc \"A\" y 26 inc \"C\"",
       "motivo": "Conducta antideportiva Fecha 4",
-      "estado": "Vigente (0/3)"
+      "estado": "Cumplió 1 (Resta 2)"
     },
     {
       "jugador": "DT: Acosta, Santiago",
       "equipo": "Minaster City",
-      "sancion": "Inhabilitación Provisoria",
-      "articulo": "Tribunal de Disciplina",
-      "motivo": "Suspensión provisoria Fecha 4",
-      "estado": "Provisorio"
+      "sancion": "6 Partidos",
+      "articulo": "Art. 23 inc \"A\"",
+      "motivo": "Sanción disciplinaria Fecha 4",
+      "estado": "Cumplió 1 (Resta 5)"
     },
     {
       "jugador": "Acosta, Jerónimo",
       "equipo": "Minaster City",
-      "sancion": "Inhabilitación Provisoria",
-      "articulo": "Tribunal de Disciplina",
-      "motivo": "Suspensión provisoria Fecha 4",
-      "estado": "Provisorio"
+      "sancion": "2 Partidos",
+      "articulo": "Art. 23 inc \"A\"",
+      "motivo": "Sanción disciplinaria Fecha 4",
+      "estado": "Cumplió 1 (Resta 1)"
     },
     {
       "jugador": "Domínguez, Lautaro",
       "equipo": "Minaster City",
-      "sancion": "Inhabilitación Provisoria",
-      "articulo": "Tribunal de Disciplina",
-      "motivo": "Suspensión provisoria Fecha 4",
-      "estado": "Provisorio"
+      "sancion": "2 Partidos",
+      "articulo": "Art. 23 inc \"A\"",
+      "motivo": "Sanción disciplinaria Fecha 4",
+      "estado": "Cumplió 1 (Resta 1)"
     },
     {
       "jugador": "Cabello, Valentín",
@@ -2502,7 +2522,7 @@ const LIGA_DATA = {
       "sancion": "2 Partidos",
       "articulo": "Art. 23 inc \"A\"",
       "motivo": "",
-      "estado": "Vigente (0/2)"
+      "estado": "Cumplió 1 (Resta 1)"
     },
     {
       "jugador": "Mogrovejo, Joaquín",
@@ -2510,19 +2530,75 @@ const LIGA_DATA = {
       "sancion": "2 Partidos",
       "articulo": "Art. 23 inc \"B\"",
       "motivo": "",
+      "estado": "Cumplió 1 (Resta 1)"
+    },
+    {
+      "jugador": "Cáceres, Agustín",
+      "equipo": "Red Bull",
+      "sancion": "2 Partidos",
+      "articulo": "Art. 26 inc \"B\"",
+      "motivo": "Sanción Fecha 5",
       "estado": "Vigente (0/2)"
     },
     {
-      "jugador": "Arbo, Mauricio",
+      "jugador": "Díaz, Javier",
+      "equipo": "C-Lesión",
+      "sancion": "2 Partidos",
+      "articulo": "Art. 26 inc \"B\"",
+      "motivo": "Sanción Fecha 5",
+      "estado": "Vigente (0/2)"
+    },
+    {
+      "jugador": "Heredia, Lautaro",
       "equipo": "La Máquina",
       "sancion": "1 Partido",
-      "articulo": "Art. 26 inc \"G\"",
-      "motivo": "Infracción reglamentaria Fecha 4",
+      "articulo": "Art. 26 inc \"C\"",
+      "motivo": "Sanción Fecha 5",
       "estado": "Vigente (0/1)"
+    },
+    {
+      "jugador": "Herrero, Nahuel",
+      "equipo": "La Máquina",
+      "sancion": "1 Partido",
+      "articulo": "Art. 27 inc \"D\"",
+      "motivo": "Sanción Fecha 5",
+      "estado": "Vigente (0/1)"
+    },
+    {
+      "jugador": "Mestre, Francisco",
+      "equipo": "Nottingham",
+      "sancion": "1 Partido",
+      "articulo": "Art. 26 inc \"C\"",
+      "motivo": "Sanción Fecha 5",
+      "estado": "Vigente (0/1)"
+    },
+    {
+      "jugador": "Boero, Gerónimo",
+      "equipo": "Nottingham",
+      "sancion": "4 Partidos",
+      "articulo": "Art. 23 inc \"A\"",
+      "motivo": "Sanción Fecha 5",
+      "estado": "Vigente (0/4)"
     },
     {
       "jugador": "Notario, Matías",
       "equipo": "Mavericks",
+      "sancion": "3 Amarillas acumuladas",
+      "articulo": "Art. 6° Régimen Amarillas",
+      "motivo": "Acumulación de 3 tarjetas amarillas",
+      "estado": "3 Amarillas"
+    },
+    {
+      "jugador": "Salinas, Guillermo",
+      "equipo": "Minaster City",
+      "sancion": "3 Amarillas acumuladas",
+      "articulo": "Art. 6° Régimen Amarillas",
+      "motivo": "Acumulación de 3 tarjetas amarillas",
+      "estado": "3 Amarillas"
+    },
+    {
+      "jugador": "Albornó, Sergio Damián",
+      "equipo": "Red Bull",
       "sancion": "3 Amarillas acumuladas",
       "articulo": "Art. 6° Régimen Amarillas",
       "motivo": "Acumulación de 3 tarjetas amarillas",
