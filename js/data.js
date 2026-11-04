@@ -3144,7 +3144,7 @@ const LIGA_DATA = {
       }
     }
   },
-  "tablaAnualFuente": "Tabla Anual enviada por la Liga al 29/10/2026",
+  "tablaAnualFuente": "Actualizada tras la Fecha 5 del Clausura con el criterio oficial de la Liga (puntos divididos en partidos programados)",
   "tablaAnual": [
     {
       "pos": 1,
@@ -3153,9 +3153,9 @@ const LIGA_DATA = {
       "bonus": 3,
       "totalAp": 18,
       "coefAp": 2.25,
-      "ptsCl": 9,
-      "coefCl": 2.25,
-      "total": 4.5
+      "ptsCl": 12,
+      "coefCl": 2.4,
+      "total": 4.65
     },
     {
       "pos": 2,
@@ -3164,53 +3164,53 @@ const LIGA_DATA = {
       "bonus": 0,
       "totalAp": 8,
       "coefAp": 1,
-      "ptsCl": 12,
+      "ptsCl": 15,
       "coefCl": 3,
       "total": 4
     },
     {
       "pos": 3,
+      "equipo": "Otro Equipo",
+      "ptsAp": 13,
+      "bonus": 0,
+      "totalAp": 13,
+      "coefAp": 1.63,
+      "ptsCl": 9,
+      "coefCl": 1.8,
+      "total": 3.43
+    },
+    {
+      "pos": 4,
+      "equipo": "Minaster City",
+      "ptsAp": 9,
+      "bonus": 1,
+      "totalAp": 10,
+      "coefAp": 1.25,
+      "ptsCl": 10,
+      "coefCl": 2,
+      "total": 3.25
+    },
+    {
+      "pos": 5,
       "equipo": "Antorcha",
       "ptsAp": 17,
       "bonus": 0,
       "totalAp": 17,
       "coefAp": 2.13,
       "ptsCl": 5,
-      "coefCl": 1.25,
-      "total": 3.38
+      "coefCl": 1,
+      "total": 3.13
     },
     {
-      "pos": 4,
+      "pos": 6,
       "equipo": "Red Bull",
       "ptsAp": 6,
       "bonus": 0,
       "totalAp": 6,
       "coefAp": 0.75,
-      "ptsCl": 10,
-      "coefCl": 2.5,
-      "total": 3.25
-    },
-    {
-      "pos": 5,
-      "equipo": "Otro Equipo",
-      "ptsAp": 13,
-      "bonus": 0,
-      "totalAp": 13,
-      "coefAp": 1.63,
-      "ptsCl": 6,
-      "coefCl": 1.5,
-      "total": 3.13
-    },
-    {
-      "pos": 6,
-      "equipo": "Minaster City",
-      "ptsAp": 9,
-      "bonus": 1,
-      "totalAp": 10,
-      "coefAp": 1.25,
-      "ptsCl": 7,
-      "coefCl": 1.75,
-      "total": 3
+      "ptsCl": 11,
+      "coefCl": 2.2,
+      "total": 2.95
     },
     {
       "pos": 7,
@@ -3220,8 +3220,8 @@ const LIGA_DATA = {
       "totalAp": 15,
       "coefAp": 1.88,
       "ptsCl": 4,
-      "coefCl": 1,
-      "total": 2.88
+      "coefCl": 0.8,
+      "total": 2.68
     },
     {
       "pos": 8,
@@ -3231,8 +3231,8 @@ const LIGA_DATA = {
       "totalAp": 14,
       "coefAp": 1.75,
       "ptsCl": 4,
-      "coefCl": 1,
-      "total": 2.75
+      "coefCl": 0.8,
+      "total": 2.55
     },
     {
       "pos": 9,
@@ -3241,75 +3241,75 @@ const LIGA_DATA = {
       "bonus": 0,
       "totalAp": 9,
       "coefAp": 1.13,
-      "ptsCl": 6,
-      "coefCl": 1.5,
-      "total": 2.63
+      "ptsCl": 7,
+      "coefCl": 1.4,
+      "total": 2.53
     },
     {
       "pos": 10,
+      "equipo": "De Primera",
+      "ptsAp": 11,
+      "bonus": 0,
+      "totalAp": 11,
+      "coefAp": 1.38,
+      "ptsCl": 5,
+      "coefCl": 1,
+      "total": 2.38
+    },
+    {
+      "pos": 11,
       "equipo": "Calise",
       "ptsAp": 12,
       "bonus": 0,
       "totalAp": 12,
       "coefAp": 1.5,
       "ptsCl": 4,
-      "coefCl": 1,
-      "total": 2.5
-    },
-    {
-      "pos": 11,
-      "equipo": "De Primera",
-      "ptsAp": 11,
-      "bonus": 0,
-      "totalAp": 11,
-      "coefAp": 1.38,
-      "ptsCl": 4,
-      "coefCl": 1,
-      "total": 2.38
+      "coefCl": 0.8,
+      "total": 2.3
     },
     {
       "pos": 12,
+      "equipo": "Nottingham",
+      "ptsAp": 9,
+      "bonus": 0,
+      "totalAp": 9,
+      "coefAp": 1.13,
+      "ptsCl": 4,
+      "coefCl": 0.8,
+      "total": 1.93
+    },
+    {
+      "pos": 13,
       "equipo": "La Máquina",
       "ptsAp": 10,
       "bonus": 0,
       "totalAp": 10,
       "coefAp": 1.25,
       "ptsCl": 3,
-      "coefCl": 0.75,
-      "total": 2
+      "coefCl": 0.6,
+      "total": 1.85
     },
     {
-      "pos": 13,
+      "pos": 14,
       "equipo": "C-Lesión",
       "ptsAp": 7,
       "bonus": 0,
       "totalAp": 7,
       "coefAp": 0.88,
       "ptsCl": 4,
-      "coefCl": 1,
-      "total": 1.88
+      "coefCl": 0.8,
+      "total": 1.68
     },
     {
-      "pos": 14,
+      "pos": 15,
       "equipo": "Celtic",
       "ptsAp": 11,
       "bonus": 0,
       "totalAp": 11,
       "coefAp": 1.38,
-      "ptsCl": 0,
-      "coefCl": 0,
-      "total": 1.38
-    },
-    {
-      "pos": 15,
-      "equipo": "Nottingham",
-      "ptsAp": 9,
-      "bonus": 0,
-      "totalAp": 9,
-      "coefAp": 1.13,
       "ptsCl": 1,
-      "coefCl": 0.25,
-      "total": 1.38
+      "coefCl": 0.2,
+      "total": 1.58
     }
   ],
   "reglamentosCompletos": {
