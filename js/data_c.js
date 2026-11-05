@@ -1035,7 +1035,10 @@
             "golesL": null,
             "golesV": null,
             "estado": "pendiente",
-            "nota": ""
+            "nota": "",
+            "dia": "Domingo 08/11",
+            "hora": "10:00",
+            "cancha": "Cancha de Fútbol"
           },
           {
             "zona": "Zona única",
@@ -1044,7 +1047,10 @@
             "golesL": null,
             "golesV": null,
             "estado": "pendiente",
-            "nota": ""
+            "nota": "",
+            "dia": "Sábado 07/11",
+            "hora": "10:00",
+            "cancha": "Cancha de Fútbol"
           },
           {
             "zona": "Zona única",
@@ -1053,7 +1059,10 @@
             "golesL": null,
             "golesV": null,
             "estado": "pendiente",
-            "nota": ""
+            "nota": "",
+            "dia": "Sábado 07/11",
+            "hora": "10:00",
+            "cancha": "Cancha de Rugby"
           },
           {
             "zona": "Zona única",
@@ -1062,7 +1071,10 @@
             "golesL": null,
             "golesV": null,
             "estado": "pendiente",
-            "nota": ""
+            "nota": "",
+            "dia": "Domingo 08/11",
+            "hora": "10:00",
+            "cancha": "Cancha de Rugby"
           },
           {
             "zona": "Zona única",
@@ -1071,9 +1083,13 @@
             "golesL": null,
             "golesV": null,
             "estado": "pendiente",
-            "nota": ""
+            "nota": "",
+            "dia": "Domingo 08/11",
+            "hora": "11:20",
+            "cancha": "Cancha de Rugby"
           }
-        ]
+        ],
+        "dia": "Sábado 7 y domingo 8 de noviembre"
       },
       {
         "numero": 8,

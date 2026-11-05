@@ -1,6 +1,6 @@
 /**
  * CATEGORÍA B 2026 — datos cargados desde los informes de la Liga
- * (Apertura: fechas 1 a 7 + fase final; Clausura: fechas 1 a 5; Tabla Anual al 30/10/2026).
+ * (Apertura: fechas 1 a 7 + fase final; Clausura: fechas 1 a 6; Tabla Anual recalculada tras la Fecha 6).
  * Generado a partir de los PDF; se completa con cada informe nuevo.
  */
 (function () {
@@ -1173,7 +1173,7 @@
   },
   "clausura": {
     "enCurso": true,
-    "ultimaFechaDisputada": 5,
+    "ultimaFechaDisputada": 6,
     "fechas": [
       {
         "numero": 1,
@@ -1573,7 +1573,7 @@
       {
         "numero": 6,
         "nombre": "Fecha 6",
-        "disputada": false,
+        "disputada": true,
         "partidos": [
           {
             "zona": "Zona A",
@@ -1618,7 +1618,7 @@
             "golesL": null,
             "golesV": null,
             "estado": "pendiente",
-            "nota": "",
+            "nota": "Sin resultado en el informe de la Liga",
             "dia": "Domingo 01/11",
             "hora": "13:00",
             "cancha": "Cancha de Fútbol"
@@ -1683,16 +1683,19 @@
             "golesL": null,
             "golesV": null,
             "estado": "pendiente",
-            "nota": ""
+            "nota": "",
+            "dia": "Sábado 07/11",
+            "hora": "12:40",
+            "cancha": "Cancha de Fútbol"
           },
           {
             "zona": "Zona A",
-            "local": "Timba",
-            "visitante": "F90",
+            "local": "F90",
+            "visitante": "Libre",
             "golesL": null,
             "golesV": null,
-            "estado": "pendiente",
-            "nota": ""
+            "estado": "libre",
+            "nota": "Sin partido: Timba fue eliminado del torneo"
           },
           {
             "zona": "Zona A",
@@ -1701,7 +1704,10 @@
             "golesL": null,
             "golesV": null,
             "estado": "pendiente",
-            "nota": ""
+            "nota": "",
+            "dia": "Sábado 07/11",
+            "hora": "11:20",
+            "cancha": "Cancha de Rugby"
           },
           {
             "zona": "Zona A",
@@ -1710,7 +1716,10 @@
             "golesL": null,
             "golesV": null,
             "estado": "pendiente",
-            "nota": ""
+            "nota": "",
+            "dia": "Sábado 07/11",
+            "hora": "14:00",
+            "cancha": "Cancha de Fútbol"
           },
           {
             "zona": "Zona B",
@@ -1719,7 +1728,10 @@
             "golesL": null,
             "golesV": null,
             "estado": "pendiente",
-            "nota": ""
+            "nota": "",
+            "dia": "Sábado 07/11",
+            "hora": "12:40",
+            "cancha": "Cancha de Rugby"
           },
           {
             "zona": "Zona B",
@@ -1737,7 +1749,10 @@
             "golesL": null,
             "golesV": null,
             "estado": "pendiente",
-            "nota": ""
+            "nota": "",
+            "dia": "Sábado 07/11",
+            "hora": "14:00",
+            "cancha": "Cancha de Rugby"
           },
           {
             "zona": "Zona B",
@@ -1746,9 +1761,13 @@
             "golesL": null,
             "golesV": null,
             "estado": "pendiente",
-            "nota": ""
+            "nota": "",
+            "dia": "Sábado 07/11",
+            "hora": "11:20",
+            "cancha": "Cancha de Fútbol"
           }
-        ]
+        ],
+        "dia": "Sábado 7 y domingo 8 de noviembre"
       }
     ],
     "tablas": {
@@ -1756,65 +1775,65 @@
         {
           "pos": 1,
           "equipo": "Malvinas",
-          "pj": 5,
-          "pg": 5,
+          "pj": 6,
+          "pg": 6,
           "pe": 0,
           "pp": 0,
-          "gf": 17,
-          "gc": 2,
-          "dg": 15,
-          "pts": 15,
+          "gf": 23,
+          "gc": 4,
+          "dg": 19,
+          "pts": 18,
           "zona": "A"
         },
         {
           "pos": 2,
           "equipo": "De Zurda",
-          "pj": 5,
-          "pg": 4,
+          "pj": 6,
+          "pg": 5,
           "pe": 0,
           "pp": 1,
-          "gf": 12,
+          "gf": 14,
           "gc": 4,
-          "dg": 8,
-          "pts": 12,
+          "dg": 10,
+          "pts": 15,
           "zona": "A"
         },
         {
           "pos": 3,
           "equipo": "F90",
-          "pj": 5,
-          "pg": 3,
+          "pj": 6,
+          "pg": 4,
           "pe": 0,
           "pp": 2,
-          "gf": 13,
+          "gf": 18,
           "gc": 6,
-          "dg": 7,
-          "pts": 9,
+          "dg": 12,
+          "pts": 12,
           "zona": "A"
         },
         {
           "pos": 4,
           "equipo": "Tercer Tiempo",
-          "pj": 5,
+          "pj": 6,
           "pg": 3,
           "pe": 0,
-          "pp": 2,
+          "pp": 3,
           "gf": 6,
-          "gc": 5,
-          "dg": 1,
+          "gc": 10,
+          "dg": -4,
           "pts": 9,
           "zona": "A"
         },
         {
           "pos": 5,
           "equipo": "Gol en Contra",
-          "pj": 5,
+          "pj": 6,
           "pg": 2,
           "pe": 0,
-          "pp": 3,
-          "gf": 11,
-          "gc": 7,
-          "dg": 4,
+          "pp": 4,
+          "gf": 13,
+          "gc": 13,
+          "dg": 0,
           "pts": 6,
           "zona": "A"
         },
@@ -1847,13 +1866,13 @@
         {
           "pos": 8,
           "equipo": "Timba",
-          "pj": 5,
+          "pj": 6,
           "pg": 0,
           "pe": 0,
-          "pp": 5,
+          "pp": 6,
           "gf": 2,
-          "gc": 21,
-          "dg": -19,
+          "gc": 23,
+          "dg": -21,
           "pts": 0,
           "zona": "A"
         }
@@ -1861,6 +1880,19 @@
       "zonaB": [
         {
           "pos": 1,
+          "equipo": "Central",
+          "pj": 5,
+          "pg": 4,
+          "pe": 1,
+          "pp": 0,
+          "gf": 9,
+          "gc": 4,
+          "dg": 5,
+          "pts": 13,
+          "zona": "B"
+        },
+        {
+          "pos": 2,
           "equipo": "Al Costado",
           "pj": 5,
           "pg": 3,
@@ -1873,80 +1905,67 @@
           "zona": "B"
         },
         {
-          "pos": 2,
-          "equipo": "Central",
-          "pj": 4,
-          "pg": 3,
-          "pe": 1,
-          "pp": 0,
-          "gf": 7,
-          "gc": 3,
-          "dg": 4,
-          "pts": 10,
-          "zona": "B"
-        },
-        {
           "pos": 3,
-          "equipo": "Descarte",
+          "equipo": "Dep. La Verna",
           "pj": 5,
           "pg": 2,
           "pe": 2,
           "pp": 1,
-          "gf": 7,
-          "gc": 4,
-          "dg": 3,
+          "gf": 8,
+          "gc": 6,
+          "dg": 2,
           "pts": 8,
           "zona": "B"
         },
         {
           "pos": 4,
-          "equipo": "Dep. La Verna",
-          "pj": 4,
-          "pg": 1,
+          "equipo": "Necaxa",
+          "pj": 5,
+          "pg": 2,
           "pe": 2,
           "pp": 1,
-          "gf": 5,
-          "gc": 5,
-          "dg": 0,
-          "pts": 5,
+          "gf": 3,
+          "gc": 1,
+          "dg": 2,
+          "pts": 8,
           "zona": "B"
         },
         {
           "pos": 5,
-          "equipo": "Necaxa",
-          "pj": 4,
-          "pg": 1,
+          "equipo": "Descarte",
+          "pj": 6,
+          "pg": 2,
           "pe": 2,
-          "pp": 1,
-          "gf": 1,
-          "gc": 1,
-          "dg": 0,
-          "pts": 5,
+          "pp": 2,
+          "gf": 7,
+          "gc": 6,
+          "dg": 1,
+          "pts": 8,
           "zona": "B"
         },
         {
           "pos": 6,
           "equipo": "Adove",
-          "pj": 4,
+          "pj": 5,
           "pg": 0,
           "pe": 1,
-          "pp": 3,
-          "gf": 3,
-          "gc": 9,
-          "dg": -6,
+          "pp": 4,
+          "gf": 4,
+          "gc": 11,
+          "dg": -7,
           "pts": 1,
           "zona": "B"
         },
         {
           "pos": 7,
           "equipo": "Inter",
-          "pj": 4,
+          "pj": 5,
           "pg": 0,
           "pe": 1,
-          "pp": 3,
-          "gf": 3,
-          "gc": 9,
-          "dg": -6,
+          "pp": 4,
+          "gf": 4,
+          "gc": 12,
+          "dg": -8,
           "pts": 1,
           "zona": "B"
         }
@@ -1955,6 +1974,12 @@
     "goleadores": [
       {
         "pos": 1,
+        "jugador": "Herrera, Pablo Simón",
+        "equipo": "Malvinas",
+        "goles": 7
+      },
+      {
+        "pos": 2,
         "jugador": "Recio, Jeremias",
         "equipo": "De Zurda",
         "goles": 5
@@ -1963,54 +1988,48 @@
         "pos": 2,
         "jugador": "Castro Segovia, Ramiro Luciano",
         "equipo": "Malvinas",
-        "goles": 4
-      },
-      {
-        "pos": 2,
-        "jugador": "Herrera, Pablo Simón",
-        "equipo": "Malvinas",
-        "goles": 4
+        "goles": 5
       },
       {
         "pos": 4,
-        "jugador": "Savorani Jofre, Sebastian",
-        "equipo": "Central",
-        "goles": 3
-      },
-      {
-        "pos": 4,
-        "jugador": "Moreira, Tomas Alejo",
-        "equipo": "Gol en Contra",
-        "goles": 3
+        "jugador": "Goldfarb, Santiago",
+        "equipo": "F90",
+        "goles": 4
       },
       {
         "pos": 4,
         "jugador": "Noe, Geronimo",
         "equipo": "Gol en Contra",
+        "goles": 4
+      },
+      {
+        "pos": 6,
+        "jugador": "Savorani Jofre, Sebastian",
+        "equipo": "Central",
         "goles": 3
       },
       {
-        "pos": 7,
-        "jugador": "Martinez, Agustin Ariel",
+        "pos": 6,
+        "jugador": "Vilanova, Ignacio",
+        "equipo": "F90",
+        "goles": 3
+      },
+      {
+        "pos": 6,
+        "jugador": "Moreira, Tomas Alejo",
+        "equipo": "Gol en Contra",
+        "goles": 3
+      },
+      {
+        "pos": 6,
+        "jugador": "Vega Muñoz, Isaias Gabriel",
+        "equipo": "Malvinas",
+        "goles": 3
+      },
+      {
+        "pos": 10,
+        "jugador": "Martinez Girons, Agustin Ariel",
         "equipo": "Adove",
-        "goles": 2
-      },
-      {
-        "pos": 7,
-        "jugador": "Tejada Cassab, Alejo",
-        "equipo": "Agrimensura",
-        "goles": 2
-      },
-      {
-        "pos": 7,
-        "jugador": "Quiroga, Juan Ignacio",
-        "equipo": "Al Costado",
-        "goles": 2
-      },
-      {
-        "pos": 7,
-        "jugador": "Rueda, Mariano Miguel",
-        "equipo": "Al Costado",
         "goles": 2
       }
     ]
@@ -2102,7 +2121,7 @@
       "sancion": "4 Partidos",
       "articulo": "Art. 22 inc. \"A\"",
       "motivo": "",
-      "estado": "Cumplió 2 (Resta 2)"
+      "estado": "Cumplió 3 (Resta 1)"
     },
     {
       "jugador": "DT: Perin Fernando",
@@ -2113,20 +2132,28 @@
       "estado": "Definitiva"
     },
     {
-      "jugador": "Gonzalez Iñaki",
-      "equipo": "Necaxa",
+      "jugador": "Guzman Santiago",
+      "equipo": "Adove",
       "sancion": "1 Partido",
-      "articulo": "Art. 26 inc. \"C\"",
+      "articulo": "Art. 26 inc. \"G\"",
       "motivo": "",
       "estado": "Vigente (0/1)"
     },
     {
-      "jugador": "Guzman, Santiago Facundo",
-      "equipo": "Adove",
-      "sancion": "3 Amarillas acumuladas",
-      "articulo": "Art. 6° Régimen Amarillas",
-      "motivo": "Acumulación de 3 tarjetas amarillas",
-      "estado": "3 Amarillas"
+      "jugador": "Ruiz Agustin",
+      "equipo": "Central",
+      "sancion": "1 Partido",
+      "articulo": "Art. 26 inc. \"G\"",
+      "motivo": "",
+      "estado": "Vigente (0/1)"
+    },
+    {
+      "jugador": "Equipo Timba",
+      "equipo": "Timba",
+      "sancion": "Eliminado del torneo",
+      "articulo": "Art. 5 inc. \"A\"",
+      "motivo": "Dos no presentaciones",
+      "estado": "Definitiva"
     },
     {
       "jugador": "Martinez, Rodrigo",
@@ -2145,16 +2172,40 @@
       "estado": "3 Amarillas"
     },
     {
-      "jugador": "Ruiz Luis Agustin",
-      "equipo": "Central",
+      "jugador": "Aciar Joan Andreu",
+      "equipo": "De Zurda",
       "sancion": "3 Amarillas acumuladas",
       "articulo": "Art. 6° Régimen Amarillas",
       "motivo": "Acumulación de 3 tarjetas amarillas",
       "estado": "3 Amarillas"
     },
     {
-      "jugador": "Aciar Joan Andreu",
+      "jugador": "Escriva Facundo",
       "equipo": "De Zurda",
+      "sancion": "3 Amarillas acumuladas",
+      "articulo": "Art. 6° Régimen Amarillas",
+      "motivo": "Acumulación de 3 tarjetas amarillas",
+      "estado": "3 Amarillas"
+    },
+    {
+      "jugador": "Fernandez Galdeano, Santiago",
+      "equipo": "Dep. La Verna",
+      "sancion": "3 Amarillas acumuladas",
+      "articulo": "Art. 6° Régimen Amarillas",
+      "motivo": "Acumulación de 3 tarjetas amarillas",
+      "estado": "3 Amarillas"
+    },
+    {
+      "jugador": "Paez Tejada, Juan Bautista",
+      "equipo": "F90",
+      "sancion": "3 Amarillas acumuladas",
+      "articulo": "Art. 6° Régimen Amarillas",
+      "motivo": "Acumulación de 3 tarjetas amarillas",
+      "estado": "3 Amarillas"
+    },
+    {
+      "jugador": "Miranda, Facundo Agustin",
+      "equipo": "Gol en Contra",
       "sancion": "3 Amarillas acumuladas",
       "articulo": "Art. 6° Régimen Amarillas",
       "motivo": "Acumulación de 3 tarjetas amarillas",
@@ -2169,6 +2220,14 @@
       "estado": "3 Amarillas"
     },
     {
+      "jugador": "Reyna Petrignani Santino",
+      "equipo": "Necaxa",
+      "sancion": "3 Amarillas acumuladas",
+      "articulo": "Art. 6° Régimen Amarillas",
+      "motivo": "Acumulación de 3 tarjetas amarillas",
+      "estado": "3 Amarillas"
+    },
+    {
       "jugador": "Choque, Isaias",
       "equipo": "Tercer Tiempo",
       "sancion": "3 Amarillas acumuladas",
@@ -2177,14 +2236,14 @@
       "estado": "3 Amarillas"
     }
   ],
-  "tablaAnualFuente": "Tabla Anual enviada por la Liga al 30/10/2026",
+  "tablaAnualFuente": "Actualizada tras la Fecha 6 del Clausura con el criterio oficial de la Liga (puntos divididos en partidos programados)",
   "tablaAnual": [
     {
       "pos": 1,
       "equipo": "Malvinas",
       "ptsAp": 13,
       "bonus": 1,
-      "ptsCl": 15,
+      "ptsCl": 18,
       "totalAp": 14,
       "coefAp": 2.0,
       "coefCl": 3.0,
@@ -2195,33 +2254,33 @@
       "equipo": "Central",
       "ptsAp": 15,
       "bonus": 0,
-      "ptsCl": 10,
+      "ptsCl": 13,
       "totalAp": 15,
       "coefAp": 2.14,
-      "coefCl": 2.5,
-      "total": 4.64
+      "coefCl": 2.17,
+      "total": 4.31
     },
     {
       "pos": 3,
+      "equipo": "F90",
+      "ptsAp": 16,
+      "bonus": 0,
+      "ptsCl": 12,
+      "totalAp": 16,
+      "coefAp": 2.29,
+      "coefCl": 2.0,
+      "total": 4.29
+    },
+    {
+      "pos": 4,
       "equipo": "Al Costado",
       "ptsAp": 16,
       "bonus": 2,
       "ptsCl": 10,
       "totalAp": 18,
       "coefAp": 2.57,
-      "coefCl": 2.0,
-      "total": 4.57
-    },
-    {
-      "pos": 4,
-      "equipo": "F90",
-      "ptsAp": 16,
-      "bonus": 0,
-      "ptsCl": 9,
-      "totalAp": 16,
-      "coefAp": 2.29,
-      "coefCl": 1.8,
-      "total": 4.09
+      "coefCl": 1.67,
+      "total": 4.24
     },
     {
       "pos": 5,
@@ -2231,63 +2290,63 @@
       "ptsCl": 8,
       "totalAp": 17,
       "coefAp": 2.43,
-      "coefCl": 1.6,
-      "total": 4.03
+      "coefCl": 1.33,
+      "total": 3.76
     },
     {
       "pos": 6,
       "equipo": "Necaxa",
       "ptsAp": 12,
       "bonus": 3,
-      "ptsCl": 5,
+      "ptsCl": 8,
       "totalAp": 15,
       "coefAp": 2.14,
-      "coefCl": 1.25,
-      "total": 3.39
+      "coefCl": 1.33,
+      "total": 3.47
     },
     {
       "pos": 7,
-      "equipo": "Tercer Tiempo",
-      "ptsAp": 8,
+      "equipo": "De Zurda",
+      "ptsAp": 3,
       "bonus": 0,
-      "ptsCl": 9,
-      "totalAp": 8,
-      "coefAp": 1.14,
-      "coefCl": 1.8,
-      "total": 2.94
+      "ptsCl": 15,
+      "totalAp": 3,
+      "coefAp": 0.43,
+      "coefCl": 2.5,
+      "total": 2.93
     },
     {
       "pos": 8,
+      "equipo": "Dep. La Verna",
+      "ptsAp": 11,
+      "bonus": 0,
+      "ptsCl": 8,
+      "totalAp": 11,
+      "coefAp": 1.57,
+      "coefCl": 1.33,
+      "total": 2.9
+    },
+    {
+      "pos": 9,
       "equipo": "Gol en Contra",
       "ptsAp": 11,
       "bonus": 1,
       "ptsCl": 6,
       "totalAp": 12,
       "coefAp": 1.71,
-      "coefCl": 1.2,
-      "total": 2.91
-    },
-    {
-      "pos": 9,
-      "equipo": "De Zurda",
-      "ptsAp": 3,
-      "bonus": 0,
-      "ptsCl": 12,
-      "totalAp": 3,
-      "coefAp": 0.43,
-      "coefCl": 2.4,
-      "total": 2.83
+      "coefCl": 1.0,
+      "total": 2.71
     },
     {
       "pos": 10,
-      "equipo": "Dep. La Verna",
-      "ptsAp": 11,
+      "equipo": "Tercer Tiempo",
+      "ptsAp": 8,
       "bonus": 0,
-      "ptsCl": 5,
-      "totalAp": 11,
-      "coefAp": 1.57,
-      "coefCl": 1.25,
-      "total": 2.82
+      "ptsCl": 9,
+      "totalAp": 8,
+      "coefAp": 1.14,
+      "coefCl": 1.5,
+      "total": 2.64
     },
     {
       "pos": 11,
@@ -2297,8 +2356,8 @@
       "ptsCl": 1,
       "totalAp": 15,
       "coefAp": 2.14,
-      "coefCl": 0.25,
-      "total": 2.39
+      "coefCl": 0.17,
+      "total": 2.31
     },
     {
       "pos": 12,
@@ -2308,8 +2367,8 @@
       "ptsCl": 6,
       "totalAp": 3,
       "coefAp": 0.43,
-      "coefCl": 1.2,
-      "total": 1.63
+      "coefCl": 1.0,
+      "total": 1.43
     },
     {
       "pos": 13,
@@ -2319,8 +2378,8 @@
       "ptsCl": 3,
       "totalAp": 5,
       "coefAp": 0.71,
-      "coefCl": 0.6,
-      "total": 1.31
+      "coefCl": 0.5,
+      "total": 1.21
     },
     {
       "pos": 14,
@@ -2330,8 +2389,8 @@
       "ptsCl": 1,
       "totalAp": 4,
       "coefAp": 0.57,
-      "coefCl": 0.25,
-      "total": 0.82
+      "coefCl": 0.17,
+      "total": 0.74
     },
     {
       "pos": 15,
@@ -2348,7 +2407,7 @@
 };
   B.liga = Object.assign({}, A.liga, {
     categoria: 'Categoría B', subtitulo: 'Categoría B · Fútbol Universitario',
-    torneoActual: 'Torneo Clausura 2026', ultimaFechaDisputada: 5, estado: 'Clausura en disputa · Fecha 5 completada'
+    torneoActual: 'Torneo Clausura 2026', ultimaFechaDisputada: 6, estado: 'Clausura en disputa · Fecha 6 completada'
   });
   B.reglamentos = A.reglamentos;
   B.reglamentosCompletos = Object.assign({}, A.reglamentosCompletos, { formaDisputa: [{"id": "disp-b-estructura", "numero": 1, "articulo": "Estructura", "titulo": "Composición de la Temporada 2026", "categoria": "formaDisputa", "seccion": "Forma de Disputa · Categoría B", "texto": "La temporada 2026 de la Liga Universitaria de Fútbol – Categoría B está compuesta por dos torneos oficiales, el Torneo Apertura y el Torneo Clausura, además de una Tabla Anual y una Superfinal Anual para determinar el campeón absoluto de la temporada. Participan quince (15) equipos."}, {"id": "disp-b-clasificatoria", "numero": 2, "articulo": "Clausura", "titulo": "Fase Clasificatoria", "categoria": "formaDisputa", "seccion": "Forma de Disputa · Categoría B", "texto": "Los quince equipos se distribuyen por sorteo en dos zonas que juegan todos contra todos:\n• Zona A: 8 equipos.\n• Zona B: 7 equipos (un equipo libre por fecha).\nAl finalizar se arma una tabla de posiciones por zona."}, {"id": "disp-b-campeonato", "numero": 3, "articulo": "Clausura", "titulo": "Fase Campeonato", "categoria": "formaDisputa", "seccion": "Forma de Disputa · Categoría B", "texto": "Clasifican del 1° al 4° de cada zona, por eliminación directa.\nCuartos de final:\n• 1° Zona A vs 4° Zona B\n• 2° Zona A vs 3° Zona B\n• 1° Zona B vs 4° Zona A\n• 2° Zona B vs 3° Zona A\nLos ganadores juegan Semifinales según el cuadro que establece la organización, y los vencedores la Final del torneo."}, {"id": "disp-b-plata", "numero": 4, "articulo": "Clausura", "titulo": "Copa de Plata", "categoria": "formaDisputa", "seccion": "Forma de Disputa · Categoría B", "texto": "Participan del 5° al 8° de la Zona A y del 5° al 7° de la Zona B. El mejor 5° de ambas zonas pasa directo a Semifinales.\nCuartos de final:\n• 5° Zona A o B vs 8° Zona A\n• 6° Zona B vs 7° Zona A\n• 6° Zona A vs 7° Zona B\nLuego se juegan Semifinales y Final para definir el Campeón de la Copa de Plata."}, {"id": "disp-b-anual", "numero": 5, "articulo": "Tabla Anual", "titulo": "Tabla Anual 2026", "categoria": "formaDisputa", "seccion": "Forma de Disputa · Categoría B", "texto": "Suma solo los puntos de la fase clasificatoria del Apertura y del Clausura, usando un coeficiente de rendimiento: puntos obtenidos dividido la cantidad de partidos programados/jugados. No cuentan los partidos de Fase Campeonato ni de Copa de Plata.\nBonus al terminar cada torneo:\n• Campeón Fase Campeonato: +3\n• Subcampeón: +2\n• Tercer puesto: +1\n• Campeón Copa de Plata: +1"}, {"id": "disp-b-superfinal", "numero": 6, "articulo": "Superfinal", "titulo": "Superfinal Anual", "categoria": "formaDisputa", "seccion": "Forma de Disputa · Categoría B", "texto": "El Campeón Anual surge de una Superfinal entre el Campeón del Apertura y el Campeón del Clausura. Si ninguno de los dos es el primero de la Tabla Anual, juegan entre ellos una prefinal y el ganador juega la Final con el primero de la Tabla Anual. Si el mismo equipo gana Apertura y Clausura y además es primero en la Tabla Anual, es campeón anual directamente."}] });
