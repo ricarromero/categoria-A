@@ -1326,17 +1326,17 @@
       st.gfPorPJ = st.pj > 0 ? parseFloat((st.gf / st.pj).toFixed(2)) : 0;
       st.gcPorPJ = st.pj > 0 ? parseFloat((st.gc / st.pj).toFixed(2)) : 0;
 
-      const teamMatches = getTeamChronologicalMatches(st.equipo);
-      st.ultimos5 = teamMatches.slice(0, 5).map(m => {
-        if (m.gf > m.gc) return 'V';
-        if (m.gf === m.gc) return 'E';
-        return 'D';
-      });
+      // Forma y racha del torneo elegido (Apertura, Clausura o ambos en Anual), sin playoffs
+      const torneosValidos = t === 'clausura' ? ['Clausura'] : t === 'apertura' ? ['Apertura'] : ['Clausura', 'Apertura'];
+      const teamMatches = getTeamChronologicalMatches(st.equipo).filter(m => torneosValidos.includes(m.torneo));
+      const resultados = teamMatches.map(m => (m.gf > m.gc ? 'V' : m.gf === m.gc ? 'E' : 'D'));
+      st.ultimos5 = resultados.slice(0, 5);
+      st.rachaCompleta = resultados;
 
       if (st.ultimos5.length > 0) {
         const first = st.ultimos5[0];
         let count = 0;
-        for (const res of st.ultimos5) {
+        for (const res of st.rachaCompleta) {
           if (res === first) count++;
           else break;
         }
@@ -1724,7 +1724,7 @@
           </table>
         </div>
         <div style="font-size:0.75rem; color:var(--dim); margin-top:12px; line-height:1.4;">
-          Calculado con el resultado de cada partido. Los puntos son los ganados en cancha y no incluyen quitas ni bonificaciones del Tribunal. VI: vallas invictas. SM: partidos sin convertir. Racha: V victorias, E empates, D derrotas seguidas.
+          Calculado con el resultado de cada partido. Los puntos son los ganados en cancha y no incluyen quitas ni bonificaciones del Tribunal. VI: vallas invictas. SM: partidos sin convertir. Racha: V victorias, E empates, D derrotas seguidas. Los últimos 5 partidos y la racha son del torneo elegido (en el Apertura, cómo terminó cada equipo la fase clasificatoria).
         </div>
       </div>
 
