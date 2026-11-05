@@ -1690,12 +1690,12 @@
           },
           {
             "zona": "Zona A",
-            "local": "F90",
-            "visitante": "Libre",
-            "golesL": null,
-            "golesV": null,
-            "estado": "libre",
-            "nota": "Sin partido: Timba fue eliminado del torneo"
+            "local": "Timba",
+            "visitante": "F90",
+            "golesL": 0,
+            "golesV": 2,
+            "estado": "finalizado",
+            "nota": "No se presenta: Timba fue eliminado y se le da por perdido 2-0 (Art. 5 inc. a)"
           },
           {
             "zona": "Zona A",
