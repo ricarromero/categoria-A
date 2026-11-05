@@ -3141,7 +3141,11 @@ const LIGA_DATA = {
       "P29": {
         "a": 0,
         "b": 1
-      }
+      },
+      "P30": { "a": 0, "b": 0, "pa": 3, "pb": 1 },
+      "P31": { "a": 1, "b": 4 },
+      "P32": { "a": 0, "b": 0, "pa": 12, "pb": 13 },
+      "P33": { "a": 2, "b": 0 }
     }
   },
   "tablaAnualFuente": "Actualizada tras la Fecha 5 del Clausura con el criterio oficial de la Liga (puntos divididos en partidos programados)",
