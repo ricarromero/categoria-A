@@ -44,6 +44,20 @@
   }
 
   // Estado reactivo de la aplicación
+  // Fecha que se muestra en Inicio y Fixture: la primera sin informe oficial.
+  // Si ya se jugaron todos sus partidos y la siguiente tiene horarios cargados, pasa a la siguiente.
+  function fechaActual(fs) {
+    const f = fs.find(x => !x.disputada && (x.partidos || []).some(p => p.estado === 'pendiente' || p.estado === 'finalizado'));
+    if (!f) return null;
+    const jugables = (f.partidos || []).filter(p => p.estado !== 'libre');
+    const terminada = jugables.length > 0 && jugables.every(p => p.estado === 'finalizado');
+    if (terminada) {
+      const sig = fs.find(x => x.numero === f.numero + 1);
+      if (sig && (sig.partidos || []).some(p => p.hora)) return sig;
+    }
+    return f;
+  }
+
   const state = {
     currentTab: 'posiciones',
     posTorneo: 'clausura', // 'clausura' | 'apertura' | 'anual'
@@ -51,7 +65,7 @@
     fixtureTorneo: 'clausura', // 'clausura' | 'apertura'
     fixtureFecha: (() => {
       const fs = (DATA.clausura && DATA.clausura.fechas) || [];
-      const enJuego = fs.find(f => !f.disputada && (f.dia || (f.partidos || []).some(p => p.estado === 'finalizado')));
+      const enJuego = fechaActual(fs) || fs.find(f => !f.disputada && f.dia);
       return enJuego ? enJuego.numero : ((DATA.clausura && DATA.clausura.ultimaFechaDisputada) || 3);
     })(),
     goleadoresTorneo: 'clausura',
@@ -568,7 +582,7 @@
     $$('button[data-fixture-torneo]', container).forEach(btn => {
       btn.addEventListener('click', () => {
         state.fixtureTorneo = btn.dataset.fixtureTorneo;
-        state.fixtureFecha = state.fixtureTorneo === 'clausura' ? (((DATA.clausura.fechas || []).find(f => !f.disputada && (f.dia || (f.partidos || []).some(p => p.estado === 'finalizado'))) || {}).numero || DATA.clausura.ultimaFechaDisputada || 3) : 1;
+        state.fixtureFecha = state.fixtureTorneo === 'clausura' ? ((fechaActual(DATA.clausura.fechas || []) || {}).numero || DATA.clausura.ultimaFechaDisputada || 3) : 1;
         renderFixture();
       });
     });
@@ -3002,9 +3016,7 @@
   const urlCat = (c, view) => `${location.pathname}?cat=${c.toLowerCase()}${view ? '#' + view : ''}`;
 
   function proximaFecha(d) {
-    // La fecha en curso se muestra (con sus resultados) hasta que llega el informe oficial y se marca como disputada
-    const f = ((d && d.clausura && d.clausura.fechas) || []).find(x => !x.disputada && (x.partidos || []).some(p => p.estado === 'pendiente' || p.estado === 'finalizado'));
-    return f || null;
+    return fechaActual((d && d.clausura && d.clausura.fechas) || []);
   }
 
   function renderInicio() {

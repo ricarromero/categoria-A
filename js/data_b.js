@@ -1767,7 +1767,7 @@
             "cancha": "Cancha de Fútbol"
           }
         ],
-        "dia": "Sábado 7 y domingo 8 de noviembre"
+        "dia": "Sábado 7 de noviembre"
       }
     ],
     "tablas": {
