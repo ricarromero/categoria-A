@@ -2458,7 +2458,7 @@ const LIGA_DATA = {
       "sancion": "5 Partidos",
       "articulo": "Art. 28 inc \"B\"",
       "motivo": "Sanción disciplinaria Fecha 4",
-      "estado": "Cumplió 2 (Resta 3)"
+      "estado": "Cumplió 3 (Resta 2)"
     },
     {
       "jugador": "Irustia, Lautaro",
@@ -2467,22 +2467,6 @@ const LIGA_DATA = {
       "articulo": "Art. 28 inc \"B\"",
       "motivo": "Sanción disciplinaria Fecha 4",
       "estado": "Cumplió 2 (Resta 3)"
-    },
-    {
-      "jugador": "Sánchez, Lucas",
-      "equipo": "Mavericks",
-      "sancion": "2 Partidos",
-      "articulo": "Art. 23 inc \"A\"",
-      "motivo": "Expulsión Fecha 4",
-      "estado": "Cumplió 1 (Resta 1)"
-    },
-    {
-      "jugador": "Castro, Santiago",
-      "equipo": "Mavericks",
-      "sancion": "2 Partidos",
-      "articulo": "Art. 23 inc \"A\"",
-      "motivo": "Expulsión Fecha 4",
-      "estado": "Cumplió 1 (Resta 1)"
     },
     {
       "jugador": "Camargo, Francisco",
@@ -2498,39 +2482,7 @@ const LIGA_DATA = {
       "sancion": "6 Partidos",
       "articulo": "Art. 23 inc \"A\"",
       "motivo": "Sanción disciplinaria Fecha 4",
-      "estado": "Cumplió 1 (Resta 5)"
-    },
-    {
-      "jugador": "Acosta, Jerónimo",
-      "equipo": "Minaster City",
-      "sancion": "2 Partidos",
-      "articulo": "Art. 23 inc \"A\"",
-      "motivo": "Sanción disciplinaria Fecha 4",
-      "estado": "Cumplió 1 (Resta 1)"
-    },
-    {
-      "jugador": "Domínguez, Lautaro",
-      "equipo": "Minaster City",
-      "sancion": "2 Partidos",
-      "articulo": "Art. 23 inc \"A\"",
-      "motivo": "Sanción disciplinaria Fecha 4",
-      "estado": "Cumplió 1 (Resta 1)"
-    },
-    {
-      "jugador": "Cabello, Valentín",
-      "equipo": "Calise",
-      "sancion": "2 Partidos",
-      "articulo": "Art. 23 inc \"A\"",
-      "motivo": "",
-      "estado": "Cumplió 1 (Resta 1)"
-    },
-    {
-      "jugador": "Mogrovejo, Joaquín",
-      "equipo": "Celtic",
-      "sancion": "2 Partidos",
-      "articulo": "Art. 23 inc \"B\"",
-      "motivo": "",
-      "estado": "Cumplió 1 (Resta 1)"
+      "estado": "Cumplió 2 (Resta 4)"
     },
     {
       "jugador": "Cáceres, Agustín",
@@ -2538,7 +2490,7 @@ const LIGA_DATA = {
       "sancion": "2 Partidos",
       "articulo": "Art. 26 inc \"B\"",
       "motivo": "Sanción Fecha 5",
-      "estado": "Vigente (0/2)"
+      "estado": "Cumplió 1 (Resta 1)"
     },
     {
       "jugador": "Díaz, Javier",
@@ -2579,6 +2531,30 @@ const LIGA_DATA = {
       "articulo": "Art. 23 inc \"A\"",
       "motivo": "Sanción Fecha 5",
       "estado": "Vigente (0/4)"
+    },
+    {
+      "jugador": "Munizaga, Ezequiel",
+      "equipo": "Calise",
+      "sancion": "1 Partido",
+      "articulo": "Art. 23 inc \"A\"",
+      "motivo": "Informe Fecha 5 (actualizado)",
+      "estado": "Vigente (0/1)"
+    },
+    {
+      "jugador": "López, Camilo",
+      "equipo": "Calise",
+      "sancion": "Suspensión provisoria",
+      "articulo": "A resolver por el Tribunal",
+      "motivo": "Suspensión provisoria",
+      "estado": "Provisoria"
+    },
+    {
+      "jugador": "Cuevas, Mateo",
+      "equipo": "Calise",
+      "sancion": "Suspensión provisoria",
+      "articulo": "A resolver por el Tribunal",
+      "motivo": "Suspensión provisoria",
+      "estado": "Provisoria"
     },
     {
       "jugador": "Notario, Matías",
