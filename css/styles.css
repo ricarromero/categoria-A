@@ -4418,7 +4418,7 @@ body.modo-inicio #heroBoard, body.modo-inicio .hero-dots, body.modo-inicio .navb
   .ini-title h2 { font-size: 1.6rem; }
   .ini-match { grid-template-columns: 46px minmax(0,1fr) 22px minmax(0,1fr); padding: 9px 10px; font-size: .84rem; }
   .ini-cancha { grid-column: 2 / -1; justify-self: center; font-size: .62rem; }
-  .ini-team span, .ini-team { word-break: break-word; }
+  .ini-team span, .ini-team { word-break: normal; overflow-wrap: anywhere; hyphens: auto; }
 }
 .ini-block.sin-hora .ini-match { grid-template-columns: minmax(0,1fr) 28px minmax(0,1fr); }
 @media (max-width: 860px) { .ini-block.sin-hora .ini-match { grid-template-columns: minmax(0,1fr) 22px minmax(0,1fr); } }
