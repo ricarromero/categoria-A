@@ -2236,7 +2236,7 @@
       "estado": "3 Amarillas"
     }
   ],
-  "tablaAnualFuente": "Actualizada tras la Fecha 6 del Clausura con el criterio oficial de la Liga (puntos divididos en partidos programados)",
+  "tablaAnualFuente": "Actualizada tras la Fecha 6 del Clausura con el criterio oficial de la Liga: puntos divididos en partidos programados (en el Clausura, Zona A 7 y Zona B 6)",
   "tablaAnual": [
     {
       "pos": 1,
@@ -2257,11 +2257,22 @@
       "ptsCl": 13,
       "totalAp": 15,
       "coefAp": 2.14,
-      "coefCl": 2.17,
-      "total": 4.31
+      "coefCl": 2.6,
+      "total": 4.74
     },
     {
       "pos": 3,
+      "equipo": "Al Costado",
+      "ptsAp": 16,
+      "bonus": 2,
+      "ptsCl": 10,
+      "totalAp": 18,
+      "coefAp": 2.57,
+      "coefCl": 2.0,
+      "total": 4.57
+    },
+    {
+      "pos": 4,
       "equipo": "F90",
       "ptsAp": 16,
       "bonus": 0,
@@ -2270,17 +2281,6 @@
       "coefAp": 2.29,
       "coefCl": 2.0,
       "total": 4.29
-    },
-    {
-      "pos": 4,
-      "equipo": "Al Costado",
-      "ptsAp": 16,
-      "bonus": 2,
-      "ptsCl": 10,
-      "totalAp": 18,
-      "coefAp": 2.57,
-      "coefCl": 1.67,
-      "total": 4.24
     },
     {
       "pos": 5,
@@ -2301,11 +2301,22 @@
       "ptsCl": 8,
       "totalAp": 15,
       "coefAp": 2.14,
-      "coefCl": 1.33,
-      "total": 3.47
+      "coefCl": 1.6,
+      "total": 3.74
     },
     {
       "pos": 7,
+      "equipo": "Dep. La Verna",
+      "ptsAp": 11,
+      "bonus": 0,
+      "ptsCl": 8,
+      "totalAp": 11,
+      "coefAp": 1.57,
+      "coefCl": 1.6,
+      "total": 3.17
+    },
+    {
+      "pos": 8,
       "equipo": "De Zurda",
       "ptsAp": 3,
       "bonus": 0,
@@ -2314,17 +2325,6 @@
       "coefAp": 0.43,
       "coefCl": 2.5,
       "total": 2.93
-    },
-    {
-      "pos": 8,
-      "equipo": "Dep. La Verna",
-      "ptsAp": 11,
-      "bonus": 0,
-      "ptsCl": 8,
-      "totalAp": 11,
-      "coefAp": 1.57,
-      "coefCl": 1.33,
-      "total": 2.9
     },
     {
       "pos": 9,
@@ -2356,8 +2356,8 @@
       "ptsCl": 1,
       "totalAp": 15,
       "coefAp": 2.14,
-      "coefCl": 0.17,
-      "total": 2.31
+      "coefCl": 0.2,
+      "total": 2.34
     },
     {
       "pos": 12,
@@ -2389,8 +2389,8 @@
       "ptsCl": 1,
       "totalAp": 4,
       "coefAp": 0.57,
-      "coefCl": 0.17,
-      "total": 0.74
+      "coefCl": 0.2,
+      "total": 0.77
     },
     {
       "pos": 15,
