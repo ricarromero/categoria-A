@@ -2088,7 +2088,7 @@
   function getReglamentoBadge(cat) {
     switch (cat) {
       case 'categoriaA':
-        return '<span class="reg-badge badge-cat-a">Categoría A</span>';
+        return `<span class="reg-badge badge-cat-a">Categoría ${CAT === 'C' ? 'A' : CAT}</span>`;
       case 'formaDisputa':
         return '<span class="reg-badge badge-forma">Forma de Disputa</span>';
       case 'reglamentoGeneral':
@@ -2265,7 +2265,7 @@
             <span class="reg-pill-count">${totalCount}</span>
           </button>
           <button type="button" class="reg-pill ${state.reglamentoSeccion === 'categoriaA' ? 'active' : ''}" data-cat="categoriaA">
-            <span>Categoría A</span>
+            <span>Categoría ${CAT === 'C' ? 'A' : CAT}</span>
             <span class="reg-pill-count">${catACount}</span>
           </button>
           <button type="button" class="reg-pill ${state.reglamentoSeccion === 'formaDisputa' ? 'active' : ''}" data-cat="formaDisputa">
