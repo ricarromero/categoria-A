@@ -1068,7 +1068,7 @@
             "zona": "Zona única",
             "local": "Defensa e Injusticia",
             "visitante": "Flandria FC",
-            "golesL": 1,
+            "golesL": 0,
             "golesV": 2,
             "estado": "finalizado",
             "nota": "",
