@@ -4118,6 +4118,12 @@ html[data-cat="C"] {
   --tile-bg: rgba(66, 26, 2, 0.45); --tile-bg-hover: rgba(80, 32, 4, 0.75); --tile-label: #FFD7A1;
 }
 
+html[data-cat="F"] {
+  --navy-primary: #6B1E5E; --navy-secondary: #B0237F; --hero-end: #8B2FC9;
+  --tile-bg: rgba(52, 8, 46, 0.45); --tile-bg-hover: rgba(66, 10, 58, 0.75); --tile-label: #F9C6E6;
+}
+html[data-cat="F"] .tab-challenger, html[data-cat="F"] .mnav-cc { display: none !important; }
+
 /* Selector de categoría (el cuadrado con la letra) */
 .cat-switch { position: relative; flex-shrink: 0; }
 .league-crest#catBtn { cursor: pointer; position: relative; padding: 0; line-height: 1; transition: transform .15s ease, box-shadow .15s ease; }
@@ -4133,6 +4139,8 @@ html[data-cat="C"] {
 .cat-menu [data-cat="A"] .cat-dot { background: #24496B; }
 .cat-menu [data-cat="B"] .cat-dot { background: #22814D; }
 .cat-menu [data-cat="C"] .cat-dot { background: #C25E09; }
+.cat-menu [data-cat="F"] .cat-dot { background: #B0237F; }
+.cat-chip.cat-F { background: #B0237F; color: #FFFFFF; }
 
 /* Botón Copa Challenger en rojo (como la Gran Final) */
 .tab-btn.tab-challenger { background: linear-gradient(180deg, #D81E57 0%, #A3123D 100%) !important; box-shadow: 0 2px 10px rgba(200, 22, 75, 0.35); }
@@ -4159,6 +4167,7 @@ html[data-cat="C"] {
 .cat-pick[data-cat="A"] { background: #2F6CA8; }
 .cat-pick[data-cat="B"] { background: #22814D; }
 .cat-pick[data-cat="C"] { background: #D9770B; }
+.cat-pick[data-cat="F"] { background: linear-gradient(135deg, #D1238C, #8B2FC9); }
 .cat-pick:hover { opacity: .9; transform: translateY(-1px); }
 .cat-pick.active { opacity: 1; width: 46px; border-color: #FFFFFF; box-shadow: 0 0 0 3px rgba(255,255,255,.22), 0 4px 12px rgba(0,0,0,.25); }
 @media (max-width: 600px) { .cat-pick { width: 32px; height: 36px; font-size: 1.25rem; } .cat-pick.active { width: 36px; } .cat-switch { gap: 4px; } }
@@ -4181,6 +4190,7 @@ html[data-cat="C"] {
 .cat-pick[data-cat="A"]:not(.active) { animation-delay: .8s; }
 .cat-pick[data-cat="B"]:not(.active) { animation-delay: 1s; }
 .cat-pick[data-cat="C"]:not(.active) { animation-delay: 1.2s; }
+.cat-pick[data-cat="F"]:not(.active) { animation-delay: 1.4s; }
 .cat-pick:hover { animation-play-state: paused; }
 @media (prefers-reduced-motion: reduce) { .cat-pick:not(.active) { animation: none; } }
 
@@ -4369,7 +4379,8 @@ body.modo-inicio #heroBoard, body.modo-inicio .hero-dots, body.modo-inicio .navb
 .ini-title { display: flex; align-items: baseline; gap: 10px; margin-bottom: 12px; }
 .ini-title h2 { margin: 0; font-family: var(--f-display); font-weight: 900; font-size: 2rem; text-transform: uppercase; color: var(--navy-primary); }
 .ini-block { background: #FFFFFF; border: 1px solid var(--border-color); border-radius: var(--radius-md); overflow: hidden; margin-bottom: 14px; box-shadow: var(--shadow-sm); border-top: 4px solid var(--cc); }
-.ini-cat-A { --cc: #2F6CA8; } .ini-cat-B { --cc: #22814D; } .ini-cat-C { --cc: #D9770B; }
+.ini-cat-A { --cc: #2F6CA8; } .ini-cat-B { --cc: #22814D; } .ini-cat-C { --cc: #D9770B; } .ini-cat-F { --cc: #B0237F; }
+.ini-pick.ini-cat-F { background: linear-gradient(135deg, #D1238C, #8B2FC9); }
 .ini-block-head { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; padding: 10px 14px; background: var(--surface-alt); border-bottom: 1px solid var(--border-subtle); }
 .ini-block-head b { color: var(--text-primary); font-size: .95rem; }
 .ini-dia { margin-left: auto; font-size: .8rem; color: var(--text-secondary); font-weight: 600; }
@@ -4438,7 +4449,7 @@ body.modo-inicio .content-area {
 .ini-hero-txt { position: relative; }
 .ini-hero h2 { margin: 0; font-family: var(--f-display); font-weight: 900; font-size: 2.1rem; line-height: 1; text-transform: uppercase; }
 .ini-hero p { margin: 6px 0 0; color: #C9D6E3; font-size: .9rem; }
-.ini-picks { position: relative; display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.ini-picks { position: relative; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; }
 .ini-pick { display: flex; align-items: center; gap: 10px; text-align: left; padding: 12px; border-radius: 12px; color: #FFFFFF; background: var(--cc); box-shadow: 0 6px 16px rgba(0,0,0,.25), inset 0 1px 0 rgba(255,255,255,.2); cursor: pointer; transition: transform .15s ease, filter .15s ease; position: relative; overflow: hidden; }
 .ini-pick::after { content: ""; position: absolute; top: 0; bottom: 0; left: -60%; width: 40%; background: linear-gradient(100deg, transparent, rgba(255,255,255,.35), transparent); transform: skewX(-20deg); animation: ccShine 5s ease-in-out infinite; pointer-events: none; }
 .ini-pick.ini-cat-B::after { animation-delay: .3s; } .ini-pick.ini-cat-C::after { animation-delay: .6s; }

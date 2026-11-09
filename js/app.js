@@ -10,7 +10,9 @@
   'use strict';
 
   // Categoría activa (A, B o C): se elige con ?cat= o se recuerda la última elegida
-  const CATS = ['A', 'B', 'C'];
+  const CATS = ['A', 'B', 'C', 'F'];
+  // Nombre visible de cada categoría (la F es la Liga Femenina)
+  const catNombre = c => (c === 'F' ? 'Liga Femenina' : 'Categoría ' + c);
   // Categorías abiertas al público. Las demás muestran "Próximamente" salvo en modo prueba (?prueba=1).
   const CATS_ABIERTAS = ['A', 'B', 'C'];
   const qs = new URLSearchParams(location.search);
@@ -199,7 +201,9 @@
     const teamCampAp = getTeam(campApertura);
 
     // 4. Goleador Clausura
-    const topScorerClausura = (DATA.clausura.goleadores || [])[0];
+    const golTorneoAp = !(DATA.clausura.goleadores || []).length;
+    const topScorerClausura = (golTorneoAp ? (DATA.apertura.goleadores || []) : DATA.clausura.goleadores)[0];
+    const golLabel = `${CAT === 'F' ? 'Goleadora' : 'Goleador'} ${golTorneoAp ? 'Apertura' : 'Clausura'}`;
     const teamScorer = getTeam(topScorerClausura?.equipo);
 
     board.innerHTML = `
@@ -231,7 +235,7 @@
       </div>
 
       <div class="board-tile" data-action="go-goleadores">
-        <span class="tile-label"><em class="tl-long">Goleador Clausura</em><em class="tl-short">Goleador</em> <span>${topScorerClausura?.goles || 0} GOLES</span></span>
+        <span class="tile-label"><em class="tl-long">${golLabel}</em><em class="tl-short">${CAT === 'F' ? 'Goleadora' : 'Goleador'}</em> <span>${topScorerClausura?.goles || 0} GOLES</span></span>
         <div class="tile-body">
           ${renderCrestImg(teamScorer, "tile-crest")}
           <span class="tile-name">${(topScorerClausura?.jugador || "—").split(',')[0]}</span>
@@ -274,7 +278,7 @@
       noticeHtml = `
         <div class="banner-alert">
           <div>
-            <b>Tabla Anual 2026 — Categoría ${CAT}</b>
+            <b>Tabla Anual 2026 — ${catNombre(CAT)}</b>
             Total = Coeficiente Apertura + Coeficiente Clausura. El total del Apertura incluye los bonus por mérito (Campeón +3, Subcampeón +2, 3° puesto +1, Campeón Copa de Plata +1). ${DATA.tablaAnualFuente ? DATA.tablaAnualFuente + '.' : ''}
           </div>
         </div>
@@ -325,7 +329,7 @@
           <div class="banner-alert">
             <div>
               <b>Torneo Clausura 2026 — ${zonaTxt} en disputa</b>
-              Tabla oficial consolidada hasta la Fecha ${DATA.clausura.ultimaFechaDisputada || 3}. ${(FMT && FMT.clausura && FMT.clausura.texto) || 'Clasifican del 1° al 4° a la Fase Campeonato y del 5° al 8° a la Copa de Plata.'}
+              ${DATA.clausura.provisoria ? `Tabla provisoria con los resultados cargados hasta la Fecha ${DATA.clausura.ultimaFechaDisputada}: todavía no llegó el informe oficial.` : `Tabla oficial consolidada hasta la Fecha ${DATA.clausura.ultimaFechaDisputada || 3}.`} ${(FMT && FMT.clausura && FMT.clausura.texto) || 'Clasifican del 1° al 4° a la Fase Campeonato y del 5° al 8° a la Copa de Plata.'}
             </div>
           </div>
         `;
@@ -334,7 +338,7 @@
           <div class="banner-alert">
             <div>
               <b>Torneo Apertura 2026 — Historial Oficial Fase Clasificatoria (${zonaTxt})</b>
-              Fase regular culminada. ${FMT && FMT.apertura && FMT.apertura.texto ? FMT.apertura.texto + ' ' : ''}El Torneo fue coronado por <b>${DATA.apertura.campeon || '—'}</b> (Campeón Campeonato) y <b>${DATA.apertura.campeonPlata || '—'}</b> (Campeón Copa de Plata).
+              Fase regular culminada. ${FMT && FMT.apertura && FMT.apertura.texto ? FMT.apertura.texto + ' ' : ''}El Torneo fue coronado por <b>${DATA.apertura.campeon || '—'}</b> (Campeón Campeonato) ${DATA.apertura.campeonPlata ? `y <b>${DATA.apertura.campeonPlata}</b> (Campeón Copa de Plata).` : '.'}
             </div>
           </div>
         `;
@@ -380,8 +384,8 @@
 
       legendHtml = `
         <div class="table-legend">
-          <div class="legend-item"><span class="legend-marker legend-campeonato"></span> Puestos 1° a ${nCamp}°: Clasificación a la Fase Campeonato${ZONA_UNICA && state.posTorneo === 'clausura' ? ' (1° y 2° directo a semifinales)' : ''}</div>
-          <div class="legend-item"><span class="legend-marker legend-plata"></span> Puestos ${nCamp + 1}° en adelante: Clasificación a Copa de Plata</div>
+          <div class="legend-item"><span class="legend-marker legend-campeonato"></span> Puestos 1° a ${nCamp}°: Clasificación a la Fase Campeonato${ZONA_UNICA && state.posTorneo === 'clausura' && !(FMT.clausura && FMT.clausura.semis) ? ' (1° y 2° directo a semifinales)' : ''}</div>
+          ${CAT === 'F' && state.posTorneo === 'apertura' ? '' : `<div class="legend-item"><span class="legend-marker legend-plata"></span> Puestos ${nCamp + 1}° en adelante: Clasificación a Copa de Plata</div>`}
           ${state.posTorneo === 'apertura' ? '<div class="legend-item"><span class="badge-sancion-pts" style="display:inline-block;">-X sanción</span> Quita oficial de puntos aplicada por Tribunal de Penas</div>' : ''}
           ${state.posTorneo === 'clausura' ? '<button class="pill-btn legend-cta" data-goto="cruces" style="margin-left:auto;">Ver cruces si el Clausura terminara hoy →</button>' : ''}
         </div>
@@ -397,7 +401,7 @@
         <div class="pill-group" role="tablist" aria-label="Seleccionar Torneo">
           <button class="pill-btn ${state.posTorneo === 'clausura' ? 'active' : ''}" data-torneo="clausura">Clausura</button>
           <button class="pill-btn ${state.posTorneo === 'apertura' ? 'active' : ''}" data-torneo="apertura">Apertura</button>
-          <button class="pill-btn ${state.posTorneo === 'anual' ? 'active' : ''}" data-torneo="anual">Tabla Anual</button>
+          ${(DATA.tablaAnual || []).length ? `<button class="pill-btn ${state.posTorneo === 'anual' ? 'active' : ''}" data-torneo="anual">Tabla Anual</button>` : ''}
         </div>
       </div>
 
@@ -706,6 +710,33 @@
     const T = (DATA.clausura.tablas?.zonaA || []).slice().sort((x, y) => x.pos - y.pos);
     const at = n => T[n - 1]?.equipo;
     const cfg = FMT.clausura;
+    if (cfg.semis) {
+      const tbd0 = txt => bkTeamHtml(null, { placeholder: txt });
+      const cr = (codigo, a, b) => `<div class="bk-match"><div class="bk-code"><span>${codigo}</span><span>${a}° vs ${b}°</span></div>${bkTeamHtml(at(a), { seed: a + '°' })}${bkTeamHtml(at(b), { seed: b + '°' })}</div>`;
+      const pd = (codigo, x, y, extra = '') => `<div class="bk-match ${extra}"><div class="bk-code"><span>${codigo}</span><span>A jugar</span></div>${x}${y}</div>`;
+      const [m1, m2] = cfg.semis; const [p1] = cfg.plata;
+      return `
+      <div class="bracket-wrap">
+        <div class="bracket-note" style="margin:0 0 14px; padding:10px 14px; background:#FDF2F8; border:1px solid #FBCFE8; border-radius:8px; color:#9D174D;">
+          <b>Proyección con la tabla tras la Fecha ${DATA.clausura.ultimaFechaDisputada}.</b> No son cruces confirmados: cambian con cada fecha.
+        </div>
+        <div class="bracket-block">
+          <div class="bracket-title"><h3>Fase Campeonato</h3><span class="bracket-tag proy">Clausura 2026 · Si terminara hoy</span></div>
+          <div class="bracket-scroll"><div class="bracket">
+            <div class="bracket-col"><div class="bracket-col-title">Semifinales</div><div class="bk-stack">${cr('SF1', m1[0], m1[1])}${cr('SF2', m2[0], m2[1])}</div></div>
+            <div class="bracket-col"><div class="bracket-col-title">Final</div><div class="bk-stack">${pd('Gran final', tbd0('Ganador SF1'), tbd0('Ganador SF2'), 'final')}<div class="bk-champion">★ Campeón Clausura 2026</div></div></div>
+          </div></div>
+        </div>
+        <div class="bracket-block">
+          <div class="bracket-title"><h3>Copa de Plata</h3><span class="bracket-tag proy">Clausura 2026 · Si terminara hoy</span></div>
+          <div class="bracket-scroll"><div class="bracket">
+            <div class="bracket-col"><div class="bracket-col-title">Semifinal</div><div class="bk-stack">${cr('SP', p1[0], p1[1])}</div></div>
+            <div class="bracket-col"><div class="bracket-col-title">Final</div><div class="bk-stack">${pd('Final', bkTeamHtml(at(cfg.plata5), { seed: cfg.plata5 + '°' }), tbd0('Ganador SP'), 'final plata')}<div class="bk-champion plata">★ Campeón Copa de Plata</div></div></div>
+          </div></div>
+        </div>
+        <div class="bracket-note">Cruces según la Forma de Disputa del Clausura de la Liga Femenina: semifinales 1° vs 4° y 2° vs 3°; Copa de Plata 6° vs 7° y el ganador juega la final con el 5°.</div>
+      </div>`;
+    }
     const tbd = txt => bkTeamHtml(null, { placeholder: txt });
     const cruce = (codigo, a, b) => `<div class="bk-match">
         <div class="bk-code"><span>${codigo}</span><span>${a}° vs ${b}°</span></div>
@@ -750,7 +781,7 @@
   }
 
   function renderProyeccionPlayoffs() {
-    if (ZONA_UNICA && FMT.clausura && FMT.clausura.cuartos) return renderProyeccionUnica();
+    if (ZONA_UNICA && FMT.clausura && (FMT.clausura.cuartos || FMT.clausura.semis)) return renderProyeccionUnica();
     const pr = getProyeccionPlayoffs();
     const fmt = n => n.toFixed(2).replace('.', ',');
     const cruce = c => `<div class="bk-match">
@@ -2088,7 +2119,7 @@
   function getReglamentoBadge(cat) {
     switch (cat) {
       case 'categoriaA':
-        return `<span class="reg-badge badge-cat-a">Categoría ${CAT === 'C' ? 'A' : CAT}</span>`;
+        return `<span class="reg-badge badge-cat-a">${CAT === 'C' ? 'Categoría A' : catNombre(CAT)}</span>`;
       case 'formaDisputa':
         return '<span class="reg-badge badge-forma">Forma de Disputa</span>';
       case 'reglamentoGeneral':
@@ -2265,7 +2296,7 @@
             <span class="reg-pill-count">${totalCount}</span>
           </button>
           <button type="button" class="reg-pill ${state.reglamentoSeccion === 'categoriaA' ? 'active' : ''}" data-cat="categoriaA">
-            <span>Categoría ${CAT === 'C' ? 'A' : CAT}</span>
+            <span>${CAT === 'C' ? 'Categoría A' : catNombre(CAT)}</span>
             <span class="reg-pill-count">${catACount}</span>
           </button>
           <button type="button" class="reg-pill ${state.reglamentoSeccion === 'formaDisputa' ? 'active' : ''}" data-cat="formaDisputa">
@@ -2840,10 +2871,10 @@
   // CATEGORÍAS B y C: ESQUELETO (sin informes todavía)
   // =========================================================================
   const ESQ = !!DATA.esqueleto;
-  const ESQ_TXT = `Todavía no tenemos los informes de la Liga para la Categoría ${CAT}. Estamos armando la sección: cuando lleguen las fechas se cargan acá las tablas, el fixture, los goleadores y las sanciones.`;
+  const ESQ_TXT = `Todavía no tenemos los informes de la Liga para la ${catNombre(CAT)}. Estamos armando la sección: cuando lleguen las fechas se cargan acá las tablas, el fixture, los goleadores y las sanciones.`;
 
   function esqBanner(extra = '') {
-    return `<div class="banner-alert esq-banner"><div><b>Categoría ${CAT} · Sección en construcción</b>${ESQ_TXT}${extra}</div></div>`;
+    return `<div class="banner-alert esq-banner"><div><b>${catNombre(CAT)} · Sección en construcción</b>${ESQ_TXT}${extra}</div></div>`;
   }
   const esqBar = (w = 70) => `<span class="esq-bar" style="width:${w}%"></span>`;
 
@@ -2861,7 +2892,7 @@
     board.innerHTML =
       tile('Líder Clausura · Zona A', '— PTS', vacio, 'Esperando informes', '', 'Líder Zona A') +
       tile('Líder Clausura · Zona B', '— PTS', vacio, 'Esperando informes', '', 'Líder Zona B') +
-      tile(`Equipos Categoría ${CAT}`, `${n} EQUIPOS`, `<span class="tile-name">Ver equipos</span>`, 'Ver la lista de equipos', 'go-equipos', 'Equipos') +
+      tile(`Equipos ${catNombre(CAT)}`, `${n} EQUIPOS`, `<span class="tile-name">Ver equipos</span>`, 'Ver la lista de equipos', 'go-equipos', 'Equipos') +
       tile('Copa Challenger', 'EN JUEGO', `<span class="tile-name">Ver cuadro</span>`, `Equipos de la ${CAT} en la Copa`, 'go-challenger', 'Challenger');
     $$('.board-tile[data-action]', board).forEach(t => t.addEventListener('click', () => {
       switchTab(t.dataset.action === 'go-equipos' ? 'equipos' : 'challenger');
@@ -2905,7 +2936,7 @@
           <tbody>${filas}</tbody>
         </table>
       </div>
-      <div class="esq-note">Equipos de la Categoría ${CAT} según el cuadro de la Copa Challenger, en orden alfabético. El orden y las zonas se actualizan con el primer informe.</div>
+      <div class="esq-note">Equipos de la ${catNombre(CAT)} según el cuadro de la Copa Challenger, en orden alfabético. El orden y las zonas se actualizan con el primer informe.</div>
       ${esqCta}`;
     esqBindTorneo(container, 'posTorneo', renderPosicionesEsqueleto);
   }
@@ -2952,8 +2983,8 @@
     document.body.insertAdjacentHTML('beforeend', `
       <div class="prox-overlay" id="proxOverlay" role="dialog" aria-modal="true" aria-labelledby="proxTitulo">
         <div class="prox-card prox-${c}">
-          <div class="prox-head"><span class="prox-letra">${c}</span><div><small>Categoría ${c}</small><h3 id="proxTitulo">Próximamente</h3></div></div>
-          <p>Estamos preparando la sección de la <b>Categoría ${c}</b> con tablas, fixture, resultados y goleadores.</p>
+          <div class="prox-head"><span class="prox-letra">${c}</span><div><small>${catNombre(c)}</small><h3 id="proxTitulo">Próximamente</h3></div></div>
+          <p>Estamos preparando la sección de la <b>${catNombre(c)}</b> con tablas, fixture, resultados y goleadores.</p>
           <p>Seguinos en Instagram para enterarte cuando esté lista.</p>
           <div class="prox-actions">
             <a class="prox-ig" href="https://www.instagram.com/ligauniversitaria.sj/" target="_blank" rel="noopener noreferrer">@ligauniversitaria.sj</a>
@@ -3011,7 +3042,7 @@
   // =========================================================================
   // INICIO: portada general (próximos partidos + tablas de las tres categorías)
   // =========================================================================
-  const CAT_DATOS = { A: window.LIGA_DATA, B: window.LIGA_DATA_B, C: window.LIGA_DATA_C };
+  const CAT_DATOS = { A: window.LIGA_DATA, B: window.LIGA_DATA_B, C: window.LIGA_DATA_C, F: window.LIGA_DATA_F };
   const catsVisibles = () => CATS.filter(c => catDisponible(c) && CAT_DATOS[c] && !CAT_DATOS[c].esqueleto);
   const urlCat = (c, view) => `${location.pathname}?cat=${c.toLowerCase()}${view ? '#' + view : ''}`;
 
@@ -3052,7 +3083,7 @@
       return `<div class="ini-block ini-cat-${c} ${conHora ? '' : 'sin-hora'}">
           <div class="ini-block-head">
             <span class="ini-chip">${c}</span>
-            <b>Categoría ${c} · ${escapeHtml(f.nombre)}</b>
+            <b>${catNombre(c)} · ${escapeHtml(f.nombre)}</b>
             <span class="ini-dia">${dia ? (variosDias ? 'El Palomar' : escapeHtml(dia) + ' · El Palomar') : 'Día y horario a confirmar'}</span>
           </div>
           ${filas}
@@ -3070,10 +3101,10 @@
         return `<tr class="${r.pos <= nCamp ? 'q' : ''} ${r.pos === nCamp ? 'cut' : ''}"><td class="p">${r.pos}</td><td class="e"><div class="ini-e"><img class="ini-crest" src="${(eq && eq.escudo) || escudoGlobal(r.equipo) || genericCrestUri(r.equipo)}" alt=""><span>${escapeHtml(r.equipo)}</span></div></td><td>${r.pj}</td><td class="pts">${r.pts}</td></tr>`;
       }).join('');
       return `<div class="ini-table ini-cat-${c}" data-ini-tab="${c}">
-          <div class="ini-table-head"><span class="ini-chip">${c}</span><b>Categoría ${c}</b><span>Clausura · Fecha ${d.clausura.ultimaFechaDisputada}</span></div>
+          <div class="ini-table-head"><span class="ini-chip">${c}</span><b>${catNombre(c)}</b><span>Clausura · Fecha ${d.clausura.ultimaFechaDisputada}</span></div>
           ${zonas.length > 1 ? `<div class="ini-zonas">${zonas.map(([z], i) => `<button type="button" class="${i ? '' : 'active'}" data-ini-zona="${c}${z}">Zona ${z}</button>`).join('')}</div>` : ''}
           ${zonas.map(([z, rows], i) => `<table class="ini-tbl" data-ini-zt="${c}${z}" ${i ? 'hidden' : ''}><thead><tr><th>#</th><th>Equipo</th><th>PJ</th><th>Pts</th></tr></thead><tbody>${filas(rows)}</tbody></table>`).join('')}
-          <a class="ini-ver" href="${urlCat(c)}">Ver Categoría ${c} →</a>
+          <a class="ini-ver" href="${urlCat(c)}">Ver ${catNombre(c)} →</a>
         </div>`;
     };
 
@@ -3086,7 +3117,7 @@
       const det = abierta ? `${n} equipos${lider ? ` · Líder: ${escapeHtml(lider.equipo)}` : ' · Zonas A y B'}` : 'Próximamente';
       return `<button type="button" class="ini-pick ini-cat-${c} ${abierta ? '' : 'locked'}" data-ini-go="${c}">
           <span class="ini-pick-letra">${c}</span>
-          <span class="ini-pick-txt"><b>Categoría ${c}</b><small>${det}</small></span>
+          <span class="ini-pick-txt"><b>${catNombre(c)}</b><small>${det}</small></span>
           <span class="ini-pick-go">${abierta ? 'Entrar' : 'Pronto'} <em>→</em></span>
         </button>`;
     }).join('');
@@ -3130,7 +3161,7 @@
 
 
   function aplicarCategoriaUI() {
-    const nombre = `Categoría ${CAT}`;
+    const nombre = `${catNombre(CAT)}`;
     document.title = `Liga Universitaria Sanjuanina de Fútbol — ${nombre} 2026`;
     const sub = $('#heroCatLabel');
     if (sub) sub.textContent = INICIO ? 'Temporada 2026' : nombre;
