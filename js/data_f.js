@@ -682,7 +682,9 @@
             "golesL": 1,
             "golesV": 6,
             "estado": "finalizado",
-            "nota": ""
+            "nota": "",
+            "dia": "Viernes 30/10",
+            "cancha": "Cancha de Sintético"
           },
           {
             "zona": "Zona única",
@@ -691,7 +693,9 @@
             "golesL": 0,
             "golesV": 6,
             "estado": "finalizado",
-            "nota": ""
+            "nota": "",
+            "dia": "Viernes 30/10",
+            "cancha": "Cancha de Sintético"
           },
           {
             "zona": "Zona única",
@@ -700,7 +704,9 @@
             "golesL": 0,
             "golesV": 2,
             "estado": "finalizado",
-            "nota": ""
+            "nota": "",
+            "dia": "Viernes 30/10",
+            "cancha": "Cancha de Sintético"
           },
           {
             "zona": "Zona única",
@@ -711,7 +717,8 @@
             "estado": "libre",
             "nota": "Fecha libre Deportivo VAR"
           }
-        ]
+        ],
+        "dia": "Viernes 30 de octubre"
       },
       {
         "numero": 2,
