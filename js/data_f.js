@@ -45,8 +45,8 @@
       "zonaApertura": null,
       "zonaClausura": "A",
       "color": "#C2268F",
-      "instagram": "",
-      "instagramHandle": ""
+      "instagram": "https://www.instagram.com/constructoras.fc/",
+      "instagramHandle": "@constructoras.fc"
     },
     {
       "id": "f_deportes",
@@ -78,8 +78,8 @@
       "zonaApertura": "A",
       "zonaClausura": "A",
       "color": "#C2268F",
-      "instagram": "",
-      "instagramHandle": ""
+      "instagram": "https://www.instagram.com/galana.fc/",
+      "instagramHandle": "@galana.fc"
     },
     {
       "id": "f_gladiadoras",
@@ -100,8 +100,8 @@
       "zonaApertura": "A",
       "zonaClausura": "A",
       "color": "#C2268F",
-      "instagram": "",
-      "instagramHandle": ""
+      "instagram": "https://www.instagram.com/interfc.fem/",
+      "instagramHandle": "@interfc.fem"
     },
     {
       "id": "f_tercer_tiempo",
@@ -111,8 +111,8 @@
       "zonaApertura": "A",
       "zonaClausura": "A",
       "color": "#C2268F",
-      "instagram": "",
-      "instagramHandle": ""
+      "instagram": "https://www.instagram.com/tercer_tiempo.sj/",
+      "instagramHandle": "@tercer_tiempo.sj"
     },
     {
       "id": "f_dep_capra",
