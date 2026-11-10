@@ -1103,7 +1103,10 @@
             "golesL": null,
             "golesV": null,
             "estado": "pendiente",
-            "nota": ""
+            "nota": "",
+            "dia": "Miércoles 11/11",
+            "hora": "21:20",
+            "cancha": "Cancha de Fútbol"
           },
           {
             "zona": "Zona única",
@@ -1121,7 +1124,10 @@
             "golesL": null,
             "golesV": null,
             "estado": "pendiente",
-            "nota": ""
+            "nota": "",
+            "dia": "Miércoles 11/11",
+            "hora": "22:40",
+            "cancha": "Cancha de Rugby"
           },
           {
             "zona": "Zona única",
@@ -1130,7 +1136,10 @@
             "golesL": null,
             "golesV": null,
             "estado": "pendiente",
-            "nota": ""
+            "nota": "",
+            "dia": "Miércoles 11/11",
+            "hora": "21:20",
+            "cancha": "Cancha de Rugby"
           },
           {
             "zona": "Zona única",
@@ -1141,7 +1150,8 @@
             "estado": "pendiente",
             "nota": ""
           }
-        ]
+        ],
+        "dia": "Miércoles 11 de noviembre"
       },
       {
         "numero": 9,

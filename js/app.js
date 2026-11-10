@@ -49,13 +49,15 @@
   function fechaActual(fs) {
     const f = fs.find(x => !x.disputada && (x.partidos || []).some(p => p.estado === 'pendiente' || p.estado === 'finalizado'));
     if (!f) return null;
-    const jugables = (f.partidos || []).filter(p => p.estado !== 'libre');
-    const terminada = jugables.length > 0 && jugables.every(p => p.estado === 'finalizado');
-    if (terminada) {
-      const sig = fs.find(x => x.numero === f.numero + 1);
-      if (sig && (sig.partidos || []).some(p => p.hora)) return sig;
+    let cur = f;
+    for (;;) {
+      const jugables = (cur.partidos || []).filter(p => p.estado !== 'libre');
+      const terminada = jugables.length > 0 && jugables.every(p => p.estado === 'finalizado');
+      if (!terminada) return cur;
+      const sig = fs.find(x => x.numero === cur.numero + 1);
+      if (!(sig && (sig.partidos || []).some(p => p.hora))) return cur;
+      cur = sig;
     }
-    return f;
   }
 
   const state = {
