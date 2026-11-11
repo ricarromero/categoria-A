@@ -1115,7 +1115,10 @@
             "golesL": null,
             "golesV": null,
             "estado": "pendiente",
-            "nota": ""
+            "nota": "",
+            "dia": "Miércoles 11/11",
+            "hora": "22:45",
+            "cancha": "Cancha de Fútbol"
           },
           {
             "zona": "Zona única",
@@ -1148,7 +1151,10 @@
             "golesL": null,
             "golesV": null,
             "estado": "pendiente",
-            "nota": ""
+            "nota": "",
+            "dia": "Miércoles 11/11",
+            "hora": "20:00",
+            "cancha": "Cancha de Rugby"
           }
         ],
         "dia": "Miércoles 11 de noviembre"
