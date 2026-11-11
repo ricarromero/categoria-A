@@ -14,7 +14,7 @@
   // Nombre visible de cada categoría (la F es la Liga Femenina)
   const catNombre = c => (c === 'F' ? 'Liga Femenina' : 'Categoría ' + c);
   // Categorías abiertas al público. Las demás muestran "Próximamente" salvo en modo prueba (?prueba=1).
-  const CATS_ABIERTAS = ['A', 'B', 'C'];
+  const CATS_ABIERTAS = ['A', 'B', 'C', 'F'];
   const qs = new URLSearchParams(location.search);
   let PRUEBA = false;
   try {
