@@ -1959,6 +1959,7 @@ const LIGA_DATA = {
         "numero": 7,
         "nombre": "Fecha 7",
         "disputada": false,
+        "dia": "Sábado 14 de noviembre",
         "partidos": [
           {
             "zona": "Zona A",
@@ -1967,7 +1968,10 @@ const LIGA_DATA = {
             "golesL": null,
             "golesV": null,
             "estado": "pendiente",
-            "nota": "Próximamente"
+            "nota": "",
+            "dia": "Sábado 14/11",
+            "hora": "13:00",
+            "cancha": "Cancha de Fútbol"
           },
           {
             "zona": "Zona A",
@@ -1976,7 +1980,10 @@ const LIGA_DATA = {
             "golesL": null,
             "golesV": null,
             "estado": "pendiente",
-            "nota": "Próximamente"
+            "nota": "",
+            "dia": "Sábado 14/11",
+            "hora": "11:30",
+            "cancha": "Cancha de Rugby"
           },
           {
             "zona": "Zona A",
@@ -1985,7 +1992,10 @@ const LIGA_DATA = {
             "golesL": null,
             "golesV": null,
             "estado": "pendiente",
-            "nota": "Próximamente"
+            "nota": "",
+            "dia": "Sábado 14/11",
+            "hora": "10:00",
+            "cancha": "Cancha de Fútbol"
           },
           {
             "zona": "Zona A",
@@ -1994,7 +2004,10 @@ const LIGA_DATA = {
             "golesL": null,
             "golesV": null,
             "estado": "pendiente",
-            "nota": "Próximamente"
+            "nota": "",
+            "dia": "Sábado 14/11",
+            "hora": "10:00",
+            "cancha": "Cancha de Rugby"
           },
           {
             "zona": "Zona B",
@@ -2003,7 +2016,10 @@ const LIGA_DATA = {
             "golesL": null,
             "golesV": null,
             "estado": "pendiente",
-            "nota": "Próximamente"
+            "nota": "",
+            "dia": "Sábado 14/11",
+            "hora": "14:30",
+            "cancha": "Cancha de Fútbol"
           },
           {
             "zona": "Zona B",
@@ -2021,7 +2037,10 @@ const LIGA_DATA = {
             "golesL": null,
             "golesV": null,
             "estado": "pendiente",
-            "nota": "Próximamente"
+            "nota": "",
+            "dia": "Sábado 14/11",
+            "hora": "13:00",
+            "cancha": "Cancha de Rugby"
           },
           {
             "zona": "Zona B",
@@ -2030,7 +2049,10 @@ const LIGA_DATA = {
             "golesL": null,
             "golesV": null,
             "estado": "pendiente",
-            "nota": "Próximamente"
+            "nota": "",
+            "dia": "Sábado 14/11",
+            "hora": "11:30",
+            "cancha": "Cancha de Fútbol"
           }
         ]
       }
