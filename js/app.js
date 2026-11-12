@@ -2602,6 +2602,50 @@
       `;
     }
 
+    // Próximos partidos del Clausura (pendientes y fechas libres), en orden cronológico
+    const proximos = [];
+    (DATA.clausura.fechas || []).forEach(f => (f.partidos || []).forEach(m => {
+      if (m.estado === 'finalizado') return;
+      const tgt = team.nombre.trim().toLowerCase();
+      const esL = (m.local || '').trim().toLowerCase() === tgt, esV = (m.visitante || '').trim().toLowerCase() === tgt;
+      if (!esL && !esV) return;
+      if (m.estado === 'libre' || m.visitante === 'Libre') { proximos.push({ fechaNum: f.numero, libre: true, dia: m.dia || f.dia || '' }); return; }
+      proximos.push({ fechaNum: f.numero, esLocal: esL, rival: esL ? m.visitante : m.local, dia: m.dia || f.dia || '', hora: m.hora || '', cancha: m.cancha || '' });
+    }));
+    function renderProximoItem(m) {
+      if (m.libre) return `
+        <div class="team-match-card tmc-proximo tmc-libre">
+          <div class="tmc-top"><span class="tmc-torneo-badge badge-proximo">Clausura · C${m.fechaNum}</span><span class="tmc-cond">LIBRE</span></div>
+          <div class="tmc-main"><span class="tmc-rival-name" style="color:var(--text-secondary,#667382)!important;">Fecha libre</span></div>
+          ${m.dia ? `<div class="tmc-nota" style="font-style:normal!important;">${escapeHtml(m.dia)}</div>` : ''}
+        </div>`;
+      const rivalTeam = getTeam(m.rival);
+      const det = [m.dia, m.cancha].filter(Boolean).map(escapeHtml).join(' · ');
+      return `
+        <div class="team-match-card tmc-proximo">
+          <div class="tmc-top">
+            <span class="tmc-torneo-badge badge-proximo">Clausura · C${m.fechaNum}</span>
+            <span class="tmc-cond">${m.esLocal ? 'LOCAL' : 'VISITANTE'}</span>
+          </div>
+          <div class="tmc-main">
+            <div class="tmc-rival-box" data-team="${rivalTeam?.id || ''}" style="${rivalTeam ? 'cursor:pointer;' : ''}">
+              ${renderCrestImg(rivalTeam, "tmc-rival-crest")}
+              <span class="tmc-rival-name" title="${m.rival}">${m.rival}</span>
+            </div>
+            <div class="tmc-score-badge score-proximo">${m.hora ? escapeHtml(m.hora) + ' hs' : 'A confirmar'}</div>
+          </div>
+          <div class="tmc-nota" style="font-style:normal!important;">${det || 'Día y horario a confirmar'}</div>
+        </div>`;
+    }
+    const proximosHtml = proximos.length ? `
+        <div style="margin-bottom:18px;">
+          <div style="display:flex; align-items:center; gap:8px; margin-bottom:10px;">
+            <span class="tmc-torneo-badge badge-proximo" style="font-size:0.75rem;">Próximos partidos · Clausura 2026</span>
+            <span style="font-size:0.8rem; color:var(--text-secondary,#667382); font-weight:600;">${proximos.filter(x => !x.libre).length} por jugar</span>
+          </div>
+          <div class="team-matches-grid">${proximos.map(renderProximoItem).join('')}</div>
+        </div>` : '';
+
     const matchFilter = state.modalMatchFilter;
     let matchesContentHtml = '';
 
@@ -2610,6 +2654,7 @@
         <div class="team-matches-grid">
           ${clMatches.length > 0 ? clMatches.map(renderMatchItem).join('') : '<div style="color:var(--muted); font-size:0.9rem;">Sin partidos disputados en Clausura.</div>'}
         </div>
+        ${proximosHtml}
       `;
     } else if (matchFilter === 'apertura') {
       matchesContentHtml = `
@@ -2629,6 +2674,8 @@
             ${clMatches.length > 0 ? clMatches.map(renderMatchItem).join('') : '<div style="color:var(--muted); font-size:0.9rem;">Sin partidos disputados.</div>'}
           </div>
         </div>
+
+        ${proximosHtml}
 
         <div>
           <div style="display:flex; align-items:center; gap:8px; margin-bottom:10px;">

@@ -1711,6 +1711,21 @@ img.match-crest {
   color: #FFFFFF !important;
 }
 
+.badge-proximo {
+  background: #EEF0F3 !important;
+  color: #3D4B5C !important;
+}
+.tmc-proximo {
+  border-style: dashed !important;
+  background: #FAFBFC !important;
+}
+.score-proximo {
+  background: #FFFFFF !important;
+  color: var(--navy-primary, #14283F) !important;
+  border: 1px dashed #B8C7D6 !important;
+  font-size: 0.95rem !important;
+}
+
 .tmc-penales {
   font-size: 0.72rem !important;
   font-weight: 600 !important;
