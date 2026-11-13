@@ -1171,7 +1171,10 @@
             "golesL": null,
             "golesV": null,
             "estado": "pendiente",
-            "nota": ""
+            "nota": "",
+            "dia": "Domingo 15/11",
+            "hora": "11:20",
+            "cancha": "Cancha de Rugby"
           },
           {
             "zona": "Zona única",
@@ -1180,7 +1183,10 @@
             "golesL": null,
             "golesV": null,
             "estado": "pendiente",
-            "nota": ""
+            "nota": "",
+            "dia": "Domingo 15/11",
+            "hora": "10:00",
+            "cancha": "Cancha de Fútbol"
           },
           {
             "zona": "Zona única",
@@ -1189,7 +1195,10 @@
             "golesL": null,
             "golesV": null,
             "estado": "pendiente",
-            "nota": ""
+            "nota": "",
+            "dia": "Domingo 15/11",
+            "hora": "10:00",
+            "cancha": "Cancha de Rugby"
           },
           {
             "zona": "Zona única",
@@ -1198,7 +1207,10 @@
             "golesL": null,
             "golesV": null,
             "estado": "pendiente",
-            "nota": ""
+            "nota": "",
+            "dia": "Domingo 15/11",
+            "hora": "11:20",
+            "cancha": "Cancha de Fútbol"
           },
           {
             "zona": "Zona única",
@@ -1207,9 +1219,13 @@
             "golesL": null,
             "golesV": null,
             "estado": "pendiente",
-            "nota": ""
+            "nota": "",
+            "dia": "Domingo 15/11",
+            "hora": "12:40",
+            "cancha": "Cancha de Rugby"
           }
-        ]
+        ],
+        "dia": "Domingo 15 de noviembre"
       }
     ],
     "tablas": {

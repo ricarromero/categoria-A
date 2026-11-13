@@ -1618,9 +1618,9 @@
             "golesL": null,
             "golesV": null,
             "estado": "pendiente",
-            "nota": "Sin resultado en el informe de la Liga",
-            "dia": "Domingo 01/11",
-            "hora": "13:00",
+            "nota": "Reprogramado para el domingo 15/11",
+            "dia": "Domingo 15/11",
+            "hora": "12:40",
             "cancha": "Cancha de Fútbol"
           },
           {
