@@ -82,14 +82,17 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
 <script src="../js/data_bc.js"></script>
 <script src="../js/parciales.js"></script>
 <script src="../js/parciales_apply.js"></script>
+<script src="../js/cc_model.js"></script>
 <script>
 (function () {
   'use strict';
   const $ = s => document.querySelector(s);
   const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   const DATOS = { A: window.LIGA_DATA, B: window.LIGA_DATA_B, C: window.LIGA_DATA_C, F: window.LIGA_DATA_F };
-  const COL = { A: '#2F6CA8', B: '#22814D', C: '#D9770B', F: 'linear-gradient(135deg,#D1238C,#8B2FC9)' };
-  const NOM = { A: 'Categoría A', B: 'Categoría B', C: 'Categoría C', F: 'Liga Femenina' };
+  const COL = { A: '#2F6CA8', B: '#22814D', C: '#D9770B', F: 'linear-gradient(135deg,#D1238C,#8B2FC9)', CC: 'linear-gradient(135deg,#C62828,#7A1630)' };
+  const NOM = { A: 'Categoría A', B: 'Categoría B', C: 'Categoría C', F: 'Liga Femenina', CC: 'Copa Challenger' };
+  const TABS = ['A', 'B', 'C', 'F', 'CC'];
+  const RONDA = { 1: '16avos', 2: 'Octavos', 3: 'Cuartos', 4: 'Semifinal', 5: 'Final' };
   const PARC = Object.assign({}, (window.LIGA_PARCIALES && window.LIGA_PARCIALES.resultados) || {});
   const ls = { get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }, set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} } };
   let PIN = '', POR = '', CAT = ls.get('carga_cat') || 'A';
@@ -113,7 +116,12 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
   });
   $('#pin').addEventListener('keydown', e => { if (e.key === 'Enter') $('#entrar').click(); });
 
-  const escudo = (D, n) => { const e = (D.equipos || []).find(x => x.nombre === n); return e && e.escudo ? '../' + e.escudo : ''; };
+  const escudo = (D, n) => {
+    const e = (D.equipos || []).find(x => x.nombre === n);
+    if (e && e.escudo) return '../' + e.escudo;
+    const cc = (window.LIGA_DATA && window.LIGA_DATA.copaChallenger && window.LIGA_DATA.copaChallenger.escudos) || {};
+    return cc[n] ? '../' + cc[n] : '';
+  };
 
   // Fechas a mostrar: la primera sin informe oficial (y la siguiente si ya tiene horarios) + partidos pendientes de fechas viejas
   function fechasDe(D) {
@@ -132,8 +140,10 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
   }
 
   function render() {
-    $('#tabs').innerHTML = Object.keys(DATOS).map(c => `<button class="tab ${c === CAT ? 'on' : ''}" data-c="${c}" style="background:${COL[c]}">${c}</button>`).join('');
+    if (!TABS.includes(CAT)) CAT = 'A';
+    $('#tabs').innerHTML = TABS.map(c => `<button class="tab ${c === CAT ? 'on' : ''}" data-c="${c}" style="background:${COL[c]}">${c === 'CC' ? 'Copa' : c}</button>`).join('');
     document.querySelectorAll('.tab').forEach(b => b.addEventListener('click', () => { CAT = b.dataset.c; ls.set('carga_cat', CAT); render(); }));
+    if (CAT === 'CC') return renderCopa();
     const D = DATOS[CAT];
     const grupos = D ? fechasDe(D) : [];
     if (!grupos.length) { $('#lista').innerHTML = `<div class="empty">No hay partidos para cargar en ${NOM[CAT]}.</div>`; return; }
@@ -143,40 +153,61 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
     document.querySelectorAll('.m').forEach(bind);
   }
 
-  function card(D, f, p) {
-    const clave = [CAT, 'clausura', f.numero, p.local, p.visitante].join('|');
+  // Copa Challenger: partidos con los dos equipos definidos y sin resultado oficial
+  function renderCopa() {
+    const D = window.LIGA_DATA;
+    const M = window.ccModel && window.ccModel(D && D.copaChallenger);
+    const ps = M ? M.all.filter(m => m.a.nombre && m.b.nombre && (!m.res || m.res.provisorio)) : [];
+    if (!ps.length) { $('#lista').innerHTML = `<div class="empty">No hay partidos de la Copa Challenger para cargar.</div>`; return; }
+    const fd = d => { if (!d) return ''; const [y, mo, da] = d.split('-').map(Number); return ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'][new Date(y, mo - 1, da).getDay()] + ' ' + da + '/' + mo; };
+    let ronda = null;
+    $('#lista').innerHTML = ps.map(m => {
+      const h = m.r !== ronda ? `<div class="fh"><b>${RONDA[m.r] || 'Ronda ' + m.r}</b><span>Copa Challenger</span></div>` : '';
+      ronda = m.r;
+      const p = { local: m.a.nombre, visitante: m.b.nombre, dia: fd(m.date), hora: m.t || '', cancha: m.c ? (m.c === 'R' ? 'Rugby' : 'Fútbol') : '', estado: m.res ? 'finalizado' : 'pendiente' };
+      if (m.res) { p.golesL = m.res.a; p.golesV = m.res.b; if (m.res.pa != null) { p.penalesL = m.res.pa; p.penalesV = m.res.pb; } }
+      return h + card(D, { numero: m.no }, p, 'P' + m.no);
+    }).join('');
+    document.querySelectorAll('.m').forEach(bind);
+  }
+
+  function card(D, f, p, codigo) {
+    const copa = CAT === 'CC';
+    const clave = copa ? ['A', 'challenger', f.numero, p.local, p.visitante].join('|') : [CAT, 'clausura', f.numero, p.local, p.visitante].join('|');
     const r = PARC[clave];
     const tiene = p.estado === 'finalizado';
     const gl = tiene ? p.golesL : '', gv = tiene ? p.golesV : '';
     const det = [p.dia, p.hora ? p.hora + ' hs' : '', (p.cancha || '').replace('Cancha de ', '')].filter(Boolean).join(' · ');
     const pen = p.penalesL !== undefined;
     return `<div class="m ${tiene ? 'hecho' : ''}" data-clave="${esc(clave)}" data-fecha="${f.numero}" data-local="${esc(p.local)}" data-visitante="${esc(p.visitante)}">
-      <div class="mt"><span>${esc(det || 'Horario a confirmar')}</span><span>${tiene ? `<span class="badge">Cargado</span>` : ''}</span></div>
+      <div class="mt"><span>${codigo ? esc(codigo) + ' · ' : ''}${esc(det || 'Horario a confirmar')}</span><span>${tiene ? `<span class="badge">Cargado</span>` : ''}</span></div>
       <div class="row">
-        <div class="ln"><div class="tm">${escudo(D, p.local) ? `<img src="${esc(escudo(D, p.local))}" alt="">` : '<i class="ph"></i>'}<span>${esc(p.local)}</span><small>Local</small></div>
+        <div class="ln"><div class="tm">${escudo(D, p.local) ? `<img src="${esc(escudo(D, p.local))}" alt="">` : '<i class="ph"></i>'}<span>${esc(p.local)}</span><small>${copa ? '' : 'Local'}</small></div>
           <input class="g gl" type="number" inputmode="numeric" min="0" max="50" value="${gl}" aria-label="Goles ${esc(p.local)}"></div>
-        <div class="ln"><div class="tm">${escudo(D, p.visitante) ? `<img src="${esc(escudo(D, p.visitante))}" alt="">` : '<i class="ph"></i>'}<span>${esc(p.visitante)}</span><small>Visitante</small></div>
+        <div class="ln"><div class="tm">${escudo(D, p.visitante) ? `<img src="${esc(escudo(D, p.visitante))}" alt="">` : '<i class="ph"></i>'}<span>${esc(p.visitante)}</span><small>${copa ? '' : 'Visitante'}</small></div>
           <input class="g gv" type="number" inputmode="numeric" min="0" max="50" value="${gv}" aria-label="Goles ${esc(p.visitante)}"></div>
       </div>
       <div class="extra ${pen || (r && r.nota) ? 'on' : ''}">
         <div><label>Penales ${esc(p.local)}</label><input class="pl" type="number" inputmode="numeric" min="0" max="50" value="${pen ? p.penalesL : ''}"></div>
         <div><label>Penales ${esc(p.visitante)}</label><input class="pv" type="number" inputmode="numeric" min="0" max="50" value="${pen ? p.penalesV : ''}"></div>
-        <div class="full"><label>Nota (opcional)</label><input class="nota" type="text" maxlength="80" placeholder="Ej: No se presentó Timba" value="${esc(r && r.nota ? r.nota : '')}"></div>
+        <div class="full" ${copa ? 'hidden' : ''}><label>Nota (opcional)</label><input class="nota" type="text" maxlength="80" placeholder="${copa ? 'Si empatan, cargá los penales arriba' : 'Ej: No se presentó Timba'}" value="${esc(r && r.nota ? r.nota : '')}"></div>
       </div>
-      <div class="acts"><button class="btn guardar">Guardar</button>${r ? '<button class="del borrar">Borrar</button>' : ''}<button class="mas">Penales / nota</button><span class="st"></span></div>
+      <div class="acts"><button class="btn guardar">Guardar</button>${r ? '<button class="del borrar">Borrar</button>' : ''}<button class="mas">${copa ? 'Penales' : 'Penales / nota'}</button><span class="st"></span></div>
     </div>`;
   }
 
   function bind(el) {
     const st = el.querySelector('.st');
     const num = s => { const v = el.querySelector(s).value.trim(); return v === '' ? null : Number(v); };
-    const base = () => ({ cat: CAT, torneo: 'clausura', fecha: Number(el.dataset.fecha), local: el.dataset.local, visitante: el.dataset.visitante });
+    const copa = CAT === 'CC';
+    const base = () => ({ cat: copa ? 'A' : CAT, torneo: copa ? 'challenger' : 'clausura', fecha: Number(el.dataset.fecha), local: el.dataset.local, visitante: el.dataset.visitante });
     el.querySelector('.mas').addEventListener('click', () => el.querySelector('.extra').classList.toggle('on'));
     el.querySelector('.guardar').addEventListener('click', async () => {
       const gl = num('.gl'), gv = num('.gv'), pl = num('.pl'), pv = num('.pv');
       const ent = x => x !== null && Number.isInteger(x) && x >= 0 && x <= 50;
       if (!ent(gl) || !ent(gv)) { st.className = 'st err'; st.textContent = 'Completá los dos goles'; return; }
       if ((pl !== null || pv !== null) && !(ent(pl) && ent(pv))) { st.className = 'st err'; st.textContent = 'Completá los dos penales'; return; }
+      if (copa && gl === gv && (pl === null || pl === pv)) { el.querySelector('.extra').classList.add('on'); st.className = 'st err'; st.textContent = 'Empate: cargá los penales'; return; }
       const body = Object.assign(base(), { golesL: gl, golesV: gv, nota: el.querySelector('.nota').value.trim() });
       if (pl !== null) { body.penalesL = pl; body.penalesV = pv; }
       const b = el.querySelector('.guardar'); b.disabled = true; st.className = 'st pend'; st.textContent = 'Guardando…';
