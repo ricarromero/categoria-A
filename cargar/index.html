@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Cargar resultados · La Liga Universitaria</title>
+<link rel="icon" type="image/png" href="../public/logo_liga.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@500;600;700;800&family=Big+Shoulders+Display:wght@800;900&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#14283F;--txt:#14283F;--mut:#667382;--bg:#F3F5F8;--card:#FFF;--line:#DCE2E8;--ok:#166534;--okbg:#EAF4EE;--err:#991B1B;--errbg:#FEE2E2;--acc:#2F6CA8}
+*{box-sizing:border-box}
+body{margin:0;font-family:Barlow,system-ui,sans-serif;background:var(--bg);color:var(--txt)}
+header{background:var(--navy);color:#FFF;padding:14px 16px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:5}
+header img{height:34px}
+header h1{margin:0;font-family:'Big Shoulders Display',Impact,sans-serif;font-weight:900;font-size:26px;text-transform:uppercase;letter-spacing:.5px}
+header .who{margin-left:auto;font-size:13px;opacity:.8;text-align:right}
+main{max-width:720px;margin:0 auto;padding:16px}
+.box{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px}
+label{display:block;font-weight:700;font-size:14px;margin:12px 0 6px}
+input[type=text],input[type=password],input[type=number]{font:inherit;font-size:18px;padding:10px 12px;border:1px solid var(--line);border-radius:10px;width:100%;background:#FFF;color:var(--txt)}
+button{font:inherit;font-weight:800;border:0;border-radius:10px;padding:11px 16px;cursor:pointer}
+.btn{background:var(--acc);color:#FFF}
+.btn:disabled{opacity:.5;cursor:default}
+.btn2{background:#EEF1F5;color:var(--txt)}
+.del{background:transparent;color:var(--err);padding:11px 8px}
+.msg{margin-top:10px;font-weight:700;font-size:14px}
+.msg.err{color:var(--err)} .msg.ok{color:var(--ok)}
+.tabs{display:flex;gap:8px;margin:4px 0 16px;flex-wrap:wrap}
+.tab{flex:1;min-width:70px;padding:10px 0;border-radius:12px;font-family:'Big Shoulders Display',Impact,sans-serif;font-weight:900;font-size:24px;color:#FFF;opacity:.45}
+.tab.on{opacity:1;box-shadow:0 4px 12px rgba(20,40,63,.25)}
+.fh{display:flex;justify-content:space-between;align-items:baseline;margin:18px 2px 8px}
+.fh b{font-family:'Big Shoulders Display',Impact,sans-serif;font-weight:900;font-size:24px;text-transform:uppercase}
+.fh span{font-size:13px;color:var(--mut);font-weight:600}
+.m{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px;margin-bottom:10px}
+.m.hecho{border-color:#9CC9AE;background:#FAFDFB}
+.mt{display:flex;justify-content:space-between;font-size:12px;font-weight:700;color:var(--mut);text-transform:uppercase;letter-spacing:.04em}
+.row{display:flex;flex-direction:column;gap:8px;margin-top:10px}
+.ln{display:grid;grid-template-columns:minmax(0,1fr) 72px;align-items:center;gap:10px}
+.tm{display:flex;align-items:center;gap:8px;font-weight:800;font-size:15px;line-height:1.1;min-width:0}
+.tm span{min-width:0;font-size:17px}
+.tm small{margin-left:auto;font-size:11px;font-weight:700;color:var(--mut);text-transform:uppercase;letter-spacing:.05em}
+.ph{width:30px;height:30px;border-radius:50%;background:#E5E9EE;flex:none}
+input[type=number]{-moz-appearance:textfield;appearance:textfield}
+input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
+.tm img{width:30px;height:30px;object-fit:contain;flex:none}
+.g{text-align:center;font-family:'Big Shoulders Display',Impact,sans-serif;font-weight:900;font-size:28px;padding:6px 0}
+.extra{display:none;margin-top:10px;gap:8px;grid-template-columns:1fr 1fr;align-items:end}
+.extra.on{display:grid}
+.extra .full{grid-column:1/-1}
+.acts{display:flex;align-items:center;gap:8px;margin-top:10px;flex-wrap:wrap}
+.acts .mas{background:transparent;color:var(--acc);padding:8px 4px;font-size:14px}
+.acts .st{margin-left:auto;font-size:13px;font-weight:700}
+.st.ok{color:var(--ok)} .st.err{color:var(--err)} .st.pend{color:var(--mut)}
+.badge{display:inline-block;background:var(--okbg);color:var(--ok);border-radius:6px;padding:2px 8px;font-size:12px;font-weight:800}
+.empty{color:var(--mut);text-align:center;padding:30px 10px}
+.note{font-size:13px;color:var(--mut);line-height:1.4;margin-top:14px}
+</style>
+</head>
+<body>
+<header><img src="../public/logo_liga.png" alt=""><h1>Cargar resultados</h1><div class="who" id="who"></div></header>
+<main>
+  <div id="login" class="box">
+    <div style="font-weight:800;font-size:20px">Entrar</div>
+    <p class="note" style="margin-top:6px">Página interna para cargar resultados provisorios. Las tablas oficiales se actualizan solo con el informe de la Liga.</p>
+    <label for="pin">PIN</label>
+    <input id="pin" type="password" inputmode="numeric" pattern="[0-9]*" autocomplete="off" placeholder="••••••••">
+    <label for="nombre">Tu nombre</label>
+    <input id="nombre" type="text" maxlength="30" placeholder="Ej: Ricardo">
+    <div style="margin-top:16px"><button class="btn" id="entrar">Entrar</button></div>
+    <div class="msg" id="loginMsg"></div>
+  </div>
+  <div id="app" hidden>
+    <div class="tabs" id="tabs"></div>
+    <div id="lista"></div>
+    <p class="note">Cada resultado guardado aparece en la página en más o menos un minuto (Inicio y Fixture). Si te equivocás, cambiá los números y guardá de nuevo, o tocá "Borrar".</p>
+  </div>
+</main>
+<script src="../js/data.js"></script>
+<script src="../js/data_b.js"></script>
+<script src="../js/data_c.js"></script>
+<script src="../js/data_f.js"></script>
+<script src="../js/data_bc.js"></script>
+<script src="../js/parciales.js"></script>
+<script src="../js/parciales_apply.js"></script>
+<script>
+(function () {
+  'use strict';
+  const $ = s => document.querySelector(s);
+  const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const DATOS = { A: window.LIGA_DATA, B: window.LIGA_DATA_B, C: window.LIGA_DATA_C, F: window.LIGA_DATA_F };
+  const COL = { A: '#2F6CA8', B: '#22814D', C: '#D9770B', F: 'linear-gradient(135deg,#D1238C,#8B2FC9)' };
+  const NOM = { A: 'Categoría A', B: 'Categoría B', C: 'Categoría C', F: 'Liga Femenina' };
+  const PARC = Object.assign({}, (window.LIGA_PARCIALES && window.LIGA_PARCIALES.resultados) || {});
+  const ls = { get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }, set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} } };
+  let PIN = '', POR = ls.get('carga_nombre') || '', CAT = ls.get('carga_cat') || 'A';
+  $('#nombre').value = POR;
+
+  async function api(body) {
+    const r = await fetch('/api/guardar', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(Object.assign({ pin: PIN, por: POR }, body)) });
+    let j = {}; try { j = await r.json(); } catch (e) {}
+    if (!r.ok || !j.ok) throw new Error(j.error || ('Error ' + r.status));
+    return j;
+  }
+
+  $('#entrar').addEventListener('click', async () => {
+    const pin = $('#pin').value.trim(), nom = $('#nombre').value.trim();
+    const m = $('#loginMsg'); m.className = 'msg';
+    if (!/^\d{4,12}$/.test(pin)) { m.className = 'msg err'; m.textContent = 'El PIN son solo números.'; return; }
+    if (!nom) { m.className = 'msg err'; m.textContent = 'Poné tu nombre, así queda registrado quién cargó cada resultado.'; return; }
+    PIN = pin; POR = nom; ls.set('carga_nombre', nom);
+    $('#entrar').disabled = true; m.textContent = 'Verificando…';
+    try { await api({ accion: 'verificar' }); $('#login').hidden = true; $('#app').hidden = false; $('#who').textContent = 'Cargando como ' + nom; render(); }
+    catch (e) { m.className = 'msg err'; m.textContent = e.message; PIN = ''; }
+    $('#entrar').disabled = false;
+  });
+  $('#pin').addEventListener('keydown', e => { if (e.key === 'Enter') $('#entrar').click(); });
+
+  const escudo = (D, n) => { const e = (D.equipos || []).find(x => x.nombre === n); return e && e.escudo ? '../' + e.escudo : ''; };
+
+  // Fechas a mostrar: la primera sin informe oficial (y la siguiente si ya tiene horarios) + partidos pendientes de fechas viejas
+  function fechasDe(D) {
+    const fs = (D.clausura && D.clausura.fechas) || [];
+    const out = [];
+    fs.forEach(f => {
+      const pend = (f.partidos || []).filter(p => p.estado === 'pendiente');
+      if (f.disputada && pend.length) out.push({ f, partidos: pend, atrasada: true });
+    });
+    const sin = fs.filter(f => !f.disputada);
+    sin.forEach((f, i) => {
+      const conHora = (f.partidos || []).some(p => p.hora);
+      if (i === 0 || conHora) out.push({ f, partidos: (f.partidos || []).filter(p => p.estado !== 'libre') });
+    });
+    return out;
+  }
+
+  function render() {
+    $('#tabs').innerHTML = Object.keys(DATOS).map(c => `<button class="tab ${c === CAT ? 'on' : ''}" data-c="${c}" style="background:${COL[c]}">${c}</button>`).join('');
+    document.querySelectorAll('.tab').forEach(b => b.addEventListener('click', () => { CAT = b.dataset.c; ls.set('carga_cat', CAT); render(); }));
+    const D = DATOS[CAT];
+    const grupos = D ? fechasDe(D) : [];
+    if (!grupos.length) { $('#lista').innerHTML = `<div class="empty">No hay partidos para cargar en ${NOM[CAT]}.</div>`; return; }
+    $('#lista').innerHTML = grupos.map(g => `
+      <div class="fh"><b>Fecha ${g.f.numero}${g.atrasada ? ' · pendiente' : ''}</b><span>${esc(g.f.dia || '')}</span></div>
+      ${g.partidos.map(p => card(D, g.f, p)).join('')}`).join('');
+    document.querySelectorAll('.m').forEach(bind);
+  }
+
+  function card(D, f, p) {
+    const clave = [CAT, 'clausura', f.numero, p.local, p.visitante].join('|');
+    const r = PARC[clave];
+    const tiene = p.estado === 'finalizado';
+    const gl = tiene ? p.golesL : '', gv = tiene ? p.golesV : '';
+    const det = [p.dia, p.hora ? p.hora + ' hs' : '', (p.cancha || '').replace('Cancha de ', '')].filter(Boolean).join(' · ');
+    const pen = p.penalesL !== undefined;
+    return `<div class="m ${tiene ? 'hecho' : ''}" data-clave="${esc(clave)}" data-fecha="${f.numero}" data-local="${esc(p.local)}" data-visitante="${esc(p.visitante)}">
+      <div class="mt"><span>${esc(det || 'Horario a confirmar')}</span><span>${tiene ? `<span class="badge">Cargado${r && r.por ? ' · ' + esc(r.por) : ''}</span>` : ''}</span></div>
+      <div class="row">
+        <div class="ln"><div class="tm">${escudo(D, p.local) ? `<img src="${esc(escudo(D, p.local))}" alt="">` : '<i class="ph"></i>'}<span>${esc(p.local)}</span><small>Local</small></div>
+          <input class="g gl" type="number" inputmode="numeric" min="0" max="50" value="${gl}" aria-label="Goles ${esc(p.local)}"></div>
+        <div class="ln"><div class="tm">${escudo(D, p.visitante) ? `<img src="${esc(escudo(D, p.visitante))}" alt="">` : '<i class="ph"></i>'}<span>${esc(p.visitante)}</span><small>Visitante</small></div>
+          <input class="g gv" type="number" inputmode="numeric" min="0" max="50" value="${gv}" aria-label="Goles ${esc(p.visitante)}"></div>
+      </div>
+      <div class="extra ${pen || (r && r.nota) ? 'on' : ''}">
+        <div><label>Penales ${esc(p.local)}</label><input class="pl" type="number" inputmode="numeric" min="0" max="50" value="${pen ? p.penalesL : ''}"></div>
+        <div><label>Penales ${esc(p.visitante)}</label><input class="pv" type="number" inputmode="numeric" min="0" max="50" value="${pen ? p.penalesV : ''}"></div>
+        <div class="full"><label>Nota (opcional)</label><input class="nota" type="text" maxlength="80" placeholder="Ej: No se presentó Timba" value="${esc(r && r.nota ? r.nota : '')}"></div>
+      </div>
+      <div class="acts"><button class="btn guardar">Guardar</button>${r ? '<button class="del borrar">Borrar</button>' : ''}<button class="mas">Penales / nota</button><span class="st"></span></div>
+    </div>`;
+  }
+
+  function bind(el) {
+    const st = el.querySelector('.st');
+    const num = s => { const v = el.querySelector(s).value.trim(); return v === '' ? null : Number(v); };
+    const base = () => ({ cat: CAT, torneo: 'clausura', fecha: Number(el.dataset.fecha), local: el.dataset.local, visitante: el.dataset.visitante });
+    el.querySelector('.mas').addEventListener('click', () => el.querySelector('.extra').classList.toggle('on'));
+    el.querySelector('.guardar').addEventListener('click', async () => {
+      const gl = num('.gl'), gv = num('.gv'), pl = num('.pl'), pv = num('.pv');
+      const ent = x => x !== null && Number.isInteger(x) && x >= 0 && x <= 50;
+      if (!ent(gl) || !ent(gv)) { st.className = 'st err'; st.textContent = 'Completá los dos goles'; return; }
+      if ((pl !== null || pv !== null) && !(ent(pl) && ent(pv))) { st.className = 'st err'; st.textContent = 'Completá los dos penales'; return; }
+      const body = Object.assign(base(), { golesL: gl, golesV: gv, nota: el.querySelector('.nota').value.trim() });
+      if (pl !== null) { body.penalesL = pl; body.penalesV = pv; }
+      const b = el.querySelector('.guardar'); b.disabled = true; st.className = 'st pend'; st.textContent = 'Guardando…';
+      try {
+        const j = await api(body);
+        PARC[el.dataset.clave] = j.item;
+        st.className = 'st ok'; st.textContent = '✓ Guardado · en la web en ~1 min';
+        el.classList.add('hecho');
+        if (!el.querySelector('.borrar')) { const d = document.createElement('button'); d.className = 'del borrar'; d.textContent = 'Borrar'; b.after(d); d.addEventListener('click', () => borrar(el)); }
+      } catch (e) { st.className = 'st err'; st.textContent = e.message; }
+      b.disabled = false;
+    });
+    const d = el.querySelector('.borrar'); if (d) d.addEventListener('click', () => borrar(el));
+    function borrar(el2) {
+      if (!window.confirm || !confirm('¿Borrar el resultado cargado de este partido?')) return;
+      st.className = 'st pend'; st.textContent = 'Borrando…';
+      api(Object.assign(base(), { accion: 'borrar' })).then(() => {
+        delete PARC[el2.dataset.clave];
+        el2.querySelector('.gl').value = ''; el2.querySelector('.gv').value = '';
+        el2.classList.remove('hecho'); const x = el2.querySelector('.borrar'); if (x) x.remove();
+        st.className = 'st ok'; st.textContent = '✓ Borrado';
+      }).catch(e => { st.className = 'st err'; st.textContent = e.message; });
+    }
+  }
+})();
+</script>
+</body>
+</html>
