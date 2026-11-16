@@ -66,8 +66,6 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
     <p class="note" style="margin-top:6px">Página interna para cargar resultados provisorios. Las tablas oficiales se actualizan solo con el informe de la Liga.</p>
     <label for="pin">PIN</label>
     <input id="pin" type="password" inputmode="numeric" pattern="[0-9]*" autocomplete="off" placeholder="••••••••">
-    <label for="nombre">Tu nombre</label>
-    <input id="nombre" type="text" maxlength="30" placeholder="Ej: Ricardo">
     <div style="margin-top:16px"><button class="btn" id="entrar">Entrar</button></div>
     <div class="msg" id="loginMsg"></div>
   </div>
@@ -94,8 +92,7 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
   const NOM = { A: 'Categoría A', B: 'Categoría B', C: 'Categoría C', F: 'Liga Femenina' };
   const PARC = Object.assign({}, (window.LIGA_PARCIALES && window.LIGA_PARCIALES.resultados) || {});
   const ls = { get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }, set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} } };
-  let PIN = '', POR = ls.get('carga_nombre') || '', CAT = ls.get('carga_cat') || 'A';
-  $('#nombre').value = POR;
+  let PIN = '', POR = '', CAT = ls.get('carga_cat') || 'A';
 
   async function api(body) {
     const r = await fetch('/api/guardar', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(Object.assign({ pin: PIN, por: POR }, body)) });
@@ -105,13 +102,12 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
   }
 
   $('#entrar').addEventListener('click', async () => {
-    const pin = $('#pin').value.trim(), nom = $('#nombre').value.trim();
+    const pin = $('#pin').value.trim();
     const m = $('#loginMsg'); m.className = 'msg';
     if (!/^\d{4,12}$/.test(pin)) { m.className = 'msg err'; m.textContent = 'El PIN son solo números.'; return; }
-    if (!nom) { m.className = 'msg err'; m.textContent = 'Poné tu nombre, así queda registrado quién cargó cada resultado.'; return; }
-    PIN = pin; POR = nom; ls.set('carga_nombre', nom);
+    PIN = pin;
     $('#entrar').disabled = true; m.textContent = 'Verificando…';
-    try { await api({ accion: 'verificar' }); $('#login').hidden = true; $('#app').hidden = false; $('#who').textContent = 'Cargando como ' + nom; render(); }
+    try { await api({ accion: 'verificar' }); $('#login').hidden = true; $('#app').hidden = false; render(); }
     catch (e) { m.className = 'msg err'; m.textContent = e.message; PIN = ''; }
     $('#entrar').disabled = false;
   });
@@ -155,7 +151,7 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
     const det = [p.dia, p.hora ? p.hora + ' hs' : '', (p.cancha || '').replace('Cancha de ', '')].filter(Boolean).join(' · ');
     const pen = p.penalesL !== undefined;
     return `<div class="m ${tiene ? 'hecho' : ''}" data-clave="${esc(clave)}" data-fecha="${f.numero}" data-local="${esc(p.local)}" data-visitante="${esc(p.visitante)}">
-      <div class="mt"><span>${esc(det || 'Horario a confirmar')}</span><span>${tiene ? `<span class="badge">Cargado${r && r.por ? ' · ' + esc(r.por) : ''}</span>` : ''}</span></div>
+      <div class="mt"><span>${esc(det || 'Horario a confirmar')}</span><span>${tiene ? `<span class="badge">Cargado</span>` : ''}</span></div>
       <div class="row">
         <div class="ln"><div class="tm">${escudo(D, p.local) ? `<img src="${esc(escudo(D, p.local))}" alt="">` : '<i class="ph"></i>'}<span>${esc(p.local)}</span><small>Local</small></div>
           <input class="g gl" type="number" inputmode="numeric" min="0" max="50" value="${gl}" aria-label="Goles ${esc(p.local)}"></div>
