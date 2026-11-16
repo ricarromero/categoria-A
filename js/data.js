@@ -2647,7 +2647,7 @@ const LIGA_DATA = {
   },
   "copaChallenger": {
     "nombre": "Copa Challenger 2026",
-    "fuente": "Cuadro y resultados enviados por la Liga al 30/10/2026",
+    "fuente": "Cuadro y resultados enviados por la Liga al 16/11/2026",
     "escudos": {
       "Defensa e Injusticia": "public/escudos/defensa_e_injusticia.png?v=4",
       "Imputables FC": "public/escudos/imputables_fc.png?v=4",
@@ -2681,7 +2681,7 @@ const LIGA_DATA = {
           "2026-10-17",
           "2026-10-21",
           "2026-11-04",
-          null
+          "2026-11-18"
         ]
       },
       "R": {
@@ -2692,15 +2692,15 @@ const LIGA_DATA = {
           "2026-10-17",
           "2026-10-29",
           "2026-11-04",
-          null
+          "2026-11-18"
         ]
       }
     },
     "cuadro": {
       "L": [
         4,
-        null,
-        null,
+        "21:00",
+        "F",
         [
           [
             3,
@@ -2844,8 +2844,8 @@ const LIGA_DATA = {
       ],
       "R": [
         4,
-        null,
-        null,
+        "22:10",
+        "F",
         [
           [
             3,
