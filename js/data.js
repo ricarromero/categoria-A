@@ -3168,10 +3168,21 @@ const LIGA_DATA = {
       "P33": { "a": 2, "b": 0 }
     }
   },
-  "tablaAnualFuente": "Actualizada tras la Fecha 7 del Clausura con el criterio oficial de la Liga (puntos divididos en partidos programados)",
+  "tablaAnualFuente": "Actualizada tras la Fecha 7 del Clausura: puntos divididos en partidos jugados (la fecha libre no cuenta)",
   "tablaAnual": [
     {
       "pos": 1,
+      "equipo": "Otro Equipo",
+      "ptsAp": 13,
+      "bonus": 0,
+      "totalAp": 13,
+      "coefAp": 1.63,
+      "ptsCl": 15,
+      "coefCl": 2.5,
+      "total": 4.13
+    },
+    {
+      "pos": 2,
       "equipo": "Jägermeister",
       "ptsAp": 15,
       "bonus": 3,
@@ -3180,17 +3191,6 @@ const LIGA_DATA = {
       "ptsCl": 13,
       "coefCl": 1.86,
       "total": 4.11
-    },
-    {
-      "pos": 2,
-      "equipo": "Otro Equipo",
-      "ptsAp": 13,
-      "bonus": 0,
-      "totalAp": 13,
-      "coefAp": 1.63,
-      "ptsCl": 15,
-      "coefCl": 2.14,
-      "total": 3.77
     },
     {
       "pos": 3,
@@ -3233,11 +3233,22 @@ const LIGA_DATA = {
       "totalAp": 15,
       "coefAp": 1.88,
       "ptsCl": 7,
-      "coefCl": 1,
-      "total": 2.88
+      "coefCl": 1.17,
+      "total": 3.05
     },
     {
       "pos": 7,
+      "equipo": "De Primera",
+      "ptsAp": 11,
+      "bonus": 0,
+      "totalAp": 11,
+      "coefAp": 1.38,
+      "ptsCl": 9,
+      "coefCl": 1.5,
+      "total": 2.88
+    },
+    {
+      "pos": 8,
       "equipo": "Antorcha",
       "ptsAp": 17,
       "bonus": 0,
@@ -3248,17 +3259,6 @@ const LIGA_DATA = {
       "total": 2.84
     },
     {
-      "pos": 8,
-      "equipo": "De Primera",
-      "ptsAp": 11,
-      "bonus": 0,
-      "totalAp": 11,
-      "coefAp": 1.38,
-      "ptsCl": 9,
-      "coefCl": 1.29,
-      "total": 2.67
-    },
-    {
       "pos": 9,
       "equipo": "Red Bull",
       "ptsAp": 6,
@@ -3266,8 +3266,8 @@ const LIGA_DATA = {
       "totalAp": 6,
       "coefAp": 0.75,
       "ptsCl": 12,
-      "coefCl": 1.71,
-      "total": 2.46
+      "coefCl": 2,
+      "total": 2.75
     },
     {
       "pos": 10,
@@ -3277,11 +3277,22 @@ const LIGA_DATA = {
       "totalAp": 12,
       "coefAp": 1.5,
       "ptsCl": 6,
-      "coefCl": 0.86,
-      "total": 2.36
+      "coefCl": 1,
+      "total": 2.5
     },
     {
       "pos": 11,
+      "equipo": "Eclipse",
+      "ptsAp": 9,
+      "bonus": 0,
+      "totalAp": 9,
+      "coefAp": 1.13,
+      "ptsCl": 7,
+      "coefCl": 1.17,
+      "total": 2.3
+    },
+    {
+      "pos": 12,
       "equipo": "Nottingham",
       "ptsAp": 9,
       "bonus": 0,
@@ -3290,17 +3301,6 @@ const LIGA_DATA = {
       "ptsCl": 8,
       "coefCl": 1.14,
       "total": 2.27
-    },
-    {
-      "pos": 12,
-      "equipo": "Eclipse",
-      "ptsAp": 9,
-      "bonus": 0,
-      "totalAp": 9,
-      "coefAp": 1.13,
-      "ptsCl": 7,
-      "coefCl": 1,
-      "total": 2.13
     },
     {
       "pos": 13,
@@ -3332,8 +3332,8 @@ const LIGA_DATA = {
       "totalAp": 11,
       "coefAp": 1.38,
       "ptsCl": -1,
-      "coefCl": -0.14,
-      "total": 1.24
+      "coefCl": -0.17,
+      "total": 1.21
     }
   ],
   "reglamentosCompletos": {
