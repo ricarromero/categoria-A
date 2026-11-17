@@ -2108,7 +2108,8 @@ const LIGA_DATA = {
           "gf": 12,
           "gc": 13,
           "dg": -1,
-          "pts": 10,
+          "pts": 8,
+          "sancion": -2,
           "zona": "A"
         },
         {
@@ -3168,7 +3169,7 @@ const LIGA_DATA = {
       "P33": { "a": 2, "b": 0 }
     }
   },
-  "tablaAnualFuente": "Actualizada tras la Fecha 7 del Clausura: puntos divididos en partidos jugados (la fecha libre no cuenta)",
+  "tablaAnualFuente": "Actualizada tras la Fecha 7 del Clausura con el criterio oficial de la Liga (puntos divididos en partidos jugados; la fecha libre no cuenta)",
   "tablaAnual": [
     {
       "pos": 1,
@@ -3216,17 +3217,6 @@ const LIGA_DATA = {
     },
     {
       "pos": 5,
-      "equipo": "Aston",
-      "ptsAp": 13,
-      "bonus": 1,
-      "totalAp": 14,
-      "coefAp": 1.75,
-      "ptsCl": 10,
-      "coefCl": 1.43,
-      "total": 3.18
-    },
-    {
-      "pos": 6,
       "equipo": "Mavericks",
       "ptsAp": 13,
       "bonus": 2,
@@ -3235,6 +3225,17 @@ const LIGA_DATA = {
       "ptsCl": 7,
       "coefCl": 1.17,
       "total": 3.05
+    },
+    {
+      "pos": 6,
+      "equipo": "Aston",
+      "ptsAp": 13,
+      "bonus": 1,
+      "totalAp": 14,
+      "coefAp": 1.75,
+      "ptsCl": 8,
+      "coefCl": 1.14,
+      "total": 2.89
     },
     {
       "pos": 7,
