@@ -330,7 +330,7 @@
         noticeHtml = `
           <div class="banner-alert">
             <div>
-              <b>Torneo Clausura 2026 — ${zonaTxt} en disputa</b>
+              <b>Torneo Clausura 2026 — ${zonaTxt} ${DATA.clausura.crucesOficiales ? '· Fase clasificatoria terminada' : 'en disputa'}</b>
               ${DATA.clausura.provisoria ? `Tabla provisoria con los resultados cargados hasta la Fecha ${DATA.clausura.ultimaFechaDisputada}: todavía no llegó el informe oficial.` : `Tabla oficial consolidada hasta la Fecha ${DATA.clausura.ultimaFechaDisputada || 3}.`} ${(FMT && FMT.clausura && FMT.clausura.texto) || 'Clasifican del 1° al 4° a la Fase Campeonato y del 5° al 8° a la Copa de Plata.'}
             </div>
           </div>
@@ -389,7 +389,8 @@
           <div class="legend-item"><span class="legend-marker legend-campeonato"></span> Puestos 1° a ${nCamp}°: Clasificación a la Fase Campeonato${ZONA_UNICA && state.posTorneo === 'clausura' && !(FMT.clausura && FMT.clausura.semis) ? ' (1° y 2° directo a semifinales)' : ''}</div>
           ${CAT === 'F' && state.posTorneo === 'apertura' ? '' : `<div class="legend-item"><span class="legend-marker legend-plata"></span> Puestos ${nCamp + 1}° en adelante: Clasificación a Copa de Plata</div>`}
           ${state.posTorneo === 'apertura' ? '<div class="legend-item"><span class="badge-sancion-pts" style="display:inline-block;">-X sanción</span> Quita oficial de puntos aplicada por Tribunal de Penas</div>' : ''}
-          ${state.posTorneo === 'clausura' ? '<button class="pill-btn legend-cta" data-goto="cruces" style="margin-left:auto;">Ver cruces si el Clausura terminara hoy →</button>' : ''}
+          ${state.posTorneo === 'clausura' && Object.values(DATA.clausura.tablas || {}).some(z => Array.isArray(z) && z.some(r => r.sancion < 0)) ? '<div class="legend-item"><span class="badge-sancion-pts" style="display:inline-block;">-X sanción</span> Descuento oficial de puntos informado por la Liga</div>' : ''}
+          ${state.posTorneo === 'clausura' ? `<button class="pill-btn legend-cta" data-goto="cruces" style="margin-left:auto;">${DATA.clausura.crucesOficiales ? 'Ver los cruces del Clausura →' : 'Ver cruces si el Clausura terminara hoy →'}</button>` : ''}
         </div>
       `;
     }
@@ -501,7 +502,7 @@
       state.fixtureFecha = currentFechaObj?.numero || 1;
     }
 
-    const playoffsPill = `<button class="fecha-pill fecha-pill-playoffs ${verPlayoffs ? 'active' : ''}" data-fecha="playoffs">${esClausura ? 'Cruces si terminara hoy' : 'Playoffs'}</button>`;
+    const playoffsPill = `<button class="fecha-pill fecha-pill-playoffs ${verPlayoffs ? 'active' : ''}" data-fecha="playoffs">${esClausura ? (DATA.clausura.crucesOficiales ? 'Playoffs' : 'Cruces si terminara hoy') : 'Playoffs'}</button>`;
     const fechaPillsHtml = playoffsPill + fechasList.map(f => {
       const activeClass = f.numero === Number(state.fixtureFecha) ? 'active' : '';
       const subTag = esClausura && f.numero > (DATA.clausura.ultimaFechaDisputada || 3) ? "· Próx" : "";
@@ -686,7 +687,10 @@
     // Mejor 5°: mayor promedio de puntos por partido, luego diferencia de gol y goles a favor
     const a5 = A[4], b5 = B[4];
     let mejor5 = a5, otro5 = b5;
-    if (a5 && b5) {
+    const of5 = DATA.clausura.crucesOficiales && DATA.clausura.crucesOficiales.mejor5;
+    if (of5 && b5 && b5.equipo === of5) { mejor5 = b5; otro5 = a5; }
+    else if (of5) { /* el mejor 5° lo define la Liga */ }
+    else if (a5 && b5) {
       const cmp = (ppj(b5) - ppj(a5)) || (b5.dg - a5.dg) || (b5.gf - a5.gf);
       if (cmp > 0) { mejor5 = b5; otro5 = a5; }
     }
@@ -798,15 +802,17 @@
     const tbd = txt => bkTeamHtml(null, { placeholder: txt });
     const [c1, c2, c3, c4] = pr.campeonato;
     const [p1, p2, p3] = pr.plata;
+    const OFI = DATA.clausura.crucesOficiales;
+    const tag = OFI ? 'Clausura 2026 · Confirmado' : 'Clausura 2026 · Si terminara hoy';
 
     return `
       <div class="bracket-wrap">
         <div class="bracket-note" style="margin:0 0 14px; padding:10px 14px; background:#F0FDF4; border:1px solid #BBF7D0; border-radius:8px; color:#166534;">
-          <b>Proyección con las tablas tras la Fecha ${pr.fecha}.</b> No son cruces confirmados: cambian con cada fecha.
+          ${OFI ? `<b>Cruces confirmados por la Liga</b> en el informe de la Fecha ${OFI.informe}. Días y horarios, a confirmar.` : `<b>Proyección con las tablas tras la Fecha ${pr.fecha}.</b> No son cruces confirmados: cambian con cada fecha.`}
         </div>
 
         <div class="bracket-block">
-          <div class="bracket-title"><h3>Fase Campeonato</h3><span class="bracket-tag proy">Clausura 2026 · Si terminara hoy</span></div>
+          <div class="bracket-title"><h3>Fase Campeonato</h3><span class="bracket-tag proy">${tag}</span></div>
           <div class="bracket-scroll"><div class="bracket">
             <div class="bracket-col"><div class="bracket-col-title">Cuartos de final</div><div class="bk-stack">
               ${cruce(c1)}${cruce(c2)}${cruce(c3)}${cruce(c4)}
@@ -825,11 +831,11 @@
         </div>
 
         <div class="bracket-block">
-          <div class="bracket-title"><h3>Copa de Plata</h3><span class="bracket-tag proy">Clausura 2026 · Si terminara hoy</span></div>
+          <div class="bracket-title"><h3>Copa de Plata</h3><span class="bracket-tag proy">${tag}</span></div>
           <div class="bracket-scroll"><div class="bracket">
             <div class="bracket-col"><div class="bracket-col-title">Cuartos de final</div><div class="bk-stack">
               ${cruce(p1)}${cruce(p2)}${cruce(p3)}
-              ${pr.mejor5 ? `<div class="bracket-bye"><b>${pr.mejor5.equipo}</b> (5°${pr.mejor5.zona}) pasa directo a semifinales como mejor 5°</div>` : ''}
+              ${pr.mejor5 ? `<div class="bracket-bye"><b>${pr.mejor5.equipo}</b> (5°${pr.mejor5.zona}) pasa directo a semifinales como mejor 5°${OFI ? ' (según la Liga)' : ''}</div>` : ''}
             </div></div>
             <div class="bracket-col"><div class="bracket-col-title">Semifinales</div><div class="bk-stack">
               ${pendiente('SF1', pr.mejor5 ? bkTeamHtml(pr.mejor5.equipo, { seed: `5°${pr.mejor5.zona}` }) : tbd('Mejor 5°'), tbd('Ganador CP1'))}
@@ -842,7 +848,7 @@
           </div></div>
         </div>
 
-        <div class="bracket-note">Cuartos según la Forma de Disputa 2026 (1°A vs 4°B, 2°A vs 3°B, 1°B vs 4°A, 2°B vs 3°A). Las semifinales siguen el mismo esquema que se usó en el Apertura; la organización puede definir otro cuadro. Mejor 5° calculado por promedio de puntos por partido (${pr.mejor5 ? fmt(pr.mejor5.ppj) : '—'}), porque la Zona B tiene un equipo libre por fecha.</div>
+        <div class="bracket-note">Cuartos según la Forma de Disputa 2026 (1°A vs 4°B, 2°A vs 3°B, 1°B vs 4°A, 2°B vs 3°A). Las semifinales siguen el mismo esquema que se usó en el Apertura; la organización puede definir otro cuadro. ${OFI ? 'El mejor 5° lo informó la Liga.' : `Mejor 5° calculado por promedio de puntos por partido (${pr.mejor5 ? fmt(pr.mejor5.ppj) : '—'}), porque la Zona B tiene un equipo libre por fecha.`}</div>
       </div>`;
   }
 

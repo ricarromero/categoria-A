@@ -1,7 +1,7 @@
 /**
  * LIGA UNIVERSITARIA SANJUANINA DE FÚTBOL — CATEGORÍA A 2026
  * Fuente de Verdad Centralizada de Datos Oficiales
- * Actualizado automáticamente: Torneo Clausura 2026 · Fecha 6 completada
+ * Actualizado automáticamente: Torneo Clausura 2026 · Fecha 7 completada
  */
 
 const LIGA_DATA = {
@@ -13,8 +13,8 @@ const LIGA_DATA = {
     "organizador": "Comisión de la Liga Universitaria",
     "universidad": "Universidad Nacional de San Juan",
     "torneoActual": "Torneo Clausura 2026",
-    "ultimaFechaDisputada": 6,
-    "estado": "Clausura en disputa · Fecha 6 completada",
+    "ultimaFechaDisputada": 7,
+    "estado": "Clausura · Fase clasificatoria terminada",
     "instagram": "https://www.instagram.com/ligauniversitaria.sj/",
     "instagramHandle": "@ligauniversitaria.sj"
   },
@@ -1435,7 +1435,7 @@ const LIGA_DATA = {
   },
   "clausura": {
     "enCurso": true,
-    "ultimaFechaDisputada": 6,
+    "ultimaFechaDisputada": 7,
     "fechas": [
       {
         "numero": 1,
@@ -1958,7 +1958,7 @@ const LIGA_DATA = {
       {
         "numero": 7,
         "nombre": "Fecha 7",
-        "disputada": false,
+        "disputada": true,
         "dia": "Sábado 14 de noviembre",
         "partidos": [
           {
@@ -2062,104 +2062,104 @@ const LIGA_DATA = {
         {
           "pos": 1,
           "equipo": "Constructores",
-          "pj": 6,
+          "pj": 7,
           "pg": 6,
           "pe": 0,
-          "pp": 0,
+          "pp": 1,
           "gf": 23,
-          "gc": 3,
-          "dg": 20,
+          "gc": 5,
+          "dg": 18,
           "pts": 18,
           "zona": "A"
         },
         {
           "pos": 2,
           "equipo": "Minaster City",
-          "pj": 6,
-          "pg": 4,
+          "pj": 7,
+          "pg": 5,
           "pe": 1,
           "pp": 1,
-          "gf": 10,
-          "gc": 5,
-          "dg": 5,
-          "pts": 13,
+          "gf": 12,
+          "gc": 6,
+          "dg": 6,
+          "pts": 16,
           "zona": "A"
         },
         {
           "pos": 3,
           "equipo": "Jägermeister",
-          "pj": 6,
+          "pj": 7,
           "pg": 4,
           "pe": 1,
-          "pp": 1,
-          "gf": 13,
-          "gc": 9,
-          "dg": 4,
+          "pp": 2,
+          "gf": 14,
+          "gc": 11,
+          "dg": 3,
           "pts": 13,
           "zona": "A"
         },
         {
           "pos": 4,
           "equipo": "Aston",
-          "pj": 6,
-          "pg": 2,
+          "pj": 7,
+          "pg": 3,
           "pe": 1,
           "pp": 3,
-          "gf": 8,
-          "gc": 11,
-          "dg": -3,
-          "pts": 7,
+          "gf": 12,
+          "gc": 13,
+          "dg": -1,
+          "pts": 10,
           "zona": "A"
         },
         {
           "pos": 5,
           "equipo": "Nottingham",
-          "pj": 6,
-          "pg": 1,
+          "pj": 7,
+          "pg": 2,
           "pe": 2,
           "pp": 3,
-          "gf": 10,
-          "gc": 14,
-          "dg": -4,
-          "pts": 5,
+          "gf": 13,
+          "gc": 16,
+          "dg": -3,
+          "pts": 8,
           "zona": "A"
         },
         {
           "pos": 6,
-          "equipo": "Antorcha",
-          "pj": 6,
-          "pg": 1,
-          "pe": 2,
-          "pp": 3,
-          "gf": 4,
-          "gc": 12,
-          "dg": -8,
-          "pts": 5,
+          "equipo": "C-Lesión",
+          "pj": 7,
+          "pg": 2,
+          "pe": 1,
+          "pp": 4,
+          "gf": 12,
+          "gc": 18,
+          "dg": -6,
+          "pts": 7,
           "zona": "A"
         },
         {
           "pos": 7,
-          "equipo": "C-Lesión",
-          "pj": 6,
+          "equipo": "Antorcha",
+          "pj": 7,
           "pg": 1,
-          "pe": 1,
+          "pe": 2,
           "pp": 4,
-          "gf": 10,
-          "gc": 18,
-          "dg": -8,
-          "pts": 4,
+          "gf": 6,
+          "gc": 15,
+          "dg": -9,
+          "pts": 5,
           "zona": "A"
         },
         {
           "pos": 8,
           "equipo": "La Máquina",
-          "pj": 6,
+          "pj": 7,
           "pg": 1,
           "pe": 0,
-          "pp": 5,
-          "gf": 5,
-          "gc": 11,
-          "dg": -6,
+          "pp": 6,
+          "gf": 7,
+          "gc": 15,
+          "dg": -8,
           "pts": 3,
           "zona": "A"
         }
@@ -2168,14 +2168,14 @@ const LIGA_DATA = {
         {
           "pos": 1,
           "equipo": "Otro Equipo",
-          "pj": 5,
-          "pg": 4,
+          "pj": 6,
+          "pg": 5,
           "pe": 0,
           "pp": 1,
-          "gf": 12,
-          "gc": 4,
-          "dg": 8,
-          "pts": 12,
+          "gf": 15,
+          "gc": 5,
+          "dg": 10,
+          "pts": 15,
           "zona": "B"
         },
         {
@@ -2193,68 +2193,70 @@ const LIGA_DATA = {
         },
         {
           "pos": 3,
-          "equipo": "Calise",
-          "pj": 5,
+          "equipo": "De Primera",
+          "pj": 6,
           "pg": 2,
-          "pe": 1,
-          "pp": 2,
-          "gf": 5,
-          "gc": 7,
-          "dg": -2,
-          "pts": 7,
+          "pe": 3,
+          "pp": 1,
+          "gf": 14,
+          "gc": 6,
+          "dg": 8,
+          "pts": 9,
           "zona": "B"
         },
         {
           "pos": 4,
           "equipo": "Eclipse",
-          "pj": 5,
+          "pj": 6,
           "pg": 2,
           "pe": 1,
-          "pp": 2,
-          "gf": 4,
-          "gc": 7,
-          "dg": -3,
+          "pp": 3,
+          "gf": 5,
+          "gc": 10,
+          "dg": -5,
           "pts": 7,
           "zona": "B"
         },
         {
           "pos": 5,
-          "equipo": "De Primera",
-          "pj": 5,
-          "pg": 1,
-          "pe": 3,
-          "pp": 1,
-          "gf": 9,
-          "gc": 6,
-          "dg": 3,
-          "pts": 6,
+          "equipo": "Mavericks",
+          "pj": 6,
+          "pg": 2,
+          "pe": 1,
+          "pp": 3,
+          "gf": 10,
+          "gc": 8,
+          "dg": 2,
+          "pts": 7,
           "zona": "B"
         },
         {
           "pos": 6,
-          "equipo": "Mavericks",
-          "pj": 5,
-          "pg": 1,
+          "equipo": "Calise",
+          "pj": 6,
+          "pg": 2,
           "pe": 1,
           "pp": 3,
           "gf": 5,
-          "gc": 8,
-          "dg": -3,
-          "pts": 4,
-          "zona": "B"
+          "gc": 12,
+          "dg": -7,
+          "pts": 6,
+          "zona": "B",
+          "sancion": -1
         },
         {
           "pos": 7,
           "equipo": "Celtic",
-          "pj": 5,
+          "pj": 6,
           "pg": 0,
           "pe": 1,
-          "pp": 4,
+          "pp": 5,
           "gf": 0,
-          "gc": 11,
-          "dg": -11,
-          "pts": 1,
-          "zona": "B"
+          "gc": 16,
+          "dg": -16,
+          "pts": -1,
+          "zona": "B",
+          "sancion": -2
         }
       ]
     },
@@ -2273,53 +2275,57 @@ const LIGA_DATA = {
       },
       {
         "pos": 3,
+        "jugador": "Quiroga, Maximiliano",
+        "equipo": "Nottingham",
+        "goles": 6
+      },
+      {
+        "pos": 4,
+        "jugador": "Moreno, Joaquín",
+        "equipo": "Mavericks",
+        "goles": 5
+      },
+      {
+        "pos": 5,
+        "jugador": "Grassano Gómez, Santino",
+        "equipo": "Aston",
+        "goles": 4
+      },
+      {
+        "pos": 6,
+        "jugador": "Gaitán, Axel",
+        "equipo": "C-Lesión",
+        "goles": 4
+      },
+      {
+        "pos": 7,
         "jugador": "Aguilera, Tomás Ezequiel",
         "equipo": "Constructores",
         "goles": 4
       },
       {
-        "pos": 4,
+        "pos": 8,
         "jugador": "Ortiz, Eduardo Mateo",
         "equipo": "Constructores",
         "goles": 4
       },
       {
-        "pos": 5,
-        "jugador": "Beja, Augusto",
-        "equipo": "Jägermeister",
-        "goles": 4
-      },
-      {
-        "pos": 6,
-        "jugador": "Quiroga, Maximiliano",
-        "equipo": "Nottingham",
-        "goles": 4
-      },
-      {
-        "pos": 7,
-        "jugador": "Gaitán, Axel",
-        "equipo": "C-Lesión",
-        "goles": 3
-      },
-      {
-        "pos": 8,
-        "jugador": "Fernández, José",
-        "equipo": "Constructores",
-        "goles": 3
-      },
-      {
         "pos": 9,
-        "jugador": "Cuevas, Gabriel Alejandro",
-        "equipo": "Jägermeister",
-        "goles": 3
+        "jugador": "Sánchez Usuna, Mateo Ezequiel",
+        "equipo": "De Primera",
+        "goles": 4
       },
       {
         "pos": 10,
-        "jugador": "Luna, Francisco",
-        "equipo": "Nottingham",
-        "goles": 3
+        "jugador": "Beja, Augusto",
+        "equipo": "Jägermeister",
+        "goles": 4
       }
-    ]
+    ],
+    "crucesOficiales": {
+      "informe": 7,
+      "mejor5": "Nottingham"
+    }
   },
   "sanciones": [
     {
@@ -2475,28 +2481,12 @@ const LIGA_DATA = {
       "estado": "Vigente"
     },
     {
-      "jugador": "Giménez, Ezequiel",
-      "equipo": "Minaster City",
-      "sancion": "5 Partidos",
-      "articulo": "Art. 28 inc \"B\"",
-      "motivo": "Sanción disciplinaria Fecha 4",
-      "estado": "Cumplió 4 (Resta 1)"
-    },
-    {
       "jugador": "Irustia, Lautaro",
       "equipo": "Nottingham",
       "sancion": "5 Partidos",
       "articulo": "Art. 28 inc \"B\"",
       "motivo": "Sanción disciplinaria Fecha 4",
-      "estado": "Cumplió 2 (Resta 3)"
-    },
-    {
-      "jugador": "Camargo, Francisco",
-      "equipo": "Antorcha",
-      "sancion": "3 Partidos",
-      "articulo": "Art. 23 inc \"A\" y 26 inc \"C\"",
-      "motivo": "Conducta antideportiva Fecha 4",
-      "estado": "Cumplió 2 (Resta 1)"
+      "estado": "Cumplió 3 (Resta 2)"
     },
     {
       "jugador": "DT: Acosta, Santiago",
@@ -2504,15 +2494,7 @@ const LIGA_DATA = {
       "sancion": "6 Partidos",
       "articulo": "Art. 23 inc \"A\"",
       "motivo": "Sanción disciplinaria Fecha 4",
-      "estado": "Cumplió 3 (Resta 3)"
-    },
-    {
-      "jugador": "Díaz, Javier",
-      "equipo": "C-Lesión",
-      "sancion": "2 Partidos",
-      "articulo": "Art. 26 inc \"B\"",
-      "motivo": "Sanción Fecha 5",
-      "estado": "Cumplió 1 (Resta 1)"
+      "estado": "Cumplió 4 (Resta 2)"
     },
     {
       "jugador": "Boero, Gerónimo",
@@ -2520,7 +2502,7 @@ const LIGA_DATA = {
       "sancion": "4 Partidos",
       "articulo": "Art. 23 inc \"A\"",
       "motivo": "Sanción Fecha 5",
-      "estado": "Cumplió 1 (Resta 3)"
+      "estado": "Cumplió 2 (Resta 2)"
     },
     {
       "jugador": "López, Camilo",
@@ -2544,7 +2526,7 @@ const LIGA_DATA = {
       "sancion": "2 Partidos",
       "articulo": "Art. 23 inc \"A\" y 26 inc \"C\"",
       "motivo": "Sanción Fecha 6",
-      "estado": "Vigente (0/2)"
+      "estado": "Cumplió 1 (Resta 1)"
     },
     {
       "jugador": "Tapia, Elías",
@@ -2552,11 +2534,51 @@ const LIGA_DATA = {
       "sancion": "3 Partidos",
       "articulo": "Art. 27 inc \"B\" y 23 inc \"A\"",
       "motivo": "Sanción Fecha 6",
-      "estado": "Vigente (0/3)"
+      "estado": "Cumplió 1 (Resta 2)"
+    },
+    {
+      "jugador": "Jiménez, Jorge",
+      "equipo": "Constructores",
+      "sancion": "Suspensión provisoria",
+      "articulo": "—",
+      "motivo": "Sanción Fecha 7",
+      "estado": "Provisoria"
+    },
+    {
+      "jugador": "Gil, Guillermo",
+      "equipo": "Jägermeister",
+      "sancion": "5 Partidos",
+      "articulo": "Art. 22 inc \"A\"",
+      "motivo": "Sanción Fecha 7",
+      "estado": "Vigente (0/5)"
+    },
+    {
+      "jugador": "Salinas, Guillermo",
+      "equipo": "Minaster City",
+      "sancion": "1 Partido",
+      "articulo": "Art. 26 inc \"G\"",
+      "motivo": "Sanción Fecha 7",
+      "estado": "Vigente (0/1)"
     },
     {
       "jugador": "Gaitán, Axel",
       "equipo": "C-Lesión",
+      "sancion": "3 Amarillas acumuladas",
+      "articulo": "Art. 6° Régimen Amarillas",
+      "motivo": "Acumulación de 3 tarjetas amarillas",
+      "estado": "3 Amarillas"
+    },
+    {
+      "jugador": "Salazar Ovejero, Facundo",
+      "equipo": "Eclipse",
+      "sancion": "3 Amarillas acumuladas",
+      "articulo": "Art. 6° Régimen Amarillas",
+      "motivo": "Acumulación de 3 tarjetas amarillas",
+      "estado": "3 Amarillas"
+    },
+    {
+      "jugador": "Carvajal, Nicolás",
+      "equipo": "Jägermeister",
       "sancion": "3 Amarillas acumuladas",
       "articulo": "Art. 6° Régimen Amarillas",
       "motivo": "Acumulación de 3 tarjetas amarillas",
@@ -2579,16 +2601,8 @@ const LIGA_DATA = {
       "estado": "3 Amarillas"
     },
     {
-      "jugador": "Salinas, Guillermo",
-      "equipo": "Minaster City",
-      "sancion": "3 Amarillas acumuladas",
-      "articulo": "Art. 6° Régimen Amarillas",
-      "motivo": "Acumulación de 3 tarjetas amarillas",
-      "estado": "3 Amarillas"
-    },
-    {
-      "jugador": "Albornó, Sergio Damián",
-      "equipo": "Red Bull",
+      "jugador": "Rodríguez, Emilio",
+      "equipo": "Nottingham",
       "sancion": "3 Amarillas acumuladas",
       "articulo": "Art. 6° Régimen Amarillas",
       "motivo": "Acumulación de 3 tarjetas amarillas",
@@ -2597,6 +2611,14 @@ const LIGA_DATA = {
     {
       "jugador": "Tejada, Ignacio",
       "equipo": "Nottingham",
+      "sancion": "3 Amarillas acumuladas",
+      "articulo": "Art. 6° Régimen Amarillas",
+      "motivo": "Acumulación de 3 tarjetas amarillas",
+      "estado": "3 Amarillas"
+    },
+    {
+      "jugador": "Albornó, Sergio Damián",
+      "equipo": "Red Bull",
       "sancion": "3 Amarillas acumuladas",
       "articulo": "Art. 6° Régimen Amarillas",
       "motivo": "Acumulación de 3 tarjetas amarillas",
@@ -3146,7 +3168,7 @@ const LIGA_DATA = {
       "P33": { "a": 2, "b": 0 }
     }
   },
-  "tablaAnualFuente": "Actualizada tras la Fecha 6 del Clausura con el criterio oficial de la Liga (puntos divididos en partidos programados)",
+  "tablaAnualFuente": "Actualizada tras la Fecha 7 del Clausura con el criterio oficial de la Liga (puntos divididos en partidos programados)",
   "tablaAnual": [
     {
       "pos": 1,
@@ -3156,30 +3178,30 @@ const LIGA_DATA = {
       "totalAp": 18,
       "coefAp": 2.25,
       "ptsCl": 13,
-      "coefCl": 2.17,
-      "total": 4.42
+      "coefCl": 1.86,
+      "total": 4.11
     },
     {
       "pos": 2,
+      "equipo": "Otro Equipo",
+      "ptsAp": 13,
+      "bonus": 0,
+      "totalAp": 13,
+      "coefAp": 1.63,
+      "ptsCl": 15,
+      "coefCl": 2.14,
+      "total": 3.77
+    },
+    {
+      "pos": 3,
       "equipo": "Constructores",
       "ptsAp": 8,
       "bonus": 0,
       "totalAp": 8,
       "coefAp": 1,
       "ptsCl": 18,
-      "coefCl": 3,
-      "total": 4
-    },
-    {
-      "pos": 3,
-      "equipo": "Otro Equipo",
-      "ptsAp": 13,
-      "bonus": 0,
-      "totalAp": 13,
-      "coefAp": 1.63,
-      "ptsCl": 12,
-      "coefCl": 2,
-      "total": 3.63
+      "coefCl": 2.57,
+      "total": 3.57
     },
     {
       "pos": 4,
@@ -3188,119 +3210,119 @@ const LIGA_DATA = {
       "bonus": 1,
       "totalAp": 10,
       "coefAp": 1.25,
-      "ptsCl": 13,
-      "coefCl": 2.17,
-      "total": 3.42
+      "ptsCl": 16,
+      "coefCl": 2.29,
+      "total": 3.54
     },
     {
       "pos": 5,
+      "equipo": "Aston",
+      "ptsAp": 13,
+      "bonus": 1,
+      "totalAp": 14,
+      "coefAp": 1.75,
+      "ptsCl": 10,
+      "coefCl": 1.43,
+      "total": 3.18
+    },
+    {
+      "pos": 6,
+      "equipo": "Mavericks",
+      "ptsAp": 13,
+      "bonus": 2,
+      "totalAp": 15,
+      "coefAp": 1.88,
+      "ptsCl": 7,
+      "coefCl": 1,
+      "total": 2.88
+    },
+    {
+      "pos": 7,
       "equipo": "Antorcha",
       "ptsAp": 17,
       "bonus": 0,
       "totalAp": 17,
       "coefAp": 2.13,
       "ptsCl": 5,
-      "coefCl": 0.83,
-      "total": 2.96
+      "coefCl": 0.71,
+      "total": 2.84
     },
     {
-      "pos": 6,
-      "equipo": "Aston",
-      "ptsAp": 13,
-      "bonus": 1,
-      "totalAp": 14,
-      "coefAp": 1.75,
-      "ptsCl": 7,
-      "coefCl": 1.17,
-      "total": 2.92
+      "pos": 8,
+      "equipo": "De Primera",
+      "ptsAp": 11,
+      "bonus": 0,
+      "totalAp": 11,
+      "coefAp": 1.38,
+      "ptsCl": 9,
+      "coefCl": 1.29,
+      "total": 2.67
     },
     {
-      "pos": 7,
+      "pos": 9,
       "equipo": "Red Bull",
       "ptsAp": 6,
       "bonus": 0,
       "totalAp": 6,
       "coefAp": 0.75,
       "ptsCl": 12,
-      "coefCl": 2,
-      "total": 2.75
+      "coefCl": 1.71,
+      "total": 2.46
     },
     {
-      "pos": 8,
+      "pos": 10,
       "equipo": "Calise",
       "ptsAp": 12,
       "bonus": 0,
       "totalAp": 12,
       "coefAp": 1.5,
-      "ptsCl": 7,
-      "coefCl": 1.17,
-      "total": 2.67
-    },
-    {
-      "pos": 9,
-      "equipo": "Mavericks",
-      "ptsAp": 13,
-      "bonus": 2,
-      "totalAp": 15,
-      "coefAp": 1.88,
-      "ptsCl": 4,
-      "coefCl": 0.67,
-      "total": 2.55
-    },
-    {
-      "pos": 10,
-      "equipo": "De Primera",
-      "ptsAp": 11,
-      "bonus": 0,
-      "totalAp": 11,
-      "coefAp": 1.38,
       "ptsCl": 6,
-      "coefCl": 1,
-      "total": 2.38
+      "coefCl": 0.86,
+      "total": 2.36
     },
     {
       "pos": 11,
+      "equipo": "Nottingham",
+      "ptsAp": 9,
+      "bonus": 0,
+      "totalAp": 9,
+      "coefAp": 1.13,
+      "ptsCl": 8,
+      "coefCl": 1.14,
+      "total": 2.27
+    },
+    {
+      "pos": 12,
       "equipo": "Eclipse",
       "ptsAp": 9,
       "bonus": 0,
       "totalAp": 9,
       "coefAp": 1.13,
       "ptsCl": 7,
-      "coefCl": 1.17,
-      "total": 2.3
-    },
-    {
-      "pos": 12,
-      "equipo": "Nottingham",
-      "ptsAp": 9,
-      "bonus": 0,
-      "totalAp": 9,
-      "coefAp": 1.13,
-      "ptsCl": 5,
-      "coefCl": 0.83,
-      "total": 1.96
+      "coefCl": 1,
+      "total": 2.13
     },
     {
       "pos": 13,
+      "equipo": "C-Lesión",
+      "ptsAp": 7,
+      "bonus": 0,
+      "totalAp": 7,
+      "coefAp": 0.88,
+      "ptsCl": 7,
+      "coefCl": 1,
+      "total": 1.88
+    },
+    {
+      "pos": 14,
       "equipo": "La Máquina",
       "ptsAp": 10,
       "bonus": 0,
       "totalAp": 10,
       "coefAp": 1.25,
       "ptsCl": 3,
-      "coefCl": 0.5,
-      "total": 1.75
-    },
-    {
-      "pos": 14,
-      "equipo": "C-Lesión",
-      "ptsAp": 7,
-      "bonus": 0,
-      "totalAp": 7,
-      "coefAp": 0.88,
-      "ptsCl": 4,
-      "coefCl": 0.67,
-      "total": 1.55
+      "coefCl": 0.43,
+      "total": 1.68
     },
     {
       "pos": 15,
@@ -3309,9 +3331,9 @@ const LIGA_DATA = {
       "bonus": 0,
       "totalAp": 11,
       "coefAp": 1.38,
-      "ptsCl": 1,
-      "coefCl": 0.17,
-      "total": 1.55
+      "ptsCl": -1,
+      "coefCl": -0.14,
+      "total": 1.24
     }
   ],
   "reglamentosCompletos": {
