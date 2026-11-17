@@ -6,7 +6,7 @@ const crypto = require('crypto');
 const REPO = 'ricarromero/categoria-A';
 const RUTA = 'js/parciales.js';
 const CATS = ['A', 'B', 'C', 'F'];
-const TORNEOS = ['clausura', 'apertura', 'challenger']; // challenger: Copa Challenger (fecha = número de partido, P34 → 34)
+const TORNEOS = ['clausura', 'apertura', 'challenger', 'playoffs']; // challenger: Copa Challenger (fecha = número de partido, P34 → 34)
 
 const esperar = ms => new Promise(r => setTimeout(r, ms));
 const hash = s => crypto.createHash('sha256').update(String(s)).digest();
@@ -50,13 +50,13 @@ module.exports = async (req, res) => {
 
   const cat = CATS.includes(b.cat) ? b.cat : null;
   const torneo = TORNEOS.includes(b.torneo) ? b.torneo : null;
-  const tope = torneo === 'challenger' ? 99 : 30;
+  const tope = torneo === 'challenger' || torneo === 'playoffs' ? 99 : 30;
   const fecha = Number.isInteger(b.fecha) && b.fecha >= 1 && b.fecha <= tope ? b.fecha : null;
   const local = texto(b.local, 60), visitante = texto(b.visitante, 60);
   if (!cat || !torneo || !fecha || !local || !visitante) return res.status(400).json({ ok: false, error: 'Datos del partido incompletos' });
   if (torneo === 'challenger' && cat !== 'A') return res.status(400).json({ ok: false, error: 'Datos del partido incompletos' });
   const clave = [cat, torneo, fecha, local, visitante].join('|');
-  const donde = torneo === 'challenger' ? `Challenger P${fecha}` : `${cat} F${fecha}`;
+  const donde = torneo === 'challenger' ? `Challenger P${fecha}` : torneo === 'playoffs' ? `${cat} playoffs` : `${cat} F${fecha}`;
   const borrar = b.accion === 'borrar';
   let item = null;
   if (!borrar) {
@@ -65,8 +65,8 @@ module.exports = async (req, res) => {
     item = { golesL: gl, golesV: gv, por: texto(b.por, 30), at: new Date().toISOString() };
     const pl = gol(b.penalesL), pv = gol(b.penalesV);
     if (pl !== null && pv !== null) { item.penalesL = pl; item.penalesV = pv; }
-    if (torneo === 'challenger' && gl === gv && (pl === null || pv === null || pl === pv)) {
-      return res.status(400).json({ ok: false, error: 'En la Copa, si empatan hay que cargar los penales' });
+    if ((torneo === 'challenger' || torneo === 'playoffs') && gl === gv && (pl === null || pv === null || pl === pv)) {
+      return res.status(400).json({ ok: false, error: 'En los cruces, si empatan hay que cargar los penales' });
     }
     const nota = texto(b.nota, 80);
     if (nota) item.nota = nota;

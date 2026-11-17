@@ -21,6 +21,14 @@
       CC.resultados[k] = x;
       return;
     }
+    if (torneo === 'playoffs') { // Playoffs del Clausura (cuartos, semis…): fecha = número de partido
+      const PO = D && D.clausura && D.clausura.crucesOficiales && D.clausura.crucesOficiales.partidos;
+      const q = PO && PO.find(x => String(x.n) === fecha && x.local === local && x.visitante === visitante);
+      if (!q || (q.golesL != null && !q.provisorio)) return;
+      q.golesL = r.golesL; q.golesV = r.golesV; q.provisorio = true;
+      if (r.penalesL !== undefined) { q.penalesL = r.penalesL; q.penalesV = r.penalesV; } else { delete q.penalesL; delete q.penalesV; }
+      return;
+    }
     const f = D && D[torneo] && (D[torneo].fechas || []).find(x => String(x.numero) === fecha);
     if (!f) return;
     const p = (f.partidos || []).find(x => x.local === local && x.visitante === visitante);

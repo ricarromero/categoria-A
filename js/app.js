@@ -790,11 +790,22 @@
     if (ZONA_UNICA && FMT.clausura && (FMT.clausura.cuartos || FMT.clausura.semis)) return renderProyeccionUnica();
     const pr = getProyeccionPlayoffs();
     const fmt = n => n.toFixed(2).replace('.', ',');
-    const cruce = c => `<div class="bk-match">
-        <div class="bk-code"><span>${c.codigo}</span><span>${c.sl} vs ${c.sv}</span></div>
-        ${bkTeamHtml(c.local, { seed: c.sl })}
-        ${bkTeamHtml(c.visitante, { seed: c.sv })}
-      </div>`;
+    const OFP = (DATA.clausura.crucesOficiales && DATA.clausura.crucesOficiales.partidos) || [];
+    const pOf = cod => OFP.find(x => x.codigo === cod);
+    const jugado = x => x && x.golesL != null && x.golesV != null;
+    const ganadorDe = cod => { const x = pOf(cod); if (!jugado(x)) return null;
+      if (x.golesL !== x.golesV) return x.golesL > x.golesV ? x.local : x.visitante;
+      if (x.penalesL != null && x.penalesL !== x.penalesV) return x.penalesL > x.penalesV ? x.local : x.visitante; return null; };
+    const det = x => x ? [x.dia ? x.dia.replace('Domingo', 'Dom').replace('Sábado', 'Sáb') : '', x.hora, (x.cancha || '').replace('Cancha de ', '')].filter(Boolean).join(' · ') : '';
+    const cruce = c => { const x = pOf(c.codigo); const ok = jugado(x); const g = ok ? ganadorDe(c.codigo) : null;
+      const sc = t => ok ? (x.local === t ? x.golesL : x.golesV) : undefined;
+      const pe = t => ok && x.penalesL != null ? (x.local === t ? x.penalesL : x.penalesV) : undefined;
+      return `<div class="bk-match">
+        <div class="bk-code"><span>${c.codigo}</span><span>${ok ? (x.penalesL != null ? 'Penales' : 'Final') + (x.provisorio ? ' · prov.' : '') : (det(x) || `${c.sl} vs ${c.sv}`)}</span></div>
+        ${bkTeamHtml(c.local, { seed: c.sl, score: sc(c.local), pen: pe(c.local), win: g === c.local, lose: g && g !== c.local })}
+        ${bkTeamHtml(c.visitante, { seed: c.sv, score: sc(c.visitante), pen: pe(c.visitante), win: g === c.visitante, lose: g && g !== c.visitante })}
+      </div>`; };
+    const gOr = (cod, txt) => { const w = ganadorDe(cod); return w ? bkTeamHtml(w) : bkTeamHtml(null, { placeholder: txt }); };
     const pendiente = (codigo, a, b, extra = '') => `<div class="bk-match ${extra}">
         <div class="bk-code"><span>${codigo}</span><span>A jugar</span></div>
         ${a}${b}
@@ -808,7 +819,7 @@
     return `
       <div class="bracket-wrap">
         <div class="bracket-note" style="margin:0 0 14px; padding:10px 14px; background:#F0FDF4; border:1px solid #BBF7D0; border-radius:8px; color:#166534;">
-          ${OFI ? `<b>Cruces confirmados por la Liga</b> en el informe de la Fecha ${OFI.informe}. Días y horarios, a confirmar.` : `<b>Proyección con las tablas tras la Fecha ${pr.fecha}.</b> No son cruces confirmados: cambian con cada fecha.`}
+          ${OFI ? `<b>Cruces confirmados por la Liga</b> en el informe de la Fecha ${OFI.informe}. ${OFP.some(x => x.hora) ? `Cuartos de final: ${OFP[0].dia}.` : 'Días y horarios, a confirmar.'}` : `<b>Proyección con las tablas tras la Fecha ${pr.fecha}.</b> No son cruces confirmados: cambian con cada fecha.`}
         </div>
 
         <div class="bracket-block">
@@ -818,8 +829,8 @@
               ${cruce(c1)}${cruce(c2)}${cruce(c3)}${cruce(c4)}
             </div></div>
             <div class="bracket-col"><div class="bracket-col-title">Semifinales</div><div class="bk-stack">
-              ${pendiente('SF1', tbd('Ganador CF1'), tbd('Ganador CF2'))}
-              ${pendiente('SF2', tbd('Ganador CF3'), tbd('Ganador CF4'))}
+              ${pendiente('SF1', gOr('CF1', 'Ganador CF1'), gOr('CF2', 'Ganador CF2'))}
+              ${pendiente('SF2', gOr('CF3', 'Ganador CF3'), gOr('CF4', 'Ganador CF4'))}
             </div></div>
             <div class="bracket-col"><div class="bracket-col-title">Final</div><div class="bk-stack">
               ${pendiente('Gran final', tbd('Ganador SF1'), tbd('Ganador SF2'), 'final')}
@@ -838,8 +849,8 @@
               ${pr.mejor5 ? `<div class="bracket-bye"><b>${pr.mejor5.equipo}</b> (5°${pr.mejor5.zona}) pasa directo a semifinales como mejor 5°${OFI ? ' (según la Liga)' : ''}</div>` : ''}
             </div></div>
             <div class="bracket-col"><div class="bracket-col-title">Semifinales</div><div class="bk-stack">
-              ${pendiente('SF1', pr.mejor5 ? bkTeamHtml(pr.mejor5.equipo, { seed: `5°${pr.mejor5.zona}` }) : tbd('Mejor 5°'), tbd('Ganador CP1'))}
-              ${pendiente('SF2', tbd('Ganador CP2'), tbd('Ganador CP3'))}
+              ${pendiente('SF1', pr.mejor5 ? bkTeamHtml(pr.mejor5.equipo, { seed: `5°${pr.mejor5.zona}` }) : tbd('Mejor 5°'), gOr('CP1', 'Ganador CP1'))}
+              ${pendiente('SF2', gOr('CP2', 'Ganador CP2'), gOr('CP3', 'Ganador CP3'))}
             </div></div>
             <div class="bracket-col"><div class="bracket-col-title">Final</div><div class="bk-stack">
               ${pendiente('Final', tbd('Ganador SF1'), tbd('Ganador SF2'), 'final plata')}

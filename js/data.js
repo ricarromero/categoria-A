@@ -2325,7 +2325,93 @@ const LIGA_DATA = {
     ],
     "crucesOficiales": {
       "informe": 7,
-      "mejor5": "Nottingham"
+      "mejor5": "Nottingham",
+      "partidos": [
+        {
+          "codigo": "CF1",
+          "n": 1,
+          "copa": "Fase Campeonato",
+          "ronda": "Cuartos de final",
+          "local": "Constructores",
+          "visitante": "Eclipse",
+          "dia": "Domingo 22/11",
+          "fecha": "2026-11-22",
+          "hora": "11:20",
+          "cancha": "Cancha de Fútbol"
+        },
+        {
+          "codigo": "CF4",
+          "n": 4,
+          "copa": "Fase Campeonato",
+          "ronda": "Cuartos de final",
+          "local": "Jägermeister",
+          "visitante": "Red Bull",
+          "dia": "Domingo 22/11",
+          "fecha": "2026-11-22",
+          "hora": "12:50",
+          "cancha": "Cancha de Fútbol"
+        },
+        {
+          "codigo": "CF2",
+          "n": 2,
+          "copa": "Fase Campeonato",
+          "ronda": "Cuartos de final",
+          "local": "Minaster City",
+          "visitante": "De Primera",
+          "dia": "Domingo 22/11",
+          "fecha": "2026-11-22",
+          "hora": "14:20",
+          "cancha": "Cancha de Fútbol"
+        },
+        {
+          "codigo": "CF3",
+          "n": 3,
+          "copa": "Fase Campeonato",
+          "ronda": "Cuartos de final",
+          "local": "Otro Equipo",
+          "visitante": "Aston",
+          "dia": "Domingo 22/11",
+          "fecha": "2026-11-22",
+          "hora": "15:50",
+          "cancha": "Cancha de Fútbol"
+        },
+        {
+          "codigo": "CP3",
+          "n": 13,
+          "copa": "Copa de Plata",
+          "ronda": "Cuartos de final",
+          "local": "C-Lesión",
+          "visitante": "Celtic",
+          "dia": "Domingo 22/11",
+          "fecha": "2026-11-22",
+          "hora": "12:40",
+          "cancha": "Cancha de Rugby"
+        },
+        {
+          "codigo": "CP1",
+          "n": 11,
+          "copa": "Copa de Plata",
+          "ronda": "Cuartos de final",
+          "local": "Mavericks",
+          "visitante": "La Máquina",
+          "dia": "Domingo 22/11",
+          "fecha": "2026-11-22",
+          "hora": "14:10",
+          "cancha": "Cancha de Rugby"
+        },
+        {
+          "codigo": "CP2",
+          "n": 12,
+          "copa": "Copa de Plata",
+          "ronda": "Cuartos de final",
+          "local": "Calise",
+          "visitante": "Antorcha",
+          "dia": "Domingo 22/11",
+          "fecha": "2026-11-22",
+          "hora": "15:40",
+          "cancha": "Cancha de Rugby"
+        }
+      ]
     }
   },
   "sanciones": [
