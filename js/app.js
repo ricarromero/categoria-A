@@ -3141,7 +3141,7 @@
       const ps = sel.map(x => ({
         local: x.local, visitante: x.visitante, golesL: x.golesL, golesV: x.golesV, penalesL: x.penalesL, penalesV: x.penalesV,
         estado: jug(x) ? 'finalizado' : 'pendiente', dia: x.dia, hora: x.hora,
-        cancha: (x.cancha || '') + (x.copa === 'Copa de Plata' ? ' · Plata' : ''), nota: x.provisorio ? 'Resultado provisorio' : '' }));
+        cancha: (x.cancha || '') + (x.copa === 'Copa de Plata' ? ' · Plata' : x.copa === 'Fase Campeonato' ? ' · Campeonato' : ''), nota: x.provisorio ? 'Resultado provisorio' : '' }));
       const dias = [...new Set(ps.map(p => p.dia).filter(Boolean))];
       const rs = [...new Set(sel.map(x => x.ronda))];
       return { nombre: rs.length === 1 ? rs[0] : 'Playoffs', dia: dias.join(' y '), partidos: ps, playoffs: true };
