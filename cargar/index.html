@@ -149,7 +149,7 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
     const PO = ((D && D.clausura && D.clausura.crucesOficiales && D.clausura.crucesOficiales.partidos) || []).filter(x => x.golesL == null || x.provisorio);
     if (PO.length) {
       const hm = h => { const [a, b] = (h || '99:99').split(':').map(Number); return a * 60 + b; };
-      const ord = PO.slice().sort((x, y) => (x.fecha || '').localeCompare(y.fecha || '') || hm(x.hora) - hm(y.hora));
+      const ord = PO.slice().sort((x, y) => (x.copa === y.copa ? 0 : x.copa === 'Fase Campeonato' ? -1 : 1) || (x.fecha || '').localeCompare(y.fecha || '') || hm(x.hora) - hm(y.hora));
       let ronda = null;
       $('#lista').innerHTML = ord.map(x => {
         const h = x.ronda + x.copa !== ronda ? `<div class="fh"><b>${esc(x.copa)}</b><span>${esc(x.ronda)}</span></div>` : '';

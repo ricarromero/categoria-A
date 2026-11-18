@@ -694,6 +694,60 @@
   "clausura": {
     "enCurso": true,
     "ultimaFechaDisputada": 8,
+    "crucesOficiales": {
+      "informe": null,
+      "nota": "La tabla final se actualiza cuando llegue el informe de la Fecha 9.",
+      "partidos": [
+        {
+          "codigo": "CF1",
+          "n": 1,
+          "copa": "Fase Campeonato",
+          "ronda": "Cuartos de final",
+          "local": "Don Bosco",
+          "visitante": "Nacional",
+          "dia": "Domingo 22/11",
+          "fecha": "2026-11-22",
+          "hora": "11:20",
+          "cancha": "Cancha de Rugby"
+        },
+        {
+          "codigo": "CF2",
+          "n": 2,
+          "copa": "Fase Campeonato",
+          "ronda": "Cuartos de final",
+          "local": "Flandria FC",
+          "visitante": "Bonus Track",
+          "dia": "Domingo 22/11",
+          "fecha": "2026-11-22",
+          "hora": "10:00",
+          "cancha": "Cancha de Rugby"
+        },
+        {
+          "codigo": "SP1",
+          "n": 21,
+          "copa": "Copa de Plata",
+          "ronda": "Semifinales",
+          "local": "Cátedra FC",
+          "visitante": "Defensa e Injusticia",
+          "dia": "Sábado 21/11",
+          "fecha": "2026-11-21",
+          "hora": "10:00",
+          "cancha": "Cancha de Rugby"
+        },
+        {
+          "codigo": "SP2",
+          "n": 22,
+          "copa": "Copa de Plata",
+          "ronda": "Semifinales",
+          "local": "Talleres",
+          "visitante": "Imputables FC",
+          "dia": "Domingo 22/11",
+          "fecha": "2026-11-22",
+          "hora": "10:00",
+          "cancha": "Cancha de Fútbol"
+        }
+      ]
+    },
     "fechas": [
       {
         "numero": 1,

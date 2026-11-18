@@ -1,6 +1,6 @@
 /**
  * CATEGORÍA B 2026 — datos cargados desde los informes de la Liga
- * (Apertura: fechas 1 a 7 + fase final; Clausura: fechas 1 a 6; Tabla Anual recalculada tras la Fecha 6).
+ * (Apertura: fechas 1 a 7 + fase final; Clausura: fechas 1 a 7 + cruces; Tabla Anual recalculada tras la Fecha 7).
  * Generado a partir de los PDF; se completa con cada informe nuevo.
  */
 (function () {
@@ -1173,7 +1173,7 @@
   },
   "clausura": {
     "enCurso": true,
-    "ultimaFechaDisputada": 6,
+    "ultimaFechaDisputada": 7,
     "fechas": [
       {
         "numero": 1,
@@ -1615,10 +1615,10 @@
             "zona": "Zona A",
             "local": "Agrimensura",
             "visitante": "Geología",
-            "golesL": null,
-            "golesV": null,
-            "estado": "pendiente",
-            "nota": "Reprogramado para el domingo 15/11",
+            "golesL": 4,
+            "golesV": 0,
+            "estado": "finalizado",
+            "nota": "Reprogramado: se jugó el domingo 15/11. Resultado deducido de la tabla oficial del informe de la Fecha 7.",
             "dia": "Domingo 15/11",
             "hora": "12:40",
             "cancha": "Cancha de Fútbol"
@@ -1674,7 +1674,7 @@
       {
         "numero": 7,
         "nombre": "Fecha 7",
-        "disputada": false,
+        "disputada": true,
         "partidos": [
           {
             "zona": "Zona A",
@@ -1695,7 +1695,7 @@
             "golesL": 0,
             "golesV": 2,
             "estado": "finalizado",
-            "nota": "No se presenta: Timba fue eliminado y se le da por perdido 2-0 (Art. 5 inc. a)"
+            "nota": ""
           },
           {
             "zona": "Zona A",
@@ -1767,112 +1767,194 @@
             "cancha": "Cancha de Fútbol"
           }
         ],
-        "dia": "Sábado 7 de noviembre"
+        "dia": "Sábado 14 de noviembre"
       }
     ],
+    "crucesOficiales": {
+      "informe": 7,
+      "mejor5": "Agrimensura",
+      "directos": {
+        "CP1": "Dep. La Verna"
+      },
+      "partidos": [
+        {
+          "codigo": "CF1",
+          "n": 1,
+          "copa": "Fase Campeonato",
+          "ronda": "Cuartos de final",
+          "local": "Malvinas",
+          "visitante": "Descarte",
+          "dia": "Sábado 21/11",
+          "fecha": "2026-11-21",
+          "hora": "10:00",
+          "cancha": "Cancha de Fútbol"
+        },
+        {
+          "codigo": "CF4",
+          "n": 4,
+          "copa": "Fase Campeonato",
+          "ronda": "Cuartos de final",
+          "local": "De Zurda",
+          "visitante": "Al Costado",
+          "dia": "Sábado 21/11",
+          "fecha": "2026-11-21",
+          "hora": "11:20",
+          "cancha": "Cancha de Fútbol"
+        },
+        {
+          "codigo": "CF3",
+          "n": 3,
+          "copa": "Fase Campeonato",
+          "ronda": "Cuartos de final",
+          "local": "Central",
+          "visitante": "Tercer Tiempo",
+          "dia": "Sábado 21/11",
+          "fecha": "2026-11-21",
+          "hora": "12:40",
+          "cancha": "Cancha de Fútbol"
+        },
+        {
+          "codigo": "CF2",
+          "n": 2,
+          "copa": "Fase Campeonato",
+          "ronda": "Cuartos de final",
+          "local": "F90",
+          "visitante": "Necaxa",
+          "dia": "Sábado 21/11",
+          "fecha": "2026-11-21",
+          "hora": "14:00",
+          "cancha": "Cancha de Fútbol"
+        },
+        {
+          "codigo": "CP2",
+          "n": 12,
+          "copa": "Copa de Plata",
+          "ronda": "Cuartos de final",
+          "local": "Geología",
+          "visitante": "Inter",
+          "dia": "Sábado 21/11",
+          "fecha": "2026-11-21",
+          "hora": "11:20",
+          "cancha": "Cancha de Rugby"
+        },
+        {
+          "codigo": "CP3",
+          "n": 13,
+          "copa": "Copa de Plata",
+          "ronda": "Cuartos de final",
+          "local": "Adove",
+          "visitante": "Gol en Contra",
+          "dia": "Sábado 21/11",
+          "fecha": "2026-11-21",
+          "hora": "12:40",
+          "cancha": "Cancha de Rugby"
+        }
+      ]
+    },
     "tablas": {
       "zonaA": [
         {
           "pos": 1,
           "equipo": "Malvinas",
-          "pj": 6,
-          "pg": 6,
+          "pj": 7,
+          "pg": 7,
           "pe": 0,
           "pp": 0,
-          "gf": 23,
+          "gf": 25,
           "gc": 4,
-          "dg": 19,
-          "pts": 18,
+          "dg": 21,
+          "pts": 21,
           "zona": "A"
         },
         {
           "pos": 2,
-          "equipo": "De Zurda",
-          "pj": 6,
+          "equipo": "F90",
+          "pj": 7,
           "pg": 5,
           "pe": 0,
-          "pp": 1,
-          "gf": 14,
-          "gc": 4,
-          "dg": 10,
+          "pp": 2,
+          "gf": 20,
+          "gc": 6,
+          "dg": 14,
           "pts": 15,
           "zona": "A"
         },
         {
           "pos": 3,
-          "equipo": "F90",
-          "pj": 6,
-          "pg": 4,
+          "equipo": "De Zurda",
+          "pj": 7,
+          "pg": 5,
           "pe": 0,
           "pp": 2,
-          "gf": 18,
+          "gf": 14,
           "gc": 6,
-          "dg": 12,
-          "pts": 12,
+          "dg": 8,
+          "pts": 15,
           "zona": "A"
         },
         {
           "pos": 4,
           "equipo": "Tercer Tiempo",
-          "pj": 6,
-          "pg": 3,
+          "pj": 7,
+          "pg": 4,
           "pe": 0,
           "pp": 3,
-          "gf": 6,
+          "gf": 7,
           "gc": 10,
-          "dg": -4,
-          "pts": 9,
+          "dg": -3,
+          "pts": 12,
           "zona": "A"
         },
         {
           "pos": 5,
-          "equipo": "Gol en Contra",
-          "pj": 6,
-          "pg": 2,
+          "equipo": "Agrimensura",
+          "pj": 7,
+          "pg": 3,
           "pe": 0,
           "pp": 4,
           "gf": 13,
-          "gc": 13,
-          "dg": 0,
-          "pts": 6,
+          "gc": 16,
+          "dg": -3,
+          "pts": 9,
           "zona": "A"
         },
         {
           "pos": 6,
-          "equipo": "Agrimensura",
-          "pj": 5,
-          "pg": 2,
+          "equipo": "Gol en Contra",
+          "pj": 7,
+          "pg": 3,
           "pe": 0,
-          "pp": 3,
-          "gf": 9,
-          "gc": 15,
-          "dg": -6,
-          "pts": 6,
-          "zona": "A"
+          "pp": 4,
+          "gf": 15,
+          "gc": 14,
+          "dg": 1,
+          "pts": 8,
+          "zona": "A",
+          "sancion": -1
         },
         {
           "pos": 7,
           "equipo": "Geología",
-          "pj": 5,
+          "pj": 7,
           "pg": 1,
           "pe": 0,
-          "pp": 4,
-          "gf": 5,
-          "gc": 15,
-          "dg": -10,
+          "pp": 6,
+          "gf": 6,
+          "gc": 21,
+          "dg": -15,
           "pts": 3,
           "zona": "A"
         },
         {
           "pos": 8,
           "equipo": "Timba",
-          "pj": 6,
+          "pj": 7,
           "pg": 0,
           "pe": 0,
-          "pp": 6,
+          "pp": 7,
           "gf": 2,
-          "gc": 23,
-          "dg": -21,
+          "gc": 25,
+          "dg": -23,
           "pts": 0,
           "zona": "A"
         }
@@ -1881,57 +1963,44 @@
         {
           "pos": 1,
           "equipo": "Central",
-          "pj": 5,
-          "pg": 4,
+          "pj": 6,
+          "pg": 5,
           "pe": 1,
           "pp": 0,
-          "gf": 9,
-          "gc": 4,
-          "dg": 5,
-          "pts": 13,
+          "gf": 11,
+          "gc": 5,
+          "dg": 6,
+          "pts": 16,
           "zona": "B"
         },
         {
           "pos": 2,
           "equipo": "Al Costado",
-          "pj": 5,
-          "pg": 3,
+          "pj": 6,
+          "pg": 4,
           "pe": 1,
           "pp": 1,
-          "gf": 7,
+          "gf": 8,
           "gc": 2,
-          "dg": 5,
-          "pts": 10,
+          "dg": 6,
+          "pts": 13,
           "zona": "B"
         },
         {
           "pos": 3,
-          "equipo": "Dep. La Verna",
-          "pj": 5,
-          "pg": 2,
+          "equipo": "Necaxa",
+          "pj": 6,
+          "pg": 3,
           "pe": 2,
           "pp": 1,
-          "gf": 8,
-          "gc": 6,
-          "dg": 2,
-          "pts": 8,
+          "gf": 5,
+          "gc": 1,
+          "dg": 4,
+          "pts": 11,
           "zona": "B"
         },
         {
           "pos": 4,
-          "equipo": "Necaxa",
-          "pj": 5,
-          "pg": 2,
-          "pe": 2,
-          "pp": 1,
-          "gf": 3,
-          "gc": 1,
-          "dg": 2,
-          "pts": 8,
-          "zona": "B"
-        },
-        {
-          "pos": 5,
           "equipo": "Descarte",
           "pj": 6,
           "pg": 2,
@@ -1944,30 +2013,45 @@
           "zona": "B"
         },
         {
+          "pos": 5,
+          "equipo": "Dep. La Verna",
+          "pj": 6,
+          "pg": 2,
+          "pe": 2,
+          "pp": 2,
+          "gf": 8,
+          "gc": 7,
+          "dg": 1,
+          "pts": 7,
+          "zona": "B",
+          "sancion": -1
+        },
+        {
           "pos": 6,
-          "equipo": "Adove",
-          "pj": 5,
+          "equipo": "Inter",
+          "pj": 6,
           "pg": 0,
           "pe": 1,
-          "pp": 4,
-          "gf": 4,
-          "gc": 11,
-          "dg": -7,
+          "pp": 5,
+          "gf": 5,
+          "gc": 14,
+          "dg": -9,
           "pts": 1,
           "zona": "B"
         },
         {
           "pos": 7,
-          "equipo": "Inter",
-          "pj": 5,
+          "equipo": "Adove",
+          "pj": 6,
           "pg": 0,
           "pe": 1,
-          "pp": 4,
+          "pp": 5,
           "gf": 4,
-          "gc": 12,
-          "dg": -8,
-          "pts": 1,
-          "zona": "B"
+          "gc": 13,
+          "dg": -9,
+          "pts": -2,
+          "zona": "B",
+          "sancion": -3
         }
       ]
     },
@@ -1976,13 +2060,7 @@
         "pos": 1,
         "jugador": "Herrera, Pablo Simón",
         "equipo": "Malvinas",
-        "goles": 7
-      },
-      {
-        "pos": 2,
-        "jugador": "Recio, Jeremias",
-        "equipo": "De Zurda",
-        "goles": 5
+        "goles": 8
       },
       {
         "pos": 2,
@@ -1991,46 +2069,52 @@
         "goles": 5
       },
       {
-        "pos": 4,
-        "jugador": "Goldfarb, Santiago",
+        "pos": 3,
+        "jugador": "Escriva Facundo",
+        "equipo": "De Zurda",
+        "goles": 4
+      },
+      {
+        "pos": 3,
+        "jugador": "Goldfarb Santiago",
         "equipo": "F90",
         "goles": 4
       },
       {
-        "pos": 4,
+        "pos": 3,
+        "jugador": "García Castro, Marcos Gustavo",
+        "equipo": "Gol en Contra",
+        "goles": 4
+      },
+      {
+        "pos": 3,
         "jugador": "Noe, Geronimo",
         "equipo": "Gol en Contra",
         "goles": 4
       },
       {
-        "pos": 6,
+        "pos": 3,
+        "jugador": "Vega Muñoz, Isaias Gabriel",
+        "equipo": "Malvinas",
+        "goles": 4
+      },
+      {
+        "pos": 8,
         "jugador": "Savorani Jofre, Sebastian",
         "equipo": "Central",
         "goles": 3
       },
       {
-        "pos": 6,
-        "jugador": "Vilanova, Ignacio",
-        "equipo": "F90",
+        "pos": 8,
+        "jugador": "Recio, Jeremias",
+        "equipo": "De Zurda",
         "goles": 3
       },
       {
-        "pos": 6,
-        "jugador": "Moreira, Tomas Alejo",
-        "equipo": "Gol en Contra",
+        "pos": 8,
+        "jugador": "Gambina, Jose Esteban",
+        "equipo": "Geología",
         "goles": 3
-      },
-      {
-        "pos": 6,
-        "jugador": "Vega Muñoz, Isaias Gabriel",
-        "equipo": "Malvinas",
-        "goles": 3
-      },
-      {
-        "pos": 10,
-        "jugador": "Martinez Girons, Agustin Ariel",
-        "equipo": "Adove",
-        "goles": 2
       }
     ]
   },
@@ -2132,20 +2216,44 @@
       "estado": "Definitiva"
     },
     {
-      "jugador": "Guzman Santiago",
-      "equipo": "Adove",
+      "jugador": "Fernandez, Santiago",
+      "equipo": "Dep. La Verna",
       "sancion": "1 Partido",
       "articulo": "Art. 26 inc. \"G\"",
       "motivo": "",
       "estado": "Vigente (0/1)"
     },
     {
-      "jugador": "Ruiz Agustin",
-      "equipo": "Central",
+      "jugador": "Guzman Juan",
+      "equipo": "Adove",
+      "sancion": "Hasta 31/12/2028",
+      "articulo": "Art. 25 inc. \"B\"",
+      "motivo": "",
+      "estado": "Vigente"
+    },
+    {
+      "jugador": "Aballay Lautaro",
+      "equipo": "Adove",
+      "sancion": "Hasta 31/12/2028",
+      "articulo": "Art. 25 inc. \"B\"",
+      "motivo": "",
+      "estado": "Vigente"
+    },
+    {
+      "jugador": "Consulo Ignacio",
+      "equipo": "Adove",
       "sancion": "1 Partido",
-      "articulo": "Art. 26 inc. \"G\"",
+      "articulo": "Art. 25 inc. \"B\"",
       "motivo": "",
       "estado": "Vigente (0/1)"
+    },
+    {
+      "jugador": "Juan Emanuel",
+      "equipo": "Adove",
+      "sancion": "Hasta 31/12/2027",
+      "articulo": "Art. 25 inc. \"B\"",
+      "motivo": "",
+      "estado": "Vigente"
     },
     {
       "jugador": "Equipo Timba",
@@ -2156,8 +2264,24 @@
       "estado": "Definitiva"
     },
     {
+      "jugador": "Equipo Adove",
+      "equipo": "Adove",
+      "sancion": "Descuento de 3 puntos",
+      "articulo": "Art. 25 inc. \"B\"",
+      "motivo": "Se aplica al finalizar la fase en disputa",
+      "estado": "Aplicada"
+    },
+    {
       "jugador": "Martinez, Rodrigo",
       "equipo": "Agrimensura",
+      "sancion": "3 Amarillas acumuladas",
+      "articulo": "Art. 6° Régimen Amarillas",
+      "motivo": "Acumulación de 3 tarjetas amarillas",
+      "estado": "3 Amarillas"
+    },
+    {
+      "jugador": "Bueno Sillero, Santiago Roman",
+      "equipo": "Al Costado",
       "sancion": "3 Amarillas acumuladas",
       "articulo": "Art. 6° Régimen Amarillas",
       "motivo": "Acumulación de 3 tarjetas amarillas",
@@ -2182,14 +2306,6 @@
     {
       "jugador": "Escriva Facundo",
       "equipo": "De Zurda",
-      "sancion": "3 Amarillas acumuladas",
-      "articulo": "Art. 6° Régimen Amarillas",
-      "motivo": "Acumulación de 3 tarjetas amarillas",
-      "estado": "3 Amarillas"
-    },
-    {
-      "jugador": "Fernandez Galdeano, Santiago",
-      "equipo": "Dep. La Verna",
       "sancion": "3 Amarillas acumuladas",
       "articulo": "Art. 6° Régimen Amarillas",
       "motivo": "Acumulación de 3 tarjetas amarillas",
@@ -2236,14 +2352,14 @@
       "estado": "3 Amarillas"
     }
   ],
-  "tablaAnualFuente": "Actualizada tras la Fecha 6 del Clausura con el criterio oficial de la Liga: puntos divididos en partidos programados (en el Clausura, Zona A 7 y Zona B 6)",
+  "tablaAnualFuente": "Actualizada tras la Fecha 7 del Clausura: puntos divididos en partidos jugados (la fecha libre no cuenta)",
   "tablaAnual": [
     {
       "pos": 1,
       "equipo": "Malvinas",
       "ptsAp": 13,
       "bonus": 1,
-      "ptsCl": 18,
+      "ptsCl": 21,
       "totalAp": 14,
       "coefAp": 2.0,
       "coefCl": 3.0,
@@ -2254,36 +2370,47 @@
       "equipo": "Central",
       "ptsAp": 15,
       "bonus": 0,
-      "ptsCl": 13,
+      "ptsCl": 16,
       "totalAp": 15,
       "coefAp": 2.14,
-      "coefCl": 2.6,
-      "total": 4.74
+      "coefCl": 2.67,
+      "total": 4.81
     },
     {
       "pos": 3,
       "equipo": "Al Costado",
       "ptsAp": 16,
       "bonus": 2,
-      "ptsCl": 10,
+      "ptsCl": 13,
       "totalAp": 18,
       "coefAp": 2.57,
-      "coefCl": 2.0,
-      "total": 4.57
+      "coefCl": 2.17,
+      "total": 4.74
     },
     {
       "pos": 4,
       "equipo": "F90",
       "ptsAp": 16,
       "bonus": 0,
-      "ptsCl": 12,
+      "ptsCl": 15,
       "totalAp": 16,
       "coefAp": 2.29,
-      "coefCl": 2.0,
-      "total": 4.29
+      "coefCl": 2.14,
+      "total": 4.43
     },
     {
       "pos": 5,
+      "equipo": "Necaxa",
+      "ptsAp": 12,
+      "bonus": 3,
+      "ptsCl": 11,
+      "totalAp": 15,
+      "coefAp": 2.14,
+      "coefCl": 1.83,
+      "total": 3.97
+    },
+    {
+      "pos": 6,
       "equipo": "Descarte",
       "ptsAp": 17,
       "bonus": 0,
@@ -2294,81 +2421,70 @@
       "total": 3.76
     },
     {
-      "pos": 6,
-      "equipo": "Necaxa",
-      "ptsAp": 12,
-      "bonus": 3,
-      "ptsCl": 8,
-      "totalAp": 15,
-      "coefAp": 2.14,
-      "coefCl": 1.6,
-      "total": 3.74
-    },
-    {
       "pos": 7,
-      "equipo": "Dep. La Verna",
-      "ptsAp": 11,
+      "equipo": "Tercer Tiempo",
+      "ptsAp": 8,
       "bonus": 0,
-      "ptsCl": 8,
-      "totalAp": 11,
-      "coefAp": 1.57,
-      "coefCl": 1.6,
-      "total": 3.17
+      "ptsCl": 12,
+      "totalAp": 8,
+      "coefAp": 1.14,
+      "coefCl": 1.71,
+      "total": 2.85
     },
     {
       "pos": 8,
+      "equipo": "Gol en Contra",
+      "ptsAp": 11,
+      "bonus": 1,
+      "ptsCl": 8,
+      "totalAp": 12,
+      "coefAp": 1.71,
+      "coefCl": 1.14,
+      "total": 2.85
+    },
+    {
+      "pos": 9,
+      "equipo": "Dep. La Verna",
+      "ptsAp": 11,
+      "bonus": 0,
+      "ptsCl": 7,
+      "totalAp": 11,
+      "coefAp": 1.57,
+      "coefCl": 1.17,
+      "total": 2.74
+    },
+    {
+      "pos": 10,
       "equipo": "De Zurda",
       "ptsAp": 3,
       "bonus": 0,
       "ptsCl": 15,
       "totalAp": 3,
       "coefAp": 0.43,
-      "coefCl": 2.5,
-      "total": 2.93
-    },
-    {
-      "pos": 9,
-      "equipo": "Gol en Contra",
-      "ptsAp": 11,
-      "bonus": 1,
-      "ptsCl": 6,
-      "totalAp": 12,
-      "coefAp": 1.71,
-      "coefCl": 1.0,
-      "total": 2.71
-    },
-    {
-      "pos": 10,
-      "equipo": "Tercer Tiempo",
-      "ptsAp": 8,
-      "bonus": 0,
-      "ptsCl": 9,
-      "totalAp": 8,
-      "coefAp": 1.14,
-      "coefCl": 1.5,
-      "total": 2.64
+      "coefCl": 2.14,
+      "total": 2.57
     },
     {
       "pos": 11,
       "equipo": "Adove",
       "ptsAp": 15,
       "bonus": 0,
-      "ptsCl": 1,
+      "ptsCl": -2,
       "totalAp": 15,
       "coefAp": 2.14,
-      "coefCl": 0.2,
-      "total": 2.34
+      "coefCl": -0.33,
+      "total": 1.81
     },
     {
       "pos": 12,
       "equipo": "Agrimensura",
       "ptsAp": 3,
       "bonus": 0,
-      "ptsCl": 6,
+      "ptsCl": 9,
       "totalAp": 3,
       "coefAp": 0.43,
-      "coefCl": 1.0,
-      "total": 1.43
+      "coefCl": 1.29,
+      "total": 1.72
     },
     {
       "pos": 13,
@@ -2378,8 +2494,8 @@
       "ptsCl": 3,
       "totalAp": 5,
       "coefAp": 0.71,
-      "coefCl": 0.5,
-      "total": 1.21
+      "coefCl": 0.43,
+      "total": 1.14
     },
     {
       "pos": 14,
@@ -2389,8 +2505,8 @@
       "ptsCl": 1,
       "totalAp": 4,
       "coefAp": 0.57,
-      "coefCl": 0.2,
-      "total": 0.77
+      "coefCl": 0.17,
+      "total": 0.74
     },
     {
       "pos": 15,
@@ -2407,7 +2523,7 @@
 };
   B.liga = Object.assign({}, A.liga, {
     categoria: 'Categoría B', subtitulo: 'Categoría B · Fútbol Universitario',
-    torneoActual: 'Torneo Clausura 2026', ultimaFechaDisputada: 6, estado: 'Clausura en disputa · Fecha 6 completada'
+    torneoActual: 'Torneo Clausura 2026', ultimaFechaDisputada: 7, estado: 'Clausura · Fase clasificatoria terminada'
   });
   B.reglamentos = A.reglamentos;
   B.reglamentosCompletos = Object.assign({}, A.reglamentosCompletos, { categoriaA: [{"id": "reg-b-art-1", "numero": 1, "articulo": "Art. 1°", "titulo": "De la Forma de Disputa", "categoria": "categoriaA", "seccion": "Categoría B 2026", "texto": "Art. 1º- En la presente temporada la forma de disputa se informará oportunamente en la\nreunión de delegados."}, {"id": "reg-b-art-2", "numero": 2, "articulo": "Art. 2°", "titulo": "Integración de Planteles (Apertura y Clausura) e Incorporaciones", "categoria": "categoriaA", "seccion": "Categoría B 2026", "texto": "Art. 2º- a) Los equipos para el Torneo Apertura de esta categoría deberán estar integrados por un\nmínimo de dieciséis (16) jugadores y un máximo de veinticinco (25). De dicho total, al menos diez\n(10) deberán haber sido clasificados en esta misma categoría, en el mismo equipo, durante el año\n2025, según los registros de la D.G.D.R.\nb) Los equipos para el Torneo Clausura de esta categoría deberán estar integrados por un mínimo\nde dieciséis (16) jugadores y un máximo de veinticinco (25). De dicho total, al menos dieciséis\n(16) deberán haber sido clasificados en esta misma categoría, en el mismo equipo, durante el\nTorneo Clausura, según los registros de la D.G.D.R.\nAl finalizar la Primera Fase de ambos Torneos, se permitirá la incorporación de hasta cuatro (4)\njugadores, los cuales deben ser nuevos, o provenientes de la categoría “C” siempre que\npertenezcan a equipos que hayan quedado eliminados por puntos, es decir, aquellos que hayan\nquedado fuera de competencia por razones deportivas, sin aplicación del Art. 12º del Reglamento\nGeneral ni por otras causas ajenas a la competencia."}, {"id": "reg-b-art-3", "numero": 3, "articulo": "Art. 3°", "titulo": "Sustituciones", "categoria": "categoriaA", "seccion": "Categoría B 2026", "texto": "Art. 3º- En cualquier momento del partido se permitirá la sustitución de jugadores, hasta un máximo\nde 5 (cinco) por equipo. El jugador reemplazado no podrá reintegrarse al juego.\nPara efectuar un cambio, el jugador deberá presentarse ante la mesa de control, donde se verificará\nsu identidad, se registrará su ingreso mediante la firma en la planilla del encuentro y se notificará\nal árbitro.\nAsimismo, un equipo podrá realizar hasta 3 (tres) sustituciones durante el entretiempo, las cuales\nno serán contabilizadas dentro del máximo de 5 (cinco) cambios permitidos durante el transcurso\ndel partido."}, {"id": "reg-b-art-4", "numero": 4, "articulo": "Art. 4°", "titulo": "Eliminación por Doble Pérdida de Puntos", "categoria": "categoriaA", "seccion": "Categoría B 2026", "texto": "Art. 4º- Cuando un equipo haya perdido los puntos en 2 (dos) ocasiones por aplicación del Art. 12º\ndel Reglamento General, quedará automáticamente eliminado de la competencia. No pudiendo\nparticipar en ninguna de las categorías de la Liga Universitaria durante el presente año."}, {"id": "reg-b-art-5", "numero": 5, "articulo": "Art. 5°", "titulo": "Partidos y Resultados de Equipos Eliminados (Regla del 50%)", "categoria": "categoriaA", "seccion": "Categoría B 2026", "texto": "Art. 5º- En aquellos casos que un equipo quedará eliminado del torneo, se procede de la siguiente\nmanera:\n a) Si el mencionado equipo queda eliminado habiendo disputado, el 50 % de los partidos\n programados para el torneo, se respetarán los resultados que este haya obtenido en los\n encuentros disputados hasta ese momento y se le dará por perdido con el Score 2 – 0 con\n los equipos que aún no haya jugado.\n b) Si el equipo fuese eliminado habiendo disputado, menos del 50 % de los partidos\n programados en el Torneo, no se tendrán en cuenta ninguno de los resultados obtenidos\n\f por este y se continuará teniendo en cuenta goles, amarillas, expulsados, sancionados y\n todo lo ocurrido en los partidos que este hubiere participado y con los equipos con que este\n haya jugado."}, {"id": "reg-b-art-6", "numero": 6, "articulo": "Art. 6°", "titulo": "Duración de los Partidos y Sistema de Puntuación", "categoria": "categoriaA", "seccion": "Categoría B 2026", "texto": "Art. 6º- Los partidos se disputarán en 2 (dos) tiempos de 35 (treinta y cinco) minutos cada uno, con\nun descanso de 10 (diez) minutos entre uno y otro. El sistema de puntuación será el siguiente:\n a) Partido ganado = 3 (tres) Puntos.\n b) Partido empatado = 1 (uno) Punto.\n c) Partido perdido = 0 (cero) Punto."}, {"id": "reg-b-art-7", "numero": 7, "articulo": "Art. 7°", "titulo": "Suspensiones por Acumulación de Amarillas", "categoria": "categoriaA", "seccion": "Categoría B 2026", "texto": "Art. 7º- Se implementará sanciones a los jugadores por acumulación de tarjetas amarillas de\nacuerdo al siguiente detalle:\n a) 4 amarillas = 1 (uno) Partido de suspensión.\n b) 7 amarillas = 2 (dos) Partidos de suspensión\n c) 9 amarillas = 3 (tres) Partidos de suspensión.\n d) 11 amarillas = 4 (cuatro) Partidos de suspensión.\nLas amarillas no se contabilizarán en semifinales y finales, si la forma de disputa así lo establece,\ncaso contrario serán acumulables en todo el torneo."}, {"id": "reg-b-art-8", "numero": 8, "articulo": "Art. 8°", "titulo": "Criterios de Desempate en Fases Clasificatorias y Tabla Anual", "categoria": "categoriaA", "seccion": "Categoría B 2026", "texto": "Art. 8º- Los equipos que hayan tenido una (1) No presentación no tendrá derecho a participar en\nningún tipo de desempate en las posiciones finales en las fases clasificatorias y tabla anual.\nEn caso de producirse un empate en las posiciones finales en la fase clasificatoria y/o tabla anual,\nentre 2 (dos) o más equipos, se procederá de la siguiente manera:\n 1. Por la mayor cantidad de puntos obtenidos por los empatados en los partidos jugados\n entre sí en la fase clasificatoria.\n 2. Por la diferencia de los goles a favor y en contra de todos los partidos disputados en la\n fase clasificatoria.\n 3. Por la mayor cantidad de goles a favor logrados en todos los partidos disputados en la\n fase clasificatoria.\n 4. Por Fair Play.\n 5. Por sorteo entre los equipos empatados.\nEn 8vos. 4tos. Semis y Finales (en caso de que el sistema de juego lo permita), en caso de\nempate se definirá por tiros desde el punto penal (5 tiros por equipo, en caso de proseguir con la\nigualdad, se ejecutara un disparo por bando, hasta definir el ganador)."}, {"id": "reg-b-art-9", "numero": 9, "articulo": "Art. 9°", "titulo": "Sistema de Descenso a la Categoría C", "categoria": "categoriaA", "seccion": "Categoría B 2026", "texto": "Art. 9º- Para la presente temporada se implementará el siguiente sistema de descenso:\nLos 2 (dos) equipos que se ubiquen en el último y penúltimo puesto de la Tabla Anual\ndescenderán directamente a la categoría “C”.\nEl equipo que se ubique en el antepenúltimo jugará un partido con el 3er equipo clasificado en la\nTabla Anual de la Categoría “C” y el equipo que este en el ante antepenúltimo lugar disputará un\npartido con el 4to equipo clasificado en la Tabla Anual de la Categoría “C”, partidos que se\ndisputaran en dos tiempos de 35 (treinta y cinco) minutos cada uno, y en caso de producirse un\nempate se dará por ganador al equipo perteneciente a la categoría “B”.\nEn caso de haber un equipo eliminado habrá un solo descenso directo, y se disputaran dos\npartidos para mantener la categoría.\nEn caso de haber dos equipos eliminados, no habrá descensos directos, y se disputaran los dos\npartidos para mantener la categoría.\nEn caso de haber tres equipos eliminados, no habrá descensos directos, y se disputará un solo\npartido para mantener la categoría."}, {"id": "reg-b-art-10", "numero": 10, "articulo": "Art. 10°", "titulo": "Inasistencias y Tardanzas de Delegados", "categoria": "categoriaA", "seccion": "Categoría B 2026", "texto": "Art. 10º- Las sanciones por inasistencia del delegado a las reuniones, que se realizan los días\n MIERCOLES a las 13:00 horas o en la fecha que determine la Comisión Organizadora, serán\n consideradas en todas las posiciones finales de cada fase del torneo, en la fase campeonato y\n copa de plata (play-off) se tendrán en cuenta para la Tabla Anual.\n Se entenderá por inasistencia la falta a una reunión. Al registrarse la tercera (3.ª) ausencia de\n un delegado y/o integrante del equipo, se descontará un (1) punto al equipo que represente. A\n partir de ese momento, se aplicará el descuento de un (1) punto por cada nueva inasistencia.\n En caso de que un delegado y/o integrante del equipo llegue tarde a una reunión con un retraso\n mayor a quince (15) minutos desde su inicio y hasta su finalización —entendiéndose esta como\n el momento en que se retira el representante de la D.G.D.R. de la U.N.S.J.—, se le computará\n una tardanza. Cada tres (3) tardanzas implicarán una (1) inasistencia al equipo\n correspondiente.\n Asimismo, toda la información comunicada en el grupo de WhatsApp de la Liga de Fútbol\n Categoría “B” temporada 2026, emitida desde los números oficiales de la DGDR (2646629521\n y 2645834768), tendrá carácter oficial."}, {"id": "reg-b-art-11", "numero": 11, "articulo": "Art. 11°", "titulo": "Inscripción, Pagos, Seguro y Ficha Médica", "categoria": "categoriaA", "seccion": "Categoría B 2026", "texto": "Art. 11º- La forma de pago para el presente Campeonato será de la siguiente manera:\n a) Cada equipo deberá abonar a modo de inscripción para la 1ra. Fase: $130.000 (pesos\n ciento treinta mil) en efectivo, completándose de la siguiente manera: 1º cuota\n $65.000(pesos sesenta y cinco mil) hasta el día hábil anterior a la reunión antes de\n disputarse la tercera fecha, presentando dicho comprobante en la Reunión donde se sortea\n la Tercera Fecha. 2º cuota $65.000(pesos sesenta y cinco mil) hasta el día hábil anterior a\n\f la reunión antes de disputarse la 6ta. Fecha, presentando dicho comprobante en la Reunión\n donde se sortea la Sexta Fecha.\n b) De no cumplir con el pago requerido en tiempo y forma se procederá a sancionar con el\n descuento de puntos a los equipos que no cumplan con el mismo, de acuerdo al siguiente\n detalle (dichos puntos serán tenidos en cuenta para definir posiciones finales y para el\n descenso): Por cada falta a un pago (según los cronogramas anteriores) se descontará 1\n (uno) punto, teniendo como última fecha de pago el día de la reunión anterior a disputarse\n la 6ta. fecha de la primera fase.; Los pagos deberán ser hechos en tiempo y forma, y los\n montos a pagar en cada fecha son acumulativos. De no haber cumplido con la totalidad del\n pago, hasta antes de la 7 ma. fecha del torneo, el equipo quedará eliminado descendiendo\n a la categoría más baja del torneo, y los jugadores en el próximo año no podrán jugar en\n ningún equipo de la Liga Superior Universitaria de Futbol.\n c) Se implementará un Seguro, el cual deberá ser abonado por cada equipo. El jugador que\n no esté asegurado, no podrá jugar, sin excepción. Dicho pago del seguro es obligatorio\n para confirmar la lista de Buena Fe, por lo tanto, el mismo debe ser abonado hasta el día\n anterior a la reunión donde se sortea de la tercera fecha o cuando la organización lo\n disponga. Pudiendo agregar jugadores en los periodos de incorporación si los hubiera.\n d) Se implementará una ficha médica, la cual se realizará en el COMPLEJO DEPORTIVO EL\n PALOMAR, NO SE RECIBIRA OTRA QUE NO SEA LA REALIZADA EN EL COMPLEJO,\n para poder disputar la fecha, solo se tomaran LAS FICHAS MEDICAS APTAS\n REALIZADAS EL DIA ANTERIOR A LA REUNION o cuando la organización lo disponga.\n SIN EXCEPCION."}, {"id": "reg-b-art-12", "numero": 12, "articulo": "Art. 12°", "titulo": "Cantidad de Jugadores y Capitán", "categoria": "categoriaA", "seccion": "Categoría B 2026", "texto": "Art. 12º- Cada equipo podrá constituirse con jugadores federados o no, totalizando un mínimo de\n16 (dieciséis) y un máximo de 25 (veinticinco) jugadores, uno de los cuales será designado\ncapitán antes de iniciar cada encuentro. El equipo que presentase la planilla con un número de\njugadores inferior a 25 (veinticinco) podrá completar la lista hasta la reunión donde se sortea la\ntercera fecha de la fase clasificatoria."}, {"id": "reg-b-art-13", "numero": 13, "articulo": "Art. 13°", "titulo": "Indumentaria", "categoria": "categoriaA", "seccion": "Categoría B 2026", "texto": "Art. 13º- Todos los integrantes de un equipo vestirán una indumentaria uniforme compuesta de\ncamiseta (con número), no se permitirá jugar con pantalones largos a los jugadores de campo, sí\nal arquero, o en los casos en que el árbitro lo autorice."}, {"id": "reg-b-art-14", "numero": 14, "articulo": "Art. 14°", "titulo": "Autoridades de la Competencia", "categoria": "categoriaA", "seccion": "Categoría B 2026", "texto": "Art. 14º- La Comisión Organizadora designará las autoridades de la competencia, quienes serán\nresponsables de la interpretación y aplicación del presente Reglamento."}, {"id": "reg-b-art-15", "numero": 15, "articulo": "Art. 15°", "titulo": "Temas no Previstos", "categoria": "categoriaA", "seccion": "Categoría B 2026", "texto": "Art. 15º- Cualquier tema no previsto en el presente Reglamento, será resuelto por la Comisión\nOrganizadora."}, {"id": "reg-b-art-16", "numero": 16, "articulo": "Art. 16°", "titulo": "Aceptación del Reglamento", "categoria": "categoriaA", "seccion": "Categoría B 2026", "texto": "Art. 16º- La participación en este Campeonato implica la aceptación total de este Reglamento."}], formaDisputa: [{"id": "disp-b-estructura", "numero": 1, "articulo": "Estructura", "titulo": "Composición de la Temporada 2026", "categoria": "formaDisputa", "seccion": "Forma de Disputa · Categoría B", "texto": "La temporada 2026 de la Liga Universitaria de Fútbol – Categoría B está compuesta por dos torneos oficiales, el Torneo Apertura y el Torneo Clausura, además de una Tabla Anual y una Superfinal Anual para determinar el campeón absoluto de la temporada. Participan quince (15) equipos."}, {"id": "disp-b-clasificatoria", "numero": 2, "articulo": "Clausura", "titulo": "Fase Clasificatoria", "categoria": "formaDisputa", "seccion": "Forma de Disputa · Categoría B", "texto": "Los quince equipos se distribuyen por sorteo en dos zonas que juegan todos contra todos:\n• Zona A: 8 equipos.\n• Zona B: 7 equipos (un equipo libre por fecha).\nAl finalizar se arma una tabla de posiciones por zona."}, {"id": "disp-b-campeonato", "numero": 3, "articulo": "Clausura", "titulo": "Fase Campeonato", "categoria": "formaDisputa", "seccion": "Forma de Disputa · Categoría B", "texto": "Clasifican del 1° al 4° de cada zona, por eliminación directa.\nCuartos de final:\n• 1° Zona A vs 4° Zona B\n• 2° Zona A vs 3° Zona B\n• 1° Zona B vs 4° Zona A\n• 2° Zona B vs 3° Zona A\nLos ganadores juegan Semifinales según el cuadro que establece la organización, y los vencedores la Final del torneo."}, {"id": "disp-b-plata", "numero": 4, "articulo": "Clausura", "titulo": "Copa de Plata", "categoria": "formaDisputa", "seccion": "Forma de Disputa · Categoría B", "texto": "Participan del 5° al 8° de la Zona A y del 5° al 7° de la Zona B. El mejor 5° de ambas zonas pasa directo a Semifinales.\nCuartos de final:\n• 5° Zona A o B vs 8° Zona A\n• 6° Zona B vs 7° Zona A\n• 6° Zona A vs 7° Zona B\nLuego se juegan Semifinales y Final para definir el Campeón de la Copa de Plata."}, {"id": "disp-b-anual", "numero": 5, "articulo": "Tabla Anual", "titulo": "Tabla Anual 2026", "categoria": "formaDisputa", "seccion": "Forma de Disputa · Categoría B", "texto": "Suma solo los puntos de la fase clasificatoria del Apertura y del Clausura, usando un coeficiente de rendimiento: puntos obtenidos dividido la cantidad de partidos programados/jugados. No cuentan los partidos de Fase Campeonato ni de Copa de Plata.\nBonus al terminar cada torneo:\n• Campeón Fase Campeonato: +3\n• Subcampeón: +2\n• Tercer puesto: +1\n• Campeón Copa de Plata: +1"}, {"id": "disp-b-superfinal", "numero": 6, "articulo": "Superfinal", "titulo": "Superfinal Anual", "categoria": "formaDisputa", "seccion": "Forma de Disputa · Categoría B", "texto": "El Campeón Anual surge de una Superfinal entre el Campeón del Apertura y el Campeón del Clausura. Si ninguno de los dos es el primero de la Tabla Anual, juegan entre ellos una prefinal y el ganador juega la Final con el primero de la Tabla Anual. Si el mismo equipo gana Apertura y Clausura y además es primero en la Tabla Anual, es campeón anual directamente."}] });

@@ -744,25 +744,41 @@
       </div>`;
     }
     const tbd = txt => bkTeamHtml(null, { placeholder: txt });
-    const cruce = (codigo, a, b) => `<div class="bk-match">
+    const OFI = DATA.clausura.crucesOficiales;
+    const OFP = (OFI && OFI.partidos) || [];
+    const pOf = cod => OFP.find(x => x.codigo === cod);
+    const jugado = x => x && x.golesL != null && x.golesV != null;
+    const ganadorDe = cod => { const x = pOf(cod); if (!jugado(x)) return null;
+      if (x.golesL !== x.golesV) return x.golesL > x.golesV ? x.local : x.visitante;
+      if (x.penalesL != null && x.penalesL !== x.penalesV) return x.penalesL > x.penalesV ? x.local : x.visitante; return null; };
+    const det = x => [x.dia ? x.dia.replace('Domingo', 'Dom').replace('Sábado', 'Sáb') : '', x.hora, (x.cancha || '').replace('Cancha de ', '')].filter(Boolean).join(' · ');
+    const gOr = (cod, txt) => { const w = ganadorDe(cod); return w ? bkTeamHtml(w) : tbd(txt); };
+    const cruce = (codigo, a, b) => { const x = pOf(codigo);
+      if (!x) return `<div class="bk-match">
         <div class="bk-code"><span>${codigo}</span><span>${a}° vs ${b}°</span></div>
         ${bkTeamHtml(at(a), { seed: a + '°' })}${bkTeamHtml(at(b), { seed: b + '°' })}</div>`;
+      const ok = jugado(x), g = ok ? ganadorDe(codigo) : null;
+      const sc = t => ok ? (x.local === t ? x.golesL : x.golesV) : undefined;
+      const pe = t => ok && x.penalesL != null ? (x.local === t ? x.penalesL : x.penalesV) : undefined;
+      const tm = t => bkTeamHtml(t, { score: sc(t), pen: pe(t), win: g === t, lose: g && g !== t });
+      return `<div class="bk-match"><div class="bk-code"><span>${codigo}</span><span>${ok ? (x.penalesL != null ? 'Penales' : 'Final') + (x.provisorio ? ' · prov.' : '') : det(x)}</span></div>${tm(x.local)}${tm(x.visitante)}</div>`; };
+    const tag = OFI ? 'Clausura 2026 · Confirmado' : 'Clausura 2026 · Si terminara hoy';
     const pend = (codigo, x, y, extra = '') => `<div class="bk-match ${extra}"><div class="bk-code"><span>${codigo}</span><span>A jugar</span></div>${x}${y}</div>`;
     const [q1, q2] = cfg.cuartos; const [s1, s2] = cfg.plata;
     return `
       <div class="bracket-wrap">
         <div class="bracket-note" style="margin:0 0 14px; padding:10px 14px; background:#F0FDF4; border:1px solid #BBF7D0; border-radius:8px; color:#166534;">
-          <b>Proyección con la tabla tras la Fecha ${DATA.clausura.ultimaFechaDisputada}.</b> No son cruces confirmados: cambian con cada fecha.
+          ${OFI ? `<b>Cruces confirmados por la Liga</b> en el programa de partidos. ${OFI.nota || ''}` : `<b>Proyección con la tabla tras la Fecha ${DATA.clausura.ultimaFechaDisputada}.</b> No son cruces confirmados: cambian con cada fecha.`}
         </div>
         <div class="bracket-block">
-          <div class="bracket-title"><h3>Fase Campeonato</h3><span class="bracket-tag proy">Clausura 2026 · Si terminara hoy</span></div>
+          <div class="bracket-title"><h3>Fase Campeonato</h3><span class="bracket-tag proy">${tag}</span></div>
           <div class="bracket-scroll"><div class="bracket">
             <div class="bracket-col"><div class="bracket-col-title">Cuartos de final</div><div class="bk-stack">
               ${cruce('CF1', q1[0], q1[1])}${cruce('CF2', q2[0], q2[1])}
             </div></div>
             <div class="bracket-col"><div class="bracket-col-title">Semifinales</div><div class="bk-stack">
-              ${pend('SF1', bkTeamHtml(at(1), { seed: '1°' }), tbd('Ganador CF2'))}
-              ${pend('SF2', bkTeamHtml(at(2), { seed: '2°' }), tbd('Ganador CF1'))}
+              ${pend('SF1', bkTeamHtml(at(1), { seed: '1°' }), gOr('CF2', 'Ganador CF2'))}
+              ${pend('SF2', bkTeamHtml(at(2), { seed: '2°' }), gOr('CF1', 'Ganador CF1'))}
             </div></div>
             <div class="bracket-col"><div class="bracket-col-title">Final</div><div class="bk-stack">
               ${pend('Gran final', tbd('Ganador SF1'), tbd('Ganador SF2'), 'final')}
@@ -771,13 +787,13 @@
           </div></div>
         </div>
         <div class="bracket-block">
-          <div class="bracket-title"><h3>Copa de Plata</h3><span class="bracket-tag proy">Clausura 2026 · Si terminara hoy</span></div>
+          <div class="bracket-title"><h3>Copa de Plata</h3><span class="bracket-tag proy">${tag}</span></div>
           <div class="bracket-scroll"><div class="bracket">
             <div class="bracket-col"><div class="bracket-col-title">Semifinales</div><div class="bk-stack">
               ${cruce('SP1', s1[0], s1[1])}${cruce('SP2', s2[0], s2[1])}
             </div></div>
             <div class="bracket-col"><div class="bracket-col-title">Final</div><div class="bk-stack">
-              ${pend('Final', tbd('Ganador SP1'), tbd('Ganador SP2'), 'final plata')}
+              ${pend('Final', gOr('SP1', 'Ganador SP1'), gOr('SP2', 'Ganador SP2'), 'final plata')}
               <div class="bk-champion plata">★ Campeón Copa de Plata</div>
             </div></div>
           </div></div>
@@ -797,7 +813,8 @@
       if (x.golesL !== x.golesV) return x.golesL > x.golesV ? x.local : x.visitante;
       if (x.penalesL != null && x.penalesL !== x.penalesV) return x.penalesL > x.penalesV ? x.local : x.visitante; return null; };
     const det = x => x ? [x.dia ? x.dia.replace('Domingo', 'Dom').replace('Sábado', 'Sáb') : '', x.hora, (x.cancha || '').replace('Cancha de ', '')].filter(Boolean).join(' · ') : '';
-    const cruce = c => { const x = pOf(c.codigo); const ok = jugado(x); const g = ok ? ganadorDe(c.codigo) : null;
+    const cruce = c => { if (DIR[c.codigo]) return `<div class="bk-match"><div class="bk-code"><span>${c.codigo}</span><span>Pasa directo</span></div>${bkTeamHtml(DIR[c.codigo], { seed: c.sl, win: true })}${bkTeamHtml(null, { placeholder: (c.visitante ? c.visitante + ' · eliminado' : 'Sin rival') })}</div>`;
+      const x = pOf(c.codigo); const ok = jugado(x); const g = ok ? ganadorDe(c.codigo) : null;
       const sc = t => ok ? (x.local === t ? x.golesL : x.golesV) : undefined;
       const pe = t => ok && x.penalesL != null ? (x.local === t ? x.penalesL : x.penalesV) : undefined;
       return `<div class="bk-match">
@@ -805,7 +822,8 @@
         ${bkTeamHtml(c.local, { seed: c.sl, score: sc(c.local), pen: pe(c.local), win: g === c.local, lose: g && g !== c.local })}
         ${bkTeamHtml(c.visitante, { seed: c.sv, score: sc(c.visitante), pen: pe(c.visitante), win: g === c.visitante, lose: g && g !== c.visitante })}
       </div>`; };
-    const gOr = (cod, txt) => { const w = ganadorDe(cod); return w ? bkTeamHtml(w) : bkTeamHtml(null, { placeholder: txt }); };
+    const DIR = (DATA.clausura.crucesOficiales && DATA.clausura.crucesOficiales.directos) || {};
+    const gOr = (cod, txt) => { const w = DIR[cod] || ganadorDe(cod); return w ? bkTeamHtml(w) : bkTeamHtml(null, { placeholder: txt }); };
     const pendiente = (codigo, a, b, extra = '') => `<div class="bk-match ${extra}">
         <div class="bk-code"><span>${codigo}</span><span>A jugar</span></div>
         ${a}${b}
