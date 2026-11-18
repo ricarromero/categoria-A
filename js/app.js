@@ -3131,6 +3131,21 @@
   const urlCat = (c, view) => `${location.pathname}?cat=${c.toLowerCase()}${view ? '#' + view : ''}`;
 
   function proximaFecha(d) {
+    // Si la Liga ya confirmó los cruces, en Inicio se muestran los partidos de playoffs (primera ronda con partidos sin jugar)
+    const PO = d && d.clausura && d.clausura.crucesOficiales && d.clausura.crucesOficiales.partidos;
+    if (PO && PO.length) {
+      const jug = x => x.golesL != null && x.golesV != null;
+      const rondas = [...new Set(PO.map(x => x.ronda))];
+      const ronda = rondas.find(r => PO.some(x => x.ronda === r && !jug(x))) || rondas[rondas.length - 1];
+      const sel = PO.filter(x => x.ronda === ronda || !jug(x));
+      const ps = sel.map(x => ({
+        local: x.local, visitante: x.visitante, golesL: x.golesL, golesV: x.golesV, penalesL: x.penalesL, penalesV: x.penalesV,
+        estado: jug(x) ? 'finalizado' : 'pendiente', dia: x.dia, hora: x.hora,
+        cancha: (x.cancha || '') + (x.copa === 'Copa de Plata' ? ' · Plata' : ''), nota: x.provisorio ? 'Resultado provisorio' : '' }));
+      const dias = [...new Set(ps.map(p => p.dia).filter(Boolean))];
+      const rs = [...new Set(sel.map(x => x.ronda))];
+      return { nombre: rs.length === 1 ? rs[0] : 'Playoffs', dia: dias.join(' y '), partidos: ps, playoffs: true };
+    }
     return fechaActual((d && d.clausura && d.clausura.fechas) || []);
   }
 
@@ -3159,7 +3174,7 @@
         <a class="ini-match ${p.estado === 'finalizado' ? 'jugado' : ''}" href="${urlCat(c, 'fixture')}">
           ${conHora ? `<span class="ini-time">${p.hora || ''}</span>` : ''}
           <span class="ini-team">${escapeHtml(p.local)}${crest(p.local)}</span>
-          ${p.estado === 'finalizado' ? `<span class="ini-score">${p.golesL}<i>-</i>${p.golesV}</span>` : '<span class="ini-vs">vs</span>'}
+          ${p.estado === 'finalizado' ? `<span class="ini-score">${p.golesL}<i>-</i>${p.golesV}${p.penalesL != null ? `<small style="display:block;font-size:.65em;opacity:.75">pen. ${p.penalesL}-${p.penalesV}</small>` : ''}</span>` : '<span class="ini-vs">vs</span>'}
           <span class="ini-team r">${crest(p.visitante)}${escapeHtml(p.visitante)}</span>
           ${p.estado === 'finalizado' ? (/no se present/i.test(p.nota || '') ? `<span class="ini-cancha ini-final" title="${escapeHtml(p.nota)}">W.O.</span>` : '<span class="ini-cancha ini-final">Final</span>') : (p.cancha ? `<span class="ini-cancha">${escapeHtml(p.cancha.replace('Cancha de ', ''))}</span>` : '')}
         </a>`;
