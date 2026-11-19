@@ -1,5 +1,14 @@
 // Resultados provisorios cargados desde /cargar (se reemplazan por el informe oficial de la Liga)
 window.LIGA_PARCIALES = {
- "resultados": {},
- "actualizado": "2026-11-17T23:57:24.568Z"
+ "resultados": {
+  "A|challenger|34|Jägermeister|Mavericks": {
+   "golesL": 0,
+   "golesV": 0,
+   "por": "",
+   "at": "2026-11-19T01:21:45.616Z",
+   "penalesL": 0,
+   "penalesV": 3
+  }
+ },
+ "actualizado": "2026-11-19T01:21:45.862Z"
 };
