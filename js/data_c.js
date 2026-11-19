@@ -693,10 +693,9 @@
   },
   "clausura": {
     "enCurso": true,
-    "ultimaFechaDisputada": 8,
+    "ultimaFechaDisputada": 9,
     "crucesOficiales": {
-      "informe": null,
-      "nota": "La tabla final se actualiza cuando llegue el informe de la Fecha 9.",
+      "informe": 9,
       "partidos": [
         {
           "codigo": "CF1",
@@ -1216,7 +1215,7 @@
       {
         "numero": 9,
         "nombre": "Fecha 9",
-        "disputada": false,
+        "disputada": true,
         "partidos": [
           {
             "zona": "Zona única",
@@ -1287,132 +1286,139 @@
         {
           "pos": 1,
           "equipo": "Newcauce",
-          "pj": 8,
+          "pj": 9,
           "pg": 6,
-          "pe": 0,
+          "pe": 1,
           "pp": 2,
           "gf": 16,
           "gc": 9,
           "dg": 7,
-          "pts": 18,
+          "pts": 19,
           "zona": "A"
         },
         {
           "pos": 2,
           "equipo": "Vial",
-          "pj": 8,
+          "pj": 9,
           "pg": 5,
-          "pe": 2,
+          "pe": 3,
           "pp": 1,
           "gf": 18,
           "gc": 9,
           "dg": 9,
           "pts": 17,
-          "zona": "A"
+          "zona": "A",
+          "sancion": -1
         },
         {
           "pos": 3,
           "equipo": "Don Bosco",
-          "pj": 8,
+          "pj": 9,
           "pg": 5,
-          "pe": 0,
+          "pe": 1,
           "pp": 3,
-          "gf": 17,
-          "gc": 14,
+          "gf": 18,
+          "gc": 15,
           "dg": 3,
           "pts": 15,
-          "zona": "A"
+          "zona": "A",
+          "sancion": -1
         },
         {
           "pos": 4,
           "equipo": "Flandria FC",
-          "pj": 8,
+          "pj": 9,
           "pg": 4,
-          "pe": 2,
+          "pe": 3,
           "pp": 2,
-          "gf": 9,
-          "gc": 7,
+          "gf": 10,
+          "gc": 8,
           "dg": 2,
           "pts": 14,
-          "zona": "A"
+          "zona": "A",
+          "sancion": -1
         },
         {
           "pos": 5,
           "equipo": "Bonus Track",
-          "pj": 8,
+          "pj": 9,
           "pg": 3,
           "pe": 3,
-          "pp": 2,
+          "pp": 3,
           "gf": 10,
-          "gc": 9,
-          "dg": 1,
+          "gc": 11,
+          "dg": -1,
           "pts": 12,
           "zona": "A"
         },
         {
           "pos": 6,
+          "equipo": "Nacional",
+          "pj": 9,
+          "pg": 4,
+          "pe": 0,
+          "pp": 5,
+          "gf": 15,
+          "gc": 20,
+          "dg": -5,
+          "pts": 11,
+          "zona": "A",
+          "sancion": -1
+        },
+        {
+          "pos": 7,
           "equipo": "Cátedra FC",
-          "pj": 8,
+          "pj": 9,
+          "pg": 3,
+          "pe": 2,
+          "pp": 4,
+          "gf": 9,
+          "gc": 10,
+          "dg": -1,
+          "pts": 10,
+          "zona": "A",
+          "sancion": -1
+        },
+        {
+          "pos": 8,
+          "equipo": "Talleres",
+          "pj": 9,
           "pg": 3,
           "pe": 1,
-          "pp": 4,
-          "gf": 8,
-          "gc": 9,
-          "dg": -1,
+          "pp": 5,
+          "gf": 10,
+          "gc": 12,
+          "dg": -2,
           "pts": 10,
           "zona": "A"
         },
         {
-          "pos": 7,
-          "equipo": "Nacional",
-          "pj": 8,
-          "pg": 3,
-          "pe": 0,
-          "pp": 5,
-          "gf": 13,
-          "gc": 20,
-          "dg": -7,
-          "pts": 9,
-          "zona": "A"
-        },
-        {
-          "pos": 8,
+          "pos": 9,
           "equipo": "Imputables FC",
-          "pj": 8,
+          "pj": 9,
           "pg": 2,
-          "pe": 2,
+          "pe": 3,
           "pp": 4,
-          "gf": 10,
-          "gc": 12,
+          "gf": 11,
+          "gc": 13,
           "dg": -2,
           "pts": 8,
-          "zona": "A"
-        },
-        {
-          "pos": 9,
-          "equipo": "Talleres",
-          "pj": 8,
-          "pg": 2,
-          "pe": 1,
-          "pp": 5,
-          "gf": 8,
-          "gc": 12,
-          "dg": -4,
-          "pts": 7,
-          "zona": "A"
+          "zona": "A",
+          "sancion": -1
         },
         {
           "pos": 10,
           "equipo": "Defensa e Injusticia",
-          "pj": 8,
+          "pj": 9,
           "pg": 1,
           "pe": 1,
-          "pp": 6,
+          "pp": 7,
           "gf": 14,
-          "gc": 22,
-          "dg": -8,
-          "pts": 4,
-          "zona": "A"
+          "gc": 24,
+          "dg": -10,
+          "pts": 3,
+          "zona": "A",
+          "sancion": -1
         }
       ],
       "zonaB": []
@@ -1432,6 +1438,12 @@
       },
       {
         "pos": 2,
+        "jugador": "Paez, Matías",
+        "equipo": "Flandria FC",
+        "goles": 5
+      },
+      {
+        "pos": 2,
         "jugador": "Gonzalez Elias",
         "equipo": "Imputables FC",
         "goles": 5
@@ -1443,21 +1455,15 @@
         "goles": 5
       },
       {
-        "pos": 5,
+        "pos": 6,
         "jugador": "Tejada, Santino",
         "equipo": "Defensa e Injusticia",
         "goles": 4
       },
       {
-        "pos": 5,
+        "pos": 6,
         "jugador": "Garcia Diaz, Pablo Nicolas",
         "equipo": "Don Bosco",
-        "goles": 4
-      },
-      {
-        "pos": 5,
-        "jugador": "Paez, Matías",
-        "equipo": "Flandria FC",
         "goles": 4
       },
       {
@@ -1514,31 +1520,7 @@
       "estado": "Vigente"
     },
     {
-      "jugador": "Segatti, Francisco",
-      "equipo": "Imputables FC",
-      "sancion": "1 Partido",
-      "articulo": "Art. 26º inc. \"G\"",
-      "motivo": "",
-      "estado": "Vigente (0/1)"
-    },
-    {
-      "jugador": "Vargas, Ventura",
-      "equipo": "Nacional",
-      "sancion": "1 Partido",
-      "articulo": "Art. 26º inc. \"G\"",
-      "motivo": "",
-      "estado": "Vigente (0/1)"
-    },
-    {
-      "jugador": "Lucero Jeremias",
-      "equipo": "Vial",
-      "sancion": "1 Partido",
-      "articulo": "Art. 26º inc. \"G\"",
-      "motivo": "",
-      "estado": "Vigente (0/1)"
-    },
-    {
-      "jugador": "Ahumada Lorenzo",
+      "jugador": "Aguilera Luca",
       "equipo": "Imputables FC",
       "sancion": "1 Partido",
       "articulo": "Art. 26º inc. \"C\"",
@@ -1570,6 +1552,14 @@
       "estado": "3 Amarillas"
     },
     {
+      "jugador": "Rico Garcia, Geronimo Agustin",
+      "equipo": "Don Bosco",
+      "sancion": "3 Amarillas acumuladas",
+      "articulo": "Art. 6° Régimen Amarillas",
+      "motivo": "Acumulación de 3 tarjetas amarillas",
+      "estado": "3 Amarillas"
+    },
+    {
       "jugador": "Bilella, Valentin",
       "equipo": "Flandria FC",
       "sancion": "3 Amarillas acumuladas",
@@ -1594,15 +1584,23 @@
       "estado": "3 Amarillas"
     },
     {
-      "jugador": "Morán, Mauricio David",
+      "jugador": "Morán Sanchez, Mauricio David",
       "equipo": "Newcauce",
+      "sancion": "3 Amarillas acumuladas",
+      "articulo": "Art. 6° Régimen Amarillas",
+      "motivo": "Acumulación de 3 tarjetas amarillas",
+      "estado": "3 Amarillas"
+    },
+    {
+      "jugador": "Bellizia Camuñas, Nicolas",
+      "equipo": "Vial",
       "sancion": "3 Amarillas acumuladas",
       "articulo": "Art. 6° Régimen Amarillas",
       "motivo": "Acumulación de 3 tarjetas amarillas",
       "estado": "3 Amarillas"
     }
   ],
-  "tablaAnualFuente": "Actualizada tras la Fecha 8 del Clausura con el criterio oficial de la Liga (puntos divididos en partidos programados)",
+  "tablaAnualFuente": "Actualizada tras la Fecha 9 del Clausura con el criterio oficial de la Liga (puntos divididos en partidos programados)",
   "tablaAnual": [
     {
       "pos": 1,
@@ -1612,8 +1610,8 @@
       "ptsCl": 17,
       "totalAp": 18,
       "coefAp": 3.0,
-      "coefCl": 2.13,
-      "total": 5.13
+      "coefCl": 1.89,
+      "total": 4.89
     },
     {
       "pos": 2,
@@ -1623,8 +1621,8 @@
       "ptsCl": 10,
       "totalAp": 12,
       "coefAp": 2.0,
-      "coefCl": 1.25,
-      "total": 3.25
+      "coefCl": 1.11,
+      "total": 3.11
     },
     {
       "pos": 3,
@@ -1634,8 +1632,8 @@
       "ptsCl": 8,
       "totalAp": 12,
       "coefAp": 2.0,
-      "coefCl": 1.0,
-      "total": 3.0
+      "coefCl": 0.89,
+      "total": 2.89
     },
     {
       "pos": 4,
@@ -1645,80 +1643,80 @@
       "ptsCl": 12,
       "totalAp": 8,
       "coefAp": 1.33,
-      "coefCl": 1.5,
-      "total": 2.83
+      "coefCl": 1.33,
+      "total": 2.66
     },
     {
       "pos": 5,
       "equipo": "Newcauce",
       "ptsAp": 0,
       "bonus": 0,
-      "ptsCl": 18,
+      "ptsCl": 19,
       "totalAp": 0,
       "coefAp": 0.0,
-      "coefCl": 2.25,
-      "total": 2.25
+      "coefCl": 2.11,
+      "total": 2.11
     },
     {
       "pos": 6,
+      "equipo": "Talleres",
+      "ptsAp": 5,
+      "bonus": 0,
+      "ptsCl": 10,
+      "totalAp": 5,
+      "coefAp": 0.83,
+      "coefCl": 1.11,
+      "total": 1.94
+    },
+    {
+      "pos": 7,
       "equipo": "Don Bosco",
       "ptsAp": 0,
       "bonus": 0,
       "ptsCl": 15,
       "totalAp": 0,
       "coefAp": 0.0,
-      "coefCl": 1.88,
-      "total": 1.88
-    },
-    {
-      "pos": 7,
-      "equipo": "Defensa e Injusticia",
-      "ptsAp": 8,
-      "bonus": 0,
-      "ptsCl": 4,
-      "totalAp": 8,
-      "coefAp": 1.33,
-      "coefCl": 0.5,
-      "total": 1.83
+      "coefCl": 1.67,
+      "total": 1.67
     },
     {
       "pos": 8,
+      "equipo": "Defensa e Injusticia",
+      "ptsAp": 8,
+      "bonus": 0,
+      "ptsCl": 3,
+      "totalAp": 8,
+      "coefAp": 1.33,
+      "coefCl": 0.33,
+      "total": 1.66
+    },
+    {
+      "pos": 9,
       "equipo": "Flandria FC",
       "ptsAp": 0,
       "bonus": 0,
       "ptsCl": 14,
       "totalAp": 0,
       "coefAp": 0.0,
-      "coefCl": 1.75,
-      "total": 1.75
-    },
-    {
-      "pos": 9,
-      "equipo": "Talleres",
-      "ptsAp": 5,
-      "bonus": 0,
-      "ptsCl": 7,
-      "totalAp": 5,
-      "coefAp": 0.83,
-      "coefCl": 0.88,
-      "total": 1.71
+      "coefCl": 1.56,
+      "total": 1.56
     },
     {
       "pos": 10,
       "equipo": "Nacional",
       "ptsAp": 1,
       "bonus": 0,
-      "ptsCl": 9,
+      "ptsCl": 11,
       "totalAp": 1,
       "coefAp": 0.17,
-      "coefCl": 1.13,
-      "total": 1.3
+      "coefCl": 1.22,
+      "total": 1.39
     }
   ]
 };
   C.liga = Object.assign({}, A.liga, {
     categoria: 'Categoría C', subtitulo: 'Categoría C · Fútbol Universitario',
-    torneoActual: 'Torneo Clausura 2026', ultimaFechaDisputada: 8, estado: 'Clausura en disputa · Fecha 8 completada'
+    torneoActual: 'Torneo Clausura 2026', ultimaFechaDisputada: 9, estado: 'Clausura · Fase clasificatoria terminada'
   });
   C.reglamentos = A.reglamentos;
   C.reglamentosCompletos = Object.assign({}, A.reglamentosCompletos, { formaDisputa: [{"id": "disp-c-estructura", "numero": 1, "articulo": "Estructura", "titulo": "Composición de la Temporada 2026", "categoria": "formaDisputa", "seccion": "Forma de Disputa · Categoría C", "texto": "La temporada 2026 de la Liga Universitaria de Fútbol – Categoría C está compuesta por el Torneo Apertura y el Torneo Clausura, además de una Tabla Anual y una Superfinal Anual para determinar el campeón absoluto de la temporada. Participan diez (10) equipos."}, {"id": "disp-c-clasificatoria", "numero": 2, "articulo": "Clausura", "titulo": "Fase Clasificatoria", "categoria": "formaDisputa", "seccion": "Forma de Disputa · Categoría C", "texto": "Se juega todos contra todos en una zona única para definir las clasificaciones a la siguiente fase."}, {"id": "disp-c-campeonato", "numero": 3, "articulo": "Clausura", "titulo": "Fase Campeonato", "categoria": "formaDisputa", "seccion": "Forma de Disputa · Categoría C", "texto": "Clasifican del 1° al 6° puesto. El 1° y el 2° pasan directo a Semifinales.\nCuartos de final, según el cuadro de la organización:\n• 3° vs 6°\n• 4° vs 5°"}, {"id": "disp-c-plata", "numero": 4, "articulo": "Clausura", "titulo": "Copa de Plata", "categoria": "formaDisputa", "seccion": "Forma de Disputa · Categoría C", "texto": "Juegan del 7° al 10° puesto de la fase clasificatoria.\nSemifinales, según el cuadro de la organización:\n• 7° vs 10°\n• 8° vs 9°"}, {"id": "disp-c-anual", "numero": 5, "articulo": "Tabla Anual", "titulo": "Tabla Anual 2026", "categoria": "formaDisputa", "seccion": "Forma de Disputa · Categoría C", "texto": "Suma solo los puntos de la fase clasificatoria del Apertura y del Clausura. No cuentan los partidos de Fase Campeonato ni de Copa de Plata.\nBonus al terminar cada torneo:\n• Campeón Fase Campeonato: +3\n• Subcampeón: +2\n• Tercer puesto: +1\n• Campeón Copa de Plata: +1"}, {"id": "disp-c-superfinal", "numero": 6, "articulo": "Superfinal", "titulo": "Superfinal Anual", "categoria": "formaDisputa", "seccion": "Forma de Disputa · Categoría C", "texto": "El Campeón Anual surge de una Superfinal entre el Campeón del Apertura y el Campeón del Clausura. Si ninguno es el primero de la Tabla Anual, juegan entre ellos una prefinal y el ganador juega la Final con el primero de la Tabla Anual. Si el mismo equipo gana Apertura y Clausura y además es primero en la Tabla Anual, es campeón anual directamente."}] });
