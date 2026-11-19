@@ -13,6 +13,8 @@
 *{box-sizing:border-box}
 body{margin:0;font-family:Barlow,system-ui,sans-serif;background:var(--bg);color:var(--txt)}
 header{background:var(--navy);color:#FFF;padding:14px 16px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:5}
+.home{display:flex;align-items:center;gap:6px;color:#FFF;text-decoration:none;font-weight:700;font-size:14px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.3);border-radius:10px;padding:7px 10px;flex:none}
+.home:active{background:rgba(255,255,255,.25)}
 header img{height:34px}
 header h1{margin:0;font-family:'Big Shoulders Display',Impact,sans-serif;font-weight:900;font-size:26px;text-transform:uppercase;letter-spacing:.5px}
 header .who{margin-left:auto;font-size:13px;opacity:.8;text-align:right}
@@ -59,7 +61,7 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
 </style>
 </head>
 <body>
-<header><img src="../public/logo_liga.png" alt=""><h1>Cargar resultados</h1><div class="who" id="who"></div></header>
+<header><a class="home" href="../" title="Ir al inicio" aria-label="Ir al inicio"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h5v-6h4v6h5V10"/></svg><span>Inicio</span></a><img src="../public/logo_liga.png" alt=""><h1>Cargar resultados</h1><div class="who" id="who"></div></header>
 <main>
   <div id="login" class="box">
     <div style="font-weight:800;font-size:20px">Entrar</div>
