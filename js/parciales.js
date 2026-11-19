@@ -9,7 +9,7 @@ window.LIGA_PARCIALES = {
    "penalesL": 0,
    "penalesV": 3
   },
-  "A|playoffs|1|Constructores|Eclipse": {
+  "A|challenger|35|Constructores|Eclipse": {
    "golesL": 0,
    "golesV": 0,
    "por": "",
@@ -18,5 +18,5 @@ window.LIGA_PARCIALES = {
    "penalesV": 3
   }
  },
- "actualizado": "2026-11-19T02:59:47.405Z"
+ "actualizado": "2026-11-19T03:00:30.984Z"
 };
