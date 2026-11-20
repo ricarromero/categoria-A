@@ -4400,14 +4400,14 @@ body.modo-inicio #heroBoard, body.modo-inicio .hero-dots, body.modo-inicio .navb
 .ini-block-head b { color: var(--text-primary); font-size: .95rem; }
 .ini-dia { margin-left: auto; font-size: .8rem; color: var(--text-secondary); font-weight: 600; }
 .ini-chip { width: 26px; height: 26px; border-radius: 6px; display: grid; place-items: center; background: var(--cc); color: #FFFFFF; font-family: var(--f-display); font-weight: 900; font-size: 1.05rem; flex: none; }
-.ini-match { display: grid; grid-template-columns: 56px minmax(0,1fr) 28px minmax(0,1fr) auto; align-items: center; gap: 8px; padding: 9px 14px; text-decoration: none; color: var(--text-primary); font-weight: 700; font-size: .9rem; }
+.ini-match { display: grid; grid-template-columns: 56px minmax(0,1fr) 28px minmax(0,1fr) 150px; align-items: center; gap: 8px; padding: 9px 14px; text-decoration: none; color: var(--text-primary); font-weight: 700; font-size: .9rem; }
 .ini-match + .ini-match { border-top: 1px solid var(--border-subtle); }
 .ini-match:hover { background: var(--surface-hover); }
 .ini-time { font-family: var(--f-display); font-weight: 900; font-size: 1.1rem; color: var(--cc); }
 .ini-team { display: flex; align-items: center; justify-content: flex-end; gap: 8px; min-width: 0; text-align: right; }
 .ini-team.r { justify-content: flex-start; text-align: left; }
 .ini-vs { text-align: center; font-size: .72rem; color: var(--text-muted); font-weight: 800; text-transform: uppercase; }
-.ini-cancha { font-size: .7rem; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; color: var(--text-secondary); background: var(--surface-alt); border: 1px solid var(--border-color); border-radius: 4px; padding: 2px 6px; }
+.ini-cancha { justify-self: end; white-space: nowrap; font-size: .66rem; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; color: var(--text-secondary); background: var(--surface-alt); border: 1px solid var(--border-color); border-radius: 4px; padding: 2px 6px; }
 .ini-crest { width: 24px; height: 24px; object-fit: contain; flex: none; }
 .ini-libre { padding: 8px 14px; font-size: .8rem; color: var(--text-secondary); border-top: 1px dashed var(--border-color); }
 .ini-cc { display: flex; align-items: center; gap: 10px; padding: 14px 16px; border-radius: var(--radius-md); text-decoration: none; color: #FFFFFF; background: linear-gradient(135deg, #D81E57, #A3123D); box-shadow: 0 4px 14px rgba(200,22,75,.25); }
@@ -4513,7 +4513,7 @@ html[data-cat="INICIO"] .brand-main .cat-switch { display: none !important; }
 /* Inicio: partidos ya jugados de la fecha en curso */
 .ini-score { display: inline-flex; align-items: center; justify-content: center; gap: 4px; min-width: 52px; padding: 2px 8px; border-radius: 6px; background: var(--cc); color: #FFFFFF; font-family: var(--f-display); font-weight: 900; font-size: 1.15rem; }
 .ini-score i { font-style: normal; opacity: .7; }
-.ini-match.jugado { grid-template-columns: 56px minmax(0,1fr) 60px minmax(0,1fr) auto; }
+.ini-match.jugado { grid-template-columns: 56px minmax(0,1fr) 60px minmax(0,1fr) 150px; }
 .ini-block.sin-hora .ini-match.jugado { grid-template-columns: minmax(0,1fr) 60px minmax(0,1fr); }
 .ini-cancha.ini-final { background: var(--cc); color: #FFFFFF; border-color: var(--cc); }
 @media (max-width: 860px) { .ini-match.jugado { grid-template-columns: 46px minmax(0,1fr) 56px minmax(0,1fr); } }
