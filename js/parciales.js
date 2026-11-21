@@ -48,7 +48,13 @@ window.LIGA_PARCIALES = {
    "golesV": 3,
    "por": "",
    "at": "2026-11-21T17:43:30.645Z"
+  },
+  "F|clausura|5|Inter|Galana": {
+   "golesL": 2,
+   "golesV": 1,
+   "por": "",
+   "at": "2026-11-21T17:44:29.065Z"
   }
  },
- "actualizado": "2026-11-21T17:43:30.888Z"
+ "actualizado": "2026-11-21T17:44:29.239Z"
 };
