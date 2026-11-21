@@ -60,7 +60,13 @@ window.LIGA_PARCIALES = {
    "golesV": 1,
    "por": "",
    "at": "2026-11-21T17:44:35.684Z"
+  },
+  "B|playoffs|12|Geología|Inter": {
+   "golesL": 2,
+   "golesV": 1,
+   "por": "",
+   "at": "2026-11-21T18:22:32.022Z"
   }
  },
- "actualizado": "2026-11-21T17:44:35.833Z"
+ "actualizado": "2026-11-21T18:22:32.291Z"
 };
