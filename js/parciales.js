@@ -24,7 +24,13 @@ window.LIGA_PARCIALES = {
    "at": "2026-11-21T15:06:04.714Z",
    "penalesL": 4,
    "penalesV": 5
+  },
+  "C|playoffs|21|Cátedra FC|Defensa e Injusticia": {
+   "golesL": 0,
+   "golesV": 3,
+   "por": "",
+   "at": "2026-11-21T15:10:04.215Z"
   }
  },
- "actualizado": "2026-11-21T15:06:04.910Z"
+ "actualizado": "2026-11-21T15:10:04.409Z"
 };
