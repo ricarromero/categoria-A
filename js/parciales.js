@@ -36,7 +36,13 @@ window.LIGA_PARCIALES = {
    "golesV": 0,
    "por": "",
    "at": "2026-11-21T17:42:34.065Z"
+  },
+  "B|playoffs|3|Central|Tercer Tiempo": {
+   "golesL": 3,
+   "golesV": 0,
+   "por": "",
+   "at": "2026-11-21T17:42:40.331Z"
   }
  },
- "actualizado": "2026-11-21T17:42:34.331Z"
+ "actualizado": "2026-11-21T17:42:40.458Z"
 };
