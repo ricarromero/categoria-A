@@ -16,7 +16,15 @@ window.LIGA_PARCIALES = {
    "at": "2026-11-19T02:59:47.137Z",
    "penalesL": 4,
    "penalesV": 3
+  },
+  "B|playoffs|1|Malvinas|Descarte": {
+   "golesL": 1,
+   "golesV": 1,
+   "por": "",
+   "at": "2026-11-21T14:38:45.860Z",
+   "penalesL": 6,
+   "penalesV": 7
   }
  },
- "actualizado": "2026-11-19T03:00:30.984Z"
+ "actualizado": "2026-11-21T14:38:46.045Z"
 };
