@@ -72,7 +72,13 @@ window.LIGA_PARCIALES = {
    "golesV": 4,
    "por": "",
    "at": "2026-11-21T19:29:20.826Z"
+  },
+  "F|clausura|5|Deportivo VAR|Deportes": {
+   "golesL": 4,
+   "golesV": 3,
+   "por": "",
+   "at": "2026-11-21T23:46:44.707Z"
   }
  },
- "actualizado": "2026-11-21T19:29:21.093Z"
+ "actualizado": "2026-11-21T23:46:44.940Z"
 };
