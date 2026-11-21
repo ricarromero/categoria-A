@@ -54,7 +54,13 @@ window.LIGA_PARCIALES = {
    "golesV": 1,
    "por": "",
    "at": "2026-11-21T17:44:29.065Z"
+  },
+  "F|clausura|5|Constructoras|Gladiadoras": {
+   "golesL": 5,
+   "golesV": 1,
+   "por": "",
+   "at": "2026-11-21T17:44:35.684Z"
   }
  },
- "actualizado": "2026-11-21T17:44:29.239Z"
+ "actualizado": "2026-11-21T17:44:35.833Z"
 };
