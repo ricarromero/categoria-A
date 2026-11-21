@@ -66,7 +66,13 @@ window.LIGA_PARCIALES = {
    "golesV": 1,
    "por": "",
    "at": "2026-11-21T18:22:32.022Z"
+  },
+  "B|playoffs|2|F90|Necaxa": {
+   "golesL": 0,
+   "golesV": 4,
+   "por": "",
+   "at": "2026-11-21T19:29:20.826Z"
   }
  },
- "actualizado": "2026-11-21T18:22:32.291Z"
+ "actualizado": "2026-11-21T19:29:21.093Z"
 };
