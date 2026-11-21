@@ -42,7 +42,13 @@ window.LIGA_PARCIALES = {
    "golesV": 0,
    "por": "",
    "at": "2026-11-21T17:42:40.331Z"
+  },
+  "B|playoffs|13|Adove|Gol en Contra": {
+   "golesL": 2,
+   "golesV": 3,
+   "por": "",
+   "at": "2026-11-21T17:43:30.645Z"
   }
  },
- "actualizado": "2026-11-21T17:42:40.458Z"
+ "actualizado": "2026-11-21T17:43:30.888Z"
 };
