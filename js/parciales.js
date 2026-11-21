@@ -30,7 +30,13 @@ window.LIGA_PARCIALES = {
    "golesV": 3,
    "por": "",
    "at": "2026-11-21T15:10:04.215Z"
+  },
+  "B|playoffs|4|De Zurda|Al Costado": {
+   "golesL": 3,
+   "golesV": 0,
+   "por": "",
+   "at": "2026-11-21T17:42:34.065Z"
   }
  },
- "actualizado": "2026-11-21T15:10:04.409Z"
+ "actualizado": "2026-11-21T17:42:34.331Z"
 };
