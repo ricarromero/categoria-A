@@ -818,7 +818,7 @@
       const sc = t => ok ? (x.local === t ? x.golesL : x.golesV) : undefined;
       const pe = t => ok && x.penalesL != null ? (x.local === t ? x.penalesL : x.penalesV) : undefined;
       return `<div class="bk-match">
-        <div class="bk-code"><span>${c.codigo}</span><span>${ok ? (x.penalesL != null ? 'Penales' : 'Final') + (x.provisorio ? ' · prov.' : '') : (det(x) || `${c.sl} vs ${c.sv}`)}</span></div>
+        <div class="bk-code"><span>${c.codigo}</span><span>${ok ? (x.penalesL != null ? 'Penales' : 'Final') + (x.provisorio ? ' · prov.' : '') : (det(x) || (c.sl ? `${c.sl} vs ${c.sv}` : 'A jugar'))}</span></div>
         ${bkTeamHtml(c.local, { seed: c.sl, score: sc(c.local), pen: pe(c.local), win: g === c.local, lose: g && g !== c.local })}
         ${bkTeamHtml(c.visitante, { seed: c.sv, score: sc(c.visitante), pen: pe(c.visitante), win: g === c.visitante, lose: g && g !== c.visitante })}
       </div>`; };
@@ -847,11 +847,11 @@
               ${cruce(c1)}${cruce(c2)}${cruce(c3)}${cruce(c4)}
             </div></div>
             <div class="bracket-col"><div class="bracket-col-title">Semifinales</div><div class="bk-stack">
-              ${pendiente('SF1', gOr('CF1', 'Ganador CF1'), gOr('CF2', 'Ganador CF2'))}
-              ${pendiente('SF2', gOr('CF3', 'Ganador CF3'), gOr('CF4', 'Ganador CF4'))}
+              ${pOf('SF1') ? cruce({ codigo: 'SF1', local: pOf('SF1').local, visitante: pOf('SF1').visitante }) : pendiente('SF1', gOr('CF1', 'Ganador CF1'), gOr('CF2', 'Ganador CF2'))}
+              ${pOf('SF2') ? cruce({ codigo: 'SF2', local: pOf('SF2').local, visitante: pOf('SF2').visitante }) : pendiente('SF2', gOr('CF3', 'Ganador CF3'), gOr('CF4', 'Ganador CF4'))}
             </div></div>
             <div class="bracket-col"><div class="bracket-col-title">Final</div><div class="bk-stack">
-              ${pendiente('Gran final', tbd('Ganador SF1'), tbd('Ganador SF2'), 'final')}
+              ${pendiente('Gran final', gOr('SF1', 'Ganador SF1'), gOr('SF2', 'Ganador SF2'), 'final')}
               <div class="bk-champion">★ Campeón Clausura 2026</div>
               <div class="bracket-col-title" style="margin-top:14px;">3° puesto</div>
               ${pendiente('3° puesto', tbd('Perdedor SF1'), tbd('Perdedor SF2'))}

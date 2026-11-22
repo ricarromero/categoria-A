@@ -1848,6 +1848,30 @@
           "fecha": "2026-11-21",
           "hora": "12:40",
           "cancha": "Cancha de Rugby"
+        },
+        {
+          "codigo": "SF1",
+          "n": 21,
+          "copa": "Fase Campeonato",
+          "ronda": "Semifinales",
+          "local": "Necaxa",
+          "visitante": "Central",
+          "dia": "",
+          "fecha": "",
+          "hora": "",
+          "cancha": ""
+        },
+        {
+          "codigo": "SF2",
+          "n": 22,
+          "copa": "Fase Campeonato",
+          "ronda": "Semifinales",
+          "local": "Descarte",
+          "visitante": "De Zurda",
+          "dia": "",
+          "fecha": "",
+          "hora": "",
+          "cancha": ""
         }
       ]
     },
