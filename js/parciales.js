@@ -78,7 +78,13 @@ window.LIGA_PARCIALES = {
    "golesV": 3,
    "por": "",
    "at": "2026-11-21T23:46:44.707Z"
+  },
+  "C|playoffs|2|Flandria FC|Bonus Track": {
+   "golesL": 1,
+   "golesV": 0,
+   "por": "",
+   "at": "2026-11-22T14:24:47.388Z"
   }
  },
- "actualizado": "2026-11-21T23:46:44.940Z"
+ "actualizado": "2026-11-22T14:24:47.616Z"
 };
