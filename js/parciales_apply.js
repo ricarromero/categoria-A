@@ -27,6 +27,7 @@
       if (!q || (q.golesL != null && !q.provisorio)) return;
       q.golesL = r.golesL; q.golesV = r.golesV; q.provisorio = true;
       if (r.penalesL !== undefined) { q.penalesL = r.penalesL; q.penalesV = r.penalesV; } else { delete q.penalesL; delete q.penalesV; }
+      if (r.ganador) q.ganador = r.ganador; else delete q.ganador;
       return;
     }
     const f = D && D[torneo] && (D[torneo].fechas || []).find(x => String(x.numero) === fecha);

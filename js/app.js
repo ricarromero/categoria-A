@@ -749,6 +749,7 @@
     const pOf = cod => OFP.find(x => x.codigo === cod);
     const jugado = x => x && x.golesL != null && x.golesV != null;
     const ganadorDe = cod => { const x = pOf(cod); if (!jugado(x)) return null;
+      if (x.ganador) return x.ganador;
       if (x.golesL !== x.golesV) return x.golesL > x.golesV ? x.local : x.visitante;
       if (x.penalesL != null && x.penalesL !== x.penalesV) return x.penalesL > x.penalesV ? x.local : x.visitante; return null; };
     const det = x => [x.dia ? x.dia.replace('Domingo', 'Dom').replace('Sábado', 'Sáb') : '', x.hora, (x.cancha || '').replace('Cancha de ', '')].filter(Boolean).join(' · ');
@@ -761,7 +762,7 @@
       const sc = t => ok ? (x.local === t ? x.golesL : x.golesV) : undefined;
       const pe = t => ok && x.penalesL != null ? (x.local === t ? x.penalesL : x.penalesV) : undefined;
       const tm = t => bkTeamHtml(t, { score: sc(t), pen: pe(t), win: g === t, lose: g && g !== t });
-      return `<div class="bk-match"><div class="bk-code"><span>${codigo}</span><span>${ok ? (x.penalesL != null ? 'Penales' : 'Final') + (x.provisorio ? ' · prov.' : '') : det(x)}</span></div>${tm(x.local)}${tm(x.visitante)}</div>`; };
+      return `<div class="bk-match"><div class="bk-code"><span>${codigo}</span><span>${ok ? (x.penalesL != null || x.ganador ? 'Penales' : 'Final') + (x.provisorio ? ' · prov.' : '') : det(x)}</span></div>${tm(x.local)}${tm(x.visitante)}</div>`; };
     const tag = OFI ? 'Clausura 2026 · Confirmado' : 'Clausura 2026 · Si terminara hoy';
     const pend = (codigo, x, y, extra = '') => `<div class="bk-match ${extra}"><div class="bk-code"><span>${codigo}</span><span>A jugar</span></div>${x}${y}</div>`;
     const [q1, q2] = cfg.cuartos; const [s1, s2] = cfg.plata;
@@ -810,6 +811,7 @@
     const pOf = cod => OFP.find(x => x.codigo === cod);
     const jugado = x => x && x.golesL != null && x.golesV != null;
     const ganadorDe = cod => { const x = pOf(cod); if (!jugado(x)) return null;
+      if (x.ganador) return x.ganador;
       if (x.golesL !== x.golesV) return x.golesL > x.golesV ? x.local : x.visitante;
       if (x.penalesL != null && x.penalesL !== x.penalesV) return x.penalesL > x.penalesV ? x.local : x.visitante; return null; };
     const det = x => x ? [x.dia ? x.dia.replace('Domingo', 'Dom').replace('Sábado', 'Sáb') : '', x.hora, (x.cancha || '').replace('Cancha de ', '')].filter(Boolean).join(' · ') : '';
@@ -818,7 +820,7 @@
       const sc = t => ok ? (x.local === t ? x.golesL : x.golesV) : undefined;
       const pe = t => ok && x.penalesL != null ? (x.local === t ? x.penalesL : x.penalesV) : undefined;
       return `<div class="bk-match">
-        <div class="bk-code"><span>${c.codigo}</span><span>${ok ? (x.penalesL != null ? 'Penales' : 'Final') + (x.provisorio ? ' · prov.' : '') : (det(x) || (c.sl ? `${c.sl} vs ${c.sv}` : 'A jugar'))}</span></div>
+        <div class="bk-code"><span>${c.codigo}</span><span>${ok ? (x.penalesL != null || x.ganador ? 'Penales' : 'Final') + (x.provisorio ? ' · prov.' : '') : (det(x) || (c.sl ? `${c.sl} vs ${c.sv}` : 'A jugar'))}</span></div>
         ${bkTeamHtml(c.local, { seed: c.sl, score: sc(c.local), pen: pe(c.local), win: g === c.local, lose: g && g !== c.local })}
         ${bkTeamHtml(c.visitante, { seed: c.sv, score: sc(c.visitante), pen: pe(c.visitante), win: g === c.visitante, lose: g && g !== c.visitante })}
       </div>`; };
@@ -3145,8 +3147,8 @@
       if (!sel.length) sel = PO;
       const ps = sel.map(x => ({
         local: x.local, visitante: x.visitante, golesL: x.golesL, golesV: x.golesV, penalesL: x.penalesL, penalesV: x.penalesV,
-        estado: jug(x) ? 'finalizado' : 'pendiente', dia: x.dia, hora: x.hora,
-        cancha: (x.cancha || '') + (x.copa === 'Copa de Plata' ? ' · Plata' : x.copa === 'Fase Campeonato' ? ' · Campeonato' : ''), nota: x.provisorio ? 'Resultado provisorio' : '' }));
+        estado: jug(x) ? 'finalizado' : 'pendiente', ganadorPen: x.penalesL == null ? x.ganador : null, dia: x.dia, hora: x.hora,
+        cancha: (x.cancha || '') + (x.copa === 'Copa de Plata' ? ' · Plata' : x.copa === 'Fase Campeonato' ? ' · Campeonato' : ''), nota: (x.ganador && x.penalesL == null ? x.ganador + ' ganó por penales' : '') || (x.provisorio ? 'Resultado provisorio' : '') }));
       const dias = [...new Set(ps.map(p => p.dia).filter(Boolean))];
       const rs = [...new Set(sel.map(x => x.ronda))];
       return { nombre: rs.length === 1 ? rs[0] : 'Playoffs', dia: dias.join(' y '), partidos: ps, playoffs: true };
@@ -3179,7 +3181,7 @@
         <a class="ini-match ${p.estado === 'finalizado' ? 'jugado' : ''}" href="${urlCat(c, 'fixture')}">
           ${conHora ? `<span class="ini-time">${p.hora || ''}</span>` : ''}
           <span class="ini-team">${escapeHtml(p.local)}${crest(p.local)}</span>
-          ${p.estado === 'finalizado' ? `<span class="ini-score">${p.golesL}<i>-</i>${p.golesV}${p.penalesL != null ? `<small style="display:block;font-size:.65em;opacity:.75">pen. ${p.penalesL}-${p.penalesV}</small>` : ''}</span>` : '<span class="ini-vs">vs</span>'}
+          ${p.estado === 'finalizado' ? `<span class="ini-score">${p.golesL}<i>-</i>${p.golesV}${p.penalesL != null ? `<small style="display:block;font-size:.65em;opacity:.75">pen. ${p.penalesL}-${p.penalesV}</small>` : (p.ganadorPen ? `<small style="display:block;font-size:.6em;opacity:.8">pasa ${escapeHtml(p.ganadorPen)} (pen.)</small>` : '')}</span>` : '<span class="ini-vs">vs</span>'}
           <span class="ini-team r">${crest(p.visitante)}${escapeHtml(p.visitante)}</span>
           ${p.estado === 'finalizado' ? (/no se present/i.test(p.nota || '') ? `<span class="ini-cancha ini-final" title="${escapeHtml(p.nota)}">W.O.</span>` : '<span class="ini-cancha ini-final">Final</span>') : (p.cancha ? `<span class="ini-cancha">${escapeHtml(p.cancha.replace('Cancha de ', ''))}</span>` : '')}
         </a>`;
