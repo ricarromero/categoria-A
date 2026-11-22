@@ -118,7 +118,15 @@ window.LIGA_PARCIALES = {
    "golesV": 1,
    "por": "",
    "at": "2026-11-22T20:06:25.077Z"
+  },
+  "A|playoffs|11|Mavericks|La Máquina": {
+   "golesL": 1,
+   "golesV": 1,
+   "por": "",
+   "at": "2026-11-22T20:51:35.370Z",
+   "penalesL": 3,
+   "penalesV": 4
   }
  },
- "actualizado": "2026-11-22T20:51:21.376Z"
+ "actualizado": "2026-11-22T20:51:35.593Z"
 };
