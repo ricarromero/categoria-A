@@ -126,7 +126,13 @@ window.LIGA_PARCIALES = {
    "at": "2026-11-22T20:51:35.370Z",
    "penalesL": 3,
    "penalesV": 4
+  },
+  "A|playoffs|3|Otro Equipo|Aston": {
+   "golesL": 3,
+   "golesV": 0,
+   "por": "",
+   "at": "2026-11-22T21:39:55.307Z"
   }
  },
- "actualizado": "2026-11-22T20:51:35.593Z"
+ "actualizado": "2026-11-22T21:39:55.313Z"
 };
