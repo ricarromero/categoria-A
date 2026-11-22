@@ -96,7 +96,15 @@ window.LIGA_PARCIALES = {
    "golesV": 0,
    "por": "",
    "at": "2026-11-22T16:27:16.274Z"
+  },
+  "C|playoffs|22|Talleres|Imputables FC": {
+   "golesL": 1,
+   "golesV": 1,
+   "por": "",
+   "at": "2026-11-22T17:14:42.870Z",
+   "penalesL": 2,
+   "penalesV": 4
   }
  },
- "actualizado": "2026-11-22T16:27:16.535Z"
+ "actualizado": "2026-11-22T17:14:43.063Z"
 };
