@@ -84,7 +84,13 @@ window.LIGA_PARCIALES = {
    "golesV": 0,
    "por": "",
    "at": "2026-11-22T14:24:47.388Z"
+  },
+  "C|playoffs|1|Don Bosco|Nacional": {
+   "golesL": 0,
+   "golesV": 1,
+   "por": "",
+   "at": "2026-11-22T16:27:06.838Z"
   }
  },
- "actualizado": "2026-11-22T14:24:47.616Z"
+ "actualizado": "2026-11-22T16:27:07.213Z"
 };
