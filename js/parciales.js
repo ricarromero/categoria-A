@@ -109,7 +109,7 @@ window.LIGA_PARCIALES = {
    "golesL": 2,
    "golesV": 2,
    "por": "",
-   "at": "2026-11-22T17:52:08.919Z",
+   "at": "2026-11-22T20:51:21.171Z",
    "penalesL": 4,
    "penalesV": 3
   },
@@ -120,5 +120,5 @@ window.LIGA_PARCIALES = {
    "at": "2026-11-22T20:06:25.077Z"
   }
  },
- "actualizado": "2026-11-22T20:06:25.274Z"
+ "actualizado": "2026-11-22T20:51:21.376Z"
 };
