@@ -3140,7 +3140,8 @@
       const pend = PO.filter(x => !jug(x) && x.fecha), hechos = PO.filter(x => jug(x) && x.fecha);
       const foco = pend.length ? Math.min(...pend.map(t)) : (hechos.length ? Math.max(...hechos.map(t)) : NaN);
       const DIAS3 = 3 * 864e5;
-      let sel = isNaN(foco) ? PO.filter(x => !jug(x)) : PO.filter(x => x.fecha ? Math.abs(t(x) - foco) <= DIAS3 : !jug(x));
+      let sel = isNaN(foco) ? PO.filter(x => !jug(x)) : PO.filter(x => x.fecha && Math.abs(t(x) - foco) <= DIAS3); // los partidos sin fecha confirmada no se muestran todavía
+      if (!sel.length) sel = PO.filter(x => !jug(x));
       if (!sel.length) sel = PO;
       const ps = sel.map(x => ({
         local: x.local, visitante: x.visitante, golesL: x.golesL, golesV: x.golesV, penalesL: x.penalesL, penalesV: x.penalesV,
