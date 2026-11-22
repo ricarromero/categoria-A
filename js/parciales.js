@@ -140,7 +140,15 @@ window.LIGA_PARCIALES = {
    "nota": "Celtic ganó por penales (resultado de la tanda sin confirmar)",
    "por": "",
    "at": "2026-11-22T21:45:14.034Z"
+  },
+  "A|playoffs|12|Calise|Antorcha": {
+   "golesL": 1,
+   "golesV": 1,
+   "penalesL": 1,
+   "penalesV": 3,
+   "por": "",
+   "at": "2026-11-22T22:36:42.509Z"
   }
  },
- "actualizado": "2026-11-22T21:45:14.039Z"
+ "actualizado": "2026-11-22T22:36:42.515Z"
 };
