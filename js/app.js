@@ -3135,9 +3135,13 @@
     const PO = d && d.clausura && d.clausura.crucesOficiales && d.clausura.crucesOficiales.partidos;
     if (PO && PO.length) {
       const jug = x => x.golesL != null && x.golesV != null;
-      const rondas = [...new Set(PO.map(x => x.ronda))];
-      const ronda = rondas.find(r => PO.some(x => x.ronda === r && !jug(x))) || rondas[rondas.length - 1];
-      const sel = PO.filter(x => x.ronda === ronda || !jug(x));
+      // Se muestra el fin de semana de playoffs en curso: los partidos con fecha cercana (resultados incluidos) y los que faltan sin fecha
+      const t = x => x.fecha ? Date.parse(x.fecha) : NaN;
+      const pend = PO.filter(x => !jug(x) && x.fecha), hechos = PO.filter(x => jug(x) && x.fecha);
+      const foco = pend.length ? Math.min(...pend.map(t)) : (hechos.length ? Math.max(...hechos.map(t)) : NaN);
+      const DIAS3 = 3 * 864e5;
+      let sel = isNaN(foco) ? PO.filter(x => !jug(x)) : PO.filter(x => x.fecha ? Math.abs(t(x) - foco) <= DIAS3 : !jug(x));
+      if (!sel.length) sel = PO;
       const ps = sel.map(x => ({
         local: x.local, visitante: x.visitante, golesL: x.golesL, golesV: x.golesV, penalesL: x.penalesL, penalesV: x.penalesV,
         estado: jug(x) ? 'finalizado' : 'pendiente', dia: x.dia, hora: x.hora,
