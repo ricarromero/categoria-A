@@ -101,9 +101,9 @@ window.LIGA_PARCIALES = {
    "golesL": 1,
    "golesV": 1,
    "por": "",
-   "at": "2026-11-22T17:14:42.870Z",
-   "penalesL": 2,
-   "penalesV": 4
+   "at": "2026-11-22T19:18:27.408Z",
+   "penalesL": 1,
+   "penalesV": 3
   },
   "A|playoffs|4|Jägermeister|Red Bull": {
    "golesL": 2,
@@ -114,5 +114,5 @@ window.LIGA_PARCIALES = {
    "penalesV": 3
   }
  },
- "actualizado": "2026-11-22T17:52:08.923Z"
+ "actualizado": "2026-11-22T19:18:27.607Z"
 };
