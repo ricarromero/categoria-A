@@ -112,7 +112,13 @@ window.LIGA_PARCIALES = {
    "at": "2026-11-22T17:52:08.919Z",
    "penalesL": 4,
    "penalesV": 3
+  },
+  "A|playoffs|2|Minaster City|De Primera": {
+   "golesL": 5,
+   "golesV": 1,
+   "por": "",
+   "at": "2026-11-22T20:06:25.077Z"
   }
  },
- "actualizado": "2026-11-22T19:18:27.607Z"
+ "actualizado": "2026-11-22T20:06:25.274Z"
 };
