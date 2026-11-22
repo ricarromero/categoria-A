@@ -90,7 +90,13 @@ window.LIGA_PARCIALES = {
    "golesV": 1,
    "por": "",
    "at": "2026-11-22T16:27:06.838Z"
+  },
+  "A|playoffs|1|Constructores|Eclipse": {
+   "golesL": 2,
+   "golesV": 0,
+   "por": "",
+   "at": "2026-11-22T16:27:16.274Z"
   }
  },
- "actualizado": "2026-11-22T16:27:07.213Z"
+ "actualizado": "2026-11-22T16:27:16.535Z"
 };
