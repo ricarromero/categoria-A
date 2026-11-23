@@ -136,10 +136,11 @@ window.LIGA_PARCIALES = {
   "A|playoffs|13|C-Lesión|Celtic": {
    "golesL": 2,
    "golesV": 2,
-   "ganador": "Celtic",
-   "nota": "Celtic ganó por penales (resultado de la tanda sin confirmar)",
    "por": "",
-   "at": "2026-11-22T21:45:14.034Z"
+   "at": "2026-11-23T01:12:28.839Z",
+   "penalesL": 2,
+   "penalesV": 4,
+   "nota": "Celtic ganó por penales (resultado de la tanda sin confirmar)"
   },
   "A|playoffs|12|Calise|Antorcha": {
    "golesL": 1,
@@ -150,5 +151,5 @@ window.LIGA_PARCIALES = {
    "at": "2026-11-22T22:36:42.509Z"
   }
  },
- "actualizado": "2026-11-22T22:36:42.515Z"
+ "actualizado": "2026-11-23T01:12:29.024Z"
 };
