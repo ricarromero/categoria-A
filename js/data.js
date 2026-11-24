@@ -2327,6 +2327,10 @@ const LIGA_DATA = {
       "informe": 7,
       "mejor5": "Nottingham",
       "partidos": [
+        {"codigo": "SF1", "n": 21, "copa": "Fase Campeonato", "ronda": "Semifinales", "local": "Otro Equipo", "visitante": "Jägermeister", "dia": "Domingo 29/11", "fecha": "2026-11-29", "hora": "14:00", "cancha": "Cancha de Fútbol"},
+        {"codigo": "SF2", "n": 22, "copa": "Fase Campeonato", "ronda": "Semifinales", "local": "Minaster City", "visitante": "Constructores", "dia": "Domingo 29/11", "fecha": "2026-11-29", "hora": "15:30", "cancha": "Cancha de Fútbol"},
+        {"codigo": "SP1", "n": 41, "copa": "Copa de Plata", "ronda": "Semifinales", "local": "Nottingham", "visitante": "La Máquina", "dia": "Domingo 29/11", "fecha": "2026-11-29", "hora": "14:00", "cancha": "Cancha de Rugby"},
+        {"codigo": "SP2", "n": 42, "copa": "Copa de Plata", "ronda": "Semifinales", "local": "Celtic", "visitante": "Antorcha", "dia": "Domingo 29/11", "fecha": "2026-11-29", "hora": "15:30", "cancha": "Cancha de Rugby"},
         {
           "codigo": "CF1",
           "n": 1,

@@ -728,10 +728,10 @@
           "ronda": "Semifinales",
           "local": "Newcauce",
           "visitante": "Nacional",
-          "dia": "",
-          "fecha": "",
-          "hora": "",
-          "cancha": ""
+          "dia": "Domingo 29/11",
+          "fecha": "2026-11-29",
+          "hora": "10:00",
+          "cancha": "Cancha de Rugby"
         },
         {
           "codigo": "SF2",
@@ -740,10 +740,10 @@
           "ronda": "Semifinales",
           "local": "Vial",
           "visitante": "Flandria FC",
-          "dia": "",
-          "fecha": "",
-          "hora": "",
-          "cancha": ""
+          "dia": "Domingo 29/11",
+          "fecha": "2026-11-29",
+          "hora": "10:00",
+          "cancha": "Cancha de Fútbol"
         },
         {
           "codigo": "SP1",

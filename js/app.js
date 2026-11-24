@@ -869,11 +869,11 @@
               ${pr.mejor5 ? `<div class="bracket-bye"><b>${pr.mejor5.equipo}</b> (5°${pr.mejor5.zona}) pasa directo a semifinales como mejor 5°${OFI ? ' (según la Liga)' : ''}</div>` : ''}
             </div></div>
             <div class="bracket-col"><div class="bracket-col-title">Semifinales</div><div class="bk-stack">
-              ${pendiente('SF1', pr.mejor5 ? bkTeamHtml(pr.mejor5.equipo, { seed: `5°${pr.mejor5.zona}` }) : tbd('Mejor 5°'), gOr('CP1', 'Ganador CP1'))}
-              ${pendiente('SF2', gOr('CP2', 'Ganador CP2'), gOr('CP3', 'Ganador CP3'))}
+              ${pOf('SP1') ? cruce({ codigo: 'SP1', local: pOf('SP1').local, visitante: pOf('SP1').visitante }) : pendiente('SF1', pr.mejor5 ? bkTeamHtml(pr.mejor5.equipo, { seed: `5°${pr.mejor5.zona}` }) : tbd('Mejor 5°'), gOr('CP1', 'Ganador CP1'))}
+              ${pOf('SP2') ? cruce({ codigo: 'SP2', local: pOf('SP2').local, visitante: pOf('SP2').visitante }) : pendiente('SF2', gOr('CP2', 'Ganador CP2'), gOr('CP3', 'Ganador CP3'))}
             </div></div>
             <div class="bracket-col"><div class="bracket-col-title">Final</div><div class="bk-stack">
-              ${pendiente('Final', tbd('Ganador SF1'), tbd('Ganador SF2'), 'final plata')}
+              ${pendiente('Final', gOr('SP1', 'Ganador SF1'), gOr('SP2', 'Ganador SF2'), 'final plata')}
               <div class="bk-champion plata">★ Campeón Copa de Plata</div>
             </div></div>
           </div></div>
