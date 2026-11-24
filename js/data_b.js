@@ -1854,24 +1854,48 @@
           "n": 21,
           "copa": "Fase Campeonato",
           "ronda": "Semifinales",
-          "local": "Necaxa",
-          "visitante": "Central",
-          "dia": "",
-          "fecha": "",
-          "hora": "",
-          "cancha": ""
+          "local": "Central",
+          "visitante": "Descarte",
+          "dia": "Domingo 29/11",
+          "fecha": "2026-11-29",
+          "hora": "11:20",
+          "cancha": "Cancha de Fútbol"
         },
         {
           "codigo": "SF2",
           "n": 22,
           "copa": "Fase Campeonato",
           "ronda": "Semifinales",
-          "local": "Descarte",
+          "local": "Necaxa",
           "visitante": "De Zurda",
-          "dia": "",
-          "fecha": "",
-          "hora": "",
-          "cancha": ""
+          "dia": "Domingo 29/11",
+          "fecha": "2026-11-29",
+          "hora": "12:40",
+          "cancha": "Cancha de Fútbol"
+        },
+        {
+          "codigo": "SP1",
+          "n": 41,
+          "copa": "Copa de Plata",
+          "ronda": "Semifinales",
+          "local": "Agrimensura",
+          "visitante": "Geología",
+          "dia": "Domingo 29/11",
+          "fecha": "2026-11-29",
+          "hora": "11:20",
+          "cancha": "Cancha de Rugby"
+        },
+        {
+          "codigo": "SP2",
+          "n": 42,
+          "copa": "Copa de Plata",
+          "ronda": "Semifinales",
+          "local": "Dep. La Verna",
+          "visitante": "Gol en Contra",
+          "dia": "Domingo 29/11",
+          "fecha": "2026-11-29",
+          "hora": "12:40",
+          "cancha": "Cancha de Rugby"
         }
       ]
     },
