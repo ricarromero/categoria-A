@@ -3128,6 +3128,10 @@ const LIGA_DATA = {
       "R11": "Imputables FC",
       "R16": "Bonus Track"
     },
+    "final": {
+      "date": "2026-11-26",
+      "t": "22:00"
+    },
     "resultados": {
       "P3": {
         "a": 1,

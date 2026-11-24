@@ -906,7 +906,8 @@
     const roots = { L: walk(CC.cuadro.L, 'L'), R: walk(CC.cuadro.R, 'R') };
     all.sort((a, b) => a.r - b.r || (a.date || '').localeCompare(b.date || '') ||
       (a.t ? toMins(a.t) : 0) - (b.t ? toMins(b.t) : 0) || a.side.localeCompare(b.side) || (a.c === 'R' ? -1 : 1));
-    const final = { r: 5, side: null, date: null, t: null, c: null, kids: [roots.L, roots.R] };
+    const FI = CC.final || {};
+    const final = { r: 5, side: null, date: FI.date || null, t: FI.t || null, c: FI.c || null, kids: [roots.L, roots.R] };
     all.push(final);
     all.forEach((m, i) => { m.no = i + 1; });
 
@@ -1030,7 +1031,7 @@
         const desde = side === 'L' ? 1 : 6;
         const llaveHead = `<div class="cc-llave-head cc-llave-${side}" style="grid-column:${desde} / span 4;grid-row:1">${ll.nombre}</div>`;
         return llaveHead + [1, 2, 3, 4].map(r => `<div class="cc-head" style="grid-column:${colDe(side, r)};grid-row:2">${CC_RONDAS_CORTO[r]}<small>${ccFecha(ll.fechas[r], true)}</small></div>`).join('');
-      }).join('') + `<div class="cc-head cc-head-final" style="grid-column:5;grid-row:2">Final<small>A confirmar</small></div>`;
+      }).join('') + `<div class="cc-head cc-head-final" style="grid-column:5;grid-row:2">Final<small>${final && final.date ? ccFecha(final.date, true) + (final.t ? ' · ' + final.t + ' hs' : '') : 'A confirmar'}</small></div>`;
       const finalHtml = `<div class="cc-final-box">
           <div class="cc-logo-wrap"><img class="cc-logo" src="public/copa_challenger_blanco.png?v=2" alt="Copa Challenger"></div>
           <div class="cc-final-title">Gran final</div>

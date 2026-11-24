@@ -15,7 +15,8 @@ window.ccModel = (function () {
     const roots = { L: walk(CC.cuadro.L, 'L'), R: walk(CC.cuadro.R, 'R') };
     all.sort((a, b) => a.r - b.r || (a.date || '').localeCompare(b.date || '') ||
       (a.t ? toMins(a.t) : 0) - (b.t ? toMins(b.t) : 0) || a.side.localeCompare(b.side) || (a.c === 'R' ? -1 : 1));
-    const final = { r: 5, side: null, date: null, t: null, c: null, kids: [roots.L, roots.R] };
+    const FI = CC.final || {};
+    const final = { r: 5, side: null, date: FI.date || null, t: FI.t || null, c: FI.c || null, kids: [roots.L, roots.R] };
     all.push(final);
     all.forEach((m, i) => { m.no = i + 1; });
 
