@@ -3130,7 +3130,8 @@ const LIGA_DATA = {
     },
     "final": {
       "date": "2026-11-26",
-      "t": "22:00"
+      "t": "22:00",
+      "c": "F"
     },
     "resultados": {
       "P3": {
