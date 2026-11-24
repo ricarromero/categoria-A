@@ -722,6 +722,30 @@
           "cancha": "Cancha de Rugby"
         },
         {
+          "codigo": "SF1",
+          "n": 31,
+          "copa": "Fase Campeonato",
+          "ronda": "Semifinales",
+          "local": "Newcauce",
+          "visitante": "Nacional",
+          "dia": "",
+          "fecha": "",
+          "hora": "",
+          "cancha": ""
+        },
+        {
+          "codigo": "SF2",
+          "n": 32,
+          "copa": "Fase Campeonato",
+          "ronda": "Semifinales",
+          "local": "Vial",
+          "visitante": "Flandria FC",
+          "dia": "",
+          "fecha": "",
+          "hora": "",
+          "cancha": ""
+        },
+        {
           "codigo": "SP1",
           "n": 21,
           "copa": "Copa de Plata",

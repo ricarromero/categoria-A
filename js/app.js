@@ -762,7 +762,7 @@
       const sc = t => ok ? (x.local === t ? x.golesL : x.golesV) : undefined;
       const pe = t => ok && x.penalesL != null ? (x.local === t ? x.penalesL : x.penalesV) : undefined;
       const tm = t => bkTeamHtml(t, { score: sc(t), pen: pe(t), win: g === t, lose: g && g !== t });
-      return `<div class="bk-match"><div class="bk-code"><span>${codigo}</span><span>${ok ? (x.penalesL != null || x.ganador ? 'Penales' : 'Final') + (x.provisorio ? ' · prov.' : '') : det(x)}</span></div>${tm(x.local)}${tm(x.visitante)}</div>`; };
+      return `<div class="bk-match"><div class="bk-code"><span>${codigo}</span><span>${ok ? (x.penalesL != null || x.ganador ? 'Penales' : 'Final') + (x.provisorio ? ' · prov.' : '') : (det(x) || 'A jugar')}</span></div>${tm(x.local)}${tm(x.visitante)}</div>`; };
     const tag = OFI ? 'Clausura 2026 · Confirmado' : 'Clausura 2026 · Si terminara hoy';
     const pend = (codigo, x, y, extra = '') => `<div class="bk-match ${extra}"><div class="bk-code"><span>${codigo}</span><span>A jugar</span></div>${x}${y}</div>`;
     const [q1, q2] = cfg.cuartos; const [s1, s2] = cfg.plata;
@@ -778,11 +778,11 @@
               ${cruce('CF1', q1[0], q1[1])}${cruce('CF2', q2[0], q2[1])}
             </div></div>
             <div class="bracket-col"><div class="bracket-col-title">Semifinales</div><div class="bk-stack">
-              ${pend('SF1', bkTeamHtml(at(1), { seed: '1°' }), gOr('CF2', 'Ganador CF2'))}
-              ${pend('SF2', bkTeamHtml(at(2), { seed: '2°' }), gOr('CF1', 'Ganador CF1'))}
+              ${pOf('SF1') ? cruce('SF1') : pend('SF1', bkTeamHtml(at(1), { seed: '1°' }), gOr('CF2', 'Ganador CF2'))}
+              ${pOf('SF2') ? cruce('SF2') : pend('SF2', bkTeamHtml(at(2), { seed: '2°' }), gOr('CF1', 'Ganador CF1'))}
             </div></div>
             <div class="bracket-col"><div class="bracket-col-title">Final</div><div class="bk-stack">
-              ${pend('Gran final', tbd('Ganador SF1'), tbd('Ganador SF2'), 'final')}
+              ${pend('Gran final', gOr('SF1', 'Ganador SF1'), gOr('SF2', 'Ganador SF2'), 'final')}
               <div class="bk-champion">★ Campeón Clausura 2026</div>
             </div></div>
           </div></div>
