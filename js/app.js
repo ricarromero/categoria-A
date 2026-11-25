@@ -999,23 +999,23 @@
     const lanzar = () => cohetes.push({ x: rnd(W * .15, W * .85), y: H, vy: rnd(-13, -10), vx: rnd(-1.2, 1.2), tope: rnd(H * .12, H * .42), c: pick() });
     tirarConfeti(160);
     tirarConfeti(70, 0, 1); tirarConfeti(70, W, -1);
-    const t0 = performance.now(), DUR = 7000;
+    const t0 = performance.now(), DUR = 10000, K = .55; // K: velocidad (más chico = más lento)
     let ultCohete = 0;
     function frame(now) {
       const t = now - t0;
       ctx.clearRect(0, 0, W, H);
-      if (t < DUR - 2000 && now - ultCohete > 420) { lanzar(); ultCohete = now; }
-      if (t > 1800 && t < 1900 && conf.length < 400) tirarConfeti(120);
+      if (t < DUR - 3000 && now - ultCohete > 700) { lanzar(); ultCohete = now; }
+      if (t > 3000 && t < 3100 && conf.length < 400) tirarConfeti(120);
       for (let i = cohetes.length - 1; i >= 0; i--) {
         const r = cohetes[i];
-        r.x += r.vx; r.y += r.vy; r.vy += .18;
+        r.x += r.vx * K; r.y += r.vy * K; r.vy += .18 * K;
         ctx.fillStyle = pintar(r.c, .9); ctx.beginPath(); ctx.arc(r.x, r.y, 2.6, 0, 6.283); ctx.fill();
         if (r.y <= r.tope || r.vy >= 0) { explotar(r.x, r.y); cohetes.splice(i, 1); }
       }
       for (let i = chispas.length - 1; i >= 0; i--) {
         const p = chispas[i];
         p.prev.push([p.x, p.y]); if (p.prev.length > 5) p.prev.shift();
-        p.x += p.vx; p.y += p.vy; p.vx *= .975; p.vy = p.vy * .975 + .06; p.vida -= p.dec;
+        p.x += p.vx * K; p.y += p.vy * K; p.vx *= Math.pow(.975, K); p.vy = p.vy * Math.pow(.975, K) + .06 * K; p.vida -= p.dec * K;
         if (p.vida <= 0) { chispas.splice(i, 1); continue; }
         ctx.globalAlpha = Math.max(0, p.vida);
         ctx.strokeStyle = pintar(p.c, p.vida); ctx.lineWidth = 3;
@@ -1024,10 +1024,10 @@
       ctx.globalAlpha = 1;
       for (let i = conf.length - 1; i >= 0; i--) {
         const p = conf[i];
-        p.x += p.vx; p.y += p.vy; p.vx *= .985; p.vy = Math.min(p.vy + .32, 4.2); p.rot += p.vr; p.giro += p.vg;
-        p.x += Math.sin(p.giro) * .8;
+        p.x += p.vx * K; p.y += p.vy * K; p.vx *= Math.pow(.985, K); p.vy = Math.min(p.vy + .32 * K, 4.2); p.rot += p.vr * K; p.giro += p.vg * K;
+        p.x += Math.sin(p.giro) * .8 * K;
         if (p.y > H + 30 && p.vy > 0) { conf.splice(i, 1); continue; }
-        if (t > DUR - 1200) p.vida = Math.max(0, (DUR - t) / 1200);
+        if (t > DUR - 1800) p.vida = Math.max(0, (DUR - t) / 1800);
         const sx = Math.cos(p.giro);
         ctx.save(); ctx.globalAlpha = p.vida; ctx.translate(p.x, p.y); ctx.rotate(p.rot); ctx.scale(sx, 1);
         ctx.fillStyle = pintar(p.c, Math.abs(sx));
