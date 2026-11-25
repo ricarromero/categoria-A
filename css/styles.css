@@ -4394,7 +4394,7 @@ body.modo-inicio #heroBoard, body.modo-inicio .hero-dots, body.modo-inicio .navb
 .ini-title { display: flex; align-items: baseline; gap: 10px; margin-bottom: 12px; }
 .ini-title h2 { margin: 0; font-family: var(--f-display); font-weight: 900; font-size: 2rem; text-transform: uppercase; color: var(--navy-primary); }
 .ini-block { background: #FFFFFF; border: 1px solid var(--border-color); border-radius: var(--radius-md); overflow: hidden; margin-bottom: 14px; box-shadow: var(--shadow-sm); border-top: 4px solid var(--cc); }
-.ini-cat-A { --cc: #2F6CA8; } .ini-cat-B { --cc: #22814D; } .ini-cat-C { --cc: #D9770B; } .ini-cat-F { --cc: #B0237F; }
+.ini-cat-CC { --cc: #B0123F; } .ini-cat-A { --cc: #2F6CA8; } .ini-cat-B { --cc: #22814D; } .ini-cat-C { --cc: #D9770B; } .ini-cat-F { --cc: #B0237F; }
 .ini-pick.ini-cat-F { background: linear-gradient(135deg, #D1238C, #8B2FC9); }
 .ini-block-head { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; padding: 10px 14px; background: var(--surface-alt); border-bottom: 1px solid var(--border-subtle); }
 .ini-block-head b { color: var(--text-primary); font-size: .95rem; }

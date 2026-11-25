@@ -3198,6 +3198,45 @@
         </div>`;
     }).join('');
 
+    // Copa Challenger: próximo partido (y los jugados en esos días), siempre primero
+    const ccBloque = (() => {
+      const M = getChallengerModel();
+      if (!M) return '';
+      const listo = m => m.a && m.b && m.a.nombre && m.b.nombre && m.date;
+      const t = m => Date.parse(m.date);
+      const pend = M.all.filter(m => listo(m) && !m.ganador && !(m.res && m.res.a != null));
+      const hechos = M.all.filter(m => listo(m) && (m.ganador || (m.res && m.res.a != null)));
+      const hoy = Date.parse(ccHoy());
+      let foco = pend.length ? Math.min(...pend.map(t)) : (hechos.length ? Math.max(...hechos.map(t)) : NaN);
+      if (isNaN(foco) || (!pend.length && hoy - foco > 4 * 864e5)) return '';
+      const sel = M.all.filter(m => listo(m) && Math.abs(t(m) - foco) <= 3 * 864e5)
+        .sort((x, y) => t(x) - t(y) || minutos(x.t) - minutos(y.t));
+      if (!sel.length) return '';
+      const ronda = m => m.r === 5 ? 'Final' : m.kids && m.kids.every(k => k.r === 3) ? 'Semifinal' : ['Previa', '16avos', 'Octavos', 'Cuartos', 'Semifinal'][m.r] || 'Copa';
+      const rondas = [...new Set(sel.map(ronda))];
+      const dias = [...new Set(sel.map(m => ccFecha(m.date, true)))];
+      const crest = n => `<img class="ini-crest" src="${escudoGlobal(n) || genericCrestUri(n)}" alt="">`;
+      const filas = sel.map(m => {
+        const r = m.res && m.res.a != null ? m.res : null;
+        const pen = r && r.a === r.b && r.pa != null;
+        return `<a class="ini-match ${r ? 'jugado' : ''}" href="${urlCat(CAT_DATOS.A ? 'A' : cats[0], 'challenger')}">
+          <span class="ini-time">${m.t || ''}</span>
+          <span class="ini-team">${escapeHtml(m.a.nombre)}${crest(m.a.nombre)}</span>
+          ${r ? `<span class="ini-score">${r.a}<i>-</i>${r.b}${pen ? `<small style="display:block;font-size:.65em;opacity:.75">pen. ${r.pa}-${r.pb}</small>` : ''}</span>` : '<span class="ini-vs">vs</span>'}
+          <span class="ini-team r">${crest(m.b.nombre)}${escapeHtml(m.b.nombre)}</span>
+          ${r ? '<span class="ini-cancha ini-final">Final</span>' : `<span class="ini-cancha">${m.c ? (m.c === 'R' ? 'Rugby' : 'Fútbol') : ''}</span>`}
+        </a>`;
+      }).join('');
+      return `<div class="ini-block ini-cat-CC">
+          <div class="ini-block-head">
+            <span class="ini-chip">🏆</span>
+            <b>Copa Challenger · ${escapeHtml(rondas.join(' y '))}</b>
+            <span class="ini-dia">${escapeHtml(dias.join(' y '))} · El Palomar</span>
+          </div>
+          ${filas}
+        </div>`;
+    })();
+
     const tabla = c => {
       const d = CAT_DATOS[c];
       const t = d.clausura.tablas || {};
@@ -3237,7 +3276,7 @@
       <div class="ini-grid">
         <section class="ini-col">
           <div class="ini-title"><h2>Próximos partidos</h2><span class="section-badge">Clausura 2026</span></div>
-          ${bloques || '<div class="ini-empty">Todavía no hay próximos partidos cargados.</div>'}
+          ${ccBloque}${bloques || '<div class="ini-empty">Todavía no hay próximos partidos cargados.</div>'}
           <a class="ini-cc" href="${urlCat(CAT_DATOS.A ? 'A' : cats[0], 'challenger')}"><b>Copa Challenger</b><small>Ver el cuadro completo</small><em>→</em></a>
         </section>
         <aside class="ini-col">
