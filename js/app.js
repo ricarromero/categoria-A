@@ -936,6 +936,114 @@
     return { all, roots, final, CC };
   }
 
+  // ===== Campeón de la Copa Challenger: colores del botón + festejo (confeti y fuegos artificiales) =====
+  const CC_TEMAS = {
+    mavericks: { key: 'mav', nombre: 'Mavericks', colores: ['#E10600', '#FF2A1F', '#B00000', 'metal'] },
+    constructores: { key: 'con', nombre: 'Constructores', colores: ['#FFD100', '#FFC400', '#F2EBDC', 'metal'] }
+  };
+  function ccCampeonTema() {
+    let nombre = null;
+    try {
+      const q = new URLSearchParams(location.search).get('campeon');
+      if (q === 'off') sessionStorage.removeItem('cc_campeon_test');
+      else if (q) sessionStorage.setItem('cc_campeon_test', q);
+      nombre = q === 'off' ? null : (q || sessionStorage.getItem('cc_campeon_test'));
+    } catch (e) { /* sin URL o sin almacenamiento */ }
+    if (!nombre) {
+      const M = getChallengerModel();
+      if (M && M.final.ganador) nombre = M.CC.equipos[M.final.ganador];
+    }
+    return nombre ? CC_TEMAS[String(nombre).toLowerCase().trim()] || null : null;
+  }
+  function aplicarTemaCampeon() {
+    const t = ccCampeonTema();
+    if (t) document.documentElement.dataset.ccCampeon = t.key;
+    else delete document.documentElement.dataset.ccCampeon;
+    return t;
+  }
+  let ccFestejoHecho = false;
+  function ccFestejo(tema, forzar) {
+    if (!tema || (ccFestejoHecho && !forzar)) return;
+    if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    ccFestejoHecho = true;
+    const old = document.getElementById('ccFestejo'); if (old) old.remove();
+    const cv = document.createElement('canvas');
+    cv.id = 'ccFestejo';
+    cv.style.cssText = 'position:fixed;inset:0;width:100vw;height:100vh;pointer-events:none;z-index:9999';
+    document.body.appendChild(cv);
+    const ctx = cv.getContext('2d');
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    let W, H;
+    const size = () => { W = innerWidth; H = innerHeight; cv.width = W * dpr; cv.height = H * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0); };
+    size(); addEventListener('resize', size);
+    const rnd = (a, b) => a + Math.random() * (b - a);
+    const pick = () => tema.colores[Math.floor(Math.random() * tema.colores.length)];
+    // color "negro mate metalizado": el brillo cambia mientras gira la pieza
+    const pintar = (c, brillo) => {
+      if (c !== 'metal') return c;
+      const l = Math.round(14 + 46 * Math.max(0, brillo));
+      return `rgb(${l},${l},${l + 3})`;
+    };
+    const conf = [], chispas = [], cohetes = [];
+    const tirarConfeti = (n, x0, dir) => {
+      for (let i = 0; i < n; i++) conf.push({
+        x: x0 != null ? x0 : rnd(0, W), y: x0 != null ? H + 10 : rnd(-H * .5, -10),
+        vx: x0 != null ? dir * rnd(3, 11) : rnd(-1.5, 1.5), vy: x0 != null ? rnd(-19, -11) : rnd(1, 4),
+        w: rnd(7, 13), h: rnd(4, 8), rot: rnd(0, 6.28), vr: rnd(-.25, .25), giro: rnd(0, 6.28), vg: rnd(.08, .2),
+        c: pick(), vida: 1
+      });
+    };
+    const explotar = (x, y) => {
+      const c1 = pick(), c2 = pick(), n = 70;
+      for (let i = 0; i < n; i++) {
+        const a = (i / n) * 6.283 + rnd(-.05, .05), v = rnd(3.5, 9);
+        chispas.push({ x, y, vx: Math.cos(a) * v, vy: Math.sin(a) * v, c: i % 2 ? c1 : c2, vida: 1, dec: rnd(.010, .018), prev: [] });
+      }
+    };
+    const lanzar = () => cohetes.push({ x: rnd(W * .15, W * .85), y: H, vy: rnd(-13, -10), vx: rnd(-1.2, 1.2), tope: rnd(H * .12, H * .42), c: pick() });
+    tirarConfeti(160);
+    tirarConfeti(70, 0, 1); tirarConfeti(70, W, -1);
+    const t0 = performance.now(), DUR = 7000;
+    let ultCohete = 0;
+    function frame(now) {
+      const t = now - t0;
+      ctx.clearRect(0, 0, W, H);
+      if (t < DUR - 2000 && now - ultCohete > 420) { lanzar(); ultCohete = now; }
+      if (t > 1800 && t < 1900 && conf.length < 400) tirarConfeti(120);
+      for (let i = cohetes.length - 1; i >= 0; i--) {
+        const r = cohetes[i];
+        r.x += r.vx; r.y += r.vy; r.vy += .18;
+        ctx.fillStyle = pintar(r.c, .9); ctx.beginPath(); ctx.arc(r.x, r.y, 2.6, 0, 6.283); ctx.fill();
+        if (r.y <= r.tope || r.vy >= 0) { explotar(r.x, r.y); cohetes.splice(i, 1); }
+      }
+      for (let i = chispas.length - 1; i >= 0; i--) {
+        const p = chispas[i];
+        p.prev.push([p.x, p.y]); if (p.prev.length > 5) p.prev.shift();
+        p.x += p.vx; p.y += p.vy; p.vx *= .975; p.vy = p.vy * .975 + .06; p.vida -= p.dec;
+        if (p.vida <= 0) { chispas.splice(i, 1); continue; }
+        ctx.globalAlpha = Math.max(0, p.vida);
+        ctx.strokeStyle = pintar(p.c, p.vida); ctx.lineWidth = 3;
+        ctx.beginPath(); ctx.moveTo(p.prev[0][0], p.prev[0][1]); ctx.lineTo(p.x, p.y); ctx.stroke();
+      }
+      ctx.globalAlpha = 1;
+      for (let i = conf.length - 1; i >= 0; i--) {
+        const p = conf[i];
+        p.x += p.vx; p.y += p.vy; p.vx *= .985; p.vy = Math.min(p.vy + .32, 4.2); p.rot += p.vr; p.giro += p.vg;
+        p.x += Math.sin(p.giro) * .8;
+        if (p.y > H + 30 && p.vy > 0) { conf.splice(i, 1); continue; }
+        if (t > DUR - 1200) p.vida = Math.max(0, (DUR - t) / 1200);
+        const sx = Math.cos(p.giro);
+        ctx.save(); ctx.globalAlpha = p.vida; ctx.translate(p.x, p.y); ctx.rotate(p.rot); ctx.scale(sx, 1);
+        ctx.fillStyle = pintar(p.c, Math.abs(sx));
+        ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+        ctx.restore();
+      }
+      if (t < DUR) requestAnimationFrame(frame);
+      else { removeEventListener('resize', size); cv.remove(); }
+    }
+    requestAnimationFrame(frame);
+  }
+
   function ccHoy() {
     const d = new Date();
     return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
@@ -1079,6 +1187,12 @@
       state.ccVista = btn.dataset.cc;
       renderChallenger();
     }));
+    const temaCampeon = aplicarTemaCampeon();
+    if (temaCampeon) {
+      if (!container.querySelector('.cc-campeon-banner')) container.insertAdjacentHTML('afterbegin', `<button type="button" class="cc-campeon-banner" title="Festejar de nuevo">🏆 ${escapeHtml(temaCampeon.nombre)}, campeón de la Copa Challenger 2026</button>`);
+      container.querySelector('.cc-campeon-banner').addEventListener('click', () => ccFestejo(temaCampeon, true));
+      if (container.offsetParent !== null || state.currentTab === 'challenger') setTimeout(() => ccFestejo(temaCampeon), 250);
+    }
     $$('.bk-team[data-team]', container).forEach(el => el.addEventListener('click', () => {
       if (el.dataset.team) openTeamModal(el.dataset.team);
     }));
@@ -3452,6 +3566,7 @@
   // INICIALIZACIÓN DE LA APLICACIÓN
   // =========================================================================
   function initApp() {
+    try { aplicarTemaCampeon(); } catch (e) { /* sin copa */ }
     aplicarCategoriaUI();
     if (INICIO) {
       document.body.classList.add('modo-inicio');
