@@ -938,8 +938,8 @@
 
   // ===== Campeón de la Copa Challenger: colores del botón + festejo (confeti y fuegos artificiales) =====
   const CC_TEMAS = {
-    mavericks: { key: 'mav', nombre: 'Mavericks', colores: ['#E10600', '#FF2A1F', '#B00000', 'metal'] },
-    constructores: { key: 'con', nombre: 'Constructores', colores: ['#FFD100', '#FFC400', '#F2EBDC', 'metal'] }
+    mavericks: { key: 'mav', nombre: 'Mavericks', colores: ['#E10600', '#FF2A1F', '#B00000', 'mate'] },
+    constructores: { key: 'con', nombre: 'Constructores', colores: ['#FFD100', '#FFC400', '#F2EBDC', 'mate'] }
   };
   function ccCampeonTema() {
     let nombre = null;
@@ -978,12 +978,8 @@
     size(); addEventListener('resize', size);
     const rnd = (a, b) => a + Math.random() * (b - a);
     const pick = () => tema.colores[Math.floor(Math.random() * tema.colores.length)];
-    // color "negro mate metalizado": el brillo cambia mientras gira la pieza
-    const pintar = (c, brillo) => {
-      if (c !== 'metal') return c;
-      const l = Math.round(14 + 46 * Math.max(0, brillo));
-      return `rgb(${l},${l},${l + 3})`;
-    };
+    // negro mate: sin brillo
+    const pintar = c => c === 'mate' ? '#1A1A1A' : c;
     const conf = [], chispas = [], cohetes = [];
     const tirarConfeti = (n, x0, dir) => {
       for (let i = 0; i < n; i++) conf.push({
