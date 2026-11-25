@@ -4536,3 +4536,7 @@ html[data-cc-campeon="con"] .tab-btn.tab-challenger.active, html[data-cc-campeon
   box-shadow: inset 0 -4px 0 #FFD100, 0 0 0 2px #F2EBDC, 0 3px 12px rgba(0, 0, 0, .45) !important; }
 html[data-cc-campeon="con"] .tab-btn.tab-challenger svg, html[data-cc-campeon="con"] .mnav-cc svg { stroke: currentColor; }
 .cc-campeon-banner { display: block; width: 100%; margin: 0 0 14px; padding: 14px 16px; border: 0; border-radius: var(--radius-md); font-family: var(--f-display); font-weight: 900; font-size: 1.25rem; text-transform: uppercase; letter-spacing: .5px; cursor: pointer; text-align: center; }
+
+.ini-cc-campeon { display: inline-flex; align-items: center; gap: 4px; padding: 3px 10px; border-radius: 999px; font-weight: 800; font-size: .8rem; text-transform: uppercase; letter-spacing: .3px; color: #FFFFFF; background: #B0123F; }
+html[data-cc-campeon="mav"] .ini-cc-campeon { background: #E10600; box-shadow: inset 0 -2px 0 #1A1A1A; }
+html[data-cc-campeon="con"] .ini-cc-campeon { background: #FFD100; text-shadow: 0 1px 2px rgba(0,0,0,.55); box-shadow: inset 0 -2px 0 #1A1A1A, 0 0 0 1.5px #F2EBDC; }

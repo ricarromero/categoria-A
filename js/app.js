@@ -941,6 +941,27 @@
     mavericks: { key: 'mav', nombre: 'Mavericks', colores: ['#E10600', '#FF2A1F', '#B00000', 'mate'] },
     constructores: { key: 'con', nombre: 'Constructores', colores: ['#FFD100', '#FFC400', '#F2EBDC', 'mate'] }
   };
+  // Prueba: ?campeon=mavericks|constructores simula la final 1-0 para ese equipo (solo si la final no tiene resultado real)
+  function ccNombreTest() {
+    try {
+      const q = new URLSearchParams(location.search).get('campeon');
+      if (q === 'off') { sessionStorage.removeItem('cc_campeon_test'); return null; }
+      if (q) sessionStorage.setItem('cc_campeon_test', q);
+      return q || sessionStorage.getItem('cc_campeon_test');
+    } catch (e) { return null; }
+  }
+  let ccSimulado = false;
+  function ccSimularFinal() {
+    if (ccSimulado) return; ccSimulado = true;
+    const n = ccNombreTest(); if (!n) return;
+    const M = getChallengerModel(); if (!M) return;
+    const F = M.final, key = 'P' + F.no;
+    if (M.CC.resultados[key] && M.CC.resultados[key].a != null) return;
+    const ganaA = F.a.nombre && F.a.nombre.toLowerCase() === n.toLowerCase();
+    const ganaB = F.b.nombre && F.b.nombre.toLowerCase() === n.toLowerCase();
+    if (!ganaA && !ganaB) return;
+    M.CC.resultados[key] = { a: ganaA ? 1 : 0, b: ganaB ? 1 : 0, simulado: true };
+  }
   function ccCampeonTema() {
     let nombre = null;
     try {
@@ -999,13 +1020,13 @@
     const lanzar = () => cohetes.push({ x: rnd(W * .15, W * .85), y: H, vy: rnd(-13, -10), vx: rnd(-1.2, 1.2), tope: rnd(H * .12, H * .42), c: pick() });
     tirarConfeti(160);
     tirarConfeti(70, 0, 1); tirarConfeti(70, W, -1);
-    const t0 = performance.now(), DUR = 10000, K = .55; // K: velocidad (más chico = más lento)
+    const t0 = performance.now(), DUR = 18000, K = .55; // K: velocidad (más chico = más lento)
     let ultCohete = 0;
     function frame(now) {
       const t = now - t0;
       ctx.clearRect(0, 0, W, H);
       if (t < DUR - 3000 && now - ultCohete > 700) { lanzar(); ultCohete = now; }
-      if (t > 3000 && t < 3100 && conf.length < 400) tirarConfeti(120);
+      for (const ola of [3500, 7500, 11500]) if (t > ola && t <= ola + 17 && conf.length < 450) { tirarConfeti(110); tirarConfeti(35, 0, 1); tirarConfeti(35, W, -1); }
       for (let i = cohetes.length - 1; i >= 0; i--) {
         const r = cohetes[i];
         r.x += r.vx * K; r.y += r.vy * K; r.vy += .18 * K;
@@ -3341,6 +3362,7 @@
           <div class="ini-block-head">
             <span class="ini-chip">🏆</span>
             <b>Copa Challenger · ${escapeHtml(rondas.join(' y '))}</b>
+            ${M.final.ganador && sel.includes(M.final) ? `<span class="ini-cc-campeon">🏆 Campeón: ${escapeHtml(M.CC.equipos[M.final.ganador])}</span>` : ''}
             <span class="ini-dia">${escapeHtml(dias.join(' y '))} · El Palomar</span>
           </div>
           ${filas}
@@ -3562,7 +3584,7 @@
   // INICIALIZACIÓN DE LA APLICACIÓN
   // =========================================================================
   function initApp() {
-    try { aplicarTemaCampeon(); } catch (e) { /* sin copa */ }
+    try { ccSimularFinal(); aplicarTemaCampeon(); } catch (e) { /* sin copa */ }
     aplicarCategoriaUI();
     if (INICIO) {
       document.body.classList.add('modo-inicio');
