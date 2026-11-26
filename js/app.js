@@ -941,39 +941,9 @@
     mavericks: { key: 'mav', nombre: 'Mavericks', colores: ['#E10600', '#FF2A1F', '#B00000', 'mate'] },
     constructores: { key: 'con', nombre: 'Constructores', colores: ['#FFD100', '#FFC400', '#F2EBDC', 'mate'] }
   };
-  // Prueba: ?campeon=mavericks|constructores simula la final 1-0 para ese equipo (solo si la final no tiene resultado real)
-  function ccNombreTest() {
-    try {
-      const q = new URLSearchParams(location.search).get('campeon');
-      if (q === 'off') { sessionStorage.removeItem('cc_campeon_test'); return null; }
-      if (q) sessionStorage.setItem('cc_campeon_test', q);
-      return q || sessionStorage.getItem('cc_campeon_test');
-    } catch (e) { return null; }
-  }
-  let ccSimulado = false;
-  function ccSimularFinal() {
-    if (ccSimulado) return; ccSimulado = true;
-    const n = ccNombreTest(); if (!n) return;
-    const M = getChallengerModel(); if (!M) return;
-    const F = M.final, key = 'P' + F.no;
-    if (M.CC.resultados[key] && M.CC.resultados[key].a != null) return;
-    const ganaA = F.a.nombre && F.a.nombre.toLowerCase() === n.toLowerCase();
-    const ganaB = F.b.nombre && F.b.nombre.toLowerCase() === n.toLowerCase();
-    if (!ganaA && !ganaB) return;
-    M.CC.resultados[key] = { a: ganaA ? 1 : 0, b: ganaB ? 1 : 0, simulado: true };
-  }
   function ccCampeonTema() {
-    let nombre = null;
-    try {
-      const q = new URLSearchParams(location.search).get('campeon');
-      if (q === 'off') sessionStorage.removeItem('cc_campeon_test');
-      else if (q) sessionStorage.setItem('cc_campeon_test', q);
-      nombre = q === 'off' ? null : (q || sessionStorage.getItem('cc_campeon_test'));
-    } catch (e) { /* sin URL o sin almacenamiento */ }
-    if (!nombre) {
-      const M = getChallengerModel();
-      if (M && M.final.ganador) nombre = M.CC.equipos[M.final.ganador];
-    }
+    const M = getChallengerModel();
+    const nombre = M && M.final.ganador ? M.CC.equipos[M.final.ganador] : null;
     return nombre ? CC_TEMAS[String(nombre).toLowerCase().trim()] || null : null;
   }
   function aplicarTemaCampeon() {
@@ -3584,7 +3554,7 @@
   // INICIALIZACIÓN DE LA APLICACIÓN
   // =========================================================================
   function initApp() {
-    try { ccSimularFinal(); aplicarTemaCampeon(); } catch (e) { /* sin copa */ }
+    try { aplicarTemaCampeon(); } catch (e) { /* sin copa */ }
     aplicarCategoriaUI();
     if (INICIO) {
       document.body.classList.add('modo-inicio');
