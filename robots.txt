@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /cargar
+Disallow: /api/
+
+Sitemap: https://ligauniversitaria.vercel.app/sitemap.xml

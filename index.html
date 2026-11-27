@@ -8,6 +8,24 @@
   <meta name="description"
     content="Liga Universitaria Sanjuanina de Fútbol — Categoría A 2026. Tablas de posiciones, fixture, resultados, goleadores, sanciones y estadísticas completas.">
 
+  <link rel="canonical" href="https://ligauniversitaria.vercel.app/">
+  <meta name="theme-color" content="#14283F">
+  <!-- Vista previa al compartir (Open Graph / Twitter) -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Liga Universitaria · Fútbol UNSJ">
+  <meta property="og:locale" content="es_AR">
+  <meta property="og:url" content="https://ligauniversitaria.vercel.app/">
+  <meta property="og:title" content="Liga Universitaria Sanjuanina de Fútbol · Temporada 2026">
+  <meta property="og:description" content="Posiciones, fixture, resultados, goleadores y Copa Challenger de las categorías A, B, C y Femenina. Proyecto independiente, no oficial.">
+  <meta property="og:image" content="https://ligauniversitaria.vercel.app/public/og.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Liga Universitaria: fútbol universitario San Juan 2026, categorías A, B, C y F">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Liga Universitaria Sanjuanina de Fútbol · Temporada 2026">
+  <meta name="twitter:description" content="Posiciones, fixture, resultados, goleadores y Copa Challenger. Proyecto independiente, no oficial.">
+  <meta name="twitter:image" content="https://ligauniversitaria.vercel.app/public/og.jpg">
+
   <!-- Google Fonts: Big Shoulders Display & Archivo -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,7 +37,7 @@
   <link rel="icon" type="image/png" href="public/logo_liga.png">
 
   <!-- Estilos Premium -->
-  <link rel="stylesheet" href="css/styles.css?v=20261126_campeon">
+  <link rel="stylesheet" href="css/styles.css?v=20261127_mejoras">
   <!-- Vercel Web Analytics -->
   <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
   <script defer src="/_vercel/insights/script.js"></script>
@@ -102,31 +120,31 @@
   <nav class="navbar-sticky" aria-label="Navegación principal">
     <div class="container">
       <div class="tabs-nav" id="mainTabs" role="tablist">
-        <button class="tab-btn tab-inicio" data-view="inicio" role="tab" aria-selected="false" title="Inicio">
+        <button class="tab-btn tab-inicio" data-view="inicio" role="tab" aria-controls="view-inicio" aria-selected="false" title="Inicio">
           <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/></svg><span class="sr-only">Inicio</span>
         </button>
-        <button class="tab-btn tab-challenger" data-view="challenger" role="tab" aria-selected="false">
+        <button class="tab-btn tab-challenger" data-view="challenger" role="tab" aria-controls="view-challenger" aria-selected="false">
           <span></span> Copa Challenger
         </button>
-        <button class="tab-btn active" data-view="posiciones" role="tab" aria-selected="true">
+        <button class="tab-btn active" data-view="posiciones" role="tab" aria-controls="view-posiciones" aria-selected="true">
           <span></span> Posiciones
         </button>
-        <button class="tab-btn" data-view="fixture" role="tab" aria-selected="false">
+        <button class="tab-btn" data-view="fixture" role="tab" aria-controls="view-fixture" aria-selected="false">
           <span></span> Fixture
         </button>
-        <button class="tab-btn" data-view="equipos" role="tab" aria-selected="false">
+        <button class="tab-btn" data-view="equipos" role="tab" aria-controls="view-equipos" aria-selected="false">
           <span></span> Equipos
         </button>
-        <button class="tab-btn" data-view="estadisticas" role="tab" aria-selected="false">
+        <button class="tab-btn" data-view="estadisticas" role="tab" aria-controls="view-estadisticas" aria-selected="false">
           <span></span> Estadísticas
         </button>
-        <button class="tab-btn" data-view="goleadores" role="tab" aria-selected="false">
+        <button class="tab-btn" data-view="goleadores" role="tab" aria-controls="view-goleadores" aria-selected="false">
           <span></span> Goleadores
         </button>
-        <button class="tab-btn" data-view="sanciones" role="tab" aria-selected="false">
+        <button class="tab-btn" data-view="sanciones" role="tab" aria-controls="view-sanciones" aria-selected="false">
           <span></span> Sanciones
         </button>
-        <button class="tab-btn" data-view="reglamento" role="tab" aria-selected="false">
+        <button class="tab-btn" data-view="reglamento" role="tab" aria-controls="view-reglamento" aria-selected="false">
           <span></span> Reglamento
         </button>
         <div class="tab-indicator" id="tabIndicator"></div>
@@ -202,10 +220,10 @@
       </div>
       <div class="footer-copy">
         Liga Universitaria Sanjuanina de Fútbol · <b id="footerCat">Categoría A · Temporada 2026</b><br>
-        Portal de seguimiento deportivo, fixture, resultados, goleadores y estadísticas de los equipos.
+        Portal de seguimiento deportivo, fixture, resultados, goleadores y estadísticas de los equipos.<br><span id="footerActualizado" class="footer-actualizado"></span>
       </div>
       <div class="footer-social">
-        <a href="https://www.instagram.com/ligauniversitaria.sj/" target="_blank" rel="noopener noreferrer" class="footer-ig-link" title="Instagram Oficial: @ligauniversitaria.sj">
+        <a href="https://www.instagram.com/ligauniversitaria.sj/" target="_blank" rel="noopener noreferrer" class="footer-ig-link" title="Instagram: @ligauniversitaria.sj (proyecto independiente, no oficial)">
           <svg class="ig-svg-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
             <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
@@ -225,7 +243,7 @@
   <script src="js/data_bc.js?v=20261111_fempub"></script>
   <script src="js/parciales.js"></script>
   <script src="js/parciales_apply.js?v=20261122_gan"></script>
-  <script src="js/app.js?v=20261126_campeon"></script>
+  <script src="js/app.js?v=20261127_mejoras"></script>
 </body>
 
 </html>

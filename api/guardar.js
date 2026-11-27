@@ -13,6 +13,27 @@ const hash = s => crypto.createHash('sha256').update(String(s)).digest();
 const texto = (v, max) => (typeof v === 'string' ? v.replace(/[\u0000-\u001f<>]/g, '').trim().slice(0, max) : '');
 const gol = v => (Number.isInteger(v) && v >= 0 && v <= 50 ? v : null);
 
+// Límite de intentos fallidos por IP: 5 cada 15 minutos (vive en la memoria de la función;
+// Vercel reutiliza la instancia entre llamadas, así que frena la fuerza bruta aunque no sea un bloqueo global).
+const FALLOS = new Map();
+const VENTANA_MS = 15 * 60 * 1000, MAX_FALLOS = 5;
+function ipDe(req) {
+  const xf = String(req.headers['x-forwarded-for'] || '').split(',')[0].trim();
+  return xf || String(req.headers['x-real-ip'] || '') || 'desconocida';
+}
+function bloqueada(ip) {
+  const r = FALLOS.get(ip);
+  if (!r) return false;
+  if (Date.now() - r.desde > VENTANA_MS) { FALLOS.delete(ip); return false; }
+  return r.n >= MAX_FALLOS;
+}
+function anotarFallo(ip) {
+  const r = FALLOS.get(ip);
+  if (!r || Date.now() - r.desde > VENTANA_MS) FALLOS.set(ip, { n: 1, desde: Date.now() });
+  else r.n++;
+  if (FALLOS.size > 5000) FALLOS.clear();
+}
+
 function pinOk(pin) {
   const real = process.env.CARGA_PIN || '';
   if (!real || typeof pin !== 'string' || !/^\d{4,12}$/.test(pin)) return false;
@@ -45,7 +66,10 @@ module.exports = async (req, res) => {
     return res.status(500).json({ ok: false, error: 'Falta configurar CARGA_PIN y GITHUB_TOKEN en Vercel' });
   }
   const b = req.body || {};
-  if (!pinOk(b.pin)) { await esperar(1500); return res.status(401).json({ ok: false, error: 'PIN incorrecto' }); }
+  const ip = ipDe(req);
+  if (bloqueada(ip)) { await esperar(1500); return res.status(429).json({ ok: false, error: 'Demasiados intentos. Esperá 15 minutos y probá de nuevo.' }); }
+  if (!pinOk(b.pin)) { anotarFallo(ip); await esperar(2500); return res.status(401).json({ ok: false, error: 'PIN incorrecto' }); }
+  FALLOS.delete(ip);
   if (b.accion === 'verificar') return res.json({ ok: true });
 
   const cat = CATS.includes(b.cat) ? b.cat : null;

@@ -555,7 +555,7 @@
             </div>
           </div>
           ${m.hora && !esFinalizado ? `<div class="match-schedule"><span>${m.dia || ''}</span><b>${m.hora} hs</b><span>${m.cancha || ''}</span></div>` : ''}
-          ${m.nota && !esLibre ? `<div class="match-footer-note">${m.nota}</div>` : ''}
+          ${m.nota && !esLibre ? `<div class="match-footer-note">${escapeHtml(m.nota)}</div>` : ''}
         </div>
       `;
     }).join('');
@@ -1128,7 +1128,7 @@
         return llaveHead + [1, 2, 3, 4].map(r => `<div class="cc-head" style="grid-column:${colDe(side, r)};grid-row:2">${CC_RONDAS_CORTO[r]}<small>${ccFecha(ll.fechas[r], true)}</small></div>`).join('');
       }).join('') + `<div class="cc-head cc-head-final" style="grid-column:5;grid-row:2">Final<small>${final && final.date ? ccFecha(final.date, true) + (final.t ? ' · ' + final.t + ' hs' : '') : 'A confirmar'}</small></div>`;
       const finalHtml = `<div class="cc-final-box">
-          <div class="cc-logo-wrap"><img class="cc-logo" src="public/copa_challenger_blanco.png?v=2" alt="Copa Challenger"></div>
+          <div class="cc-logo-wrap"><img loading="lazy" decoding="async" class="cc-logo" src="public/copa_challenger_blanco.png?v=2" alt="Copa Challenger"></div>
           <div class="cc-final-title">Gran final</div>
           ${ccMatchHtml(final, 'final', true)}
           ${final.ganador ? `<div class="bk-champion">★ ${CC.equipos[final.ganador]} campeón</div>` : `<div class="cc-final-note">Ganador ${CC.llaves.L.nombre} vs Ganador ${CC.llaves.R.nombre}</div>`}
@@ -1780,7 +1780,7 @@
 
                   return `
                     <div class="scatter-bubble" style="left:${posX}%; top:${posY}%;" data-team="${t.id}">
-                      <img src="${t.escudo}" alt="${t.equipo}">
+                      <img loading="lazy" decoding="async" src="${t.escudo}" alt="${t.equipo}">
                       <div class="scatter-tooltip ${dirY} ${dirX}">
                         <div class="tt-team-name">${t.equipo}</div>
                         <div class="tt-row"><span>GF/PJ:</span> <b>${t.gfPorPJ.toFixed(2)}</b></div>
@@ -1824,7 +1824,7 @@
                     <div class="bf-bar-against" style="width:${Math.max(widthGC, 4)}%;"></div>
                   </div>
                   <div class="bf-team-col" data-team="${t.id}" style="cursor:pointer;">
-                    <img src="${t.escudo}" alt="${t.equipo}">
+                    <img loading="lazy" decoding="async" src="${t.escudo}" alt="${t.equipo}">
                     <span>${t.equipo}</span>
                   </div>
                   <div class="bf-favor-col">
@@ -1937,7 +1937,7 @@
             return `
               <div class="dumbbell-row">
                 <div class="db-team-col" data-team="${d.equipo.id}" style="cursor:pointer;">
-                  <img src="${d.equipo.escudo}" alt="${d.equipo.nombre}">
+                  <img loading="lazy" decoding="async" src="${d.equipo.escudo}" alt="${d.equipo.nombre}">
                   <span>${d.equipo.nombre}</span>
                 </div>
                 <div class="db-track-col">
@@ -2834,7 +2834,7 @@
         <div>
           <div style="font-size:0.72rem; text-transform:uppercase; letter-spacing:0.12em; font-weight:800; color:var(--text-secondary,#667382); margin-bottom:4px;">Ficha Oficial del Club</div>
           <div class="team-modal-brand">
-            <img src="${team.escudo || genericCrestUri(team.nombre)}" alt="${team.nombre}" class="modal-crest-lg">
+            <img loading="lazy" decoding="async" src="${team.escudo || genericCrestUri(team.nombre)}" alt="${team.nombre}" class="modal-crest-lg">
             <div>
               <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
                 <h2 class="modal-team-title">${team.nombre}</h2>
@@ -3274,7 +3274,7 @@
       const libres = f.partidos.filter(p => p.estado === 'libre').map(p => p.local === 'Libre' ? p.visitante : p.local);
       const dia = f.dia || '';
       const conHora = ps.some(p => p.hora);
-      const crest = n => { const eq = (d.equipos || []).find(e => e.nombre === n); return `<img class="ini-crest" src="${(eq && eq.escudo) || escudoGlobal(n) || genericCrestUri(n)}" alt="">`; };
+      const crest = n => { const eq = (d.equipos || []).find(e => e.nombre === n); return `<img loading="lazy" decoding="async" class="ini-crest" src="${(eq && eq.escudo) || escudoGlobal(n) || genericCrestUri(n)}" alt="">`; };
       let diaPrevio = null;
       const filas = ps.map(p => {
         const sep = variosDias && p.dia !== diaPrevio ? `<div class="ini-daysep">${escapeHtml(p.dia || '')}</div>` : '';
@@ -3316,7 +3316,7 @@
       const ronda = m => m.r === 5 ? 'Final' : m.kids && m.kids.every(k => k.r === 3) ? 'Semifinal' : ['Previa', '16avos', 'Octavos', 'Cuartos', 'Semifinal'][m.r] || 'Copa';
       const rondas = [...new Set(sel.map(ronda))];
       const dias = [...new Set(sel.map(m => ccFecha(m.date, true)))];
-      const crest = n => `<img class="ini-crest" src="${escudoGlobal(n) || genericCrestUri(n)}" alt="">`;
+      const crest = n => `<img loading="lazy" decoding="async" class="ini-crest" src="${escudoGlobal(n) || genericCrestUri(n)}" alt="">`;
       const filas = sel.map(m => {
         const r = m.res && m.res.a != null ? m.res : null;
         const pen = r && r.a === r.b && r.pa != null;
@@ -3346,7 +3346,7 @@
       const nCamp = (d.formato && d.formato.clausura && d.formato.clausura.campeonato) || 4;
       const filas = rows => (rows || []).map(r => {
         const eq = (d.equipos || []).find(e => e.nombre === r.equipo);
-        return `<tr class="${r.pos <= nCamp ? 'q' : ''} ${r.pos === nCamp ? 'cut' : ''}"><td class="p">${r.pos}</td><td class="e"><div class="ini-e"><img class="ini-crest" src="${(eq && eq.escudo) || escudoGlobal(r.equipo) || genericCrestUri(r.equipo)}" alt=""><span>${escapeHtml(r.equipo)}</span></div></td><td>${r.pj}</td><td class="pts">${r.pts}</td></tr>`;
+        return `<tr class="${r.pos <= nCamp ? 'q' : ''} ${r.pos === nCamp ? 'cut' : ''}"><td class="p">${r.pos}</td><td class="e"><div class="ini-e"><img loading="lazy" decoding="async" class="ini-crest" src="${(eq && eq.escudo) || escudoGlobal(r.equipo) || genericCrestUri(r.equipo)}" alt=""><span>${escapeHtml(r.equipo)}</span></div></td><td>${r.pj}</td><td class="pts">${r.pts}</td></tr>`;
       }).join('');
       return `<div class="ini-table ini-cat-${c}" data-ini-tab="${c}">
           <div class="ini-table-head"><span class="ini-chip">${c}</span><b>${catNombre(c)}</b><span>Clausura · Fecha ${d.clausura.ultimaFechaDisputada}</span></div>
@@ -3504,7 +3504,8 @@
     }
   }
 
-  function switchTab(viewName) {
+  function switchTab(viewName, opts) {
+    opts = opts || {};
     if (viewName === 'inicio') { location.href = location.pathname; return; }
     state.currentTab = viewName;
 
@@ -3543,8 +3544,11 @@
       case 'challenger': renderChallenger(); break;
     }
 
-    if (window.history && window.history.replaceState) {
-      window.history.replaceState(null, '', '#' + viewName);
+    // Historial: cada sección suma una entrada, así el botón «atrás» vuelve a la sección anterior
+    if (window.history && window.history.pushState && !opts.pop) {
+      const nueva = '#' + viewName;
+      if (opts.inicial || !location.hash) history.replaceState({ view: viewName }, '', nueva);
+      else if (location.hash !== nueva) history.pushState({ view: viewName }, '', nueva);
     }
 
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -3553,7 +3557,18 @@
   // =========================================================================
   // INICIALIZACIÓN DE LA APLICACIÓN
   // =========================================================================
+  function mostrarActualizado() {
+    const el = document.getElementById('footerActualizado');
+    const iso = window.LIGA_PARCIALES && window.LIGA_PARCIALES.actualizado;
+    if (!el || !iso) return;
+    const d = new Date(iso);
+    if (isNaN(d)) return;
+    const f = d.toLocaleString('es-AR', { timeZone: 'America/Argentina/San_Juan', day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit', hourCycle: 'h23' }).replace(',', ' ·');
+    el.textContent = `Última carga de resultados: ${f} hs`;
+  }
+
   function initApp() {
+    try { mostrarActualizado(); } catch (e) { /* sin fecha */ }
     try { aplicarTemaCampeon(); } catch (e) { /* sin copa */ }
     aplicarCategoriaUI();
     if (INICIO) {
@@ -3593,7 +3608,11 @@
     const hash = window.location.hash ? window.location.hash.substring(1) : '';
     const initialView = urlParams.get('tab') || urlParams.get('view') || hash || 'posiciones';
     const validViews = ['posiciones', 'fixture', 'challenger', 'equipos', 'estadisticas', 'goleadores', 'sanciones', 'reglamento'];
-    switchTab(validViews.includes(initialView) ? initialView : 'posiciones');
+    switchTab(validViews.includes(initialView) ? initialView : 'posiciones', { inicial: true });
+    window.addEventListener('popstate', () => {
+      const v = location.hash ? location.hash.substring(1) : 'posiciones';
+      if (validViews.includes(v) && v !== state.currentTab) switchTab(v, { pop: true });
+    });
   }
 
   window.APP = {

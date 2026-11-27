@@ -1,0 +1,9 @@
+# Archivos internos que no se publican en el sitio
+tools/
+README.md
+liga_data_consolidated.json
+public/escudos_hd/
+*.py
+*.ps1
+.gitignore
+.vercelignore
