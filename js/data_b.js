@@ -1787,7 +1787,12 @@
           "dia": "Sábado 21/11",
           "fecha": "2026-11-21",
           "hora": "10:00",
-          "cancha": "Cancha de Fútbol"
+          "cancha": "Cancha de Fútbol",
+          "golesL": 1,
+          "golesV": 1,
+          "penalesL": 4,
+          "penalesV": 5,
+          "oficial": true
         },
         {
           "codigo": "CF4",
@@ -1799,7 +1804,10 @@
           "dia": "Sábado 21/11",
           "fecha": "2026-11-21",
           "hora": "11:20",
-          "cancha": "Cancha de Fútbol"
+          "cancha": "Cancha de Fútbol",
+          "golesL": 3,
+          "golesV": 0,
+          "oficial": true
         },
         {
           "codigo": "CF3",
@@ -1811,7 +1819,10 @@
           "dia": "Sábado 21/11",
           "fecha": "2026-11-21",
           "hora": "12:40",
-          "cancha": "Cancha de Fútbol"
+          "cancha": "Cancha de Fútbol",
+          "golesL": 3,
+          "golesV": 0,
+          "oficial": true
         },
         {
           "codigo": "CF2",
@@ -1823,7 +1834,10 @@
           "dia": "Sábado 21/11",
           "fecha": "2026-11-21",
           "hora": "14:00",
-          "cancha": "Cancha de Fútbol"
+          "cancha": "Cancha de Fútbol",
+          "golesL": 0,
+          "golesV": 4,
+          "oficial": true
         },
         {
           "codigo": "CP2",
@@ -1835,7 +1849,10 @@
           "dia": "Sábado 21/11",
           "fecha": "2026-11-21",
           "hora": "11:20",
-          "cancha": "Cancha de Rugby"
+          "cancha": "Cancha de Rugby",
+          "golesL": 2,
+          "golesV": 1,
+          "oficial": true
         },
         {
           "codigo": "CP3",
@@ -1847,7 +1864,10 @@
           "dia": "Sábado 21/11",
           "fecha": "2026-11-21",
           "hora": "12:40",
-          "cancha": "Cancha de Rugby"
+          "cancha": "Cancha de Rugby",
+          "golesL": 2,
+          "golesV": 3,
+          "oficial": true
         },
         {
           "codigo": "SF1",
@@ -1897,7 +1917,8 @@
           "hora": "12:40",
           "cancha": "Cancha de Rugby"
         }
-      ]
+      ],
+      "informeCuartos": "Cuartos de final"
     },
     "tablas": {
       "zonaA": [
@@ -2108,61 +2129,61 @@
         "pos": 1,
         "jugador": "Herrera, Pablo Simón",
         "equipo": "Malvinas",
-        "goles": 8
+        "goles": 9
       },
       {
         "pos": 2,
-        "jugador": "Castro Segovia, Ramiro Luciano",
-        "equipo": "Malvinas",
-        "goles": 5
-      },
-      {
-        "pos": 3,
-        "jugador": "Escriva Facundo",
+        "jugador": "Recio, Jeremias",
         "equipo": "De Zurda",
-        "goles": 4
-      },
-      {
-        "pos": 3,
-        "jugador": "Goldfarb Santiago",
-        "equipo": "F90",
-        "goles": 4
+        "goles": 6
       },
       {
         "pos": 3,
         "jugador": "García Castro, Marcos Gustavo",
         "equipo": "Gol en Contra",
-        "goles": 4
+        "goles": 5
       },
       {
         "pos": 3,
+        "jugador": "Castro Segovia, Ramiro Luciano",
+        "equipo": "Malvinas",
+        "goles": 5
+      },
+      {
+        "pos": 5,
+        "jugador": "Savorani Jofre, Sebastian",
+        "equipo": "Central",
+        "goles": 4
+      },
+      {
+        "pos": 5,
+        "jugador": "Escriva Facundo",
+        "equipo": "De Zurda",
+        "goles": 4
+      },
+      {
+        "pos": 5,
+        "jugador": "Goldfarb Santiago",
+        "equipo": "F90",
+        "goles": 4
+      },
+      {
+        "pos": 5,
+        "jugador": "Moreira, Tomas Alejo",
+        "equipo": "Gol en Contra",
+        "goles": 4
+      },
+      {
+        "pos": 5,
         "jugador": "Noe, Geronimo",
         "equipo": "Gol en Contra",
         "goles": 4
       },
       {
-        "pos": 3,
+        "pos": 5,
         "jugador": "Vega Muñoz, Isaias Gabriel",
         "equipo": "Malvinas",
         "goles": 4
-      },
-      {
-        "pos": 8,
-        "jugador": "Savorani Jofre, Sebastian",
-        "equipo": "Central",
-        "goles": 3
-      },
-      {
-        "pos": 8,
-        "jugador": "Recio, Jeremias",
-        "equipo": "De Zurda",
-        "goles": 3
-      },
-      {
-        "pos": 8,
-        "jugador": "Gambina, Jose Esteban",
-        "equipo": "Geología",
-        "goles": 3
       }
     ]
   },
@@ -2248,28 +2269,12 @@
       "estado": "Definitiva"
     },
     {
-      "jugador": "Murua Lucas",
-      "equipo": "De Zurda",
-      "sancion": "4 Partidos",
-      "articulo": "Art. 22 inc. \"A\"",
-      "motivo": "",
-      "estado": "Cumplió 3 (Resta 1)"
-    },
-    {
       "jugador": "DT: Perin Fernando",
       "equipo": "De Zurda",
       "sancion": "Suspensión de por vida",
       "articulo": "Tribunal de Disciplina",
       "motivo": "",
       "estado": "Definitiva"
-    },
-    {
-      "jugador": "Fernandez, Santiago",
-      "equipo": "Dep. La Verna",
-      "sancion": "1 Partido",
-      "articulo": "Art. 26 inc. \"G\"",
-      "motivo": "",
-      "estado": "Vigente (0/1)"
     },
     {
       "jugador": "Guzman Juan",
@@ -2286,14 +2291,6 @@
       "articulo": "Art. 25 inc. \"B\"",
       "motivo": "",
       "estado": "Vigente"
-    },
-    {
-      "jugador": "Consulo Ignacio",
-      "equipo": "Adove",
-      "sancion": "1 Partido",
-      "articulo": "Art. 25 inc. \"B\"",
-      "motivo": "",
-      "estado": "Vigente (0/1)"
     },
     {
       "jugador": "Juan Emanuel",
@@ -2320,84 +2317,28 @@
       "estado": "Aplicada"
     },
     {
-      "jugador": "Martinez, Rodrigo",
-      "equipo": "Agrimensura",
-      "sancion": "3 Amarillas acumuladas",
-      "articulo": "Art. 6° Régimen Amarillas",
-      "motivo": "Acumulación de 3 tarjetas amarillas",
-      "estado": "3 Amarillas"
-    },
-    {
-      "jugador": "Bueno Sillero, Santiago Roman",
-      "equipo": "Al Costado",
-      "sancion": "3 Amarillas acumuladas",
-      "articulo": "Art. 6° Régimen Amarillas",
-      "motivo": "Acumulación de 3 tarjetas amarillas",
-      "estado": "3 Amarillas"
-    },
-    {
-      "jugador": "Faliti Elizondo, Luciano Abel",
-      "equipo": "Al Costado",
-      "sancion": "3 Amarillas acumuladas",
-      "articulo": "Art. 6° Régimen Amarillas",
-      "motivo": "Acumulación de 3 tarjetas amarillas",
-      "estado": "3 Amarillas"
-    },
-    {
-      "jugador": "Aciar Joan Andreu",
+      "jugador": "Toledo, Alan",
       "equipo": "De Zurda",
-      "sancion": "3 Amarillas acumuladas",
-      "articulo": "Art. 6° Régimen Amarillas",
-      "motivo": "Acumulación de 3 tarjetas amarillas",
-      "estado": "3 Amarillas"
+      "sancion": "Suspensión provisoria",
+      "articulo": "A resolver por el Tribunal",
+      "motivo": "",
+      "estado": "Provisoria"
     },
     {
-      "jugador": "Escriva Facundo",
+      "jugador": "Roldán, Gabriel",
       "equipo": "De Zurda",
-      "sancion": "3 Amarillas acumuladas",
-      "articulo": "Art. 6° Régimen Amarillas",
-      "motivo": "Acumulación de 3 tarjetas amarillas",
-      "estado": "3 Amarillas"
+      "sancion": "Suspensión provisoria",
+      "articulo": "A resolver por el Tribunal",
+      "motivo": "",
+      "estado": "Provisoria"
     },
     {
-      "jugador": "Paez Tejada, Juan Bautista",
+      "jugador": "Vilanova, Ignacio",
       "equipo": "F90",
-      "sancion": "3 Amarillas acumuladas",
-      "articulo": "Art. 6° Régimen Amarillas",
-      "motivo": "Acumulación de 3 tarjetas amarillas",
-      "estado": "3 Amarillas"
-    },
-    {
-      "jugador": "Miranda, Facundo Agustin",
-      "equipo": "Gol en Contra",
-      "sancion": "3 Amarillas acumuladas",
-      "articulo": "Art. 6° Régimen Amarillas",
-      "motivo": "Acumulación de 3 tarjetas amarillas",
-      "estado": "3 Amarillas"
-    },
-    {
-      "jugador": "Menendez, Matias",
-      "equipo": "Inter",
-      "sancion": "3 Amarillas acumuladas",
-      "articulo": "Art. 6° Régimen Amarillas",
-      "motivo": "Acumulación de 3 tarjetas amarillas",
-      "estado": "3 Amarillas"
-    },
-    {
-      "jugador": "Reyna Petrignani Santino",
-      "equipo": "Necaxa",
-      "sancion": "3 Amarillas acumuladas",
-      "articulo": "Art. 6° Régimen Amarillas",
-      "motivo": "Acumulación de 3 tarjetas amarillas",
-      "estado": "3 Amarillas"
-    },
-    {
-      "jugador": "Choque, Isaias",
-      "equipo": "Tercer Tiempo",
-      "sancion": "3 Amarillas acumuladas",
-      "articulo": "Art. 6° Régimen Amarillas",
-      "motivo": "Acumulación de 3 tarjetas amarillas",
-      "estado": "3 Amarillas"
+      "sancion": "2 Partidos",
+      "articulo": "Art. 26 inc \"B\"",
+      "motivo": "",
+      "estado": "Vigente (0/2)"
     }
   ],
   "tablaAnualFuente": "Actualizada tras la Fecha 7 del Clausura: puntos divididos en partidos jugados (la fecha libre no cuenta)",

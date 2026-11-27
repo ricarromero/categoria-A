@@ -2241,9 +2241,9 @@ const LIGA_DATA = {
           "gf": 5,
           "gc": 12,
           "dg": -7,
-          "pts": 6,
+          "pts": 4,
           "zona": "B",
-          "sancion": -1
+          "sancion": -3
         },
         {
           "pos": 7,
@@ -2266,7 +2266,7 @@ const LIGA_DATA = {
         "pos": 1,
         "jugador": "Albornó, Sergio Damián",
         "equipo": "Red Bull",
-        "goles": 7
+        "goles": 8
       },
       {
         "pos": 2,
@@ -2282,38 +2282,38 @@ const LIGA_DATA = {
       },
       {
         "pos": 4,
+        "jugador": "Gaitán, Axel",
+        "equipo": "C-Lesión",
+        "goles": 5
+      },
+      {
+        "pos": 5,
         "jugador": "Moreno, Joaquín",
         "equipo": "Mavericks",
         "goles": 5
       },
       {
-        "pos": 5,
+        "pos": 6,
+        "jugador": "Trozzi, Leonel Ángel",
+        "equipo": "Otro Equipo",
+        "goles": 5
+      },
+      {
+        "pos": 7,
         "jugador": "Grassano Gómez, Santino",
         "equipo": "Aston",
         "goles": 4
       },
       {
-        "pos": 6,
-        "jugador": "Gaitán, Axel",
-        "equipo": "C-Lesión",
-        "goles": 4
-      },
-      {
-        "pos": 7,
+        "pos": 8,
         "jugador": "Aguilera, Tomás Ezequiel",
         "equipo": "Constructores",
         "goles": 4
       },
       {
-        "pos": 8,
+        "pos": 9,
         "jugador": "Ortiz, Eduardo Mateo",
         "equipo": "Constructores",
-        "goles": 4
-      },
-      {
-        "pos": 9,
-        "jugador": "Sánchez Usuna, Mateo Ezequiel",
-        "equipo": "De Primera",
         "goles": 4
       },
       {
@@ -2327,10 +2327,54 @@ const LIGA_DATA = {
       "informe": 7,
       "mejor5": "Nottingham",
       "partidos": [
-        {"codigo": "SF1", "n": 21, "copa": "Fase Campeonato", "ronda": "Semifinales", "local": "Otro Equipo", "visitante": "Jägermeister", "dia": "Domingo 29/11", "fecha": "2026-11-29", "hora": "14:00", "cancha": "Cancha de Fútbol"},
-        {"codigo": "SF2", "n": 22, "copa": "Fase Campeonato", "ronda": "Semifinales", "local": "Minaster City", "visitante": "Constructores", "dia": "Domingo 29/11", "fecha": "2026-11-29", "hora": "15:30", "cancha": "Cancha de Fútbol"},
-        {"codigo": "SP1", "n": 41, "copa": "Copa de Plata", "ronda": "Semifinales", "local": "Nottingham", "visitante": "La Máquina", "dia": "Domingo 29/11", "fecha": "2026-11-29", "hora": "14:00", "cancha": "Cancha de Rugby"},
-        {"codigo": "SP2", "n": 42, "copa": "Copa de Plata", "ronda": "Semifinales", "local": "Celtic", "visitante": "Antorcha", "dia": "Domingo 29/11", "fecha": "2026-11-29", "hora": "15:30", "cancha": "Cancha de Rugby"},
+        {
+          "codigo": "SF1",
+          "n": 21,
+          "copa": "Fase Campeonato",
+          "ronda": "Semifinales",
+          "local": "Otro Equipo",
+          "visitante": "Jägermeister",
+          "dia": "Domingo 29/11",
+          "fecha": "2026-11-29",
+          "hora": "14:00",
+          "cancha": "Cancha de Fútbol"
+        },
+        {
+          "codigo": "SF2",
+          "n": 22,
+          "copa": "Fase Campeonato",
+          "ronda": "Semifinales",
+          "local": "Minaster City",
+          "visitante": "Constructores",
+          "dia": "Domingo 29/11",
+          "fecha": "2026-11-29",
+          "hora": "15:30",
+          "cancha": "Cancha de Fútbol"
+        },
+        {
+          "codigo": "SP1",
+          "n": 41,
+          "copa": "Copa de Plata",
+          "ronda": "Semifinales",
+          "local": "Nottingham",
+          "visitante": "La Máquina",
+          "dia": "Domingo 29/11",
+          "fecha": "2026-11-29",
+          "hora": "14:00",
+          "cancha": "Cancha de Rugby"
+        },
+        {
+          "codigo": "SP2",
+          "n": 42,
+          "copa": "Copa de Plata",
+          "ronda": "Semifinales",
+          "local": "Celtic",
+          "visitante": "Antorcha",
+          "dia": "Domingo 29/11",
+          "fecha": "2026-11-29",
+          "hora": "15:30",
+          "cancha": "Cancha de Rugby"
+        },
         {
           "codigo": "CF1",
           "n": 1,
@@ -2341,7 +2385,10 @@ const LIGA_DATA = {
           "dia": "Domingo 22/11",
           "fecha": "2026-11-22",
           "hora": "11:20",
-          "cancha": "Cancha de Fútbol"
+          "cancha": "Cancha de Fútbol",
+          "golesL": 2,
+          "golesV": 0,
+          "oficial": true
         },
         {
           "codigo": "CF4",
@@ -2353,7 +2400,12 @@ const LIGA_DATA = {
           "dia": "Domingo 22/11",
           "fecha": "2026-11-22",
           "hora": "12:50",
-          "cancha": "Cancha de Fútbol"
+          "cancha": "Cancha de Fútbol",
+          "golesL": 2,
+          "golesV": 2,
+          "penalesL": 4,
+          "penalesV": 2,
+          "oficial": true
         },
         {
           "codigo": "CF2",
@@ -2365,7 +2417,10 @@ const LIGA_DATA = {
           "dia": "Domingo 22/11",
           "fecha": "2026-11-22",
           "hora": "14:20",
-          "cancha": "Cancha de Fútbol"
+          "cancha": "Cancha de Fútbol",
+          "golesL": 5,
+          "golesV": 1,
+          "oficial": true
         },
         {
           "codigo": "CF3",
@@ -2377,7 +2432,10 @@ const LIGA_DATA = {
           "dia": "Domingo 22/11",
           "fecha": "2026-11-22",
           "hora": "15:50",
-          "cancha": "Cancha de Fútbol"
+          "cancha": "Cancha de Fútbol",
+          "golesL": 3,
+          "golesV": 0,
+          "oficial": true
         },
         {
           "codigo": "CP3",
@@ -2389,7 +2447,12 @@ const LIGA_DATA = {
           "dia": "Domingo 22/11",
           "fecha": "2026-11-22",
           "hora": "12:40",
-          "cancha": "Cancha de Rugby"
+          "cancha": "Cancha de Rugby",
+          "golesL": 2,
+          "golesV": 2,
+          "penalesL": 2,
+          "penalesV": 4,
+          "oficial": true
         },
         {
           "codigo": "CP1",
@@ -2401,7 +2464,12 @@ const LIGA_DATA = {
           "dia": "Domingo 22/11",
           "fecha": "2026-11-22",
           "hora": "14:10",
-          "cancha": "Cancha de Rugby"
+          "cancha": "Cancha de Rugby",
+          "golesL": 1,
+          "golesV": 1,
+          "penalesL": 2,
+          "penalesV": 4,
+          "oficial": true
         },
         {
           "codigo": "CP2",
@@ -2413,9 +2481,15 @@ const LIGA_DATA = {
           "dia": "Domingo 22/11",
           "fecha": "2026-11-22",
           "hora": "15:40",
-          "cancha": "Cancha de Rugby"
+          "cancha": "Cancha de Rugby",
+          "golesL": 1,
+          "golesV": 1,
+          "penalesL": 1,
+          "penalesV": 3,
+          "oficial": true
         }
-      ]
+      ],
+      "informeCuartos": "Cuartos de final"
     }
   },
   "sanciones": [
@@ -2577,7 +2651,7 @@ const LIGA_DATA = {
       "sancion": "5 Partidos",
       "articulo": "Art. 28 inc \"B\"",
       "motivo": "Sanción disciplinaria Fecha 4",
-      "estado": "Cumplió 3 (Resta 2)"
+      "estado": "Cumplió 4 (Resta 1)"
     },
     {
       "jugador": "DT: Acosta, Santiago",
@@ -2585,7 +2659,7 @@ const LIGA_DATA = {
       "sancion": "6 Partidos",
       "articulo": "Art. 23 inc \"A\"",
       "motivo": "Sanción disciplinaria Fecha 4",
-      "estado": "Cumplió 4 (Resta 2)"
+      "estado": "Cumplió 5 (Resta 1)"
     },
     {
       "jugador": "Boero, Gerónimo",
@@ -2593,31 +2667,23 @@ const LIGA_DATA = {
       "sancion": "4 Partidos",
       "articulo": "Art. 23 inc \"A\"",
       "motivo": "Sanción Fecha 5",
-      "estado": "Cumplió 2 (Resta 2)"
+      "estado": "Cumplió 3 (Resta 1)"
     },
     {
       "jugador": "López, Camilo",
       "equipo": "Calise",
-      "sancion": "Suspensión provisoria",
-      "articulo": "A resolver por el Tribunal",
+      "sancion": "5 Partidos",
+      "articulo": "Art. 25 inc \"B\"",
       "motivo": "Suspensión provisoria",
-      "estado": "Provisoria"
+      "estado": "Cumplió 3 (Resta 2)"
     },
     {
       "jugador": "Cuevas, Mateo",
       "equipo": "Calise",
-      "sancion": "Suspensión provisoria",
-      "articulo": "A resolver por el Tribunal",
+      "sancion": "Hasta 31/12/2027",
+      "articulo": "Art. 25 inc \"B\"",
       "motivo": "Suspensión provisoria",
-      "estado": "Provisoria"
-    },
-    {
-      "jugador": "Arbo, Mauricio",
-      "equipo": "La Máquina",
-      "sancion": "2 Partidos",
-      "articulo": "Art. 23 inc \"A\" y 26 inc \"C\"",
-      "motivo": "Sanción Fecha 6",
-      "estado": "Cumplió 1 (Resta 1)"
+      "estado": "Vigente"
     },
     {
       "jugador": "Tapia, Elías",
@@ -2625,15 +2691,15 @@ const LIGA_DATA = {
       "sancion": "3 Partidos",
       "articulo": "Art. 27 inc \"B\" y 23 inc \"A\"",
       "motivo": "Sanción Fecha 6",
-      "estado": "Cumplió 1 (Resta 2)"
+      "estado": "Cumplió 2 (Resta 1)"
     },
     {
       "jugador": "Jiménez, Jorge",
       "equipo": "Constructores",
-      "sancion": "Suspensión provisoria",
-      "articulo": "—",
+      "sancion": "Hasta 31/12/2027",
+      "articulo": "Art. 28 inc \"B\" y 22 inc \"B\"",
       "motivo": "Sanción Fecha 7",
-      "estado": "Provisoria"
+      "estado": "Vigente"
     },
     {
       "jugador": "Gil, Guillermo",
@@ -2641,79 +2707,87 @@ const LIGA_DATA = {
       "sancion": "5 Partidos",
       "articulo": "Art. 22 inc \"A\"",
       "motivo": "Sanción Fecha 7",
-      "estado": "Vigente (0/5)"
+      "estado": "Cumplió 1 (Resta 4)"
     },
     {
-      "jugador": "Salinas, Guillermo",
-      "equipo": "Minaster City",
+      "jugador": "Rodríguez, Alejandro",
+      "equipo": "Calise",
+      "sancion": "Hasta 31/12/2028",
+      "articulo": "Art. 25 inc \"B\"",
+      "motivo": "",
+      "estado": "Vigente"
+    },
+    {
+      "jugador": "Rollán, Santiago",
+      "equipo": "Calise",
+      "sancion": "2 Partidos",
+      "articulo": "Art. 23 inc \"A\"",
+      "motivo": "",
+      "estado": "Vigente (0/2)"
+    },
+    {
+      "jugador": "Chía, Juan Cruz",
+      "equipo": "Celtic",
+      "sancion": "3 Partidos",
+      "articulo": "Art. 23 inc \"A\"",
+      "motivo": "",
+      "estado": "Vigente (0/3)"
+    },
+    {
+      "jugador": "Benegas, Joaquín",
+      "equipo": "De Primera",
       "sancion": "1 Partido",
-      "articulo": "Art. 26 inc \"G\"",
-      "motivo": "Sanción Fecha 7",
+      "articulo": "Art. 26 inc \"C\"",
+      "motivo": "",
       "estado": "Vigente (0/1)"
     },
     {
-      "jugador": "Gaitán, Axel",
-      "equipo": "C-Lesión",
-      "sancion": "3 Amarillas acumuladas",
-      "articulo": "Art. 6° Régimen Amarillas",
-      "motivo": "Acumulación de 3 tarjetas amarillas",
-      "estado": "3 Amarillas"
+      "jugador": "Peralta, Ángel",
+      "equipo": "De Primera",
+      "sancion": "1 Partido",
+      "articulo": "Art. 26 inc \"C\"",
+      "motivo": "",
+      "estado": "Vigente (0/1)"
     },
     {
-      "jugador": "Salazar Ovejero, Facundo",
+      "jugador": "Villafañe, Tomás",
       "equipo": "Eclipse",
-      "sancion": "3 Amarillas acumuladas",
-      "articulo": "Art. 6° Régimen Amarillas",
-      "motivo": "Acumulación de 3 tarjetas amarillas",
-      "estado": "3 Amarillas"
+      "sancion": "1 Partido",
+      "articulo": "Art. 27 inc \"E\"",
+      "motivo": "",
+      "estado": "Vigente (0/1)"
     },
     {
-      "jugador": "Carvajal, Nicolás",
-      "equipo": "Jägermeister",
-      "sancion": "3 Amarillas acumuladas",
-      "articulo": "Art. 6° Régimen Amarillas",
-      "motivo": "Acumulación de 3 tarjetas amarillas",
-      "estado": "3 Amarillas"
+      "jugador": "Martínez, Gonzalo",
+      "equipo": "Eclipse",
+      "sancion": "3 Partidos",
+      "articulo": "Art. 23 inc \"A\"",
+      "motivo": "",
+      "estado": "Vigente (0/3)"
     },
     {
-      "jugador": "Argañaraz, Jesús",
-      "equipo": "Mavericks",
-      "sancion": "3 Amarillas acumuladas",
-      "articulo": "Art. 6° Régimen Amarillas",
-      "motivo": "Acumulación de 3 tarjetas amarillas",
-      "estado": "3 Amarillas"
+      "jugador": "Núñez, Catriel",
+      "equipo": "La Máquina",
+      "sancion": "3 Partidos",
+      "articulo": "Art. 23 inc \"A\"",
+      "motivo": "",
+      "estado": "Vigente (0/3)"
     },
     {
-      "jugador": "Notario, Matías",
-      "equipo": "Mavericks",
-      "sancion": "3 Amarillas acumuladas",
-      "articulo": "Art. 6° Régimen Amarillas",
-      "motivo": "Acumulación de 3 tarjetas amarillas",
-      "estado": "3 Amarillas"
+      "jugador": "Equipo Calise",
+      "equipo": "Calise",
+      "sancion": "Descuento de 2 puntos (1° fase del Clausura)",
+      "articulo": "Art. 25 inc \"B\"",
+      "motivo": "",
+      "estado": "Aplicada"
     },
     {
-      "jugador": "Rodríguez, Emilio",
-      "equipo": "Nottingham",
-      "sancion": "3 Amarillas acumuladas",
-      "articulo": "Art. 6° Régimen Amarillas",
-      "motivo": "Acumulación de 3 tarjetas amarillas",
-      "estado": "3 Amarillas"
-    },
-    {
-      "jugador": "Tejada, Ignacio",
-      "equipo": "Nottingham",
-      "sancion": "3 Amarillas acumuladas",
-      "articulo": "Art. 6° Régimen Amarillas",
-      "motivo": "Acumulación de 3 tarjetas amarillas",
-      "estado": "3 Amarillas"
-    },
-    {
-      "jugador": "Albornó, Sergio Damián",
-      "equipo": "Red Bull",
-      "sancion": "3 Amarillas acumuladas",
-      "articulo": "Art. 6° Régimen Amarillas",
-      "motivo": "Acumulación de 3 tarjetas amarillas",
-      "estado": "3 Amarillas"
+      "jugador": "Equipo De Primera",
+      "equipo": "De Primera",
+      "sancion": "Llamado de atención",
+      "articulo": "Art. 12.2 inc \"A\"",
+      "motivo": "",
+      "estado": "Aplicada"
     }
   ],
   "reglamentos": {
@@ -3373,17 +3447,6 @@ const LIGA_DATA = {
     },
     {
       "pos": 10,
-      "equipo": "Calise",
-      "ptsAp": 12,
-      "bonus": 0,
-      "totalAp": 12,
-      "coefAp": 1.5,
-      "ptsCl": 6,
-      "coefCl": 1,
-      "total": 2.5
-    },
-    {
-      "pos": 11,
       "equipo": "Eclipse",
       "ptsAp": 9,
       "bonus": 0,
@@ -3394,7 +3457,7 @@ const LIGA_DATA = {
       "total": 2.3
     },
     {
-      "pos": 12,
+      "pos": 11,
       "equipo": "Nottingham",
       "ptsAp": 9,
       "bonus": 0,
@@ -3403,6 +3466,17 @@ const LIGA_DATA = {
       "ptsCl": 8,
       "coefCl": 1.14,
       "total": 2.27
+    },
+    {
+      "pos": 12,
+      "equipo": "Calise",
+      "ptsAp": 12,
+      "bonus": 0,
+      "totalAp": 12,
+      "coefAp": 1.5,
+      "ptsCl": 4,
+      "coefCl": 0.67,
+      "total": 2.17
     },
     {
       "pos": 13,

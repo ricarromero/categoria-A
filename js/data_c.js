@@ -707,7 +707,10 @@
           "dia": "Domingo 22/11",
           "fecha": "2026-11-22",
           "hora": "11:20",
-          "cancha": "Cancha de Rugby"
+          "cancha": "Cancha de Rugby",
+          "golesL": 0,
+          "golesV": 1,
+          "oficial": true
         },
         {
           "codigo": "CF2",
@@ -719,7 +722,10 @@
           "dia": "Domingo 22/11",
           "fecha": "2026-11-22",
           "hora": "10:00",
-          "cancha": "Cancha de Rugby"
+          "cancha": "Cancha de Rugby",
+          "golesL": 1,
+          "golesV": 0,
+          "oficial": true
         },
         {
           "codigo": "SF1",
@@ -755,7 +761,10 @@
           "dia": "Sábado 21/11",
           "fecha": "2026-11-21",
           "hora": "10:00",
-          "cancha": "Cancha de Rugby"
+          "cancha": "Cancha de Rugby",
+          "golesL": 0,
+          "golesV": 3,
+          "oficial": true
         },
         {
           "codigo": "SP2",
@@ -767,9 +776,15 @@
           "dia": "Domingo 22/11",
           "fecha": "2026-11-22",
           "hora": "10:00",
-          "cancha": "Cancha de Fútbol"
+          "cancha": "Cancha de Fútbol",
+          "golesL": 1,
+          "golesV": 1,
+          "penalesL": 2,
+          "penalesV": 3,
+          "oficial": true
         }
-      ]
+      ],
+      "informeCuartos": "Cuartos de final"
     },
     "fechas": [
       {
@@ -1456,6 +1471,12 @@
       },
       {
         "pos": 2,
+        "jugador": "Rugna, Bruno",
+        "equipo": "Defensa e Injusticia",
+        "goles": 5
+      },
+      {
+        "pos": 2,
         "jugador": "Bustos, Santiago Gabriel",
         "equipo": "Don Bosco",
         "goles": 5
@@ -1479,33 +1500,27 @@
         "goles": 5
       },
       {
-        "pos": 6,
+        "pos": 7,
         "jugador": "Tejada, Santino",
         "equipo": "Defensa e Injusticia",
         "goles": 4
       },
       {
-        "pos": 6,
+        "pos": 7,
         "jugador": "Garcia Diaz, Pablo Nicolas",
         "equipo": "Don Bosco",
         "goles": 4
       },
       {
-        "pos": 8,
+        "pos": 7,
+        "jugador": "Daroni Ortega, Benjamin",
+        "equipo": "Nacional",
+        "goles": 4
+      },
+      {
+        "pos": 10,
         "jugador": "Palacios, Mauricio",
         "equipo": "Bonus Track",
-        "goles": 3
-      },
-      {
-        "pos": 8,
-        "jugador": "Palma, Martin",
-        "equipo": "Bonus Track",
-        "goles": 3
-      },
-      {
-        "pos": 8,
-        "jugador": "Rugna, Bruno",
-        "equipo": "Defensa e Injusticia",
         "goles": 3
       }
     ]
@@ -1544,84 +1559,20 @@
       "estado": "Vigente"
     },
     {
-      "jugador": "Aguilera Luca",
-      "equipo": "Imputables FC",
-      "sancion": "1 Partido",
-      "articulo": "Art. 26º inc. \"C\"",
+      "jugador": "Oliva, Cristian",
+      "equipo": "Talleres",
+      "sancion": "Suspensión provisoria",
+      "articulo": "A resolver por el Tribunal",
       "motivo": "",
-      "estado": "Vigente (0/1)"
+      "estado": "Provisoria"
     },
     {
-      "jugador": "Gallastegui, Tomas",
-      "equipo": "Bonus Track",
-      "sancion": "3 Amarillas acumuladas",
-      "articulo": "Art. 6° Régimen Amarillas",
-      "motivo": "Acumulación de 3 tarjetas amarillas",
-      "estado": "3 Amarillas"
-    },
-    {
-      "jugador": "Segovia, Luca",
-      "equipo": "Cátedra FC",
-      "sancion": "3 Amarillas acumuladas",
-      "articulo": "Art. 6° Régimen Amarillas",
-      "motivo": "Acumulación de 3 tarjetas amarillas",
-      "estado": "3 Amarillas"
-    },
-    {
-      "jugador": "Correa, Matías",
-      "equipo": "Don Bosco",
-      "sancion": "3 Amarillas acumuladas",
-      "articulo": "Art. 6° Régimen Amarillas",
-      "motivo": "Acumulación de 3 tarjetas amarillas",
-      "estado": "3 Amarillas"
-    },
-    {
-      "jugador": "Rico Garcia, Geronimo Agustin",
-      "equipo": "Don Bosco",
-      "sancion": "3 Amarillas acumuladas",
-      "articulo": "Art. 6° Régimen Amarillas",
-      "motivo": "Acumulación de 3 tarjetas amarillas",
-      "estado": "3 Amarillas"
-    },
-    {
-      "jugador": "Bilella, Valentin",
-      "equipo": "Flandria FC",
-      "sancion": "3 Amarillas acumuladas",
-      "articulo": "Art. 6° Régimen Amarillas",
-      "motivo": "Acumulación de 3 tarjetas amarillas",
-      "estado": "3 Amarillas"
-    },
-    {
-      "jugador": "Petrignani, Matias",
-      "equipo": "Flandria FC",
-      "sancion": "3 Amarillas acumuladas",
-      "articulo": "Art. 6° Régimen Amarillas",
-      "motivo": "Acumulación de 3 tarjetas amarillas",
-      "estado": "3 Amarillas"
-    },
-    {
-      "jugador": "Salinas, Matias",
-      "equipo": "Flandria FC",
-      "sancion": "3 Amarillas acumuladas",
-      "articulo": "Art. 6° Régimen Amarillas",
-      "motivo": "Acumulación de 3 tarjetas amarillas",
-      "estado": "3 Amarillas"
-    },
-    {
-      "jugador": "Morán Sanchez, Mauricio David",
-      "equipo": "Newcauce",
-      "sancion": "3 Amarillas acumuladas",
-      "articulo": "Art. 6° Régimen Amarillas",
-      "motivo": "Acumulación de 3 tarjetas amarillas",
-      "estado": "3 Amarillas"
-    },
-    {
-      "jugador": "Bellizia Camuñas, Nicolas",
-      "equipo": "Vial",
-      "sancion": "3 Amarillas acumuladas",
-      "articulo": "Art. 6° Régimen Amarillas",
-      "motivo": "Acumulación de 3 tarjetas amarillas",
-      "estado": "3 Amarillas"
+      "jugador": "Sagatti, Francisco",
+      "equipo": "Imputables FC",
+      "sancion": "Suspensión provisoria",
+      "articulo": "A resolver por el Tribunal",
+      "motivo": "",
+      "estado": "Provisoria"
     }
   ],
   "tablaAnualFuente": "Actualizada tras la Fecha 9 del Clausura con el criterio oficial de la Liga (puntos divididos en partidos programados)",
