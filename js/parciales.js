@@ -149,7 +149,13 @@ window.LIGA_PARCIALES = {
    "penalesV": 3,
    "por": "",
    "at": "2026-11-22T22:36:42.509Z"
+  },
+  "A|challenger|36|Mavericks|Constructores": {
+   "golesL": 0,
+   "golesV": 2,
+   "por": "",
+   "at": "2026-11-27T02:20:02.623Z"
   }
  },
- "actualizado": "2026-11-23T01:12:29.024Z"
+ "actualizado": "2026-11-27T02:20:02.873Z"
 };
